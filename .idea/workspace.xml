@@ -4,22 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3711139a-9762-476c-93e8-28738e439817" name="Changes" comment="nix besonderes">
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/src/main/java/entity/AbstractBaseEntity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/src/main/java/entity/CurrentAC.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/src/main/resources/application.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/src/main/resources/config/liquibase/master.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/froniusRestClient/src/main/java/versuch1/Contoller1.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/froniusRestClient/src/main/java/versuch1/InverterInfo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/froniusRestClient/src/main/java/versuch1/StartSpring.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/froniusRestClient/src/main/resources/application.properties" afterDir="false" />
+    <list default="true" id="3711139a-9762-476c-93e8-28738e439817" name="Changes" comment="update">
+      <change afterPath="$PROJECT_DIR$/application/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/src/main/resources/db/changelog/202403132147_added_CurrentAC_entity.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/src/main/resources/db/master.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/controller/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/database/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/database/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/src/main/resources/config/liquibase/master.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ReadMe.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/froniusRestClient/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/froniusRestClient/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/froniusRestClient/src/main/java/versuch1/InverterInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/froniusRestClient/src/main/java/versuch1/InverterInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/froniusRestClient/src/main/java/versuch1/StartSpring.java" beforeDir="false" afterPath="$PROJECT_DIR$/application/src/main/java/application/StartSpring.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/froniusRestClient/src/main/resources/application.properties" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -61,7 +58,7 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
     "jdk.selected.JAVA_MODULE": "19",
-    "last_opened_file_path": "C:/Users/User/Desktop/PROG/001_Java_Spring/003_Programme/007_Keycloak/Projektarbeit_Pressl-Lazea/fhb-sivs-project-backend",
+    "last_opened_file_path": "C:/Users/User/Desktop/BA_Fronius",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -70,8 +67,13 @@
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0",
-    "spring.configuration.checksum": "fc89e9479844134b3b8bdf2609f70c5b",
+    "spring.configuration.checksum": "49918238fcc790647f4f448ebf52a4a9",
     "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "postgresql"
+    ]
   }
 }]]></component>
   <component name="RecentsManager">
@@ -80,7 +82,13 @@
       <recent name="C:\Users\User\Desktop\BA_Fronius" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\User\Desktop\BA_Fronius\database\src\main\resources\db\changelog" />
+      <recent name="C:\Users\User\Desktop\BA_Fronius\database\src\main\resources\db" />
+      <recent name="C:\Users\User\Desktop\BA_Fronius\database\src\main\resources\db.changelog" />
       <recent name="C:\Users\User\Desktop\BA_Fronius\database\src\main\resources\config\" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="" />
     </key>
   </component>
   <component name="RunManager" selected="Spring Boot.StartSpring">
@@ -92,11 +100,11 @@
       </method>
     </configuration>
     <configuration name="StartSpring" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
-      <module name="froniusRestClient" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="versuch1.StartSpring" />
+      <module name="application" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="application.StartSpring" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="versuch1.*" />
+          <option name="PATTERN" value=".*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -123,7 +131,10 @@
       <workItem from="1709789634752" duration="8527000" />
       <workItem from="1709815312207" duration="889000" />
       <workItem from="1709876131526" duration="9532000" />
-      <workItem from="1709992871933" duration="7016000" />
+      <workItem from="1709992871933" duration="7823000" />
+      <workItem from="1710134657920" duration="671000" />
+      <workItem from="1710172663621" duration="4078000" />
+      <workItem from="1710359720477" duration="7455000" />
     </task>
     <task id="LOCAL-00001" summary="initial project">
       <created>1709763069584</created>
@@ -132,7 +143,14 @@
       <option name="project" value="LOCAL" />
       <updated>1709763069584</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="update">
+      <created>1710000630117</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1710000630117</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -141,6 +159,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="initial project" />
     <MESSAGE value="nix besonderes" />
-    <option name="LAST_COMMIT_MESSAGE" value="nix besonderes" />
+    <MESSAGE value="update" />
+    <option name="LAST_COMMIT_MESSAGE" value="update" />
   </component>
 </project>

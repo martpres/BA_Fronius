@@ -22,6 +22,7 @@
         <module>controller</module>
         <module>middleware</module>
         <module>froniusRestClient</module>
+        <module>application</module>
     </modules>
 
     <properties>
@@ -29,5 +30,25 @@
         <maven.compiler.target>19</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+
+    <dependencies>
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.liquibase</groupId>
+                <artifactId>liquibase-maven-plugin</artifactId>
+                <version>4.19.0</version>
+
+                <configuration>
+                    <changeLogFile>
+                        database/src/main/resources/db/master.xml
+                    </changeLogFile>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

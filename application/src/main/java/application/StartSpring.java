@@ -1,11 +1,11 @@
-package versuch1;
+package application;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 
 
-
-@SpringBootApplication
+@SpringBootApplication//(exclude={DataSourceAutoConfiguration.class})
 public class StartSpring {
 
     public static void main(String[] args) {

@@ -31,24 +31,21 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
-    <dependencies>
+<!--    <build>-->
+<!--        <plugins>-->
+<!--            <plugin>-->
 
-    </dependencies>
+<!--                <groupId>org.liquibase</groupId>-->
+<!--                <artifactId>liquibase-maven-plugin</artifactId>-->
+<!--                <version>4.19.0</version>-->
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.liquibase</groupId>
-                <artifactId>liquibase-maven-plugin</artifactId>
-                <version>4.19.0</version>
-
-                <configuration>
-                    <changeLogFile>
-                        database/src/main/resources/db/master.xml
-                    </changeLogFile>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
+<!--                <configuration>-->
+<!--                    <changeLogFile>-->
+<!--                        application/src/main/resources/db/master.xml-->
+<!--                    </changeLogFile>-->
+<!--                </configuration>-->
+<!--            </plugin>-->
+<!--        </plugins>-->
+<!--    </build>-->
 
 </project>

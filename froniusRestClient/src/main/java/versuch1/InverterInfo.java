@@ -8,18 +8,13 @@ package versuch1;
 //@Entity
 public class InverterInfo {
 
-    //@Id
-//    @GeneratedValue(strategy = GenerationType.AUTO)
+//  @Id
+//  @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
     private String apiVersion;
     private String baseUrl;
     private String compatibilityRange;
-
-
-
-
-
 
 
     public String getApiVersion() {
@@ -40,8 +35,6 @@ public class InverterInfo {
     public void setCompatibilityRange(String compatibilityRange) {
         this.compatibilityRange = compatibilityRange;
     }
-
-
 
 
 }

@@ -4,18 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3711139a-9762-476c-93e8-28738e439817" name="Changes" comment="liqubase">
+    <list default="true" id="3711139a-9762-476c-93e8-28738e439817" name="Changes" comment="idea ignore">
+      <change afterPath="$PROJECT_DIR$/api/src/main/java/dto/CurrentAcDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/froniusRestClient/src/main/java/FroniusClient.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/api/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/application/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/src/main/java/application/StartSpring.java" beforeDir="false" afterPath="$PROJECT_DIR$/application/src/main/java/application/StartSpring.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/database/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/application/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/src/main/resources/db/changelog/202403132147_added_CurrentAC_entity.xml" beforeDir="false" afterPath="$PROJECT_DIR$/application/src/main/resources/db/changelog/202403132147_added_CurrentAC_entity.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/src/main/resources/db/master.xml" beforeDir="false" afterPath="$PROJECT_DIR$/application/src/main/resources/db/master.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/froniusRestClient/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/froniusRestClient/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/froniusRestClient/src/main/java/versuch1/Contoller1.java" beforeDir="false" afterPath="$PROJECT_DIR$/froniusRestClient/src/main/java/versuch1/Contoller1.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/froniusRestClient/src/main/java/versuch1/InverterInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/froniusRestClient/src/main/java/versuch1/InverterInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/froniusRestClient/src/main/java/versuch1/Contoller1.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/froniusRestClient/src/main/java/versuch1/InverterInfo.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -46,35 +42,35 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "jdk.selected.JAVA_MODULE": "19",
-    "last_opened_file_path": "C:/Users/User/Desktop/BA_Fronius_POM _Spezial",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "spring.configuration.checksum": "796b295921d435c0f5951652454f910b",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;19&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/User/Desktop/BA_Fronius_POM _Spezial&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;796b295921d435c0f5951652454f910b&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "postgresql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;postgresql&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\User\Desktop\BA_Fronius\database\src\main\resources" />
@@ -154,7 +150,14 @@
       <option name="project" value="LOCAL" />
       <updated>1710000630117</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="idea ignore">
+      <created>1710970587737</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1710970587737</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -164,6 +167,7 @@
     <MESSAGE value="initial project" />
     <MESSAGE value="nix besonderes" />
     <MESSAGE value="update" />
-    <option name="LAST_COMMIT_MESSAGE" value="update" />
+    <MESSAGE value="idea ignore" />
+    <option name="LAST_COMMIT_MESSAGE" value="idea ignore" />
   </component>
 </project>

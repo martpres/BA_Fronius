@@ -6,7 +6,6 @@ public class CurrentAcDto {
     private Float acPhase1;
     private Float acPhase2;
     private Float acPhase3;
-
     private LocalDateTime timestamp;
 
     public CurrentAcDto(Float acPhase1, Float acPhase2, Float acPhase3, LocalDateTime timestamp) {

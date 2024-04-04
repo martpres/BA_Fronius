@@ -15,6 +15,8 @@ public class CurrentAcDto {
         this.timestamp = timestamp;
     }
 
+    public CurrentAcDto() {
+    }
 
     public Float getAcPhase1() {
         return acPhase1;

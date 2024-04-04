@@ -9,7 +9,6 @@ import service.FroniusClient;
 public class FroniusClientImpl implements FroniusClient {
     RestClient restClient = RestClient.create();
 
-
     @Override
     public CurrentAcDto currentAcEndpoint() {
         return null;

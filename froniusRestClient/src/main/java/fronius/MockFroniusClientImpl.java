@@ -10,8 +10,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class MockFroniusClientImpl implements FroniusClient {
-    private final String CURRENT_AC_FILE_PATH="src/main/resources/currentAC.json";
-    private final ObjectMapper objectMapper = new ObjectMapper();
+    private final String CURRENT_AC_FILE_PATH="froniusRestClient/src/main/resources/currentAC.json";
 
     @Override
     public CurrentAcDto currentAcEndpoint() {
@@ -19,20 +18,12 @@ public class MockFroniusClientImpl implements FroniusClient {
     }
 
     private <T> T readJsonFromFile(final String filePath, final String jsonPath, Class<T> clazz){
-        return JsonPath
-                .parse(readFile(filePath))
-                .read(jsonPath, clazz);
-    }
-
-    private String readFile(final String filePath){
         try {
-            return objectMapper.readTree(new File(filePath)).asText();
+            return JsonPath
+                    .parse(new File(filePath))
+                    .read(jsonPath, clazz);
         } catch (IOException e) {
-            throw new IllegalArgumentException("Could not red file " + e.getMessage());
+            throw new IllegalArgumentException("could not parse json" + e.getMessage());
         }
     }
-
-
 }
-
-

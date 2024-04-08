@@ -7,21 +7,29 @@ import java.util.Objects;
 
 // http://192.168.0.100/solar_api/v1/GetMeterRealtimeData.cgi?Scope=Device&DeviceId=0
 @Entity
-@Table(name = "current_AC")
+@Table(name = "current_ac", catalog = "public")
 public class CurrentAC extends AbstractBaseEntity{
 
-    @Column(name = "ac_phase_1", updatable = false, nullable = false)
+    @Column(name = "ac_phase_1", updatable = false, nullable = false, columnDefinition = "numeric")
     @Nonnull
     private Float acPhase1;
 
-    @Column(name = "ac_phase_2", updatable = false, nullable = false)
+    @Column(name = "ac_phase_2", updatable = false, nullable = false, columnDefinition = "numeric")
     @Nonnull
     private Float acPhase2;
 
-    @Column(name = "ac_phase_3", updatable = false, nullable = false)
+    @Column(name = "ac_phase_3", updatable = false, nullable = false, columnDefinition = "numeric")
     @Nonnull
     private Float acPhase3;
 
+    public CurrentAC() {
+    }
+
+    public CurrentAC(Float acPhase1, Float acPhase2, Float acPhase3) {
+        this.acPhase1 = acPhase1;
+        this.acPhase2 = acPhase2;
+        this.acPhase3 = acPhase3;
+    }
 
     public Float getAcPhase1() {
         return acPhase1;

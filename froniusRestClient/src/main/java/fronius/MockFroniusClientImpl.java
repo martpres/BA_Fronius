@@ -19,9 +19,9 @@ public class MockFroniusClientImpl implements FroniusClient {
 
     private <T> T readJsonFromFile(final String filePath, final String jsonPath, Class<T> clazz){
         try {
-            return JsonPath
+            return new ObjectMapper().convertValue(JsonPath
                     .parse(new File(filePath))
-                    .read(jsonPath, clazz);
+                    .read(jsonPath), clazz);
         } catch (IOException e) {
             throw new IllegalArgumentException("could not parse json" + e.getMessage());
         }

@@ -1,7 +1,6 @@
 package dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -14,14 +13,14 @@ public class CurrentAcDto implements Serializable {
     private Float acPhase3;
     private LocalDateTime timestamp;
 
+    public CurrentAcDto() {
+    }
+
     public CurrentAcDto(Float acPhase1, Float acPhase2, Float acPhase3, LocalDateTime timestamp) {
         this.acPhase1 = acPhase1;
         this.acPhase2 = acPhase2;
         this.acPhase3 = acPhase3;
         this.timestamp = timestamp;
-    }
-
-    public CurrentAcDto() {
     }
 
     public Float getAcPhase1() {

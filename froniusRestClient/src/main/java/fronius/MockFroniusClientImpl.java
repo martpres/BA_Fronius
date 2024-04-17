@@ -3,9 +3,7 @@ package fronius;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jayway.jsonpath.JsonPath;
 import dto.CurrentAcDto;
-import org.springframework.beans.factory.annotation.Autowired;
 import service.FroniusClient;
-
 import java.io.File;
 import java.io.IOException;
 

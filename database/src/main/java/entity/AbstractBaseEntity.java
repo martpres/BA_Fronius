@@ -34,5 +34,4 @@ public abstract class AbstractBaseEntity implements Serializable {
         this.createdAt = createdAt;
     }
 
-
 }

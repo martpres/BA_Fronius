@@ -9,7 +9,6 @@ public class FroniusClientFactory {
 
     private final FroniusClient froniusClient;
 
-
     public FroniusClientFactory(@Value("${app.mock.restclient:true}") boolean mock, FroniusClient restclient){
         if (mock){
             froniusClient = new MockFroniusClientImpl();

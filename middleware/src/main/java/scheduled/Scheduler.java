@@ -29,7 +29,7 @@ public class Scheduler {
     }
 
     @Async
-    @Scheduled(fixedDelayString = "PT10S", initialDelayString = "PT10S")
+    @Scheduled(fixedDelayString = "PT10S", initialDelayString = "PT20S")
     public void startWorkflowForCurrentAC(){
         if (currentAc) {
             CurrentAcDto dto = froniusClientFactory.getFroniusClient().currentAcEndpoint();

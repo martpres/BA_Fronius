@@ -6,7 +6,7 @@
                    http://www.liquibase.org/xml/ns/dbchangelog-ext
                    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
-    <changeSet id="202403132147-1" author="martpres">
+    <changeSet id="202404191602-1" author="martpres">
         <createTable tableName="current_ac">
 
             <column name="id" type="integer" autoIncrement="true">

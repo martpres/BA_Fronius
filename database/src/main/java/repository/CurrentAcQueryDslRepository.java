@@ -13,10 +13,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import response.QueryDslResponse;
-
 import java.time.LocalDate;
 import java.util.Optional;
-
 
 @Repository
 @Transactional(readOnly = true)
@@ -42,5 +40,4 @@ public class CurrentAcQueryDslRepository {
         pageRequest.ifPresent(value->query.offset(value.getOffset()));
         return new QueryDslResponse<>(currentAcMapper.entityToDto(query.fetch()),jpaQueryFactory.selectFrom(qCurrentAC).fetchCount());
     }
-
 }

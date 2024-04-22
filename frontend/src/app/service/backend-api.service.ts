@@ -7,10 +7,13 @@ import {Observable} from "rxjs";
 })
 export class BackendApiService {
 
-  private baseUrl= 'http://localhost:8080/api/'
-  
+  private baseUrl = 'http://localhost:8080/api/'
+
   constructor(private httpClient: HttpClient) {
   }
-  
-  public loadCurrentAC():Observable<any>
+
+  // public loadCurrentAC(): Observable<any> {
+  //   return this.httpClient.get('${this.baseUrl}current-ac')
+  // }
+
 }

@@ -6,5 +6,4 @@ import { Component } from '@angular/core';
   styleUrls: ['./current-ac.component.scss']
 })
 export class CurrentACComponent {
-
 }

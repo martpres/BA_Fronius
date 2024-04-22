@@ -1,7 +1,6 @@
 package controller;
 
 import dto.CurrentAcDto;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,8 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
 import pagination.PaginationUtil;
 import response.QueryDslResponse;
 import service.CurrentAcService;
-
-import java.awt.print.Pageable;
 import java.time.LocalDate;
 import java.util.Optional;
 

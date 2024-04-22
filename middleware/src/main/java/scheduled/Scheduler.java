@@ -17,8 +17,7 @@ public class Scheduler {
     private final CurrentAcRepository currentAcRepository;
     private final CurrentAcMapper currentAcMapper;
 
-    public Scheduler(@Value("${app.run.scheduled.current-ac:false}")
-                     boolean currentAc,
+    public Scheduler(@Value("${app.run.scheduled.current-ac:false}") boolean currentAc,
                      FroniusClientFactory froniusClientFactory,
                      CurrentAcRepository currentAcRepository,
                      CurrentAcMapper currentAcMapper) {

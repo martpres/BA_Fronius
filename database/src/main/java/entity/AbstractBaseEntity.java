@@ -8,7 +8,7 @@ import java.time.ZonedDateTime;
 public abstract class AbstractBaseEntity implements Serializable {
 
     @Id
-    @Column(name = "timestamp", updatable = false, nullable = false)
+    @Column(name = "primary_timestamp", updatable = false, nullable = false)
     private ZonedDateTime timestamp;
 
     public ZonedDateTime getTimestamp() {

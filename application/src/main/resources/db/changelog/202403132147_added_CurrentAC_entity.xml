@@ -9,17 +9,17 @@
     <changeSet id="202404191602-1" author="martpres">
         <createTable tableName="current_ac">
 
-            <column name="created_at" type="timestamp">
+            <column name="primary_timestamp" type="timestamp">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
 
-            <column name="ac_phase_1" type="decimal">
+            <column name="ac_phase_1" type="real">
             </column>
 
-            <column name="ac_phase_2" type="decimal">
+            <column name="ac_phase_2" type="real">
             </column>
 
-            <column name="ac_phase_3" type="decimal">
+            <column name="ac_phase_3" type="real">
             </column>
 
         </createTable>

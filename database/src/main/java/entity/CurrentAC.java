@@ -10,15 +10,15 @@ import java.util.Objects;
 @Table(name = "current_ac", catalog = "public")
 public class CurrentAC extends AbstractBaseEntity{
 
-    @Column(name = "ac_phase_1", updatable = false, nullable = false, columnDefinition = "numeric")
+    @Column(name = "ac_phase_1", updatable = false, nullable = false)
     @Nonnull
     private Float acPhase1;
 
-    @Column(name = "ac_phase_2", updatable = false, nullable = false, columnDefinition = "numeric")
+    @Column(name = "ac_phase_2", updatable = false, nullable = false)
     @Nonnull
     private Float acPhase2;
 
-    @Column(name = "ac_phase_3", updatable = false, nullable = false, columnDefinition = "numeric")
+    @Column(name = "ac_phase_3", updatable = false, nullable = false)
     @Nonnull
     private Float acPhase3;
 

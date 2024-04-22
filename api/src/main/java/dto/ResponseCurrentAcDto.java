@@ -1,23 +1,21 @@
 package dto;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.Serializable;
 import java.time.ZonedDateTime;
 
-public class CurrentAcDto implements Serializable {
-    @JsonProperty("Body.Data.Current_AC_Phase_1")
+public class ResponseCurrentAcDto implements Serializable {
+
     private Float acPhase1;
-    @JsonProperty("Body.Data.Current_AC_Phase_2")
+
     private Float acPhase2;
-    @JsonProperty("Body.Data.Current_AC_Phase_3")
+
     private Float acPhase3;
-    @JsonProperty("Head.Timestamp")
     private ZonedDateTime timestamp;
 
-    public CurrentAcDto() {
+    public ResponseCurrentAcDto() {
     }
 
-    public CurrentAcDto(Float acPhase1, Float acPhase2, Float acPhase3, ZonedDateTime timestamp) {
+    public ResponseCurrentAcDto(Float acPhase1, Float acPhase2, Float acPhase3, ZonedDateTime timestamp) {
         this.acPhase1 = acPhase1;
         this.acPhase2 = acPhase2;
         this.acPhase3 = acPhase3;

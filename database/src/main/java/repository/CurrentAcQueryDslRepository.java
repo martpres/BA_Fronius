@@ -3,7 +3,7 @@ package repository;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import dto.CurrentAcDto;
+import dto.ResponseCurrentAcDto;
 import entity.CurrentAC;
 import entity.QCurrentAC;
 import jakarta.persistence.EntityManager;
@@ -30,7 +30,7 @@ public class CurrentAcQueryDslRepository {
         this.currentAcMapper = currentAcMapper;
     }
 
-    public QueryDslResponse<CurrentAcDto> loadCurrentAc(Optional<ZonedDateTime> startDate, Optional<ZonedDateTime> endDate, Optional<PageRequest> pageRequest){
+    public QueryDslResponse<ResponseCurrentAcDto> loadCurrentAc(Optional<ZonedDateTime> startDate, Optional<ZonedDateTime> endDate, Optional<PageRequest> pageRequest){
         BooleanBuilder booleanBuilder = new BooleanBuilder();
         JPAQueryFactory jpaQueryFactory = new JPAQueryFactory(entityManager);
         startDate.ifPresent(value->booleanBuilder.and(qCurrentAC.timestamp.after(startDate.get())));

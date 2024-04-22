@@ -1,6 +1,6 @@
 package controller;
 
-import dto.CurrentAcDto;
+import dto.ResponseCurrentAcDto;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,10 +23,10 @@ public class CurrentAcController {
     }
 
     @GetMapping(value = "/", produces = "application/json")
-    public QueryDslResponse<CurrentAcDto> loadCurrentAc(@RequestParam(value = "startDate", required = false) Optional<ZonedDateTime> startDate,
-                                                        @RequestParam(value = "endDate", required = false) Optional<ZonedDateTime> endDate,
-                                                        @RequestParam(value = "page", required = false) Optional<Integer> page,
-                                                        @RequestParam(value = "pagesize", required = false) Optional<Integer> pagesize ){
+    public QueryDslResponse<ResponseCurrentAcDto> loadCurrentAc(@RequestParam(value = "startDate", required = false) Optional<ZonedDateTime> startDate,
+                                                                @RequestParam(value = "endDate", required = false) Optional<ZonedDateTime> endDate,
+                                                                @RequestParam(value = "page", required = false) Optional<Integer> page,
+                                                                @RequestParam(value = "pagesize", required = false) Optional<Integer> pagesize ){
         return currentAcService.loadCurrentAc(startDate, endDate, PaginationUtil.getPagination(page,pagesize));
     }
 }

@@ -1,6 +1,6 @@
 package service;
 
-import dto.CurrentAcDto;
+import dto.ResponseCurrentAcDto;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,7 +18,7 @@ public class CurrentAcService {
         this.currentAcQueryDslRepository = currentAcQueryDslRepository;
     }
 
-    public QueryDslResponse<CurrentAcDto> loadCurrentAc(Optional<ZonedDateTime> startDate, Optional<ZonedDateTime> endDate, Optional<PageRequest> pageRequest){
+    public QueryDslResponse<ResponseCurrentAcDto> loadCurrentAc(Optional<ZonedDateTime> startDate, Optional<ZonedDateTime> endDate, Optional<PageRequest> pageRequest){
         return currentAcQueryDslRepository.loadCurrentAc(startDate,endDate,pageRequest);
     }
 

@@ -1,6 +1,8 @@
 package fronius;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.jayway.jsonpath.JsonPath;
 import dto.CurrentAcDto;
 import service.FroniusClient;
@@ -12,12 +14,14 @@ public class MockFroniusClientImpl implements FroniusClient {
 
     @Override
     public CurrentAcDto currentAcEndpoint() {
-        return readJsonFromFile(CURRENT_AC_FILE_PATH, "$.Body.Data", CurrentAcDto.class);
+        return readJsonFromFile(CURRENT_AC_FILE_PATH, "$", CurrentAcDto.class);
     }
 
     private <T> T readJsonFromFile(final String filePath, final String jsonPath, Class<T> clazz){
         try {
-            return new ObjectMapper().convertValue(JsonPath
+            ObjectMapper mapper = new ObjectMapper();
+            mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+            return mapper.convertValue(JsonPath
                     .parse(new File(filePath))
                     .read(jsonPath), clazz);
         } catch (IOException e) {

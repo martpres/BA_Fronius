@@ -1,6 +1,7 @@
 package mapper;
 
 import dto.CurrentAcDto;
+import dto.ResponseCurrentAcDto;
 import entity.CurrentAC;
 import org.mapstruct.InjectionStrategy;
 import org.mapstruct.Mapper;
@@ -14,7 +15,7 @@ public abstract class CurrentAcMapper {
 
     public abstract CurrentAC dtoToEntity(CurrentAcDto dto);
 
-    public abstract CurrentAcDto entityToDto(CurrentAC entity);
+    public abstract ResponseCurrentAcDto entityToDto(CurrentAC entity);
 
-    public abstract List<CurrentAcDto> entityToDto(List<CurrentAC> entities);
+    public abstract List<ResponseCurrentAcDto> entityToDto(List<CurrentAC> entities);
 }

@@ -1,37 +1,21 @@
 package entity;
 
 import jakarta.persistence.*;
-import org.springframework.data.annotation.CreatedDate;
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 
 @MappedSuperclass
 public abstract class AbstractBaseEntity implements Serializable {
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "id", updatable = false, nullable = false)
-    private Integer id;
+    @Column(name = "timestamp", updatable = false, nullable = false)
+    private ZonedDateTime timestamp;
 
-    @CreatedDate
-    @Column(name = "created_at", updatable = false)
-    private LocalDateTime createdAt = LocalDateTime.now();
-
-
-    public Integer getId() {
-        return id;
+    public ZonedDateTime getTimestamp() {
+        return timestamp;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setTimestamp(ZonedDateTime timestamp) {
+        this.timestamp = timestamp;
     }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
 }

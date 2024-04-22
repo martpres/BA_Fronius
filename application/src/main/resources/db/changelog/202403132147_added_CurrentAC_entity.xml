@@ -9,11 +9,8 @@
     <changeSet id="202404191602-1" author="martpres">
         <createTable tableName="current_ac">
 
-            <column name="id" type="integer" autoIncrement="true">
-                <constraints primaryKey="true" nullable="false" />
-            </column>
-
-            <column name="created_at" type="timestamp" defaultValueComputed="current_timestamp">
+            <column name="created_at" type="timestamp">
+                <constraints primaryKey="true" nullable="false"/>
             </column>
 
             <column name="ac_phase_1" type="decimal">

@@ -6,8 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import repository.CurrentAcQueryDslRepository;
 import response.QueryDslResponse;
-
-import java.time.LocalDate;
+import java.time.ZonedDateTime;
 import java.util.Optional;
 
 @Service
@@ -19,7 +18,7 @@ public class CurrentAcService {
         this.currentAcQueryDslRepository = currentAcQueryDslRepository;
     }
 
-    public QueryDslResponse<CurrentAcDto> loadCurrentAc(Optional<LocalDate> startDate, Optional<LocalDate> endDate, Optional<PageRequest> pageRequest){
+    public QueryDslResponse<CurrentAcDto> loadCurrentAc(Optional<ZonedDateTime> startDate, Optional<ZonedDateTime> endDate, Optional<PageRequest> pageRequest){
         return currentAcQueryDslRepository.loadCurrentAc(startDate,endDate,pageRequest);
     }
 

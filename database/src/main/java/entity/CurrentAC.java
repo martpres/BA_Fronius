@@ -55,7 +55,6 @@ public class CurrentAC extends AbstractBaseEntity{
         this.acPhase3 = acPhase3;
     }
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -64,12 +63,12 @@ public class CurrentAC extends AbstractBaseEntity{
         return Objects.equals(acPhase1, currentAC.acPhase1)
                 && Objects.equals(acPhase2, currentAC.acPhase2)
                 && Objects.equals(acPhase3, currentAC.acPhase3)
-                && Objects.equals(super.getId(), currentAC.getId());
+                && Objects.equals(super.getTimestamp(), currentAC.getTimestamp());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(acPhase1, acPhase2, acPhase3, super.getId());
+        return Objects.hash(acPhase1, acPhase2, acPhase3, super.getTimestamp());
     }
 
     @Override
@@ -78,7 +77,7 @@ public class CurrentAC extends AbstractBaseEntity{
                 "acPhase1=" + acPhase1 +
                 ", acPhase2=" + acPhase2 +
                 ", acPhase3=" + acPhase3 +
-                ", timestamp=" + super.getCreatedAt() +
+                ", timestamp=" + super.getTimestamp() +
                 '}';
     }
 

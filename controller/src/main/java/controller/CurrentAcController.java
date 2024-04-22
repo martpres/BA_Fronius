@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import pagination.PaginationUtil;
 import response.QueryDslResponse;
 import service.CurrentAcService;
-import java.time.LocalDate;
+import java.time.ZonedDateTime;
 import java.util.Optional;
 
 @RestController
@@ -23,8 +23,8 @@ public class CurrentAcController {
     }
 
     @GetMapping(value = "/", produces = "application/json")
-    public QueryDslResponse<CurrentAcDto> loadCurrentAc(@RequestParam(value = "startDate", required = false) Optional<LocalDate> startDate,
-                                                        @RequestParam(value = "endDate", required = false) Optional<LocalDate> endDate,
+    public QueryDslResponse<CurrentAcDto> loadCurrentAc(@RequestParam(value = "startDate", required = false) Optional<ZonedDateTime> startDate,
+                                                        @RequestParam(value = "endDate", required = false) Optional<ZonedDateTime> endDate,
                                                         @RequestParam(value = "page", required = false) Optional<Integer> page,
                                                         @RequestParam(value = "pagesize", required = false) Optional<Integer> pagesize ){
         return currentAcService.loadCurrentAc(startDate, endDate, PaginationUtil.getPagination(page,pagesize));

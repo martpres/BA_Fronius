@@ -2,7 +2,7 @@ package dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 
 public class CurrentAcDto implements Serializable {
     @JsonProperty("Current_AC_Phase_1")
@@ -11,12 +11,12 @@ public class CurrentAcDto implements Serializable {
     private Float acPhase2;
     @JsonProperty("Current_AC_Phase_3")
     private Float acPhase3;
-    private LocalDateTime timestamp;
+    private ZonedDateTime timestamp;
 
     public CurrentAcDto() {
     }
 
-    public CurrentAcDto(Float acPhase1, Float acPhase2, Float acPhase3, LocalDateTime timestamp) {
+    public CurrentAcDto(Float acPhase1, Float acPhase2, Float acPhase3, ZonedDateTime timestamp) {
         this.acPhase1 = acPhase1;
         this.acPhase2 = acPhase2;
         this.acPhase3 = acPhase3;
@@ -47,11 +47,11 @@ public class CurrentAcDto implements Serializable {
         this.acPhase3 = acPhase3;
     }
 
-    public LocalDateTime getTimestamp() {
+    public ZonedDateTime getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(LocalDateTime timestamp) {
+    public void setTimestamp(ZonedDateTime timestamp) {
         this.timestamp = timestamp;
     }
 

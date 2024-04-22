@@ -13,7 +13,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import response.QueryDslResponse;
-import java.time.LocalDate;
+import java.time.ZonedDateTime;
 import java.util.Optional;
 
 @Repository
@@ -30,11 +30,11 @@ public class CurrentAcQueryDslRepository {
         this.currentAcMapper = currentAcMapper;
     }
 
-    public QueryDslResponse<CurrentAcDto> loadCurrentAc(Optional<LocalDate> startDate, Optional<LocalDate> endDate, Optional<PageRequest> pageRequest){
+    public QueryDslResponse<CurrentAcDto> loadCurrentAc(Optional<ZonedDateTime> startDate, Optional<ZonedDateTime> endDate, Optional<PageRequest> pageRequest){
         BooleanBuilder booleanBuilder = new BooleanBuilder();
         JPAQueryFactory jpaQueryFactory = new JPAQueryFactory(entityManager);
-        startDate.ifPresent(value->booleanBuilder.and(qCurrentAC.createdAt.after(startDate.get().atStartOfDay())));
-        endDate.ifPresent(value->booleanBuilder.and(qCurrentAC.createdAt.before(endDate.get().atStartOfDay())));
+        startDate.ifPresent(value->booleanBuilder.and(qCurrentAC.timestamp.after(startDate.get())));
+        endDate.ifPresent(value->booleanBuilder.and(qCurrentAC.timestamp.before(endDate.get())));
         JPAQuery<CurrentAC> query = jpaQueryFactory.selectFrom(qCurrentAC).where(booleanBuilder);
         pageRequest.ifPresent(value->query.limit(value.getPageSize()));
         pageRequest.ifPresent(value->query.offset(value.getOffset()));

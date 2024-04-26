@@ -2,16 +2,15 @@ package dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.ZonedDateTime;
+import java.util.Map;
 
 public class CurrentAcDto implements Serializable {
-    @JsonProperty("Body.Data.Current_AC_Phase_1")
+
     private Float acPhase1;
-    @JsonProperty("Body.Data.Current_AC_Phase_2")
     private Float acPhase2;
-    @JsonProperty("Body.Data.Current_AC_Phase_3")
     private Float acPhase3;
-    @JsonProperty("Head.Timestamp")
     private ZonedDateTime timestamp;
 
     public CurrentAcDto() {
@@ -64,5 +63,18 @@ public class CurrentAcDto implements Serializable {
                 ", acPhase3=" + acPhase3 +
                 ", timestamp=" + timestamp +
                 '}';
+    }
+
+    @JsonProperty("Body")
+    private void unpackData(Map<String, Object> body) {
+        Map<String,Object> data = (Map<String, Object>) body.get("Data");
+        this.acPhase1 = ((BigDecimal) data.get("Current_AC_Phase_1")).floatValue();
+        this.acPhase2 = ((BigDecimal) data.get("Current_AC_Phase_2")).floatValue();
+        this.acPhase3 = ((BigDecimal) data.get("Current_AC_Phase_3")).floatValue();
+    }
+
+    @JsonProperty("Head")
+    private void unpackHead(Map<String, Object> head) {
+        this.timestamp = ZonedDateTime.parse((String) head.get("Timestamp"));
     }
 }

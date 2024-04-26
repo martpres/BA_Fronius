@@ -32,7 +32,7 @@ public class Scheduler {
     public void startWorkflowForCurrentAC(){
         if (currentAc) {
             CurrentAcDto dto = froniusClientFactory.getFroniusClient().currentAcEndpoint();
-//            currentAcRepository.save(currentAcMapper.dtoToEntity(dto));
+            currentAcRepository.save(currentAcMapper.dtoToEntity(dto));
         }
     }
 }

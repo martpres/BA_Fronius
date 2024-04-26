@@ -13,7 +13,7 @@ import java.time.ZonedDateTime;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("api/current-ac")
+@RequestMapping("/api/current-ac")
 @Transactional(readOnly = true)
 public class CurrentAcController {
     private final CurrentAcService currentAcService;

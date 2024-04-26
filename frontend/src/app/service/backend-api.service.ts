@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
+import {QueryDslResponse} from "../dto/queryDslResponse.model";
+import {CurrentAC} from "../dto/currentAC.model";
+import {CurrentAcFilter} from "../dto/current-ac-filter.model";
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +15,8 @@ export class BackendApiService {
   constructor(private httpClient: HttpClient) {
   }
 
-  // public loadCurrentAC(): Observable<any> {
-  //   return this.httpClient.get('${this.baseUrl}current-ac')
-  // }
+  public loadCurrentAC(filter?: any): Observable<QueryDslResponse<CurrentAC>> {
+    return this.httpClient.get<QueryDslResponse<CurrentAC>>(`${this.baseUrl}current-ac/`,{params: filter});
+  }
 
 }

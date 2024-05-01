@@ -1,1 +1,13 @@
-<p>current-ac works!</p>
+<div *ngIf="lineChartData">
+  <ngx-charts-line-chart
+    [legend]="true"
+    [showXAxisLabel]="true"
+    [showYAxisLabel]="true"
+    [xAxis]="true"
+    [yAxis]="true"
+    [xAxisLabel]="'Time'"
+    [yAxisLabel]="'Current'"
+    [timeline]="true"
+    [results]="lineChartData"
+  ></ngx-charts-line-chart>
+</div>

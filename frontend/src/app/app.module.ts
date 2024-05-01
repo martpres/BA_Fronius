@@ -7,6 +7,8 @@ import { HeaderComponent } from './header/header.component';
 import {MaterialModule} from "./material/material.module";
 import { CurrentACComponent } from './current-ac/current-ac.component';
 import {HttpClientModule} from "@angular/common/http";
+import {DatePipe} from "@angular/common";
+import {NgxChartsModule} from "@swimlane/ngx-charts";
 
 @NgModule({
   declarations: [
@@ -19,9 +21,12 @@ import {HttpClientModule} from "@angular/common/http";
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxChartsModule
   ],
-  providers: [],
+  providers: [
+    DatePipe
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

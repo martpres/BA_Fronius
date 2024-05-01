@@ -18,6 +18,7 @@ public class FroniusClientImpl implements FroniusClient {
 
     @Override
     public CurrentAcDto currentAcEndpoint() {
+        System.out.println("DEBUG: sending rest request");
         return restClient.get()
                 .uri(froniusUrl + "GetMeterRealtimeData.cgi?Scope=Device&DeviceId=0")
                 .retrieve()

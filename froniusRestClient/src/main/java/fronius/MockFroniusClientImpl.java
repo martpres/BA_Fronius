@@ -22,6 +22,7 @@ public class MockFroniusClientImpl implements FroniusClient {
 
     @Override
     public CurrentAcDto currentAcEndpoint() {
+        System.out.println("DEBUG: reading Json file");
         CurrentAcDto dto = readJsonFromFile(CURRENT_AC_FILE_PATH, "$", CurrentAcDto.class);
         dto.setTimestamp(ZonedDateTime.now());
         return dto;

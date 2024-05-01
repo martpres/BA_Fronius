@@ -68,9 +68,19 @@ public class CurrentAcDto implements Serializable {
     @JsonProperty("Body")
     private void unpackData(Map<String, Object> body) {
         Map<String,Object> data = (Map<String, Object>) body.get("Data");
-        this.acPhase1 = ((BigDecimal) data.get("Current_AC_Phase_1")).floatValue();
-        this.acPhase2 = ((BigDecimal) data.get("Current_AC_Phase_2")).floatValue();
-        this.acPhase3 = ((BigDecimal) data.get("Current_AC_Phase_3")).floatValue();
+        if (data.get("Current_AC_Phase_1").getClass()==Double.class){
+            this.acPhase1 = ((Double) data.get("Current_AC_Phase_1")).floatValue();
+            this.acPhase2 = ((Double) data.get("Current_AC_Phase_2")).floatValue();
+            this.acPhase3 = ((Double) data.get("Current_AC_Phase_3")).floatValue();
+            return;
+        }
+        if (data.get("Current_AC_Phase_1").getClass()==BigDecimal.class){
+            this.acPhase1 = ((BigDecimal) data.get("Current_AC_Phase_1")).floatValue();
+            this.acPhase2 = ((BigDecimal) data.get("Current_AC_Phase_2")).floatValue();
+            this.acPhase3 = ((BigDecimal) data.get("Current_AC_Phase_3")).floatValue();
+            return;
+        }
+        throw new IllegalStateException("currentAcDto class not found: " + data.get("Current_AC_Phase_1").getClass());
     }
 
     @JsonProperty("Head")

@@ -11,7 +11,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 @EntityScan({"entity"})
 @EnableJpaRepositories({"repository"})
-@ComponentScan({"scheduled", "fronius", "mapper", "repository", "controller", "service"})
+@ComponentScan({"scheduled", "fronius", "mapper", "repository", "controller", "service", "config"})
 @ConfigurationPropertiesScan({"config"})
 @SpringBootApplication
 @EnableScheduling

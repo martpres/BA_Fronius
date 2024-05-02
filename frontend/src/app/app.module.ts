@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import {LOCALE_ID, NgModule} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -7,8 +7,10 @@ import { HeaderComponent } from './header/header.component';
 import {MaterialModule} from "./material/material.module";
 import { CurrentACComponent } from './current-ac/current-ac.component';
 import {HttpClientModule} from "@angular/common/http";
-import {DatePipe} from "@angular/common";
+import {CommonModule, DatePipe, registerLocaleData} from "@angular/common";
 import {NgxChartsModule} from "@swimlane/ngx-charts";
+import localeDe from '@angular/common/locales/de';
+import localeDeExtra from '@angular/common/locales/extra/de';
 
 @NgModule({
   declarations: [
@@ -18,6 +20,7 @@ import {NgxChartsModule} from "@swimlane/ngx-charts";
   ],
   imports: [
     BrowserModule,
+    CommonModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
@@ -25,8 +28,13 @@ import {NgxChartsModule} from "@swimlane/ngx-charts";
     NgxChartsModule
   ],
   providers: [
+    {provide: LOCALE_ID, useValue: 'de-DE'},
     DatePipe
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor() {
+    registerLocaleData(localeDe, 'de-DE', localeDeExtra);
+  }
+}

@@ -1,10 +1,11 @@
-import {Component, LOCALE_ID, OnDestroy, OnInit} from '@angular/core';
+import {Component, inject, OnDestroy, OnInit} from '@angular/core';
 import {BackendApiService} from "../service/backend-api.service";
 import {Subscription} from "rxjs";
 import {QueryDslResponse} from "../dto/queryDslResponse.model";
 import {CurrentAC} from "../dto/currentAC.model";
-import {CurrentAcFilter} from "../dto/current-ac-filter.model";
-import {DatePipe, formatDate} from "@angular/common";
+import {DateTimeService} from "../service/date-time.service";
+import {formatDate} from "@angular/common";
+import {localId, timeFormat} from "../dto/const";
 
 @Component({
   selector: 'app-current-ac',
@@ -12,32 +13,37 @@ import {DatePipe, formatDate} from "@angular/common";
   styleUrls: ['./current-ac.component.scss']
 })
 export class CurrentACComponent implements OnInit, OnDestroy{
+  public lineChartData?: any[];
+  public initialDate = new Date();
   private sub?: Subscription;
   private data?: QueryDslResponse<CurrentAC>;
-  public lineChartData?: any[];
+  private refreshMilliSeconds = 60000;
+  private interval?: any;
 
-  constructor(private backendService: BackendApiService, private datePipe: DatePipe) {
+
+  constructor(private backendService: BackendApiService, private dateTimeService: DateTimeService) {
   }
 
   ngOnInit(): void {
-    this.sendRequest();
+    this.interval = setInterval(()=> {
+      this.sendRequest();
+    }, this.refreshMilliSeconds);
   }
 
   ngOnDestroy(): void {
     this.sub?.unsubscribe();
+    clearInterval(this.interval);
   }
 
-  public formatTime(value:Date):string {
-    console.log(formatDate(value, 'HH:mm', 'de-DE'))
-    return formatDate(value, 'HH:mm', 'de-DE');
+  public convertTime(value: Date): string {
+    return formatDate(value, timeFormat, localId);
   }
 
   private sendRequest(): void {
-    const endDate = new Date(new Date().toUTCString());
-    const startDate = new Date(new Date().toUTCString());
-    startDate.setUTCHours(0,0,0,0)
-    const filter = {startDate: startDate.toISOString(), endDate: endDate.toISOString()} as CurrentAcFilter;
-    this.sub = this.backendService.loadCurrentAC(filter).subscribe((e)=> {
+    this.initialDate = new Date();
+    const endDate = this.dateTimeService.convertToUtcDate(this.initialDate);
+    const startDate = this.dateTimeService.convertToStartOfDayUtc(this.dateTimeService.convertToUtcDate(this.initialDate));
+    this.sub = this.backendService.loadCurrentAC(this.dateTimeService.createFilter(startDate, endDate)).subscribe((e)=> {
       this.data=e;
       this.mapRequestToLineChart();
     });
@@ -53,8 +59,7 @@ export class CurrentACComponent implements OnInit, OnDestroy{
     const arrayPhase2: any[] = [];
     const arrayPhase3: any[] = [];
     this.data?.content?.forEach((e)=>{
-      let date = new Date(e.timestamp ?? new Date());
-      date=new Date(date.toLocaleString('de-De', {timeZone: 'Europe/Berlin'}))
+      let date = this.dateTimeService.convertUtcToLocalTimeZone(e.timestamp)
       arrayPhase1.push({name: date, value: e.acPhase1});
       arrayPhase2.push({name: date, value: e.acPhase2});
       arrayPhase3.push({name: date, value: e.acPhase3});

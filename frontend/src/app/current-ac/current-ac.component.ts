@@ -25,6 +25,7 @@ export class CurrentACComponent implements OnInit, OnDestroy{
   }
 
   ngOnInit(): void {
+    this.sendRequest();
     this.interval = setInterval(()=> {
       this.sendRequest();
     }, this.refreshMilliSeconds);

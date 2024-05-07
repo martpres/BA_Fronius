@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.jayway.jsonpath.JsonPath;
 import dto.CurrentAcDto;
+import dto.PowerDcDto;
 import service.FroniusClient;
 import java.io.File;
 import java.io.IOException;
@@ -12,6 +13,7 @@ import java.time.ZonedDateTime;
 
 public class MockFroniusClientImpl implements FroniusClient {
     private final String CURRENT_AC_FILE_PATH="froniusRestClient/src/main/resources/currentAC.json";
+    private final String POWER_DC_FILE_PATH="froniusRestClient/src/main/resources/powerDC.json";
     private final ObjectMapper objectMapper;
 
     public MockFroniusClientImpl() {
@@ -24,6 +26,14 @@ public class MockFroniusClientImpl implements FroniusClient {
     public CurrentAcDto currentAcEndpoint() {
         System.out.println("DEBUG: reading Json file");
         CurrentAcDto dto = readJsonFromFile(CURRENT_AC_FILE_PATH, "$", CurrentAcDto.class);
+        dto.setTimestamp(ZonedDateTime.now());
+        return dto;
+    }
+
+    @Override
+    public PowerDcDto powerDcEndpoint() {
+        System.out.println("DEBUG: reading Json file");
+        PowerDcDto dto = readJsonFromFile(POWER_DC_FILE_PATH, "$", PowerDcDto.class);
         dto.setTimestamp(ZonedDateTime.now());
         return dto;
     }

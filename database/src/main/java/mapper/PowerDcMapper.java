@@ -19,7 +19,7 @@ public abstract class PowerDcMapper {
 
     public abstract PowerDC dtoToEntity(PowerDcDto dto);
 
-    public abstract ResponsePowerDcDto entityToDto(CurrentAC entity);
+    public abstract ResponsePowerDcDto entityToDto(PowerDC entity);
 
     public abstract List<ResponsePowerDcDto> entityToDto(List<PowerDC> entities);
 }

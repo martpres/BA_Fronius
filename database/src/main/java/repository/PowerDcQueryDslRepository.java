@@ -6,6 +6,8 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import dto.ResponseCurrentAcDto;
 import dto.ResponsePowerDcDto;
 import entity.CurrentAC;
+import entity.PowerDC;
+import entity.QPowerDC;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import mapper.CurrentAcMapper;
@@ -37,7 +39,7 @@ public class PowerDcQueryDslRepository {
         JPAQueryFactory jpaQueryFactory = new JPAQueryFactory(entityManager);
         startDate.ifPresent(value->booleanBuilder.and(qPowerDC.timestamp.after(startDate.get())));
         endDate.ifPresent(value->booleanBuilder.and(qPowerDC.timestamp.before(endDate.get())));
-        JPAQuery<CurrentAC> query = jpaQueryFactory.selectFrom(qPowerDC).where(booleanBuilder);
+        JPAQuery<PowerDC> query = jpaQueryFactory.selectFrom(qPowerDC).where(booleanBuilder);
         pageRequest.ifPresent(value->query.limit(value.getPageSize()));
         pageRequest.ifPresent(value->query.offset(value.getOffset()));
         return new QueryDslResponse<>(powerDcMapper.entityToDto(query.fetch()),jpaQueryFactory.selectFrom(qPowerDC).fetchCount());

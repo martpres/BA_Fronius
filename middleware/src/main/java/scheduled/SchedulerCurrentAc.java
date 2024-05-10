@@ -10,17 +10,17 @@ import org.springframework.stereotype.Component;
 import repository.CurrentAcRepository;
 
 @Component
-public class Scheduler {
+public class SchedulerCurrentAc {
 
     private final FroniusClientFactory froniusClientFactory;
     private final boolean currentAc;
     private final CurrentAcRepository currentAcRepository;
     private final CurrentAcMapper currentAcMapper;
 
-    public Scheduler(@Value("${app.run.scheduled.current-ac:false}") boolean currentAc,
-                     FroniusClientFactory froniusClientFactory,
-                     CurrentAcRepository currentAcRepository,
-                     CurrentAcMapper currentAcMapper) {
+    public SchedulerCurrentAc(@Value("${app.run.scheduled.current-ac:false}") boolean currentAc,
+                              FroniusClientFactory froniusClientFactory,
+                              CurrentAcRepository currentAcRepository,
+                              CurrentAcMapper currentAcMapper) {
         this.froniusClientFactory = froniusClientFactory;
         this.currentAc = currentAc;
         this.currentAcRepository = currentAcRepository;

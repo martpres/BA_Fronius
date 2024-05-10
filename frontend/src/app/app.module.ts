@@ -11,12 +11,14 @@ import {CommonModule, DatePipe, registerLocaleData} from "@angular/common";
 import {NgxChartsModule} from "@swimlane/ngx-charts";
 import localeDe from '@angular/common/locales/de';
 import localeDeExtra from '@angular/common/locales/extra/de';
+import { PowerDCComponent } from './power-dc/power-dc.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    CurrentACComponent
+    CurrentACComponent,
+    PowerDCComponent
   ],
   imports: [
     BrowserModule,

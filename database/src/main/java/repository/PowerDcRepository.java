@@ -1,11 +1,11 @@
 package repository;
 
-import entity.CurrentAC;
+import entity.PowerDC;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import java.time.ZonedDateTime;
 
 @Repository
-public interface CurrentAcRepository extends CrudRepository<CurrentAC, ZonedDateTime> {
+public interface PowerDcRepository extends CrudRepository<PowerDC, ZonedDateTime> {
 }

@@ -1,11 +1,9 @@
 package service;
 
-import dto.ResponseCurrentAcDto;
 import dto.ResponsePowerDcDto;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import repository.CurrentAcQueryDslRepository;
 import repository.PowerDcQueryDslRepository;
 import response.QueryDslResponse;
 

@@ -5,13 +5,13 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import java.io.Serializable;
 import java.time.ZonedDateTime;
 
-public record ResponsePowerDcDto(Float dcPower1,
+public record ResponsePowerDcDto(Float dcPowerPv,
                                  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
-                                   ZonedDateTime timestamp) implements Serializable {
+                                 ZonedDateTime timestamp) implements Serializable {
     @Override
     public String toString() {
-        return "ResponseCurrentAcDto{" +
-                "acPhase1=" + dcPower1 +
+        return "ResponsePowerDcDto{" +
+                "dcPowerPv=" + dcPowerPv +
                 ", timestamp=" + timestamp +
                 '}';
     }

@@ -12,43 +12,44 @@ import java.util.Objects;
 @Table(name = "power_dc", catalog = "public")
 public class PowerDC extends AbstractBaseEntity{
 
-    @Column(name = "dc_string_1", updatable = false, nullable = false)
+    @Column(name = "dc_power_pv", updatable = false, nullable = false)
     @Nonnull
-    private Float dcPower1;
+    private Float dcPowerPv;
 
     public PowerDC() {
     }
 
-    public PowerDC(Float dcPower1) {
-        this.dcPower1 = dcPower1;
+    public PowerDC(Float dcPowerPv) {
+        this.dcPowerPv = dcPowerPv;
     }
 
-    public Float getDcPower1() {
-        return dcPower1;
+    public Float getDcPowerPv() {
+        return dcPowerPv;
     }
 
-    public void setDcPower1(Float dcPower1) {
-        this.dcPower1 = dcPower1;
+    public void setDcPowerPv(Float dcPowerPv) {
+        this.dcPowerPv = dcPowerPv;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        PowerDC dcPower1 = (PowerDC) o;
-        return Objects.equals(dcPower1, dcPower1.dcPower1)
-                && Objects.equals(super.getTimestamp(), dcPower1.getTimestamp());
+        PowerDC dcPowerPv1 = (PowerDC) o;
+        return Objects.equals(dcPowerPv, dcPowerPv1.dcPowerPv)
+                && Objects.equals(super.getTimestamp(), dcPowerPv1.getTimestamp());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(dcPower1, super.getTimestamp());
+        return Objects.hash(dcPowerPv, super.getTimestamp());
     }
 
     @Override
     public String toString() {
         return "PowerDC{" +
-                "dcPower1=" + dcPower1 +
+                "dcPowerPv=" + dcPowerPv +
+                ", timestamp=" + super.getTimestamp() +
                 '}';
     }
 }

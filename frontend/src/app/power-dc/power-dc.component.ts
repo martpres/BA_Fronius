@@ -61,9 +61,9 @@ export class PowerDCComponent implements OnInit, OnDestroy {
     const arrayPower1: any[] = [];
     this.data?.content?.forEach((e)=>{
       let date = this.dateTimeService.convertUtcToLocalTimeZone(e.timestamp)
-      arrayPower1.push({name: date, value: e.dcPower1});
+      arrayPower1.push({name: date, value: e.dcPowerPv});
     });
-    this.lineChartData?.push({name: 'Power 1', series: arrayPower1});
+    this.lineChartData?.push({name: 'Power Pv', series: arrayPower1});
   }
 
 

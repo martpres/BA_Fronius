@@ -1,10 +1,7 @@
 package mapper;
 
-import dto.CurrentAcDto;
 import dto.PowerDcDto;
-import dto.ResponseCurrentAcDto;
 import dto.ResponsePowerDcDto;
-import entity.CurrentAC;
 import entity.PowerDC;
 import org.mapstruct.InjectionStrategy;
 import org.mapstruct.Mapper;

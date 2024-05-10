@@ -9,23 +9,23 @@ import java.util.Map;
 
 public class PowerDcDto implements Serializable {
 
-    private Float dcPower1;
+    private Float dcPowerPv;
     private ZonedDateTime timestamp;
 
     public PowerDcDto() {
     }
 
-    public PowerDcDto(Float dcPower1, ZonedDateTime timestamp) {
-        this.dcPower1 = dcPower1;
+    public PowerDcDto(Float dcPowerPv, ZonedDateTime timestamp) {
+        this.dcPowerPv = dcPowerPv;
         this.timestamp = timestamp;
     }
 
-    public Float getDcPower1() {
-        return dcPower1;
+    public Float getDcPowerPv() {
+        return dcPowerPv;
     }
 
-    public void setDcPower1(Float dcPower1) {
-        this.dcPower1 = dcPower1;
+    public void setDcPowerPv(Float dcPowerPv) {
+        this.dcPowerPv = dcPowerPv;
     }
 
     public ZonedDateTime getTimestamp() {
@@ -39,7 +39,7 @@ public class PowerDcDto implements Serializable {
     @Override
     public String toString() {
         return "PowerDcDto{" +
-                "dcPower1=" + dcPower1 +
+                "dcPowerPv=" + dcPowerPv +
                 ", timestamp=" + timestamp +
                 '}';
     }
@@ -47,44 +47,15 @@ public class PowerDcDto implements Serializable {
     @JsonProperty("Body")
     private void unpackData(Map<String, Object> body) {
         Map<String, Object> data = (Map<String, Object>) body.get("Data");
+        Map<String, Object> site = (Map<String, Object>) data.get("Site");
 
-        if (data.containsKey("Site")) {
-            Map<String, Object> site = (Map<String, Object>) data.get("Site");
-
-            if (site.containsKey("P_PV")) {
-                Object p_pvValue = site.get("P_PV");
-
-                if (p_pvValue.getClass() == Double.class) {
-                    this.dcPower1 = ((Double) p_pvValue).floatValue();
-                    return;
-                } else if (p_pvValue.getClass() == BigDecimal.class) {
-                    this.dcPower1 = ((BigDecimal) p_pvValue).floatValue();
-                    return;
-                } else {
-                    throw new IllegalStateException("Invalid type for P_PV: " + p_pvValue.getClass());
-                }
-            } else {
-                throw new IllegalStateException("Missing key 'P_PV' within 'Site' node");
-            }
+        if (site.get("P_PV").getClass() == Double.class) {
+            this.dcPowerPv = ((Double) site.get("P_PV")).floatValue();
+        } else if (site.get("P_PV").getClass() == BigDecimal.class) {
+            this.dcPowerPv = ((BigDecimal) site.get("P_PV")).floatValue();
         } else {
-            throw new IllegalStateException("Missing key 'Site' within 'Data' node");
+            throw new IllegalStateException("powerDcDto class not found: " + site.get("P_PV").getClass());
         }
-
-//        Map<String, Object> site = null;
-//        if (data.containsKey("Site")) {
-//            site = (Map<String, Object>) data.get("Site");
-//        }
-//
-//        if (site.get("P_PV").getClass() == Double.class) {
-//            this.dcPower1 = ((Double) data.get("P_PV")).floatValue();
-//            return;
-//        }
-//
-//        if (data.get("P_PV").getClass() == BigDecimal.class) {
-//            this.dcPower1 = ((BigDecimal) data.get("P_PV")).floatValue();
-//            return;
-//        }
-//        throw new IllegalStateException("powerDcDto class not found: " + data.get("P_PV").getClass());
     }
 
     @JsonProperty("Head")

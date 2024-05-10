@@ -1,15 +1,12 @@
 package scheduled;
 
-import dto.CurrentAcDto;
 import dto.PowerDcDto;
 import fronius.FroniusClientFactory;
-import mapper.CurrentAcMapper;
 import mapper.PowerDcMapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-import repository.CurrentAcRepository;
 import repository.PowerDcRepository;
 
 @Component

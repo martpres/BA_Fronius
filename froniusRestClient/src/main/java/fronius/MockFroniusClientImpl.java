@@ -24,7 +24,7 @@ public class MockFroniusClientImpl implements FroniusClient {
 
     @Override
     public CurrentAcDto currentAcEndpoint() {
-        System.out.println("DEBUG: reading Json file");
+        System.out.println("DEBUG: CurrentAC | reading Json file");
         CurrentAcDto dto = readJsonFromFile(CURRENT_AC_FILE_PATH, "$", CurrentAcDto.class);
         dto.setTimestamp(ZonedDateTime.now());
         return dto;
@@ -32,7 +32,7 @@ public class MockFroniusClientImpl implements FroniusClient {
 
     @Override
     public PowerDcDto powerDcEndpoint() {
-        System.out.println("DEBUG: reading Json file");
+        System.out.println("DEBUG: PowerDC | reading Json file");
         PowerDcDto dto = readJsonFromFile(POWER_DC_FILE_PATH, "$", PowerDcDto.class);
         dto.setTimestamp(ZonedDateTime.now());
         return dto;

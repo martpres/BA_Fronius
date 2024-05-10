@@ -1,4 +1,4 @@
 export interface PowerDC {
-  dcPower1?: number;
+  dcPowerPv?: number;
   timestamp?: Date;
 }

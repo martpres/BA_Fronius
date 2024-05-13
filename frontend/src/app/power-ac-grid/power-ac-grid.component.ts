@@ -1,18 +1,18 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {BackendApiService} from "../service/backend-api.service";
 import {Subscription} from "rxjs";
 import {QueryDslResponse} from "../dto/queryDslResponse.model";
+import {BackendApiService} from "../service/backend-api.service";
 import {DateTimeService} from "../service/date-time.service";
 import {formatDate} from "@angular/common";
 import {localId, timeFormat} from "../dto/const";
 import {PowerFlowRealtimeData} from "../dto/powerFlowRealtimeData.model";
 
 @Component({
-  selector: 'app-power-dc',
-  templateUrl: './power-dc.component.html',
-  styleUrls: ['./power-dc.component.scss']
+  selector: 'app-power-ac-grid',
+  templateUrl: './power-ac-grid.component.html',
+  styleUrls: ['./power-ac-grid.component.scss']
 })
-export class PowerDCComponent implements OnInit, OnDestroy {
+export class PowerAcGridComponent implements OnInit, OnDestroy {
 
   public lineChartData?: any[];
   public initialDate = new Date();
@@ -60,9 +60,11 @@ export class PowerDCComponent implements OnInit, OnDestroy {
     const arrayPower1: any[] = [];
     this.data?.content?.forEach((e)=>{
       let date = this.dateTimeService.convertUtcToLocalTimeZone(e.timestamp)
-      arrayPower1.push({name: date, value: e.dcPowerPv});
+      arrayPower1.push({name: date, value: e.acPowerGrid});
     });
-    this.lineChartData?.push({name: 'Power Pv', series: arrayPower1});
+    this.lineChartData?.push({name: 'Power Grid', series: arrayPower1});
   }
+
+
 
 }

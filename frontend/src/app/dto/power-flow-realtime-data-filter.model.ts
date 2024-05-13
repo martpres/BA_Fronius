@@ -1,4 +1,4 @@
-export interface PowerDcFilter {
+export interface PowerFlowRealtimeDataFilter {
   startDate?: Date | string;
   endDate?: Date | string;
   page?: number;

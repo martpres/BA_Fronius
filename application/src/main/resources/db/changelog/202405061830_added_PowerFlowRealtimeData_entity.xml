@@ -7,13 +7,16 @@
                    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
     <changeSet id="202405061830-1" author="martpres">
-        <createTable tableName="power_dc">
+        <createTable tableName="power_flow_realtime_data">
 
             <column name="primary_timestamp" type="timestamptz">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
 
             <column name="dc_power_pv" type="real">
+            </column>
+
+            <column name="ac_power_grid" type="real">
             </column>
 
         </createTable>

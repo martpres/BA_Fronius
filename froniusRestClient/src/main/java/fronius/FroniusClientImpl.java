@@ -1,7 +1,7 @@
 package fronius;
 
 import dto.CurrentAcDto;
-import dto.PowerDcDto;
+import dto.PowerFlowRealtimeDataDto;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
@@ -27,11 +27,17 @@ public class FroniusClientImpl implements FroniusClient {
     }
 
     @Override
-    public PowerDcDto powerDcEndpoint() {
-        System.out.println("DEBUG: PowerDC | sending rest request");
+    public PowerFlowRealtimeDataDto powerFlowRealtimeDataEndpoint() {
+        System.out.println("DEBUG: PowerFlowRealtimeData | sending rest request");
         return restClient.get()
                 .uri(froniusUrl + "GetPowerFlowRealtimeData.fcgi")
                 .retrieve()
-                .body(PowerDcDto.class);
+                .body(PowerFlowRealtimeDataDto.class);
     }
+
+
+
+
+
+
 }

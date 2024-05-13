@@ -3,8 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {QueryDslResponse} from "../dto/queryDslResponse.model";
 import {CurrentAC} from "../dto/currentAC.model";
-import {CurrentAcFilter} from "../dto/current-ac-filter.model";
-import {PowerDC} from "../dto/powerDC.model";
+import {PowerFlowRealtimeData} from "../dto/powerFlowRealtimeData.model";
 
 @Injectable({
   providedIn: 'root'
@@ -20,8 +19,8 @@ export class BackendApiService {
     return this.httpClient.get<QueryDslResponse<CurrentAC>>(`${this.baseUrl}current-ac/`,{params: filter});
   }
 
-  public loadPowerDC(filter?: any): Observable<QueryDslResponse<PowerDC>> {
-    return this.httpClient.get<QueryDslResponse<PowerDC>>(`${this.baseUrl}power-dc/`,{params: filter});
+  public loadPowerFlowRealtimeData(filter?: any): Observable<QueryDslResponse<PowerFlowRealtimeData>> {
+    return this.httpClient.get<QueryDslResponse<PowerFlowRealtimeData>>(`${this.baseUrl}power-flow-realtime-data/`,{params: filter});
   }
 
 }

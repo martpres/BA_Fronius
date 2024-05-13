@@ -5,15 +5,15 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.jayway.jsonpath.JsonPath;
 import dto.CurrentAcDto;
-import dto.PowerDcDto;
+import dto.PowerFlowRealtimeDataDto;
 import service.FroniusClient;
 import java.io.File;
 import java.io.IOException;
 import java.time.ZonedDateTime;
 
 public class MockFroniusClientImpl implements FroniusClient {
-    private final String CURRENT_AC_FILE_PATH="froniusRestClient/src/main/resources/currentAC.json";
-    private final String POWER_DC_FILE_PATH="froniusRestClient/src/main/resources/powerDC.json";
+    private final String CURRENT_AC_FILE_PATH="froniusRestClient/src/main/resources/meterRealtimeData.json";
+    private final String POWER_FLOW_REALTIME_DATA_PATH="froniusRestClient/src/main/resources/powerFlowRealtimeData..json";
     private final ObjectMapper objectMapper;
 
     public MockFroniusClientImpl() {
@@ -25,17 +25,17 @@ public class MockFroniusClientImpl implements FroniusClient {
     @Override
     public CurrentAcDto currentAcEndpoint() {
         System.out.println("DEBUG: CurrentAC | reading Json file");
-        CurrentAcDto dto = readJsonFromFile(CURRENT_AC_FILE_PATH, "$", CurrentAcDto.class);
-        dto.setTimestamp(ZonedDateTime.now());
-        return dto;
+        CurrentAcDto dto1 = readJsonFromFile(CURRENT_AC_FILE_PATH, "$", CurrentAcDto.class);
+        dto1.setTimestamp(ZonedDateTime.now());
+        return dto1;
     }
 
     @Override
-    public PowerDcDto powerDcEndpoint() {
-        System.out.println("DEBUG: PowerDC | reading Json file");
-        PowerDcDto dto = readJsonFromFile(POWER_DC_FILE_PATH, "$", PowerDcDto.class);
-        dto.setTimestamp(ZonedDateTime.now());
-        return dto;
+    public PowerFlowRealtimeDataDto powerFlowRealtimeDataEndpoint() {
+        System.out.println("DEBUG: PowerFlowRealtimeData | reading Json file");
+        PowerFlowRealtimeDataDto dto2 = readJsonFromFile(POWER_FLOW_REALTIME_DATA_PATH, "$", PowerFlowRealtimeDataDto.class);
+        dto2.setTimestamp(ZonedDateTime.now());
+        return dto2;
     }
 
     private <T> T readJsonFromFile(final String filePath, final String jsonPath, Class<T> clazz){

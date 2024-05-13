@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.time.ZonedDateTime;
 
 public class MockFroniusClientImpl implements FroniusClient {
-    private final String CURRENT_AC_FILE_PATH="froniusRestClient/src/main/resources/meterRealtimeData.json";
+    private final String METER_REALTIME_DATA_PATH="froniusRestClient/src/main/resources/meterRealtimeData.json";
     private final String POWER_FLOW_REALTIME_DATA_PATH="froniusRestClient/src/main/resources/powerFlowRealtimeData..json";
     private final ObjectMapper objectMapper;
 
@@ -25,7 +25,7 @@ public class MockFroniusClientImpl implements FroniusClient {
     @Override
     public CurrentAcDto currentAcEndpoint() {
         System.out.println("DEBUG: CurrentAC | reading Json file");
-        CurrentAcDto dto1 = readJsonFromFile(CURRENT_AC_FILE_PATH, "$", CurrentAcDto.class);
+        CurrentAcDto dto1 = readJsonFromFile(METER_REALTIME_DATA_PATH, "$", CurrentAcDto.class);
         dto1.setTimestamp(ZonedDateTime.now());
         return dto1;
     }

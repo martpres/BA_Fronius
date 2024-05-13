@@ -7,23 +7,23 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-import repository.CurrentAcRepository;
+import repository.ParamsRepository;
 
 @Component
 public class SchedulerCurrentAc {
 
     private final FroniusClientFactory froniusClientFactory;
     private final boolean currentAc;
-    private final CurrentAcRepository currentAcRepository;
+    private final ParamsRepository paramsRepository;
     private final CurrentAcMapper currentAcMapper;
 
     public SchedulerCurrentAc(@Value("${app.run.scheduled.current-ac:false}") boolean currentAc,
                               FroniusClientFactory froniusClientFactory,
-                              CurrentAcRepository currentAcRepository,
+                              ParamsRepository paramsRepository,
                               CurrentAcMapper currentAcMapper) {
         this.froniusClientFactory = froniusClientFactory;
         this.currentAc = currentAc;
-        this.currentAcRepository = currentAcRepository;
+        this.paramsRepository = paramsRepository;
         this.currentAcMapper = currentAcMapper;
     }
 
@@ -33,7 +33,7 @@ public class SchedulerCurrentAc {
         if (currentAc) {
             CurrentAcDto dto = froniusClientFactory.getFroniusClient().currentAcEndpoint();
             System.out.println("DEBUG: " + dto.toString());
-            currentAcRepository.save(currentAcMapper.dtoToEntity(dto));
+            paramsRepository.save(currentAcMapper.dtoToEntity(dto));
         }
     }
 }

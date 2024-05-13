@@ -2,9 +2,10 @@ package mapper;
 
 import dto.PowerFlowRealtimeDataDto;
 import dto.ResponsePowerFlowRealtimeDataDto;
-import entity.PowerFlowRealtimeData;
+import entity.ParamsEntity;
 import org.mapstruct.InjectionStrategy;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
 
 import java.util.List;
@@ -14,9 +15,12 @@ import java.util.List;
         unmappedTargetPolicy = ReportingPolicy.ERROR)
 public abstract class PowerFlowRealtimeDataMapper {
 
-    public abstract PowerFlowRealtimeData dtoToEntity(PowerFlowRealtimeDataDto dto);
+    @Mapping(target = "acPhase1", ignore = true)
+    @Mapping(target = "acPhase2", ignore = true)
+    @Mapping(target = "acPhase3", ignore = true)
+    public abstract ParamsEntity dtoToEntity(PowerFlowRealtimeDataDto dto);
 
-    public abstract ResponsePowerFlowRealtimeDataDto entityToDto(PowerFlowRealtimeData entity);
+    public abstract ResponsePowerFlowRealtimeDataDto entityToDto(ParamsEntity entity);
 
-    public abstract List<ResponsePowerFlowRealtimeDataDto> entityToDto(List<PowerFlowRealtimeData> entities);
+    public abstract List<ResponsePowerFlowRealtimeDataDto> entityToDto(List<ParamsEntity> entities);
 }

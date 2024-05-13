@@ -28,8 +28,7 @@ public class FroniusClientImpl implements FroniusClient {
 
     @Override
     public PowerFlowRealtimeDataDto powerFlowRealtimeDataEndpoint() {
-        System.out.println("DEBUG: PowerDC | sending rest request");
-        System.out.println("DEBUG: PowerACGrid | sending rest request");
+        System.out.println("DEBUG: PowerFlowRealtimeData | sending rest request");
         return restClient.get()
                 .uri(froniusUrl + "GetPowerFlowRealtimeData.fcgi")
                 .retrieve()

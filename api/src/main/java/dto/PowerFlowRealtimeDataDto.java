@@ -56,18 +56,12 @@ private void unpackData(Map<String, Object> body) {
 
     if (site.get("P_PV").getClass() == Double.class) {
         this.dcPowerPv = ((Double) site.get("P_PV")).floatValue();
+        this.acPowerGrid = ((Double) site.get("P_Grid")).floatValue();
     } else if (site.get("P_PV").getClass() == BigDecimal.class) {
         this.dcPowerPv = ((BigDecimal) site.get("P_PV")).floatValue();
-    } else {
-        throw new IllegalStateException("Unexpected class for P_PV: " + site.get("P_PV").getClass());
-    }
-
-    if (site.get("P_Grid").getClass() == Double.class) {
-        this.acPowerGrid = ((Double) site.get("P_Grid")).floatValue();
-    } else if (site.get("P_Grid").getClass() == BigDecimal.class) {
         this.acPowerGrid = ((BigDecimal) site.get("P_Grid")).floatValue();
     } else {
-        throw new IllegalStateException("Unexpected class for P_Grid: " + site.get("P_Grid").getClass());
+        throw new IllegalStateException("Unexpected cast for class PowerFlowRealtimeData : " + site.get("P_PV").getClass());
     }
 }
 

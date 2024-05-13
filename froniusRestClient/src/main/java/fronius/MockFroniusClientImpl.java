@@ -32,8 +32,7 @@ public class MockFroniusClientImpl implements FroniusClient {
 
     @Override
     public PowerFlowRealtimeDataDto powerFlowRealtimeDataEndpoint() {
-        System.out.println("DEBUG: PowerDC | reading Json file");
-        System.out.println("DEBUG: PowerACGrid | reading Json file");
+        System.out.println("DEBUG: PowerFlowRealtimeData | reading Json file");
         PowerFlowRealtimeDataDto dto2 = readJsonFromFile(POWER_FLOW_REALTIME_DATA_PATH, "$", PowerFlowRealtimeDataDto.class);
         dto2.setTimestamp(ZonedDateTime.now());
         return dto2;

@@ -1,12 +1,11 @@
-import {Component, inject, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {BackendApiService} from "../service/backend-api.service";
 import {Subscription} from "rxjs";
 import {QueryDslResponse} from "../dto/queryDslResponse.model";
-import {CurrentAC} from "../dto/currentAC.model";
 import {DateTimeService} from "../service/date-time.service";
 import {formatDate} from "@angular/common";
 import {localId, timeFormat} from "../dto/const";
-import {PowerDC} from "../dto/powerDC.model";
+import {PowerFlowRealtimeData} from "../dto/powerFlowRealtimeData.model";
 
 @Component({
   selector: 'app-power-dc',
@@ -18,7 +17,7 @@ export class PowerDCComponent implements OnInit, OnDestroy {
   public lineChartData?: any[];
   public initialDate = new Date();
   private sub?: Subscription;
-  private data?: QueryDslResponse<PowerDC>;
+  private data?: QueryDslResponse<PowerFlowRealtimeData>;
   private refreshMilliSeconds = 60000;
   private interval?: any;
 
@@ -46,7 +45,7 @@ export class PowerDCComponent implements OnInit, OnDestroy {
     this.initialDate = new Date();
     const endDate = this.dateTimeService.convertToUtcDate(this.initialDate);
     const startDate = this.dateTimeService.convertToStartOfDayUtc(this.dateTimeService.convertToUtcDate(this.initialDate));
-    this.sub = this.backendService.loadPowerDC(this.dateTimeService.createFilter(startDate, endDate)).subscribe((e)=> {
+    this.sub = this.backendService.loadPowerFlowRealtimeData(this.dateTimeService.createFilter(startDate, endDate)).subscribe((e)=> {
       this.data=e;
       this.mapRequestToLineChart();
     });

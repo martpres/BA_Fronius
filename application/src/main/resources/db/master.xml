@@ -3,6 +3,5 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
     <include file="changelog/202403132147_added_CurrentAC_entity.xml" relativeToChangelogFile="true" />
-    <include file="changelog/202405061830_added_PowerDC_entity.xml" relativeToChangelogFile="true" />
-    <include file="changelog/202405131730_added_PowerACGrid_entity.xml" relativeToChangelogFile="true" />
+    <include file="changelog/202405061830_added_PowerFlowRealtimeData_entity.xml" relativeToChangelogFile="true" />
 </databaseChangeLog>

@@ -48,7 +48,7 @@ public class PowerDC extends AbstractBaseEntity{
     @Override
     public String toString() {
         return "PowerDC{" +
-                "dcPowerPv=" + dcPowerPv +
+                "acPowerGrid=" + dcPowerPv +
                 ", timestamp=" + super.getTimestamp() +
                 '}';
     }

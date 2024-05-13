@@ -7,23 +7,23 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-import repository.PowerDcRepository;
+import repository.PowerFlowRealtimeDataRepository;
 
 @Component
 public class SchedulerPowerDc {
 
     private final FroniusClientFactory froniusClientFactory;
     private final boolean powerDc;
-    private final PowerDcRepository powerDcRepository;
+    private final PowerFlowRealtimeDataRepository powerFlowRealtimeDataRepository;
     private final PowerDcMapper powerDcMapper;
 
     public SchedulerPowerDc(@Value("${app.run.scheduled.power-dc:false}") boolean powerDc,
                             FroniusClientFactory froniusClientFactory,
-                            PowerDcRepository powerDcRepository,
+                            PowerFlowRealtimeDataRepository powerFlowRealtimeDataRepository,
                             PowerDcMapper powerDcMapper) {
         this.froniusClientFactory = froniusClientFactory;
         this.powerDc = powerDc;
-        this.powerDcRepository = powerDcRepository;
+        this.powerFlowRealtimeDataRepository = powerFlowRealtimeDataRepository;
         this.powerDcMapper = powerDcMapper;
     }
 
@@ -33,7 +33,7 @@ public class SchedulerPowerDc {
         if (powerDc) {
             PowerDcDto dto = froniusClientFactory.getFroniusClient().powerDcEndpoint();
             System.out.println("DEBUG: " + dto.toString());
-            powerDcRepository.save(powerDcMapper.dtoToEntity(dto));
+            powerFlowRealtimeDataRepository.save(powerDcMapper.dtoToEntity(dto));
         }
     }
 }

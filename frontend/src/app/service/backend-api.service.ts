@@ -5,6 +5,7 @@ import {QueryDslResponse} from "../dto/queryDslResponse.model";
 import {CurrentAC} from "../dto/currentAC.model";
 import {CurrentAcFilter} from "../dto/current-ac-filter.model";
 import {PowerDC} from "../dto/powerDC.model";
+import {PowerACGrid} from "../dto/powerACGrid.model";
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +23,10 @@ export class BackendApiService {
 
   public loadPowerDC(filter?: any): Observable<QueryDslResponse<PowerDC>> {
     return this.httpClient.get<QueryDslResponse<PowerDC>>(`${this.baseUrl}power-dc/`,{params: filter});
+  }
+
+  public loadPowerACGrid(filter?: any): Observable<QueryDslResponse<PowerACGrid>> {
+    return this.httpClient.get<QueryDslResponse<PowerACGrid>>(`${this.baseUrl}power-ac-grid/`,{params: filter});
   }
 
 }

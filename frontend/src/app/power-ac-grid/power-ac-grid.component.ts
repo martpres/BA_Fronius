@@ -1,24 +1,23 @@
-import {Component, inject, OnDestroy, OnInit} from '@angular/core';
-import {BackendApiService} from "../service/backend-api.service";
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Subscription} from "rxjs";
 import {QueryDslResponse} from "../dto/queryDslResponse.model";
-import {CurrentAC} from "../dto/currentAC.model";
+import {BackendApiService} from "../service/backend-api.service";
 import {DateTimeService} from "../service/date-time.service";
 import {formatDate} from "@angular/common";
 import {localId, timeFormat} from "../dto/const";
-import {PowerDC} from "../dto/powerDC.model";
+import {PowerACGrid} from "../dto/powerACGrid.model";
 
 @Component({
-  selector: 'app-power-dc',
-  templateUrl: './power-dc.component.html',
-  styleUrls: ['./power-dc.component.scss']
+  selector: 'app-power-ac-grid',
+  templateUrl: './power-ac-grid.component.html',
+  styleUrls: ['./power-ac-grid.component.scss']
 })
-export class PowerDCComponent implements OnInit, OnDestroy {
+export class PowerAcGridComponent implements OnInit, OnDestroy {
 
   public lineChartData?: any[];
   public initialDate = new Date();
   private sub?: Subscription;
-  private data?: QueryDslResponse<PowerDC>;
+  private data?: QueryDslResponse<PowerACGrid>;
   private refreshMilliSeconds = 60000;
   private interval?: any;
 
@@ -46,7 +45,7 @@ export class PowerDCComponent implements OnInit, OnDestroy {
     this.initialDate = new Date();
     const endDate = this.dateTimeService.convertToUtcDate(this.initialDate);
     const startDate = this.dateTimeService.convertToStartOfDayUtc(this.dateTimeService.convertToUtcDate(this.initialDate));
-    this.sub = this.backendService.loadPowerDC(this.dateTimeService.createFilter(startDate, endDate)).subscribe((e)=> {
+    this.sub = this.backendService.loadPowerACGrid(this.dateTimeService.createFilter(startDate, endDate)).subscribe((e)=> {
       this.data=e;
       this.mapRequestToLineChart();
     });
@@ -61,9 +60,11 @@ export class PowerDCComponent implements OnInit, OnDestroy {
     const arrayPower1: any[] = [];
     this.data?.content?.forEach((e)=>{
       let date = this.dateTimeService.convertUtcToLocalTimeZone(e.timestamp)
-      arrayPower1.push({name: date, value: e.dcPowerPv});
+      arrayPower1.push({name: date, value: e.acPowerGrid});
     });
-    this.lineChartData?.push({name: 'Power Pv', series: arrayPower1});
+    this.lineChartData?.push({name: 'Power Grid', series: arrayPower1});
   }
+
+
 
 }

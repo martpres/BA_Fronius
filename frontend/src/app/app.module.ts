@@ -12,13 +12,15 @@ import {NgxChartsModule} from "@swimlane/ngx-charts";
 import localeDe from '@angular/common/locales/de';
 import localeDeExtra from '@angular/common/locales/extra/de';
 import { PowerDCComponent } from './power-dc/power-dc.component';
+import { PowerAcGridComponent } from './power-ac-grid/power-ac-grid.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     CurrentACComponent,
-    PowerDCComponent
+    PowerDCComponent,
+    PowerAcGridComponent
   ],
   imports: [
     BrowserModule,

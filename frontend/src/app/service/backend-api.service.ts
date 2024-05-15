@@ -3,7 +3,8 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {QueryDslResponse} from "../dto/queryDslResponse.model";
 import {CurrentAC} from "../dto/currentAC.model";
-import {PowerFlowRealtimeData} from "../dto/powerFlowRealtimeData.model";
+import {DcPowerPv} from "../dto/dcPowerPv.model";
+import {AcPowerGrid} from "../dto/acPowerGrid.model";
 
 @Injectable({
   providedIn: 'root'
@@ -19,8 +20,11 @@ export class BackendApiService {
     return this.httpClient.get<QueryDslResponse<CurrentAC>>(`${this.baseUrl}current-ac/`,{params: filter});
   }
 
-  public loadPowerFlowRealtimeData(filter?: any): Observable<QueryDslResponse<PowerFlowRealtimeData>> {
-    return this.httpClient.get<QueryDslResponse<PowerFlowRealtimeData>>(`${this.baseUrl}power-flow-realtime-data/`,{params: filter});
+  public loadDcPowerPv(filter?: any): Observable<QueryDslResponse<DcPowerPv>> {
+    return this.httpClient.get<QueryDslResponse<DcPowerPv>>(`${this.baseUrl}power-flow-realtime-data/dc-power-pv`,{params: filter});
   }
 
+  public loadAcPowerGrid(filter?: any): Observable<QueryDslResponse<AcPowerGrid>> {
+    return this.httpClient.get<QueryDslResponse<AcPowerGrid>>(`${this.baseUrl}power-flow-realtime-data/ac-power-grid`,{params: filter});
+  }
 }

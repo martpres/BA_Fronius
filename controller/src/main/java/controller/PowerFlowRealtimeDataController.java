@@ -1,6 +1,7 @@
 package controller;
 
-import dto.ResponsePowerFlowRealtimeDataDto;
+import dto.ResponseAcPowerGridDto;
+import dto.ResponseDcPowerPvDto;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,11 +23,19 @@ public class PowerFlowRealtimeDataController {
         this.powerFlowRealtimeDataService = powerFlowRealtimeDataService;
     }
 
-    @GetMapping(value = "/", produces = "application/json")
-    public QueryDslResponse<ResponsePowerFlowRealtimeDataDto> loadCurrentAc(@RequestParam(value = "startDate", required = false) Optional<ZonedDateTime> startDate,
-                                                                            @RequestParam(value = "endDate", required = false) Optional<ZonedDateTime> endDate,
-                                                                            @RequestParam(value = "page", required = false) Optional<Integer> page,
-                                                                            @RequestParam(value = "pagesize", required = false) Optional<Integer> pagesize ){
-        return powerFlowRealtimeDataService.loadPowerFlowRealtimeData(startDate, endDate, PaginationUtil.getPagination(page,pagesize));
+    @GetMapping(value = "/dc-power-pv", produces = "application/json")
+    public QueryDslResponse<ResponseDcPowerPvDto> loadDcPowerPv(@RequestParam(value = "startDate", required = false) Optional<ZonedDateTime> startDate,
+                                                                @RequestParam(value = "endDate", required = false) Optional<ZonedDateTime> endDate,
+                                                                @RequestParam(value = "page", required = false) Optional<Integer> page,
+                                                                @RequestParam(value = "pagesize", required = false) Optional<Integer> pagesize ){
+        return powerFlowRealtimeDataService.loadDcPowerPv(startDate, endDate, PaginationUtil.getPagination(page,pagesize));
+    }
+
+    @GetMapping(value = "/ac-power-grid", produces = "application/json")
+    public QueryDslResponse<ResponseAcPowerGridDto> loadAcPowerGrid(@RequestParam(value = "startDate", required = false) Optional<ZonedDateTime> startDate,
+                                                                    @RequestParam(value = "endDate", required = false) Optional<ZonedDateTime> endDate,
+                                                                    @RequestParam(value = "page", required = false) Optional<Integer> page,
+                                                                    @RequestParam(value = "pagesize", required = false) Optional<Integer> pagesize ){
+        return powerFlowRealtimeDataService.loadAcPowerGrid(startDate, endDate, PaginationUtil.getPagination(page,pagesize));
     }
 }

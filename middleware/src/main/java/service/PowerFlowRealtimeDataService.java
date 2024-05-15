@@ -1,6 +1,7 @@
 package service;
 
-import dto.ResponsePowerFlowRealtimeDataDto;
+import dto.ResponseAcPowerGridDto;
+import dto.ResponseDcPowerPvDto;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,8 +20,12 @@ public class PowerFlowRealtimeDataService {
         this.paramsQueryDslRepository = paramsQueryDslRepository;
     }
 
-    public QueryDslResponse<ResponsePowerFlowRealtimeDataDto> loadPowerFlowRealtimeData(Optional<ZonedDateTime> startDate, Optional<ZonedDateTime> endDate, Optional<PageRequest> pageRequest){
-        return paramsQueryDslRepository.loadPowerFlowRealtimeData(startDate,endDate,pageRequest);
+    public QueryDslResponse<ResponseDcPowerPvDto> loadDcPowerPv(Optional<ZonedDateTime> startDate, Optional<ZonedDateTime> endDate, Optional<PageRequest> pageRequest){
+        return paramsQueryDslRepository.loadDcPowerPv(startDate,endDate,pageRequest);
+    }
+
+    public QueryDslResponse<ResponseAcPowerGridDto> loadAcPowerGrid(Optional<ZonedDateTime> startDate, Optional<ZonedDateTime> endDate, Optional<PageRequest> pageRequest){
+        return paramsQueryDslRepository.loadAcPowerGrid(startDate,endDate,pageRequest);
     }
 
 }

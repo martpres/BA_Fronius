@@ -1,7 +1,8 @@
 package mapper;
 
 import dto.PowerFlowRealtimeDataDto;
-import dto.ResponsePowerFlowRealtimeDataDto;
+import dto.ResponseAcPowerGridDto;
+import dto.ResponseDcPowerPvDto;
 import entity.ParamsEntity;
 import org.mapstruct.InjectionStrategy;
 import org.mapstruct.Mapper;
@@ -20,7 +21,11 @@ public abstract class PowerFlowRealtimeDataMapper {
     @Mapping(target = "acPhase3", ignore = true)
     public abstract ParamsEntity dtoToEntity(PowerFlowRealtimeDataDto dto);
 
-    public abstract ResponsePowerFlowRealtimeDataDto entityToDto(ParamsEntity entity);
+    public abstract ResponseDcPowerPvDto convertParamsToDcPowerPv(ParamsEntity entity);
 
-    public abstract List<ResponsePowerFlowRealtimeDataDto> entityToDto(List<ParamsEntity> entities);
+    public abstract List<ResponseDcPowerPvDto> convertParamsToDcPowerPv(List<ParamsEntity> entities);
+
+    public abstract ResponseAcPowerGridDto convertParamsToAcPowerGrid(ParamsEntity entity);
+
+    public abstract List<ResponseAcPowerGridDto> convertParamsToAcPowerGrid(List<ParamsEntity> entities);
 }

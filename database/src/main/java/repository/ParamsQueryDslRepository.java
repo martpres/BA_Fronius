@@ -4,8 +4,9 @@ package repository;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import dto.ResponseAcPowerGridDto;
 import dto.ResponseCurrentAcDto;
-import dto.ResponsePowerFlowRealtimeDataDto;
+import dto.ResponseDcPowerPvDto;
 import entity.ParamsEntity;
 import entity.QParamsEntity;
 import jakarta.persistence.EntityManager;
@@ -46,11 +47,18 @@ public class ParamsQueryDslRepository {
         return new QueryDslResponse<>(currentAcMapper.entityToDto(query.fetch()), fetchCount());
     }
 
-    public QueryDslResponse<ResponsePowerFlowRealtimeDataDto> loadPowerFlowRealtimeData(Optional<ZonedDateTime> startDate, Optional<ZonedDateTime> endDate, Optional<PageRequest> pageRequest) {
+    public QueryDslResponse<ResponseDcPowerPvDto> loadDcPowerPv(Optional<ZonedDateTime> startDate, Optional<ZonedDateTime> endDate, Optional<PageRequest> pageRequest) {
+        BooleanBuilder booleanBuilder = prepareBooleanBuilder(startDate, endDate);
+        booleanBuilder.and(qParamsEntity.dcPowerPv.isNotNull());
+        JPAQuery<ParamsEntity> query = prepareQuery(booleanBuilder, pageRequest);
+        return new QueryDslResponse<>(powerFlowRealtimeDataMapper.convertParamsToDcPowerPv(query.fetch()), fetchCount());
+    }
+
+    public QueryDslResponse<ResponseAcPowerGridDto> loadAcPowerGrid(Optional<ZonedDateTime> startDate, Optional<ZonedDateTime> endDate, Optional<PageRequest> pageRequest) {
         BooleanBuilder booleanBuilder = prepareBooleanBuilder(startDate, endDate);
         booleanBuilder.and(qParamsEntity.acPowerGrid.isNotNull());
         JPAQuery<ParamsEntity> query = prepareQuery(booleanBuilder, pageRequest);
-        return new QueryDslResponse<>(powerFlowRealtimeDataMapper.entityToDto(query.fetch()), fetchCount());
+        return new QueryDslResponse<>(powerFlowRealtimeDataMapper.convertParamsToAcPowerGrid(query.fetch()), fetchCount());
     }
 
     private JPAQuery<ParamsEntity> prepareQuery(BooleanBuilder booleanBuilder, Optional<PageRequest> pageRequest) {

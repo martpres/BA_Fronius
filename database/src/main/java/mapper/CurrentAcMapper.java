@@ -2,9 +2,10 @@ package mapper;
 
 import dto.CurrentAcDto;
 import dto.ResponseCurrentAcDto;
-import entity.CurrentAC;
+import entity.ParamsEntity;
 import org.mapstruct.InjectionStrategy;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
 import java.util.List;
 
@@ -13,9 +14,11 @@ import java.util.List;
         unmappedTargetPolicy = ReportingPolicy.ERROR)
 public abstract class CurrentAcMapper {
 
-    public abstract CurrentAC dtoToEntity(CurrentAcDto dto);
+    @Mapping(target = "dcPowerPv", ignore = true)
+    @Mapping(target = "acPowerGrid", ignore = true)
+    public abstract ParamsEntity dtoToEntity(CurrentAcDto dto);
 
-    public abstract ResponseCurrentAcDto entityToDto(CurrentAC entity);
+    public abstract ResponseCurrentAcDto entityToDto(ParamsEntity entity);
 
-    public abstract List<ResponseCurrentAcDto> entityToDto(List<CurrentAC> entities);
+    public abstract List<ResponseCurrentAcDto> entityToDto(List<ParamsEntity> entities);
 }

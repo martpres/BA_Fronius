@@ -6,11 +6,20 @@
                    http://www.liquibase.org/xml/ns/dbchangelog-ext
                    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
-    <changeSet id="202405061830-1" author="martpres">
-        <createTable tableName="power_flow_realtime_data">
+    <changeSet id="202405131953-1" author="martpres">
+        <createTable tableName="params">
 
             <column name="primary_timestamp" type="timestamptz">
                 <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="ac_phase_1" type="real">
+            </column>
+
+            <column name="ac_phase_2" type="real">
+            </column>
+
+            <column name="ac_phase_3" type="real">
             </column>
 
             <column name="dc_power_pv" type="real">

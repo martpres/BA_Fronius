@@ -7,26 +7,25 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-import repository.PowerFlowRealtimeDataRepository;
+import repository.ParamsRepository;
 
 @Component
 public class SchedulerPowerFlowRealtimeData {
 
     private final boolean powerFlowRealtimeData;
-    private final PowerFlowRealtimeDataRepository powerFlowRealtimeDataRepository;
+    private final ParamsRepository paramsRepository;
     private final PowerFlowRealtimeDataMapper powerFlowRealtimeDataMapper;
     private final FroniusClientFactory froniusClientFactory;
 
     public SchedulerPowerFlowRealtimeData(@Value("${app.run.scheduled.power-flow-realtime-data:false}") boolean powerFlowRealtimeData1,
-                                          PowerFlowRealtimeDataRepository powerFlowRealtimeDataRepository,
+                                          ParamsRepository paramsRepository,
                                           PowerFlowRealtimeDataMapper powerFlowRealtimeDataMapper,
                                           FroniusClientFactory froniusClientFactory) {
         this.powerFlowRealtimeData = powerFlowRealtimeData1;
-        this.powerFlowRealtimeDataRepository = powerFlowRealtimeDataRepository;
+        this.paramsRepository = paramsRepository;
         this.powerFlowRealtimeDataMapper = powerFlowRealtimeDataMapper;
         this.froniusClientFactory = froniusClientFactory;
     }
-
 
     @Async
     @Scheduled(fixedDelayString = "PT10S", initialDelayString = "PT25S")
@@ -34,7 +33,7 @@ public class SchedulerPowerFlowRealtimeData {
         if (powerFlowRealtimeData) {
             PowerFlowRealtimeDataDto dto = froniusClientFactory.getFroniusClient().powerFlowRealtimeDataEndpoint();
             System.out.println("DEBUG: " + dto.toString());
-            powerFlowRealtimeDataRepository.save(powerFlowRealtimeDataMapper.dtoToEntity(dto));
+            paramsRepository.save(powerFlowRealtimeDataMapper.dtoToEntity(dto));
         }
     }
 }

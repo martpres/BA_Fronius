@@ -1,11 +1,11 @@
 package repository;
 
-import entity.PowerFlowRealtimeData;
+import entity.ParamsEntity;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import java.time.ZonedDateTime;
 
 @Repository
-public interface PowerFlowRealtimeDataRepository extends CrudRepository<PowerFlowRealtimeData, ZonedDateTime> {
+public interface ParamsRepository extends CrudRepository<ParamsEntity, ZonedDateTime> {
 }

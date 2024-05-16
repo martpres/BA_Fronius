@@ -5,7 +5,7 @@ import {BackendApiService} from "../service/backend-api.service";
 import {DateTimeService} from "../service/date-time.service";
 import {formatDate} from "@angular/common";
 import {localId, timeFormat} from "../dto/const";
-import {PowerFlowRealtimeData} from "../dto/powerFlowRealtimeData.model";
+import {AcPowerGrid} from "../dto/acPowerGrid.model";
 
 @Component({
   selector: 'app-power-ac-grid',
@@ -17,7 +17,7 @@ export class PowerAcGridComponent implements OnInit, OnDestroy {
   public lineChartData?: any[];
   public initialDate = new Date();
   private sub?: Subscription;
-  private data?: QueryDslResponse<PowerFlowRealtimeData>;
+  private data?: QueryDslResponse<AcPowerGrid>;
   private refreshMilliSeconds = 60000;
   private interval?: any;
 
@@ -45,7 +45,7 @@ export class PowerAcGridComponent implements OnInit, OnDestroy {
     this.initialDate = new Date();
     const endDate = this.dateTimeService.convertToUtcDate(this.initialDate);
     const startDate = this.dateTimeService.convertToStartOfDayUtc(this.dateTimeService.convertToUtcDate(this.initialDate));
-    this.sub = this.backendService.loadPowerFlowRealtimeData(this.dateTimeService.createFilter(startDate, endDate)).subscribe((e)=> {
+    this.sub = this.backendService.loadAcPowerGrid(this.dateTimeService.createFilter(startDate, endDate)).subscribe((e)=> {
       this.data=e;
       this.mapRequestToLineChart();
     });

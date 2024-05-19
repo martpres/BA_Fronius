@@ -10,7 +10,14 @@ import java.util.Map;
 public class PowerFlowRealtimeDataDto implements Serializable {
     private Float dcPowerPv;
     private Float acPowerGrid;
+    private
     private ZonedDateTime timestamp;
+
+//    @Mapping(target = "socAkku", ignore = true)
+//    @Mapping(target = "dcPowerAkku", ignore = true)
+//    @Mapping(target = "acPowerLoad", ignore = true)
+//    @Mapping(target = "autonomy", ignore = true)
+//    @Mapping(target = "selfConsumption", ignore = true)
 
     public PowerFlowRealtimeDataDto() {
     }

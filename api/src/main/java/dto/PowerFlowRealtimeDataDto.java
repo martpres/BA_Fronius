@@ -48,7 +48,7 @@ public class PowerFlowRealtimeDataDto implements Serializable {
     @Override
     public String toString() {
         return "PowerFlowRealtimeDataDto{" +
-                "dcPowerPv=" + dcPowerPv +
+                "dcVoltagePv=" + dcPowerPv +
                 ", acPowerGrid=" + acPowerGrid +
                 ", timestamp=" + timestamp +
                 '}';

@@ -28,7 +28,7 @@ public class SchedulerPowerFlowRealtimeData {
     }
 
     @Async
-    @Scheduled(fixedDelayString = "PT10S", initialDelayString = "PT25S")
+    @Scheduled(fixedDelayString = "PT15S", initialDelayString = "PT25S")
     public void startWorkflowForPowerFlowRealtimeData() {
         if (powerFlowRealtimeData) {
             PowerFlowRealtimeDataDto dto = froniusClientFactory.getFroniusClient().powerFlowRealtimeDataEndpoint();

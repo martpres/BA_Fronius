@@ -28,6 +28,12 @@
             <column name="ac_power_grid" type="real">
             </column>
 
+            <column name="dc_voltage_pv" type="real">
+            </column>
+
+            <column name="ac_power_inverter" type="real">
+            </column>
+
         </createTable>
     </changeSet>
 </databaseChangeLog>

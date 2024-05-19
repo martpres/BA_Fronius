@@ -1,6 +1,6 @@
 package mapper;
 
-import dto.CurrentAcDto;
+import dto.MeterRealtimeDataDto;
 import dto.ResponseCurrentAcDto;
 import entity.ParamsEntity;
 import org.mapstruct.InjectionStrategy;
@@ -12,11 +12,11 @@ import java.util.List;
 @Mapper(componentModel = "spring",
         injectionStrategy = InjectionStrategy.CONSTRUCTOR,
         unmappedTargetPolicy = ReportingPolicy.ERROR)
-public abstract class CurrentAcMapper {
+public abstract class MeterRealtimeDataMapper {
 
     @Mapping(target = "dcPowerPv", ignore = true)
     @Mapping(target = "acPowerGrid", ignore = true)
-    public abstract ParamsEntity dtoToEntity(CurrentAcDto dto);
+    public abstract ParamsEntity dtoToEntity(MeterRealtimeDataDto dto);
 
     public abstract ResponseCurrentAcDto entityToDto(ParamsEntity entity);
 

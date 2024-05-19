@@ -1,11 +1,11 @@
 package service;
 
-import dto.CurrentAcDto;
+import dto.MeterRealtimeDataDto;
 import dto.PowerFlowRealtimeDataDto;
 
 public interface FroniusClient {
 
-    CurrentAcDto currentAcEndpoint();
+    MeterRealtimeDataDto meterRealtimeDataEndpoint();
 
     PowerFlowRealtimeDataDto powerFlowRealtimeDataEndpoint();
 }

@@ -6,17 +6,17 @@ import java.math.BigDecimal;
 import java.time.ZonedDateTime;
 import java.util.Map;
 
-public class CurrentAcDto implements Serializable {
+public class MeterRealtimeDataDto implements Serializable {
 
     private Float acPhase1;
     private Float acPhase2;
     private Float acPhase3;
     private ZonedDateTime timestamp;
 
-    public CurrentAcDto() {
+    public MeterRealtimeDataDto() {
     }
 
-    public CurrentAcDto(Float acPhase1, Float acPhase2, Float acPhase3, ZonedDateTime timestamp) {
+    public MeterRealtimeDataDto(Float acPhase1, Float acPhase2, Float acPhase3, ZonedDateTime timestamp) {
         this.acPhase1 = acPhase1;
         this.acPhase2 = acPhase2;
         this.acPhase3 = acPhase3;
@@ -57,7 +57,7 @@ public class CurrentAcDto implements Serializable {
 
     @Override
     public String toString() {
-        return "CurrentAcDto{" +
+        return "MeterRealtimeDataDto{" +
                 "acPhase1=" + acPhase1 +
                 ", acPhase2=" + acPhase2 +
                 ", acPhase3=" + acPhase3 +
@@ -78,7 +78,7 @@ public class CurrentAcDto implements Serializable {
             this.acPhase2 = ((BigDecimal) data.get("Current_AC_Phase_2")).floatValue();
             this.acPhase3 = ((BigDecimal) data.get("Current_AC_Phase_3")).floatValue();
         } else {
-            throw new IllegalStateException("currentAcDto class not found: " + data.get("Current_AC_Phase_1").getClass());
+            throw new IllegalStateException("Unexpected cast for class MeterRealtimeData :"  + data.get("Current_AC_Phase_1").getClass());
         }
     }
 

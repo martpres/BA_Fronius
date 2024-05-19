@@ -11,10 +11,10 @@ import java.util.Optional;
 
 @Service
 @Transactional(readOnly = true)
-public class CurrentAcService {
+public class MeterRealtimeDataService {
     private final ParamsQueryDslRepository paramsQueryDslRepository;
 
-    public CurrentAcService(ParamsQueryDslRepository paramsQueryDslRepository) {
+    public MeterRealtimeDataService(ParamsQueryDslRepository paramsQueryDslRepository) {
         this.paramsQueryDslRepository = paramsQueryDslRepository;
     }
 

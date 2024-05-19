@@ -1,11 +1,8 @@
 package entity;
 
-import jakarta.annotation.Nonnull;
 import jakarta.persistence.*;
-
 import java.util.Objects;
 
-// http://192.168.0.100/solar_api/v1/GetMeterRealtimeData.cgi?Scope=Device&DeviceId=0
 @Entity
 @Table(name = "params", catalog = "public")
 public class ParamsEntity extends AbstractBaseEntity{

@@ -1,6 +1,6 @@
 package fronius;
 
-import dto.CurrentAcDto;
+import dto.MeterRealtimeDataDto;
 import dto.PowerFlowRealtimeDataDto;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -18,12 +18,12 @@ public class FroniusClientImpl implements FroniusClient {
     }
 
     @Override
-    public CurrentAcDto currentAcEndpoint() {
-        System.out.println("DEBUG: CurrentAC | sending rest request");
+    public MeterRealtimeDataDto meterRealtimeDataEndpoint() {
+        System.out.println("DEBUG: MeterRealtimeData | sending rest request");
         return restClient.get()
                 .uri(froniusUrl + "GetMeterRealtimeData.cgi?Scope=Device&DeviceId=0")
                 .retrieve()
-                .body(CurrentAcDto.class);
+                .body(MeterRealtimeDataDto.class);
     }
 
     @Override

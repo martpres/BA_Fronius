@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.jayway.jsonpath.JsonPath;
-import dto.CurrentAcDto;
+import dto.MeterRealtimeDataDto;
 import dto.PowerFlowRealtimeDataDto;
 import service.FroniusClient;
 import java.io.File;
@@ -23,9 +23,9 @@ public class MockFroniusClientImpl implements FroniusClient {
     }
 
     @Override
-    public CurrentAcDto currentAcEndpoint() {
-        System.out.println("DEBUG: CurrentAC | reading Json file");
-        CurrentAcDto dto1 = readJsonFromFile(METER_REALTIME_DATA_PATH, "$", CurrentAcDto.class);
+    public MeterRealtimeDataDto meterRealtimeDataEndpoint() {
+        System.out.println("DEBUG: MeterRealtimeData | reading Json file");
+        MeterRealtimeDataDto dto1 = readJsonFromFile(METER_REALTIME_DATA_PATH, "$", MeterRealtimeDataDto.class);
         dto1.setTimestamp(ZonedDateTime.now());
         return dto1;
     }

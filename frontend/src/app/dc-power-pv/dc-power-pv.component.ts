@@ -1,23 +1,23 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
+import {BackendApiService} from "../service/backend-api.service";
 import {Subscription} from "rxjs";
 import {QueryDslResponse} from "../dto/queryDslResponse.model";
-import {BackendApiService} from "../service/backend-api.service";
 import {DateTimeService} from "../service/date-time.service";
 import {formatDate} from "@angular/common";
 import {localId, timeFormat} from "../dto/const";
-import {AcPowerGrid} from "../dto/acPowerGrid.model";
+import {DcPowerPv} from "../dto/dcPowerPv.model";
 
 @Component({
-  selector: 'app-power-ac-grid',
-  templateUrl: './power-ac-grid.component.html',
-  styleUrls: ['./power-ac-grid.component.scss']
+  selector: 'app-power-dc',
+  templateUrl: './dc-power-pv.component.html',
+  styleUrls: ['./dc-power-pv.component.scss']
 })
-export class PowerAcGridComponent implements OnInit, OnDestroy {
+export class DcPowerPvComponent implements OnInit, OnDestroy {
 
   public lineChartData?: any[];
   public initialDate = new Date();
   private sub?: Subscription;
-  private data?: QueryDslResponse<AcPowerGrid>;
+  private data?: QueryDslResponse<DcPowerPv>;
   private refreshMilliSeconds = 60000;
   private interval?: any;
 
@@ -45,7 +45,7 @@ export class PowerAcGridComponent implements OnInit, OnDestroy {
     this.initialDate = new Date();
     const endDate = this.dateTimeService.convertToUtcDate(this.initialDate);
     const startDate = this.dateTimeService.convertToStartOfDayUtc(this.dateTimeService.convertToUtcDate(this.initialDate));
-    this.sub = this.backendService.loadAcPowerGrid(this.dateTimeService.createFilter(startDate, endDate)).subscribe((e)=> {
+    this.sub = this.backendService.loadDcPowerPv(this.dateTimeService.createFilter(startDate, endDate)).subscribe((e)=> {
       this.data=e;
       this.mapRequestToLineChart();
     });
@@ -60,11 +60,9 @@ export class PowerAcGridComponent implements OnInit, OnDestroy {
     const arrayPower1: any[] = [];
     this.data?.content?.forEach((e)=>{
       let date = this.dateTimeService.convertUtcToLocalTimeZone(e.timestamp)
-      arrayPower1.push({name: date, value: e.acPowerGrid});
+      arrayPower1.push({name: date, value: e.dcPowerPv});
     });
-    this.lineChartData?.push({name: 'Power Grid', series: arrayPower1});
+    this.lineChartData?.push({name: 'Power Pv', series: arrayPower1});
   }
-
-
 
 }

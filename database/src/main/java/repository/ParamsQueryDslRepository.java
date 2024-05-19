@@ -1,17 +1,16 @@
 package repository;
 
-
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import dto.ResponseAcPowerGridDto;
-import dto.ResponseCurrentAcDto;
+import dto.ResponseAcCurrentGridDto;
 import dto.ResponseDcPowerPvDto;
 import entity.ParamsEntity;
 import entity.QParamsEntity;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import mapper.CurrentAcMapper;
+import mapper.MeterRealtimeDataMapper;
 import mapper.PowerFlowRealtimeDataMapper;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Repository;
@@ -29,22 +28,22 @@ public class ParamsQueryDslRepository {
 
     private final QParamsEntity qParamsEntity = QParamsEntity.paramsEntity;
 
-    private final CurrentAcMapper currentAcMapper;
+    private final MeterRealtimeDataMapper meterRealtimeDataMapper;
 
     private final PowerFlowRealtimeDataMapper powerFlowRealtimeDataMapper;
 
-    public ParamsQueryDslRepository(CurrentAcMapper currentAcMapper, PowerFlowRealtimeDataMapper powerFlowRealtimeDataMapper) {
-        this.currentAcMapper = currentAcMapper;
+    public ParamsQueryDslRepository(MeterRealtimeDataMapper meterRealtimeDataMapper, PowerFlowRealtimeDataMapper powerFlowRealtimeDataMapper) {
+        this.meterRealtimeDataMapper = meterRealtimeDataMapper;
         this.powerFlowRealtimeDataMapper = powerFlowRealtimeDataMapper;
     }
 
-    public QueryDslResponse<ResponseCurrentAcDto> loadCurrentAc(Optional<ZonedDateTime> startDate, Optional<ZonedDateTime> endDate, Optional<PageRequest> pageRequest) {
+    public QueryDslResponse<ResponseAcCurrentGridDto> loadCurrentAc(Optional<ZonedDateTime> startDate, Optional<ZonedDateTime> endDate, Optional<PageRequest> pageRequest) {
         BooleanBuilder booleanBuilder = prepareBooleanBuilder(startDate, endDate);
-        booleanBuilder.and(qParamsEntity.acPhase1.isNotNull());
-        booleanBuilder.and(qParamsEntity.acPhase2.isNotNull());
-        booleanBuilder.and(qParamsEntity.acPhase3.isNotNull());
+        booleanBuilder.and(qParamsEntity.acCurrentGridPhase1.isNotNull());
+        booleanBuilder.and(qParamsEntity.acCurrentGridPhase2.isNotNull());
+        booleanBuilder.and(qParamsEntity.acCurrentGridPhase3.isNotNull());
         JPAQuery<ParamsEntity> query = prepareQuery(booleanBuilder, pageRequest);
-        return new QueryDslResponse<>(currentAcMapper.entityToDto(query.fetch()), fetchCount());
+        return new QueryDslResponse<>(meterRealtimeDataMapper.entityToDto(query.fetch()), fetchCount());
     }
 
     public QueryDslResponse<ResponseDcPowerPvDto> loadDcPowerPv(Optional<ZonedDateTime> startDate, Optional<ZonedDateTime> endDate, Optional<PageRequest> pageRequest) {

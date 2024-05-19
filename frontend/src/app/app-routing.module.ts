@@ -1,25 +1,25 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {CurrentACComponent} from "./current-ac/current-ac.component";
-import {PowerDCComponent} from "./power-dc/power-dc.component";
-import {PowerAcGridComponent} from "./power-ac-grid/power-ac-grid.component";
+import {AcCurrentGridComponent} from "./ac-current-grid/ac-current-grid.component";
+import {DcPowerPvComponent} from "./dc-power-pv/dc-power-pv.component";
+import {AcPowerGridComponent} from "./ac-power-grid/ac-power-grid.component";
 
 const routes: Routes = [
   {
-    path: 'current-ac',
-    component: CurrentACComponent
+    path: 'ac-current-grid',
+    component: AcCurrentGridComponent
   },
   {
-    path: 'power-dc',
-    component: PowerDCComponent
+    path: 'dc-power-pv',
+    component: DcPowerPvComponent
   },
   {
-    path: 'power-ac-grid',
-    component: PowerAcGridComponent
+    path: 'ac-power-grid',
+    component: AcPowerGridComponent
   },
   {
     path: '**',
-    redirectTo: 'current-ac'
+    redirectTo: 'ac-current-grid'
   }
 ];
 

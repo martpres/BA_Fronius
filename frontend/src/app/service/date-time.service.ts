@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import {formatDate} from "@angular/common";
 import {localId, timeFormat, timeZone} from "../dto/const";
 
 @Injectable({
@@ -8,10 +7,6 @@ import {localId, timeFormat, timeZone} from "../dto/const";
 export class DateTimeService {
 
   constructor() {
-  }
-
-  public convertToUtcString(date: Date = new Date()): string {
-    return date.toUTCString();
   }
 
   public convertToUtcDate(date: Date = new Date()): Date {

@@ -7,14 +7,14 @@ import java.util.Objects;
 @Table(name = "params", catalog = "public")
 public class ParamsEntity extends AbstractBaseEntity{
 
-    @Column(name = "ac_phase_1", updatable = false)
-    private Float acPhase1;
+    @Column(name = "ac_current_phase1_grid", updatable = false)
+    private Float acCurrentPhase1Grid;
 
-    @Column(name = "ac_phase_2", updatable = false)
-    private Float acPhase2;
+    @Column(name = "ac_current_phase2_grid", updatable = false)
+    private Float acCurrentPhase2Grid;
 
-    @Column(name = "ac_phase_3", updatable = false)
-    private Float acPhase3;
+    @Column(name = "ac_current_phase3_grid", updatable = false)
+    private Float acCurrentPhase3Grid;
 
     @Column(name = "dc_power_pv", updatable = false)
     private Float dcPowerPv;
@@ -30,42 +30,42 @@ public class ParamsEntity extends AbstractBaseEntity{
         this.acPowerGrid = acPowerGrid;
     }
 
-    public ParamsEntity(Float acPhase1, Float acPhase2, Float acPhase3) {
-        this.acPhase1 = acPhase1;
-        this.acPhase2 = acPhase2;
-        this.acPhase3 = acPhase3;
+    public ParamsEntity(Float acCurrentPhase1Grid, Float acCurrentPhase2Grid, Float acCurrentPhase3Grid) {
+        this.acCurrentPhase1Grid = acCurrentPhase1Grid;
+        this.acCurrentPhase2Grid = acCurrentPhase2Grid;
+        this.acCurrentPhase3Grid = acCurrentPhase3Grid;
     }
 
-    public ParamsEntity(Float acPhase1, Float acPhase2, Float acPhase3, Float dcPowerPv, Float acPowerGrid) {
-        this.acPhase1 = acPhase1;
-        this.acPhase2 = acPhase2;
-        this.acPhase3 = acPhase3;
+    public ParamsEntity(Float acCurrentPhase1Grid, Float acCurrentPhase2Grid, Float acCurrentPhase3Grid, Float dcPowerPv, Float acPowerGrid) {
+        this.acCurrentPhase1Grid = acCurrentPhase1Grid;
+        this.acCurrentPhase2Grid = acCurrentPhase2Grid;
+        this.acCurrentPhase3Grid = acCurrentPhase3Grid;
         this.dcPowerPv = dcPowerPv;
         this.acPowerGrid = acPowerGrid;
     }
 
-    public Float getAcPhase1() {
-        return acPhase1;
+    public Float getAcCurrentPhase1Grid() {
+        return acCurrentPhase1Grid;
     }
 
-    public void setAcPhase1(Float acPhase1) {
-        this.acPhase1 = acPhase1;
+    public void setAcCurrentPhase1Grid(Float acCurrentPhase1Grid) {
+        this.acCurrentPhase1Grid = acCurrentPhase1Grid;
     }
 
-    public Float getAcPhase2() {
-        return acPhase2;
+    public Float getAcCurrentPhase2Grid() {
+        return acCurrentPhase2Grid;
     }
 
-    public void setAcPhase2(Float acPhase2) {
-        this.acPhase2 = acPhase2;
+    public void setAcCurrentPhase2Grid(Float acCurrentPhase2Grid) {
+        this.acCurrentPhase2Grid = acCurrentPhase2Grid;
     }
 
-    public Float getAcPhase3() {
-        return acPhase3;
+    public Float getAcCurrentPhase3Grid() {
+        return acCurrentPhase3Grid;
     }
 
-    public void setAcPhase3(Float acPhase3) {
-        this.acPhase3 = acPhase3;
+    public void setAcCurrentPhase3Grid(Float acCurrentPhase3Grid) {
+        this.acCurrentPhase3Grid = acCurrentPhase3Grid;
     }
 
     public Float getDcPowerPv() {
@@ -89,9 +89,9 @@ public class ParamsEntity extends AbstractBaseEntity{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ParamsEntity paramsEntity = (ParamsEntity) o;
-        return Objects.equals(acPhase1, paramsEntity.acPhase1)
-                && Objects.equals(acPhase2, paramsEntity.acPhase2)
-                && Objects.equals(acPhase3, paramsEntity.acPhase3)
+        return Objects.equals(acCurrentPhase1Grid, paramsEntity.acCurrentPhase1Grid)
+                && Objects.equals(acCurrentPhase2Grid, paramsEntity.acCurrentPhase2Grid)
+                && Objects.equals(acCurrentPhase3Grid, paramsEntity.acCurrentPhase3Grid)
                 && Objects.equals(dcPowerPv, paramsEntity.dcPowerPv)
                 && Objects.equals(acPowerGrid, paramsEntity.acPowerGrid)
                 && Objects.equals(super.getTimestamp(), paramsEntity.getTimestamp());
@@ -99,15 +99,15 @@ public class ParamsEntity extends AbstractBaseEntity{
 
     @Override
     public int hashCode() {
-        return Objects.hash(acPhase1, acPhase2, acPhase3, dcPowerPv, acPowerGrid, super.getTimestamp());
+        return Objects.hash(acCurrentPhase1Grid, acCurrentPhase2Grid, acCurrentPhase3Grid, dcPowerPv, acPowerGrid, super.getTimestamp());
     }
 
     @Override
     public String toString() {
         return "Params:{" +
-                " acPhase1=" + acPhase1 +
-                ", acPhase2=" + acPhase2 +
-                ", acPhase3=" + acPhase3 +
+                " acCurrentPhase1Grid=" + acCurrentPhase1Grid +
+                ", acCurrentPhase2Grid=" + acCurrentPhase2Grid +
+                ", acCurrentPhase3Grid=" + acCurrentPhase3Grid +
                 ", dcPowerPv=" + dcPowerPv +
                 ", acPowerGrid=" + acPowerGrid +
                 ", timestamp=" + super.getTimestamp() +

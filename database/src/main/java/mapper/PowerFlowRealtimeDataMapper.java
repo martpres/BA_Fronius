@@ -16,9 +16,9 @@ import java.util.List;
         unmappedTargetPolicy = ReportingPolicy.ERROR)
 public abstract class PowerFlowRealtimeDataMapper {
 
-    @Mapping(target = "acPhase1", ignore = true)
-    @Mapping(target = "acPhase2", ignore = true)
-    @Mapping(target = "acPhase3", ignore = true)
+    @Mapping(target = "acCurrentPhase1Grid", ignore = true)
+    @Mapping(target = "acCurrentPhase2Grid", ignore = true)
+    @Mapping(target = "acCurrentPhase3Grid", ignore = true)
     public abstract ParamsEntity dtoToEntity(PowerFlowRealtimeDataDto dto);
 
     public abstract ResponseDcPowerPvDto convertParamsToDcPowerPv(ParamsEntity entity);

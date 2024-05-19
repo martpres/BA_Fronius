@@ -8,43 +8,43 @@ import java.util.Map;
 
 public class MeterRealtimeDataDto implements Serializable {
 
-    private Float acPhase1;
-    private Float acPhase2;
-    private Float acPhase3;
+    private Float acCurrentGridPhase1;
+    private Float acCurrentGridPhase2;
+    private Float acCurrentGridPhase3;
     private ZonedDateTime timestamp;
 
     public MeterRealtimeDataDto() {
     }
 
-    public MeterRealtimeDataDto(Float acPhase1, Float acPhase2, Float acPhase3, ZonedDateTime timestamp) {
-        this.acPhase1 = acPhase1;
-        this.acPhase2 = acPhase2;
-        this.acPhase3 = acPhase3;
+    public MeterRealtimeDataDto(Float acCurrentGridPhase1, Float acCurrentGridPhase2, Float acCurrentGridPhase3, ZonedDateTime timestamp) {
+        this.acCurrentGridPhase1 = acCurrentGridPhase1;
+        this.acCurrentGridPhase2 = acCurrentGridPhase2;
+        this.acCurrentGridPhase3 = acCurrentGridPhase3;
         this.timestamp = timestamp;
     }
 
-    public Float getAcPhase1() {
-        return acPhase1;
+    public Float getAcCurrentGridPhase1() {
+        return acCurrentGridPhase1;
     }
 
-    public void setAcPhase1(Float acPhase1) {
-        this.acPhase1 = acPhase1;
+    public void setAcCurrentGridPhase1(Float acCurrentGridPhase1) {
+        this.acCurrentGridPhase1 = acCurrentGridPhase1;
     }
 
-    public Float getAcPhase2() {
-        return acPhase2;
+    public Float getAcCurrentGridPhase2() {
+        return acCurrentGridPhase2;
     }
 
-    public void setAcPhase2(Float acPhase2) {
-        this.acPhase2 = acPhase2;
+    public void setAcCurrentGridPhase2(Float acCurrentGridPhase2) {
+        this.acCurrentGridPhase2 = acCurrentGridPhase2;
     }
 
-    public Float getAcPhase3() {
-        return acPhase3;
+    public Float getAcCurrentGridPhase3() {
+        return acCurrentGridPhase3;
     }
 
-    public void setAcPhase3(Float acPhase3) {
-        this.acPhase3 = acPhase3;
+    public void setAcCurrentGridPhase3(Float acCurrentGridPhase3) {
+        this.acCurrentGridPhase3 = acCurrentGridPhase3;
     }
 
     public ZonedDateTime getTimestamp() {
@@ -58,9 +58,9 @@ public class MeterRealtimeDataDto implements Serializable {
     @Override
     public String toString() {
         return "MeterRealtimeDataDto{" +
-                "acPhase1=" + acPhase1 +
-                ", acPhase2=" + acPhase2 +
-                ", acPhase3=" + acPhase3 +
+                "acCurrentGridPhase1=" + acCurrentGridPhase1 +
+                ", acCurrentGridPhase2=" + acCurrentGridPhase2 +
+                ", acCurrentGridPhase3=" + acCurrentGridPhase3 +
                 ", timestamp=" + timestamp +
                 '}';
     }
@@ -69,14 +69,14 @@ public class MeterRealtimeDataDto implements Serializable {
     private void unpackData(Map<String, Object> body) {
         Map<String,Object> data = (Map<String, Object>) body.get("Data");
         if (data.get("Current_AC_Phase_1").getClass()==Double.class){
-            this.acPhase1 = ((Double) data.get("Current_AC_Phase_1")).floatValue();
-            this.acPhase2 = ((Double) data.get("Current_AC_Phase_2")).floatValue();
-            this.acPhase3 = ((Double) data.get("Current_AC_Phase_3")).floatValue();
+            this.acCurrentGridPhase1 = ((Double) data.get("Current_AC_Phase_1")).floatValue();
+            this.acCurrentGridPhase2 = ((Double) data.get("Current_AC_Phase_2")).floatValue();
+            this.acCurrentGridPhase3 = ((Double) data.get("Current_AC_Phase_3")).floatValue();
         }
         else if (data.get("Current_AC_Phase_1").getClass()==BigDecimal.class){
-            this.acPhase1 = ((BigDecimal) data.get("Current_AC_Phase_1")).floatValue();
-            this.acPhase2 = ((BigDecimal) data.get("Current_AC_Phase_2")).floatValue();
-            this.acPhase3 = ((BigDecimal) data.get("Current_AC_Phase_3")).floatValue();
+            this.acCurrentGridPhase1 = ((BigDecimal) data.get("Current_AC_Phase_1")).floatValue();
+            this.acCurrentGridPhase2 = ((BigDecimal) data.get("Current_AC_Phase_2")).floatValue();
+            this.acCurrentGridPhase3 = ((BigDecimal) data.get("Current_AC_Phase_3")).floatValue();
         } else {
             throw new IllegalStateException("Unexpected cast for class MeterRealtimeData :"  + data.get("Current_AC_Phase_1").getClass());
         }

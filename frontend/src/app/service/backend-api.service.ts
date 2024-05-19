@@ -17,7 +17,7 @@ export class BackendApiService {
   }
 
   public loadCurrentAC(filter?: any): Observable<QueryDslResponse<CurrentAC>> {
-    return this.httpClient.get<QueryDslResponse<CurrentAC>>(`${this.baseUrl}meter-realtime-data/current-ac`,{params: filter});
+    return this.httpClient.get<QueryDslResponse<CurrentAC>>(`${this.baseUrl}meter-realtime-data/ac-current-grid`,{params: filter});
   }
 
   public loadDcPowerPv(filter?: any): Observable<QueryDslResponse<DcPowerPv>> {

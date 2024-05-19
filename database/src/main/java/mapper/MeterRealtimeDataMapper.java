@@ -1,7 +1,7 @@
 package mapper;
 
 import dto.MeterRealtimeDataDto;
-import dto.ResponseCurrentAcDto;
+import dto.ResponseAcCurrentGridDto;
 import entity.ParamsEntity;
 import org.mapstruct.InjectionStrategy;
 import org.mapstruct.Mapper;
@@ -18,7 +18,7 @@ public abstract class MeterRealtimeDataMapper {
     @Mapping(target = "acPowerGrid", ignore = true)
     public abstract ParamsEntity dtoToEntity(MeterRealtimeDataDto dto);
 
-    public abstract ResponseCurrentAcDto entityToDto(ParamsEntity entity);
+    public abstract ResponseAcCurrentGridDto entityToDto(ParamsEntity entity);
 
-    public abstract List<ResponseCurrentAcDto> entityToDto(List<ParamsEntity> entities);
+    public abstract List<ResponseAcCurrentGridDto> entityToDto(List<ParamsEntity> entities);
 }

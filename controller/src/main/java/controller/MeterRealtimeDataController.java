@@ -1,6 +1,6 @@
 package controller;
 
-import dto.ResponseCurrentAcDto;
+import dto.ResponseAcCurrentGridDto;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,11 +22,11 @@ public class MeterRealtimeDataController {
         this.meterRealtimeDataService = meterRealtimeDataService;
     }
 
-    @GetMapping(value = "/current-ac", produces = "application/json")
-    public QueryDslResponse<ResponseCurrentAcDto> loadCurrentAc(@RequestParam(value = "startDate", required = false) Optional<ZonedDateTime> startDate,
-                                                                @RequestParam(value = "endDate", required = false) Optional<ZonedDateTime> endDate,
-                                                                @RequestParam(value = "page", required = false) Optional<Integer> page,
-                                                                @RequestParam(value = "pagesize", required = false) Optional<Integer> pagesize ){
+    @GetMapping(value = "/ac-current-grid", produces = "application/json")
+    public QueryDslResponse<ResponseAcCurrentGridDto> loadCurrentAc(@RequestParam(value = "startDate", required = false) Optional<ZonedDateTime> startDate,
+                                                                    @RequestParam(value = "endDate", required = false) Optional<ZonedDateTime> endDate,
+                                                                    @RequestParam(value = "page", required = false) Optional<Integer> page,
+                                                                    @RequestParam(value = "pagesize", required = false) Optional<Integer> pagesize ){
         return meterRealtimeDataService.loadCurrentAc(startDate, endDate, PaginationUtil.getPagination(page,pagesize));
     }
 }

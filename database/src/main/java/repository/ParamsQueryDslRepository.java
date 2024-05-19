@@ -5,7 +5,7 @@ import com.querydsl.core.BooleanBuilder;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import dto.ResponseAcPowerGridDto;
-import dto.ResponseCurrentAcDto;
+import dto.ResponseAcCurrentGridDto;
 import dto.ResponseDcPowerPvDto;
 import entity.ParamsEntity;
 import entity.QParamsEntity;
@@ -17,7 +17,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import response.QueryDslResponse;
-
 import java.time.ZonedDateTime;
 import java.util.Optional;
 
@@ -38,11 +37,11 @@ public class ParamsQueryDslRepository {
         this.powerFlowRealtimeDataMapper = powerFlowRealtimeDataMapper;
     }
 
-    public QueryDslResponse<ResponseCurrentAcDto> loadCurrentAc(Optional<ZonedDateTime> startDate, Optional<ZonedDateTime> endDate, Optional<PageRequest> pageRequest) {
+    public QueryDslResponse<ResponseAcCurrentGridDto> loadCurrentAc(Optional<ZonedDateTime> startDate, Optional<ZonedDateTime> endDate, Optional<PageRequest> pageRequest) {
         BooleanBuilder booleanBuilder = prepareBooleanBuilder(startDate, endDate);
-        booleanBuilder.and(qParamsEntity.acPhase1.isNotNull());
-        booleanBuilder.and(qParamsEntity.acPhase2.isNotNull());
-        booleanBuilder.and(qParamsEntity.acPhase3.isNotNull());
+        booleanBuilder.and(qParamsEntity.acCurrentPhase1Grid.isNotNull());
+        booleanBuilder.and(qParamsEntity.acCurrentPhase2Grid.isNotNull());
+        booleanBuilder.and(qParamsEntity.acCurrentPhase3Grid.isNotNull());
         JPAQuery<ParamsEntity> query = prepareQuery(booleanBuilder, pageRequest);
         return new QueryDslResponse<>(meterRealtimeDataMapper.entityToDto(query.fetch()), fetchCount());
     }

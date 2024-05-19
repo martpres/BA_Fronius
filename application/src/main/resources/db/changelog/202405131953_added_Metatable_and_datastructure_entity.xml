@@ -13,13 +13,13 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
 
-            <column name="ac_phase_1" type="real">
+            <column name="ac_current_grid_phase1" type="real">
             </column>
 
-            <column name="ac_phase_2" type="real">
+            <column name="ac_current_grid_phase2" type="real">
             </column>
 
-            <column name="ac_phase_3" type="real">
+            <column name="ac_current_grid_phase3" type="real">
             </column>
 
             <column name="dc_power_pv" type="real">

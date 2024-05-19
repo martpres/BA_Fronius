@@ -1,6 +1,6 @@
 package service;
 
-import dto.ResponseCurrentAcDto;
+import dto.ResponseAcCurrentGridDto;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,7 +18,7 @@ public class MeterRealtimeDataService {
         this.paramsQueryDslRepository = paramsQueryDslRepository;
     }
 
-    public QueryDslResponse<ResponseCurrentAcDto> loadCurrentAc(Optional<ZonedDateTime> startDate, Optional<ZonedDateTime> endDate, Optional<PageRequest> pageRequest){
+    public QueryDslResponse<ResponseAcCurrentGridDto> loadCurrentAc(Optional<ZonedDateTime> startDate, Optional<ZonedDateTime> endDate, Optional<PageRequest> pageRequest){
         return paramsQueryDslRepository.loadCurrentAc(startDate,endDate,pageRequest);
     }
 

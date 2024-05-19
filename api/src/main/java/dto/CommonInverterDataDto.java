@@ -8,11 +8,8 @@ import java.time.ZonedDateTime;
 import java.util.Map;
 
 public class CommonInverterDataDto implements Serializable {
-
     private Integer acPowerInverter;
-
     private Float dcVoltagePv;
-
     private ZonedDateTime timestamp;
 
     public CommonInverterDataDto() {
@@ -62,29 +59,18 @@ public class CommonInverterDataDto implements Serializable {
         Map<String, Object> data = (Map<String, Object>) body.get("Data");
         Map<String, Object> pac = (Map<String, Object>) data.get("PAC");
         Map<String, Object> udc = (Map<String, Object>) data.get("UDC");
-
         if (pac.get("Value").getClass() == Integer.class) {
             this.acPowerInverter = ((Integer) pac.get("Value")).intValue();
         } else {
-            throw new IllegalStateException("Unexpected cast for class CommonInverterData (PAC) : " + pac.get("Value").getClass());
+            throw new IllegalStateException("Unexpected cast for class CommonInverterData: " + pac.get("Value").getClass());
         }
-
-//        if (pac.get("Value").getClass() == Double.class) {
-//            this.acPowerInverter = ((Double) pac.get("Value")).floatValue();
-//        } else if (pac.get("Value").getClass() == BigDecimal.class) {
-//            this.acPowerInverter = ((BigDecimal) pac.get("Value")).floatValue();
-//        } else {
-//            throw new IllegalStateException("Unexpected cast for class CommonInverterData (PAC) : " + pac.get("PAC").getClass());
-//        }
-
         if (udc.get("Value").getClass() == Double.class) {
             this.dcVoltagePv = ((Double) udc.get("Value")).floatValue();
         } else if (udc.get("Value").getClass() == BigDecimal.class) {
             this.dcVoltagePv = ((BigDecimal) udc.get("Value")).floatValue();
         } else {
-            throw new IllegalStateException("Unexpected cast for class CommonInverterData (UDC) : " + udc.get("Value").getClass());
+            throw new IllegalStateException("Unexpected cast for class CommonInverterData: " + udc.get("Value").getClass());
         }
-
     }
 
     @JsonProperty("Head")

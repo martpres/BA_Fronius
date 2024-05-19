@@ -5,22 +5,22 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderComponent } from './header/header.component';
 import {MaterialModule} from "./material/material.module";
-import { CurrentACComponent } from './current-ac/current-ac.component';
+import { AcCurrentGridComponent } from './ac-current-grid/ac-current-grid.component';
 import {HttpClientModule} from "@angular/common/http";
 import {CommonModule, DatePipe, registerLocaleData} from "@angular/common";
 import {NgxChartsModule} from "@swimlane/ngx-charts";
 import localeDe from '@angular/common/locales/de';
 import localeDeExtra from '@angular/common/locales/extra/de';
-import { PowerDCComponent } from './power-dc/power-dc.component';
-import { PowerAcGridComponent } from './power-ac-grid/power-ac-grid.component';
+import { DcPowerPvComponent } from './dc-power-pv/dc-power-pv.component';
+import { AcPowerGridComponent } from './ac-power-grid/ac-power-grid.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    CurrentACComponent,
-    PowerDCComponent,
-    PowerAcGridComponent
+    AcCurrentGridComponent,
+    DcPowerPvComponent,
+    AcPowerGridComponent
   ],
   imports: [
     BrowserModule,

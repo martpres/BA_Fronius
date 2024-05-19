@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {QueryDslResponse} from "../dto/queryDslResponse.model";
-import {AcCurrentGrid} from "../dto/currentAC.model";
+import {AcCurrentGrid} from "../dto/acCurrentGrid.model";
 import {DcPowerPv} from "../dto/dcPowerPv.model";
 import {AcPowerGrid} from "../dto/acPowerGrid.model";
 

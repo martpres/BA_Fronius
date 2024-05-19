@@ -2,17 +2,17 @@ import {Component, inject, OnDestroy, OnInit} from '@angular/core';
 import {BackendApiService} from "../service/backend-api.service";
 import {Subscription} from "rxjs";
 import {QueryDslResponse} from "../dto/queryDslResponse.model";
-import {AcCurrentGrid} from "../dto/currentAC.model";
+import {AcCurrentGrid} from "../dto/acCurrentGrid.model";
 import {DateTimeService} from "../service/date-time.service";
 import {formatDate} from "@angular/common";
 import {localId, timeFormat} from "../dto/const";
 
 @Component({
-  selector: 'app-current-ac',
-  templateUrl: './current-ac.component.html',
-  styleUrls: ['./current-ac.component.scss']
+  selector: 'app-ac-current-grid',
+  templateUrl: './ac-current-grid.component.html',
+  styleUrls: ['./ac-current-grid.component.scss']
 })
-export class CurrentACComponent implements OnInit, OnDestroy{
+export class AcCurrentGridComponent implements OnInit, OnDestroy{
   public lineChartData?: any[];
   public initialDate = new Date();
   private sub?: Subscription;
@@ -55,17 +55,17 @@ export class CurrentACComponent implements OnInit, OnDestroy{
       return;
     }
     this.lineChartData = [];
-    const arrayPhase1: any[] = [];
-    const arrayPhase2: any[] = [];
-    const arrayPhase3: any[] = [];
+    const arrayAcCurrentGridPhase1: any[] = [];
+    const arrayAcCurrentGridPhase2: any[] = [];
+    const arrayAcCurrentGridPhase3: any[] = [];
     this.data?.content?.forEach((e)=>{
       let date = this.dateTimeService.convertUtcToLocalTimeZone(e.timestamp)
-      arrayPhase1.push({name: date, value: e.acPhase1});
-      arrayPhase2.push({name: date, value: e.acPhase2});
-      arrayPhase3.push({name: date, value: e.acPhase3});
+      arrayAcCurrentGridPhase1.push({name: date, value: e.acCurrentGridPhase1});
+      arrayAcCurrentGridPhase2.push({name: date, value: e.acCurrentGridPhase2});
+      arrayAcCurrentGridPhase3.push({name: date, value: e.acCurrentGridPhase3});
     });
-    this.lineChartData?.push({name: 'Phase 1', series: arrayPhase1});
-    this.lineChartData?.push({name: 'Phase 2', series: arrayPhase2});
-    this.lineChartData?.push({name: 'Phase 3', series: arrayPhase3});
+    this.lineChartData?.push({name: 'Phase 1', series: arrayAcCurrentGridPhase1});
+    this.lineChartData?.push({name: 'Phase 2', series: arrayAcCurrentGridPhase2});
+    this.lineChartData?.push({name: 'Phase 3', series: arrayAcCurrentGridPhase3});
   }
 }

@@ -11,7 +11,7 @@ public record ResponseDcPowerPvDto(Float dcPowerPv,
     @Override
     public String toString() {
         return "ResponseDcPowerPvDto{" +
-                "dcPowerPv=" + dcPowerPv +
+                "dcVoltagePv=" + dcPowerPv +
                 ", timestamp=" + timestamp +
                 '}';
     }

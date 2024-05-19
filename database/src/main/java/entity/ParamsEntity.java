@@ -23,50 +23,47 @@ public class ParamsEntity extends AbstractBaseEntity {
     @Column(name = "ac_power_grid", updatable = false)
     private Float acPowerGrid;
 
+    @Column(name = "ac_power_inverter", updatable = false)
+    private Integer acPowerInverter;
+
+    @Column(name = "dc_voltage_pv", updatable = false)
+    private Float dcVoltagePv;
+
     public ParamsEntity() {
     }
 
-    public ParamsEntity(Float dcPowerPv, Float acPowerGrid) {
-        this.dcPowerPv = dcPowerPv;
-        this.acPowerGrid = acPowerGrid;
-    }
-
-    public ParamsEntity(Float acCurrentGridPhase1, Float acCurrentGridPhase2, Float acCurrentGridPhase3) {
-        this.acCurrentGridPhase1 = acCurrentGridPhase1;
-        this.acCurrentGridPhase2 = acCurrentGridPhase2;
-        this.acCurrentGridPhase3 = acCurrentGridPhase3;
-    }
-
-    public ParamsEntity(Float acCurrentGridPhase1, Float acCurrentGridPhase2, Float acCurrentGridPhase3, Float dcPowerPv, Float acPowerGrid) {
+    public ParamsEntity(Float acCurrentGridPhase1, Float acCurrentGridPhase2, Float acCurrentGridPhase3, Float dcPowerPv, Float acPowerGrid, Integer acPowerInverter, Float dcVoltagePv) {
         this.acCurrentGridPhase1 = acCurrentGridPhase1;
         this.acCurrentGridPhase2 = acCurrentGridPhase2;
         this.acCurrentGridPhase3 = acCurrentGridPhase3;
         this.dcPowerPv = dcPowerPv;
         this.acPowerGrid = acPowerGrid;
+        this.acPowerInverter = acPowerInverter;
+        this.dcVoltagePv = dcVoltagePv;
     }
 
     public Float getAcCurrentGridPhase1() {
         return acCurrentGridPhase1;
     }
 
-    public void setAcCurrentGridPhase1(Float acCurrentPhase1Grid) {
-        this.acCurrentGridPhase1 = acCurrentPhase1Grid;
+    public void setAcCurrentGridPhase1(Float acCurrentGridPhase1) {
+        this.acCurrentGridPhase1 = acCurrentGridPhase1;
     }
 
     public Float getAcCurrentGridPhase2() {
         return acCurrentGridPhase2;
     }
 
-    public void setAcCurrentGridPhase2(Float acCurrentPhase2Grid) {
-        this.acCurrentGridPhase2 = acCurrentPhase2Grid;
+    public void setAcCurrentGridPhase2(Float acCurrentGridPhase2) {
+        this.acCurrentGridPhase2 = acCurrentGridPhase2;
     }
 
     public Float getAcCurrentGridPhase3() {
         return acCurrentGridPhase3;
     }
 
-    public void setAcCurrentGridPhase3(Float acCurrentPhase3Grid) {
-        this.acCurrentGridPhase3 = acCurrentPhase3Grid;
+    public void setAcCurrentGridPhase3(Float acCurrentGridPhase3) {
+        this.acCurrentGridPhase3 = acCurrentGridPhase3;
     }
 
     public Float getDcPowerPv() {
@@ -85,6 +82,22 @@ public class ParamsEntity extends AbstractBaseEntity {
         this.acPowerGrid = acPowerGrid;
     }
 
+    public Integer getAcPowerInverter() {
+        return acPowerInverter;
+    }
+
+    public void setAcPowerInverter(Integer acPowerInverter) {
+        this.acPowerInverter = acPowerInverter;
+    }
+
+    public Float getDcVoltagePv() {
+        return dcVoltagePv;
+    }
+
+    public void setDcVoltagePv(Float dcVoltagePv) {
+        this.dcVoltagePv = dcVoltagePv;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -95,22 +108,27 @@ public class ParamsEntity extends AbstractBaseEntity {
                 && Objects.equals(acCurrentGridPhase3, paramsEntity.acCurrentGridPhase3)
                 && Objects.equals(dcPowerPv, paramsEntity.dcPowerPv)
                 && Objects.equals(acPowerGrid, paramsEntity.acPowerGrid)
+                && Objects.equals(dcVoltagePv, paramsEntity.dcVoltagePv)
+                && Objects.equals(acPowerInverter, paramsEntity.acPowerInverter)
                 && Objects.equals(super.getTimestamp(), paramsEntity.getTimestamp());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(acCurrentGridPhase1, acCurrentGridPhase2, acCurrentGridPhase3, dcPowerPv, acPowerGrid, super.getTimestamp());
+        return Objects.hash(acCurrentGridPhase1, acCurrentGridPhase2, acCurrentGridPhase3,
+                dcPowerPv, acPowerGrid, dcVoltagePv, acPowerInverter, super.getTimestamp());
     }
 
     @Override
     public String toString() {
         return "Params:{" +
-                " acCurrentGridPhase1=" + acCurrentGridPhase1 +
+                "  acCurrentGridPhase1=" + acCurrentGridPhase1 +
                 ", acCurrentGridPhase2=" + acCurrentGridPhase2 +
                 ", acCurrentGridPhase3=" + acCurrentGridPhase3 +
                 ", dcPowerPv=" + dcPowerPv +
                 ", acPowerGrid=" + acPowerGrid +
+                ", dcVoltagePv=" + dcVoltagePv +
+                ", acPowerInverter=" + acPowerInverter +
                 ", timestamp=" + super.getTimestamp() +
                 '}';
     }

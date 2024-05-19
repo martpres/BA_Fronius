@@ -13,6 +13,8 @@ import localeDe from '@angular/common/locales/de';
 import localeDeExtra from '@angular/common/locales/extra/de';
 import { DcPowerPvComponent } from './dc-power-pv/dc-power-pv.component';
 import { AcPowerGridComponent } from './ac-power-grid/ac-power-grid.component';
+import { AcPowerInverterComponent } from './ac-power-inverter/ac-power-inverter.component';
+import { DcVoltagePvComponent } from './dc-voltage-pv/dc-voltage-pv.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { AcPowerGridComponent } from './ac-power-grid/ac-power-grid.component';
     HeaderComponent,
     AcCurrentGridComponent,
     DcPowerPvComponent,
-    AcPowerGridComponent
+    AcPowerGridComponent,
+    AcPowerInverterComponent,
+    DcVoltagePvComponent
   ],
   imports: [
     BrowserModule,

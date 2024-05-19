@@ -3,13 +3,12 @@ package repository;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import dto.ResponseAcPowerGridDto;
-import dto.ResponseAcCurrentGridDto;
-import dto.ResponseDcPowerPvDto;
+import dto.*;
 import entity.ParamsEntity;
 import entity.QParamsEntity;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import mapper.CommonInverterDataMapper;
 import mapper.MeterRealtimeDataMapper;
 import mapper.PowerFlowRealtimeDataMapper;
 import org.springframework.data.domain.PageRequest;
@@ -26,15 +25,19 @@ public class ParamsQueryDslRepository {
     @PersistenceContext
     private EntityManager entityManager;
 
+//    private final QParamsEntity qParamsEntity = QParamsEntity.paramsEntity;
     private final QParamsEntity qParamsEntity = QParamsEntity.paramsEntity;
 
     private final MeterRealtimeDataMapper meterRealtimeDataMapper;
 
     private final PowerFlowRealtimeDataMapper powerFlowRealtimeDataMapper;
 
-    public ParamsQueryDslRepository(MeterRealtimeDataMapper meterRealtimeDataMapper, PowerFlowRealtimeDataMapper powerFlowRealtimeDataMapper) {
+    private final CommonInverterDataMapper commonInverterDataMapper;
+
+    public ParamsQueryDslRepository(MeterRealtimeDataMapper meterRealtimeDataMapper, PowerFlowRealtimeDataMapper powerFlowRealtimeDataMapper, CommonInverterDataMapper commonInverterDataMapper) {
         this.meterRealtimeDataMapper = meterRealtimeDataMapper;
         this.powerFlowRealtimeDataMapper = powerFlowRealtimeDataMapper;
+        this.commonInverterDataMapper = commonInverterDataMapper;
     }
 
     public QueryDslResponse<ResponseAcCurrentGridDto> loadCurrentAc(Optional<ZonedDateTime> startDate, Optional<ZonedDateTime> endDate, Optional<PageRequest> pageRequest) {
@@ -53,11 +56,25 @@ public class ParamsQueryDslRepository {
         return new QueryDslResponse<>(powerFlowRealtimeDataMapper.convertParamsToDcPowerPv(query.fetch()), fetchCount());
     }
 
+    public QueryDslResponse<ResponseDcVoltagePvDto> loadDcVoltagePv(Optional<ZonedDateTime> startDate, Optional<ZonedDateTime> endDate, Optional<PageRequest> pageRequest) {
+        BooleanBuilder booleanBuilder = prepareBooleanBuilder(startDate, endDate);
+        booleanBuilder.and(qParamsEntity.dcVoltagePv.isNotNull());
+        JPAQuery<ParamsEntity> query = prepareQuery(booleanBuilder, pageRequest);
+        return new QueryDslResponse<>(commonInverterDataMapper.convertParamsToDcVoltagePv(query.fetch()), fetchCount());
+    }
+
     public QueryDslResponse<ResponseAcPowerGridDto> loadAcPowerGrid(Optional<ZonedDateTime> startDate, Optional<ZonedDateTime> endDate, Optional<PageRequest> pageRequest) {
         BooleanBuilder booleanBuilder = prepareBooleanBuilder(startDate, endDate);
         booleanBuilder.and(qParamsEntity.acPowerGrid.isNotNull());
         JPAQuery<ParamsEntity> query = prepareQuery(booleanBuilder, pageRequest);
         return new QueryDslResponse<>(powerFlowRealtimeDataMapper.convertParamsToAcPowerGrid(query.fetch()), fetchCount());
+    }
+
+    public QueryDslResponse<ResponseAcPowerInverterDto> loadAcPowerInverter(Optional<ZonedDateTime> startDate, Optional<ZonedDateTime> endDate, Optional<PageRequest> pageRequest) {
+        BooleanBuilder booleanBuilder = prepareBooleanBuilder(startDate, endDate);
+        booleanBuilder.and(qParamsEntity.acPowerInverter.isNotNull());
+        JPAQuery<ParamsEntity> query = prepareQuery(booleanBuilder, pageRequest);
+        return new QueryDslResponse<>(commonInverterDataMapper.convertParamsToAcPowerInverter(query.fetch()), fetchCount());
     }
 
     private JPAQuery<ParamsEntity> prepareQuery(BooleanBuilder booleanBuilder, Optional<PageRequest> pageRequest) {

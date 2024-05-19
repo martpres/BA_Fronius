@@ -1,5 +1,6 @@
 package fronius;
 
+import dto.CommonInverterDataDto;
 import dto.MeterRealtimeDataDto;
 import dto.PowerFlowRealtimeDataDto;
 import org.springframework.beans.factory.annotation.Value;
@@ -33,6 +34,15 @@ public class FroniusClientImpl implements FroniusClient {
                 .uri(froniusUrl + "GetPowerFlowRealtimeData.fcgi")
                 .retrieve()
                 .body(PowerFlowRealtimeDataDto.class);
+    }
+
+    @Override
+    public CommonInverterDataDto commonInverterDataEndpoint() {
+        System.out.println("DEBUG: CommonInverterData | sending rest request");
+        return restClient.get()
+                .uri(froniusUrl + "GetInverterRealtimeData.cgi?Scope=Device&DeviceId=1&DataCollection=CommonInverterData")
+                .retrieve()
+                .body(CommonInverterDataDto.class);
     }
 
 }

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.jayway.jsonpath.JsonPath;
+import dto.CommonInverterDataDto;
 import dto.MeterRealtimeDataDto;
 import dto.PowerFlowRealtimeDataDto;
 import service.FroniusClient;
@@ -14,7 +15,8 @@ import java.time.ZonedDateTime;
 
 public class MockFroniusClientImpl implements FroniusClient {
     private final String METER_REALTIME_DATA_PATH = "froniusRestClient/src/main/resources/meterRealtimeData.json";
-    private final String POWER_FLOW_REALTIME_DATA_PATH = "froniusRestClient/src/main/resources/powerFlowRealtimeData..json";
+    private final String POWER_FLOW_REALTIME_DATA_PATH = "froniusRestClient/src/main/resources/powerFlowRealtimeData.json";
+    private final String COMMON_INVERTER_DATA_PATH = "froniusRestClient/src/main/resources/commonInverterData.json";
     private final ObjectMapper objectMapper;
 
     public MockFroniusClientImpl() {
@@ -37,6 +39,14 @@ public class MockFroniusClientImpl implements FroniusClient {
         PowerFlowRealtimeDataDto dto2 = readJsonFromFile(POWER_FLOW_REALTIME_DATA_PATH, "$", PowerFlowRealtimeDataDto.class);
         dto2.setTimestamp(ZonedDateTime.now());
         return dto2;
+    }
+
+    @Override
+    public CommonInverterDataDto commonInverterDataEndpoint() {
+        System.out.println("DEBUG: CommonInverterData | reading Json file");
+        CommonInverterDataDto dto3 = readJsonFromFile(COMMON_INVERTER_DATA_PATH, "$", CommonInverterDataDto.class);
+        dto3.setTimestamp(ZonedDateTime.now());
+        return dto3;
     }
 
     private <T> T readJsonFromFile(final String filePath, final String jsonPath, Class<T> clazz) {

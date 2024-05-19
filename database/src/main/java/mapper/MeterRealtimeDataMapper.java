@@ -16,6 +16,8 @@ import java.util.List;
 public abstract class MeterRealtimeDataMapper {
 
     @Mapping(target = "dcPowerPv", ignore = true)
+    @Mapping(target = "acPowerInverter", ignore = true)
+    @Mapping(target = "dcVoltagePv", ignore = true)
     @Mapping(target = "acPowerGrid", ignore = true)
     public abstract ParamsEntity dtoToEntity(MeterRealtimeDataDto dto);
 

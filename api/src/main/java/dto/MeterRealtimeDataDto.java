@@ -8,7 +8,6 @@ import java.time.ZonedDateTime;
 import java.util.Map;
 
 public class MeterRealtimeDataDto implements Serializable {
-
     private Float acCurrentGridPhase1;
     private Float acCurrentGridPhase2;
     private Float acCurrentGridPhase3;

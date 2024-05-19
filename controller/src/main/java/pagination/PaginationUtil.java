@@ -9,8 +9,8 @@ public class PaginationUtil {
     private PaginationUtil() {
     }
 
-    public static Optional<PageRequest> getPagination(Optional<Integer> page, Optional<Integer> pagesize){
-        if (page.isEmpty() || pagesize.isEmpty()){
+    public static Optional<PageRequest> getPagination(Optional<Integer> page, Optional<Integer> pagesize) {
+        if (page.isEmpty() || pagesize.isEmpty()) {
             return Optional.empty();
         }
         return Optional.of(PageRequest.of(page.get(), pagesize.get()));

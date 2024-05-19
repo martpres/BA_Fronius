@@ -9,8 +9,8 @@ public class FroniusClientFactory {
 
     private final FroniusClient froniusClient;
 
-    public FroniusClientFactory(@Value("${app.mock.restclient:true}") boolean mock, FroniusClient restclient){
-        if (mock){
+    public FroniusClientFactory(@Value("${app.mock.restclient:true}") boolean mock, FroniusClient restclient) {
+        if (mock) {
             froniusClient = new MockFroniusClientImpl();
         } else {
             froniusClient = restclient;
@@ -18,7 +18,7 @@ public class FroniusClientFactory {
     }
 
     public FroniusClient getFroniusClient() {
-        if (froniusClient==null){
+        if (froniusClient == null) {
             throw new IllegalArgumentException("Fronius Client is Null");
         }
         return froniusClient;

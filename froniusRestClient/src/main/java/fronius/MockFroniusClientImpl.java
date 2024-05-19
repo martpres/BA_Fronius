@@ -7,13 +7,14 @@ import com.jayway.jsonpath.JsonPath;
 import dto.MeterRealtimeDataDto;
 import dto.PowerFlowRealtimeDataDto;
 import service.FroniusClient;
+
 import java.io.File;
 import java.io.IOException;
 import java.time.ZonedDateTime;
 
 public class MockFroniusClientImpl implements FroniusClient {
-    private final String METER_REALTIME_DATA_PATH="froniusRestClient/src/main/resources/meterRealtimeData.json";
-    private final String POWER_FLOW_REALTIME_DATA_PATH="froniusRestClient/src/main/resources/powerFlowRealtimeData..json";
+    private final String METER_REALTIME_DATA_PATH = "froniusRestClient/src/main/resources/meterRealtimeData.json";
+    private final String POWER_FLOW_REALTIME_DATA_PATH = "froniusRestClient/src/main/resources/powerFlowRealtimeData..json";
     private final ObjectMapper objectMapper;
 
     public MockFroniusClientImpl() {
@@ -38,7 +39,7 @@ public class MockFroniusClientImpl implements FroniusClient {
         return dto2;
     }
 
-    private <T> T readJsonFromFile(final String filePath, final String jsonPath, Class<T> clazz){
+    private <T> T readJsonFromFile(final String filePath, final String jsonPath, Class<T> clazz) {
         try {
             return objectMapper.convertValue(JsonPath.parse(new File(filePath)).read(jsonPath), clazz);
         } catch (IOException e) {

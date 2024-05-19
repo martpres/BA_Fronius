@@ -1,6 +1,7 @@
 package dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.ZonedDateTime;
@@ -67,18 +68,17 @@ public class MeterRealtimeDataDto implements Serializable {
 
     @JsonProperty("Body")
     private void unpackData(Map<String, Object> body) {
-        Map<String,Object> data = (Map<String, Object>) body.get("Data");
-        if (data.get("Current_AC_Phase_1").getClass()==Double.class){
+        Map<String, Object> data = (Map<String, Object>) body.get("Data");
+        if (data.get("Current_AC_Phase_1").getClass() == Double.class) {
             this.acCurrentGridPhase1 = ((Double) data.get("Current_AC_Phase_1")).floatValue();
             this.acCurrentGridPhase2 = ((Double) data.get("Current_AC_Phase_2")).floatValue();
             this.acCurrentGridPhase3 = ((Double) data.get("Current_AC_Phase_3")).floatValue();
-        }
-        else if (data.get("Current_AC_Phase_1").getClass()==BigDecimal.class){
+        } else if (data.get("Current_AC_Phase_1").getClass() == BigDecimal.class) {
             this.acCurrentGridPhase1 = ((BigDecimal) data.get("Current_AC_Phase_1")).floatValue();
             this.acCurrentGridPhase2 = ((BigDecimal) data.get("Current_AC_Phase_2")).floatValue();
             this.acCurrentGridPhase3 = ((BigDecimal) data.get("Current_AC_Phase_3")).floatValue();
         } else {
-            throw new IllegalStateException("Unexpected cast for class MeterRealtimeData :"  + data.get("Current_AC_Phase_1").getClass());
+            throw new IllegalStateException("Unexpected cast for class MeterRealtimeData :" + data.get("Current_AC_Phase_1").getClass());
         }
     }
 

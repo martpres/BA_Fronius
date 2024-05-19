@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {QueryDslResponse} from "../dto/queryDslResponse.model";
-import {CurrentAC} from "../dto/currentAC.model";
+import {AcCurrentGrid} from "../dto/currentAC.model";
 import {DcPowerPv} from "../dto/dcPowerPv.model";
 import {AcPowerGrid} from "../dto/acPowerGrid.model";
 
@@ -16,8 +16,8 @@ export class BackendApiService {
   constructor(private httpClient: HttpClient) {
   }
 
-  public loadCurrentAC(filter?: any): Observable<QueryDslResponse<CurrentAC>> {
-    return this.httpClient.get<QueryDslResponse<CurrentAC>>(`${this.baseUrl}meter-realtime-data/ac-current-grid`,{params: filter});
+  public loadCurrentAC(filter?: any): Observable<QueryDslResponse<AcCurrentGrid>> {
+    return this.httpClient.get<QueryDslResponse<AcCurrentGrid>>(`${this.baseUrl}meter-realtime-data/ac-current-grid`,{params: filter});
   }
 
   public loadDcPowerPv(filter?: any): Observable<QueryDslResponse<DcPowerPv>> {

@@ -2,7 +2,7 @@ import {Component, inject, OnDestroy, OnInit} from '@angular/core';
 import {BackendApiService} from "../service/backend-api.service";
 import {Subscription} from "rxjs";
 import {QueryDslResponse} from "../dto/queryDslResponse.model";
-import {CurrentAC} from "../dto/currentAC.model";
+import {AcCurrentGrid} from "../dto/currentAC.model";
 import {DateTimeService} from "../service/date-time.service";
 import {formatDate} from "@angular/common";
 import {localId, timeFormat} from "../dto/const";
@@ -16,10 +16,9 @@ export class CurrentACComponent implements OnInit, OnDestroy{
   public lineChartData?: any[];
   public initialDate = new Date();
   private sub?: Subscription;
-  private data?: QueryDslResponse<CurrentAC>;
+  private data?: QueryDslResponse<AcCurrentGrid>;
   private refreshMilliSeconds = 60000;
   private interval?: any;
-
 
   constructor(private backendService: BackendApiService, private dateTimeService: DateTimeService) {
   }

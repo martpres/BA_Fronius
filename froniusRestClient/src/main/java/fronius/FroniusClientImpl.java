@@ -35,9 +35,4 @@ public class FroniusClientImpl implements FroniusClient {
                 .body(PowerFlowRealtimeDataDto.class);
     }
 
-
-
-
-
-
 }

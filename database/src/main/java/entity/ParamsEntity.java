@@ -1,20 +1,21 @@
 package entity;
 
 import jakarta.persistence.*;
+
 import java.util.Objects;
 
 @Entity
 @Table(name = "params", catalog = "public")
-public class ParamsEntity extends AbstractBaseEntity{
+public class ParamsEntity extends AbstractBaseEntity {
 
-    @Column(name = "ac_current_phase1_grid", updatable = false)
-    private Float acCurrentPhase1Grid;
+    @Column(name = "ac_current_grid_phase1", updatable = false)
+    private Float acCurrentGridPhase1;
 
-    @Column(name = "ac_current_phase2_grid", updatable = false)
-    private Float acCurrentPhase2Grid;
+    @Column(name = "ac_current_grid_phase2", updatable = false)
+    private Float acCurrentGridPhase2;
 
-    @Column(name = "ac_current_phase3_grid", updatable = false)
-    private Float acCurrentPhase3Grid;
+    @Column(name = "ac_current_grid_phase3", updatable = false)
+    private Float acCurrentGridPhase3;
 
     @Column(name = "dc_power_pv", updatable = false)
     private Float dcPowerPv;
@@ -30,42 +31,42 @@ public class ParamsEntity extends AbstractBaseEntity{
         this.acPowerGrid = acPowerGrid;
     }
 
-    public ParamsEntity(Float acCurrentPhase1Grid, Float acCurrentPhase2Grid, Float acCurrentPhase3Grid) {
-        this.acCurrentPhase1Grid = acCurrentPhase1Grid;
-        this.acCurrentPhase2Grid = acCurrentPhase2Grid;
-        this.acCurrentPhase3Grid = acCurrentPhase3Grid;
+    public ParamsEntity(Float acCurrentGridPhase1, Float acCurrentGridPhase2, Float acCurrentGridPhase3) {
+        this.acCurrentGridPhase1 = acCurrentGridPhase1;
+        this.acCurrentGridPhase2 = acCurrentGridPhase2;
+        this.acCurrentGridPhase3 = acCurrentGridPhase3;
     }
 
-    public ParamsEntity(Float acCurrentPhase1Grid, Float acCurrentPhase2Grid, Float acCurrentPhase3Grid, Float dcPowerPv, Float acPowerGrid) {
-        this.acCurrentPhase1Grid = acCurrentPhase1Grid;
-        this.acCurrentPhase2Grid = acCurrentPhase2Grid;
-        this.acCurrentPhase3Grid = acCurrentPhase3Grid;
+    public ParamsEntity(Float acCurrentGridPhase1, Float acCurrentGridPhase2, Float acCurrentGridPhase3, Float dcPowerPv, Float acPowerGrid) {
+        this.acCurrentGridPhase1 = acCurrentGridPhase1;
+        this.acCurrentGridPhase2 = acCurrentGridPhase2;
+        this.acCurrentGridPhase3 = acCurrentGridPhase3;
         this.dcPowerPv = dcPowerPv;
         this.acPowerGrid = acPowerGrid;
     }
 
-    public Float getAcCurrentPhase1Grid() {
-        return acCurrentPhase1Grid;
+    public Float getAcCurrentGridPhase1() {
+        return acCurrentGridPhase1;
     }
 
-    public void setAcCurrentPhase1Grid(Float acCurrentPhase1Grid) {
-        this.acCurrentPhase1Grid = acCurrentPhase1Grid;
+    public void setAcCurrentGridPhase1(Float acCurrentPhase1Grid) {
+        this.acCurrentGridPhase1 = acCurrentPhase1Grid;
     }
 
-    public Float getAcCurrentPhase2Grid() {
-        return acCurrentPhase2Grid;
+    public Float getAcCurrentGridPhase2() {
+        return acCurrentGridPhase2;
     }
 
-    public void setAcCurrentPhase2Grid(Float acCurrentPhase2Grid) {
-        this.acCurrentPhase2Grid = acCurrentPhase2Grid;
+    public void setAcCurrentGridPhase2(Float acCurrentPhase2Grid) {
+        this.acCurrentGridPhase2 = acCurrentPhase2Grid;
     }
 
-    public Float getAcCurrentPhase3Grid() {
-        return acCurrentPhase3Grid;
+    public Float getAcCurrentGridPhase3() {
+        return acCurrentGridPhase3;
     }
 
-    public void setAcCurrentPhase3Grid(Float acCurrentPhase3Grid) {
-        this.acCurrentPhase3Grid = acCurrentPhase3Grid;
+    public void setAcCurrentGridPhase3(Float acCurrentPhase3Grid) {
+        this.acCurrentGridPhase3 = acCurrentPhase3Grid;
     }
 
     public Float getDcPowerPv() {
@@ -89,9 +90,9 @@ public class ParamsEntity extends AbstractBaseEntity{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ParamsEntity paramsEntity = (ParamsEntity) o;
-        return Objects.equals(acCurrentPhase1Grid, paramsEntity.acCurrentPhase1Grid)
-                && Objects.equals(acCurrentPhase2Grid, paramsEntity.acCurrentPhase2Grid)
-                && Objects.equals(acCurrentPhase3Grid, paramsEntity.acCurrentPhase3Grid)
+        return Objects.equals(acCurrentGridPhase1, paramsEntity.acCurrentGridPhase1)
+                && Objects.equals(acCurrentGridPhase2, paramsEntity.acCurrentGridPhase2)
+                && Objects.equals(acCurrentGridPhase3, paramsEntity.acCurrentGridPhase3)
                 && Objects.equals(dcPowerPv, paramsEntity.dcPowerPv)
                 && Objects.equals(acPowerGrid, paramsEntity.acPowerGrid)
                 && Objects.equals(super.getTimestamp(), paramsEntity.getTimestamp());
@@ -99,15 +100,15 @@ public class ParamsEntity extends AbstractBaseEntity{
 
     @Override
     public int hashCode() {
-        return Objects.hash(acCurrentPhase1Grid, acCurrentPhase2Grid, acCurrentPhase3Grid, dcPowerPv, acPowerGrid, super.getTimestamp());
+        return Objects.hash(acCurrentGridPhase1, acCurrentGridPhase2, acCurrentGridPhase3, dcPowerPv, acPowerGrid, super.getTimestamp());
     }
 
     @Override
     public String toString() {
         return "Params:{" +
-                " acCurrentPhase1Grid=" + acCurrentPhase1Grid +
-                ", acCurrentPhase2Grid=" + acCurrentPhase2Grid +
-                ", acCurrentPhase3Grid=" + acCurrentPhase3Grid +
+                " acCurrentGridPhase1=" + acCurrentGridPhase1 +
+                ", acCurrentGridPhase2=" + acCurrentGridPhase2 +
+                ", acCurrentGridPhase3=" + acCurrentGridPhase3 +
                 ", dcPowerPv=" + dcPowerPv +
                 ", acPowerGrid=" + acPowerGrid +
                 ", timestamp=" + super.getTimestamp() +

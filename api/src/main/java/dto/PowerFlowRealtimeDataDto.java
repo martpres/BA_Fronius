@@ -24,18 +24,23 @@ public class PowerFlowRealtimeDataDto implements Serializable {
     public Float getDcPowerPv() {
         return dcPowerPv;
     }
+
     public void setDcPowerPv(Float dcPowerPv) {
         this.dcPowerPv = dcPowerPv;
     }
+
     public Float getAcPowerGrid() {
         return acPowerGrid;
     }
+
     public void setAcPowerGrid(Float acPowerGrid) {
         this.acPowerGrid = acPowerGrid;
     }
+
     public ZonedDateTime getTimestamp() {
         return timestamp;
     }
+
     public void setTimestamp(ZonedDateTime timestamp) {
         this.timestamp = timestamp;
     }
@@ -49,21 +54,21 @@ public class PowerFlowRealtimeDataDto implements Serializable {
                 '}';
     }
 
-@JsonProperty("Body")
-private void unpackData(Map<String, Object> body) {
-    Map<String, Object> data = (Map<String, Object>) body.get("Data");
-    Map<String, Object> site = (Map<String, Object>) data.get("Site");
+    @JsonProperty("Body")
+    private void unpackData(Map<String, Object> body) {
+        Map<String, Object> data = (Map<String, Object>) body.get("Data");
+        Map<String, Object> site = (Map<String, Object>) data.get("Site");
 
-    if (site.get("P_PV").getClass() == Double.class) {
-        this.dcPowerPv = ((Double) site.get("P_PV")).floatValue();
-        this.acPowerGrid = ((Double) site.get("P_Grid")).floatValue();
-    } else if (site.get("P_PV").getClass() == BigDecimal.class) {
-        this.dcPowerPv = ((BigDecimal) site.get("P_PV")).floatValue();
-        this.acPowerGrid = ((BigDecimal) site.get("P_Grid")).floatValue();
-    } else {
-        throw new IllegalStateException("Unexpected cast for class PowerFlowRealtimeData : " + site.get("P_PV").getClass());
+        if (site.get("P_PV").getClass() == Double.class) {
+            this.dcPowerPv = ((Double) site.get("P_PV")).floatValue();
+            this.acPowerGrid = ((Double) site.get("P_Grid")).floatValue();
+        } else if (site.get("P_PV").getClass() == BigDecimal.class) {
+            this.dcPowerPv = ((BigDecimal) site.get("P_PV")).floatValue();
+            this.acPowerGrid = ((BigDecimal) site.get("P_Grid")).floatValue();
+        } else {
+            throw new IllegalStateException("Unexpected cast for class PowerFlowRealtimeData : " + site.get("P_PV").getClass());
+        }
     }
-}
 
     @JsonProperty("Head")
     private void unpackHead(Map<String, Object> head) {

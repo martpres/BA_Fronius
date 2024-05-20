@@ -29,9 +29,6 @@ public class ParamsEntity extends AbstractBaseEntity {
     @Column(name = "dc_voltage_pv", updatable = false)
     private Float dcVoltagePv;
 
-    @Column(name = "soc_akku", updatable = false)
-    private Float socAkku;
-
     @Column(name = "dc_power_akku", updatable = false)
     private Float dcPowerAkku;
 
@@ -42,14 +39,14 @@ public class ParamsEntity extends AbstractBaseEntity {
     private Float autonomy;
 
     @Column(name = "selfConsumption", updatable = false)
-    private Integer selfConsumption;
+    private Float selfConsumption;
 
     public ParamsEntity() {
     }
 
     public ParamsEntity(Float acCurrentGridPhase1, Float acCurrentGridPhase2, Float acCurrentGridPhase3,
                         Float dcPowerPv, Float acPowerGrid, Integer acPowerInverter, Float dcVoltagePv,
-                        Float socAkku, Float dcPowerAkku, Float acPowerLoad, Float autonomy, Integer selfConsumption) {
+                        Float dcPowerAkku, Float acPowerLoad, Float autonomy, Float selfConsumption) {
         this.acCurrentGridPhase1 = acCurrentGridPhase1;
         this.acCurrentGridPhase2 = acCurrentGridPhase2;
         this.acCurrentGridPhase3 = acCurrentGridPhase3;
@@ -57,7 +54,6 @@ public class ParamsEntity extends AbstractBaseEntity {
         this.acPowerGrid = acPowerGrid;
         this.acPowerInverter = acPowerInverter;
         this.dcVoltagePv = dcVoltagePv;
-        this.socAkku = socAkku;
         this.dcPowerAkku = dcPowerAkku;
         this.acPowerLoad = acPowerLoad;
         this.autonomy = autonomy;
@@ -120,14 +116,6 @@ public class ParamsEntity extends AbstractBaseEntity {
         this.dcVoltagePv = dcVoltagePv;
     }
 
-    public Float getSocAkku() {
-        return socAkku;
-    }
-
-    public void setSocAkku(Float socStorage) {
-        this.socAkku = socStorage;
-    }
-
     public Float getDcPowerAkku() {
         return dcPowerAkku;
     }
@@ -152,11 +140,11 @@ public class ParamsEntity extends AbstractBaseEntity {
         this.autonomy = autonomy;
     }
 
-    public Integer getSelfConsumption() {
+    public Float getSelfConsumption() {
         return selfConsumption;
     }
 
-    public void setSelfConsumption(Integer selfConsumption) {
+    public void setSelfConsumption(Float selfConsumption) {
         this.selfConsumption = selfConsumption;
     }
 
@@ -172,7 +160,6 @@ public class ParamsEntity extends AbstractBaseEntity {
                 && Objects.equals(acPowerGrid, paramsEntity.acPowerGrid)
                 && Objects.equals(dcVoltagePv, paramsEntity.dcVoltagePv)
                 && Objects.equals(acPowerInverter, paramsEntity.acPowerInverter)
-                && Objects.equals(socAkku, paramsEntity.socAkku)
                 && Objects.equals(dcPowerAkku, paramsEntity.dcPowerAkku)
                 && Objects.equals(acPowerLoad, paramsEntity.acPowerLoad)
                 && Objects.equals(autonomy, paramsEntity.autonomy)
@@ -183,7 +170,7 @@ public class ParamsEntity extends AbstractBaseEntity {
     @Override
     public int hashCode() {
         return Objects.hash(acCurrentGridPhase1, acCurrentGridPhase2, acCurrentGridPhase3,
-                dcPowerPv, acPowerGrid, dcVoltagePv, acPowerInverter, socAkku, dcPowerAkku,
+                dcPowerPv, acPowerGrid, dcVoltagePv, acPowerInverter, dcPowerAkku,
                 acPowerLoad, autonomy, selfConsumption, super.getTimestamp());
     }
 
@@ -197,7 +184,6 @@ public class ParamsEntity extends AbstractBaseEntity {
                 ", acPowerGrid=" + acPowerGrid +
                 ", dcVoltagePv=" + dcVoltagePv +
                 ", acPowerInverter=" + acPowerInverter +
-                ", socAkku=" + socAkku +
                 ", dcPowerAkku=" + dcPowerAkku +
                 ", acPowerLoad=" + acPowerLoad +
                 ", autonomy=" + autonomy +

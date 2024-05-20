@@ -23,8 +23,8 @@
                 "P_Grid": 4.7999999999999998,
                 "P_Load": -2031.8,
                 "P_PV": 843.80000000000007,
-                "rel_Autonomy": 99.76375627522394,
-                "rel_SelfConsumption": 100
+                "rel_Autonomy": 55.19849,
+                "rel_SelfConsumption": 34.1145
             },
             "Version": "12"
         }

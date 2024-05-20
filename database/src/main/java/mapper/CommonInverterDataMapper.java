@@ -19,7 +19,6 @@ public abstract class CommonInverterDataMapper {
     @Mapping(target = "acCurrentGridPhase3", ignore = true)
     @Mapping(target = "dcPowerPv", ignore = true)
     @Mapping(target = "acPowerGrid", ignore = true)
-    @Mapping(target = "socAkku", ignore = true)
     @Mapping(target = "dcPowerAkku", ignore = true)
     @Mapping(target = "acPowerLoad", ignore = true)
     @Mapping(target = "autonomy", ignore = true)

@@ -1,7 +1,6 @@
 package service;
 
-import dto.ResponseAcPowerGridDto;
-import dto.ResponseDcPowerPvDto;
+import dto.*;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,6 +24,22 @@ public class PowerFlowRealtimeDataService {
 
     public QueryDslResponse<ResponseAcPowerGridDto> loadAcPowerGrid(Optional<ZonedDateTime> startDate, Optional<ZonedDateTime> endDate, Optional<PageRequest> pageRequest){
         return paramsQueryDslRepository.loadAcPowerGrid(startDate,endDate,pageRequest);
+    }
+
+    public QueryDslResponse<ResponseDcPowerAkkuDto> loadDcPowerAkku(Optional<ZonedDateTime> startDate, Optional<ZonedDateTime> endDate, Optional<PageRequest> pageRequest){
+        return paramsQueryDslRepository.loadDcPowerAkku(startDate,endDate,pageRequest);
+    }
+
+    public QueryDslResponse<ResponseAcPowerLoadDto> loadAcPowerLoad(Optional<ZonedDateTime> startDate, Optional<ZonedDateTime> endDate, Optional<PageRequest> pageRequest){
+        return paramsQueryDslRepository.loadAcPowerLoad(startDate,endDate,pageRequest);
+    }
+
+    public QueryDslResponse<ResponseAutonomyDto> loadAutonomy(Optional<ZonedDateTime> startDate, Optional<ZonedDateTime> endDate, Optional<PageRequest> pageRequest){
+        return paramsQueryDslRepository.loadAutonomy(startDate,endDate,pageRequest);
+    }
+
+    public QueryDslResponse<ResponseSelfConsumptionDto> loadSelfConsumption(Optional<ZonedDateTime> startDate, Optional<ZonedDateTime> endDate, Optional<PageRequest> pageRequest){
+        return paramsQueryDslRepository.loadSelfConsumption(startDate,endDate,pageRequest);
     }
 
 }

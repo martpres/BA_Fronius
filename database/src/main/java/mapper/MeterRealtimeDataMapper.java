@@ -15,14 +15,15 @@ import java.util.List;
         unmappedTargetPolicy = ReportingPolicy.ERROR)
 public abstract class MeterRealtimeDataMapper {
 
-    @Mapping(target = "dcPowerPv", ignore = true)
-    @Mapping(target = "acPowerInverter", ignore = true)
     @Mapping(target = "dcVoltagePv", ignore = true)
+    @Mapping(target = "acPowerInverter", ignore = true)
+    @Mapping(target = "dcPowerPv", ignore = true)
     @Mapping(target = "acPowerGrid", ignore = true)
     @Mapping(target = "dcPowerAkku", ignore = true)
     @Mapping(target = "acPowerLoad", ignore = true)
     @Mapping(target = "autonomy", ignore = true)
     @Mapping(target = "selfConsumption", ignore = true)
+    @Mapping(target = "stateOfChargeStorage", ignore = true)
     public abstract ParamsEntity dtoToEntity(MeterRealtimeDataDto dto);
 
     public abstract ResponseAcCurrentGridDto entityToDto(ParamsEntity entity);

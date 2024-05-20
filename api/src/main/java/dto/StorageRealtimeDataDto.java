@@ -97,12 +97,12 @@ public class StorageRealtimeDataDto implements Serializable {
     private void unpackData(Map<String, Object> body) {
         Map<String, Object> data = (Map<String, Object>) body.get("Data");
         Map<String, Object> controller = (Map<String, Object>) data.get("Controller");
-        Map<String, Object> details = (Map<String, Object>) data.get("Details");
+        Map<String, Object> details = (Map<String, Object>) controller.get("Details");
 
-        if (data.get("StateOfCharge_Relative").getClass() == Double.class) {
-            this.stateOfChargeStorage = ((Double) data.get("StateOfCharge_Relative")).floatValue();
-        } else if (data.get("StateOfCharge_Relative").getClass() == BigDecimal.class) {
-            this.stateOfChargeStorage = ((BigDecimal) data.get("StateOfCharge_Relative")).floatValue();
+        if (controller.get("StateOfCharge_Relative").getClass() == Double.class) {
+            this.stateOfChargeStorage = ((Double) controller.get("StateOfCharge_Relative")).floatValue();
+        } else if (controller.get("StateOfCharge_Relative").getClass() == BigDecimal.class) {
+            this.stateOfChargeStorage = ((BigDecimal) controller.get("StateOfCharge_Relative")).floatValue();
         } else {
             throw new IllegalStateException("Unexpected cast for class StorageRealtimeData");
         }

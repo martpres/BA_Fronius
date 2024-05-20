@@ -3,6 +3,7 @@ package fronius;
 import dto.CommonInverterDataDto;
 import dto.MeterRealtimeDataDto;
 import dto.PowerFlowRealtimeDataDto;
+import dto.StorageRealtimeDataDto;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
@@ -43,6 +44,15 @@ public class FroniusClientImpl implements FroniusClient {
                 .uri(froniusUrl + "GetInverterRealtimeData.cgi?Scope=Device&DeviceId=1&DataCollection=CommonInverterData")
                 .retrieve()
                 .body(CommonInverterDataDto.class);
+    }
+
+    @Override
+    public StorageRealtimeDataDto storageRealtimeDataEndpoint() {
+        System.out.println("DEBUG: StorageRealtimeData | sending rest request");
+        return restClient.get()
+                .uri(froniusUrl + "GetStorageRealtimeData.cgi?Scope=Device&DeviceId=0")
+                .retrieve()
+                .body(StorageRealtimeDataDto.class);
     }
 
 }

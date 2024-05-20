@@ -25,8 +25,8 @@ public class ParamsQueryDslRepository {
     @PersistenceContext
     private EntityManager entityManager;
 
-//    private final QParamsEntity qParamsEntity = QParamsEntity.paramsEntity;
     private final QParamsEntity qParamsEntity = QParamsEntity.paramsEntity;
+
 
     private final MeterRealtimeDataMapper meterRealtimeDataMapper;
 
@@ -56,11 +56,32 @@ public class ParamsQueryDslRepository {
         return new QueryDslResponse<>(powerFlowRealtimeDataMapper.convertParamsToDcPowerPv(query.fetch()), fetchCount());
     }
 
-    public QueryDslResponse<ResponseDcVoltagePvDto> loadDcVoltagePv(Optional<ZonedDateTime> startDate, Optional<ZonedDateTime> endDate, Optional<PageRequest> pageRequest) {
+    public QueryDslResponse<ResponseDcPowerAkkuDto> loadDcPowerAkku(Optional<ZonedDateTime> startDate, Optional<ZonedDateTime> endDate, Optional<PageRequest> pageRequest) {
         BooleanBuilder booleanBuilder = prepareBooleanBuilder(startDate, endDate);
-        booleanBuilder.and(qParamsEntity.dcVoltagePv.isNotNull());
+        booleanBuilder.and(qParamsEntity.dcPowerAkku.isNotNull());
         JPAQuery<ParamsEntity> query = prepareQuery(booleanBuilder, pageRequest);
-        return new QueryDslResponse<>(commonInverterDataMapper.convertParamsToDcVoltagePv(query.fetch()), fetchCount());
+        return new QueryDslResponse<>(powerFlowRealtimeDataMapper.convertParamsToDcPowerAkku(query.fetch()), fetchCount());
+    }
+
+    public QueryDslResponse<ResponseAcPowerLoadDto> loadAcPowerLoad(Optional<ZonedDateTime> startDate, Optional<ZonedDateTime> endDate, Optional<PageRequest> pageRequest) {
+        BooleanBuilder booleanBuilder = prepareBooleanBuilder(startDate, endDate);
+        booleanBuilder.and(qParamsEntity.acPowerLoad.isNotNull());
+        JPAQuery<ParamsEntity> query = prepareQuery(booleanBuilder, pageRequest);
+        return new QueryDslResponse<>(powerFlowRealtimeDataMapper.convertParamsToAcPowerLoad(query.fetch()), fetchCount());
+    }
+
+    public QueryDslResponse<ResponseAutonomyDto> loadAutonomy(Optional<ZonedDateTime> startDate, Optional<ZonedDateTime> endDate, Optional<PageRequest> pageRequest) {
+        BooleanBuilder booleanBuilder = prepareBooleanBuilder(startDate, endDate);
+        booleanBuilder.and(qParamsEntity.autonomy.isNotNull());
+        JPAQuery<ParamsEntity> query = prepareQuery(booleanBuilder, pageRequest);
+        return new QueryDslResponse<>(powerFlowRealtimeDataMapper.convertParamsToAutonomy(query.fetch()), fetchCount());
+    }
+
+    public QueryDslResponse<ResponseSelfConsumptionDto> loadSelfConsumption(Optional<ZonedDateTime> startDate, Optional<ZonedDateTime> endDate, Optional<PageRequest> pageRequest) {
+        BooleanBuilder booleanBuilder = prepareBooleanBuilder(startDate, endDate);
+        booleanBuilder.and(qParamsEntity.selfConsumption.isNotNull());
+        JPAQuery<ParamsEntity> query = prepareQuery(booleanBuilder, pageRequest);
+        return new QueryDslResponse<>(powerFlowRealtimeDataMapper.convertParamsToSelfConsumption(query.fetch()), fetchCount());
     }
 
     public QueryDslResponse<ResponseAcPowerGridDto> loadAcPowerGrid(Optional<ZonedDateTime> startDate, Optional<ZonedDateTime> endDate, Optional<PageRequest> pageRequest) {
@@ -76,6 +97,14 @@ public class ParamsQueryDslRepository {
         JPAQuery<ParamsEntity> query = prepareQuery(booleanBuilder, pageRequest);
         return new QueryDslResponse<>(commonInverterDataMapper.convertParamsToAcPowerInverter(query.fetch()), fetchCount());
     }
+
+    public QueryDslResponse<ResponseDcVoltagePvDto> loadDcVoltagePv(Optional<ZonedDateTime> startDate, Optional<ZonedDateTime> endDate, Optional<PageRequest> pageRequest) {
+        BooleanBuilder booleanBuilder = prepareBooleanBuilder(startDate, endDate);
+        booleanBuilder.and(qParamsEntity.dcVoltagePv.isNotNull());
+        JPAQuery<ParamsEntity> query = prepareQuery(booleanBuilder, pageRequest);
+        return new QueryDslResponse<>(commonInverterDataMapper.convertParamsToDcVoltagePv(query.fetch()), fetchCount());
+    }
+
 
     private JPAQuery<ParamsEntity> prepareQuery(BooleanBuilder booleanBuilder, Optional<PageRequest> pageRequest) {
         JPAQuery<ParamsEntity> query = getJpaQueryFactory().selectFrom(qParamsEntity).where(booleanBuilder);

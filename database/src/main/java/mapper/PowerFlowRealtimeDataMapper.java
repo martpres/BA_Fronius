@@ -1,8 +1,6 @@
 package mapper;
 
-import dto.PowerFlowRealtimeDataDto;
-import dto.ResponseAcPowerGridDto;
-import dto.ResponseDcPowerPvDto;
+import dto.*;
 import entity.ParamsEntity;
 import org.mapstruct.InjectionStrategy;
 import org.mapstruct.Mapper;
@@ -24,10 +22,23 @@ public abstract class PowerFlowRealtimeDataMapper {
     public abstract ParamsEntity dtoToEntity(PowerFlowRealtimeDataDto dto);
 
     public abstract ResponseDcPowerPvDto convertParamsToDcPowerPv(ParamsEntity entity);
-
     public abstract List<ResponseDcPowerPvDto> convertParamsToDcPowerPv(List<ParamsEntity> entities);
 
     public abstract ResponseAcPowerGridDto convertParamsToAcPowerGrid(ParamsEntity entity);
-
     public abstract List<ResponseAcPowerGridDto> convertParamsToAcPowerGrid(List<ParamsEntity> entities);
+
+
+    public abstract ResponseDcPowerAkkuDto convertParamsToDcPowerAkku(ParamsEntity entity);
+    public abstract List<ResponseDcPowerAkkuDto> convertParamsToDcPowerAkku(List<ParamsEntity> entities);
+
+    public abstract ResponseAcPowerLoadDto convertParamsToAcPowerLoad(ParamsEntity entity);
+    public abstract List<ResponseAcPowerLoadDto> convertParamsToAcPowerLoad(List<ParamsEntity> entities);
+
+    public abstract ResponseAutonomyDto convertParamsToAutonomy(ParamsEntity entity);
+    public abstract List<ResponseAutonomyDto> convertParamsToAutonomy(List<ParamsEntity> entities);
+
+    public abstract ResponseSelfConsumptionDto convertParamsToSelfConsumption(ParamsEntity entity);
+    public abstract List<ResponseSelfConsumptionDto> convertParamsToSelfConsumption(List<ParamsEntity> entities);
+
+
 }

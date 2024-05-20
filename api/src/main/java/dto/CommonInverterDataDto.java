@@ -49,7 +49,7 @@ public class CommonInverterDataDto implements Serializable {
     public String toString() {
         return "CommonInverterDataDto{" +
                 ", acPowerInverter=" + acPowerInverter +
-                "dcVoltagePv=" + dcVoltagePv +
+                ", dcVoltagePv=" + dcVoltagePv +
                 ", timestamp=" + timestamp +
                 '}';
     }

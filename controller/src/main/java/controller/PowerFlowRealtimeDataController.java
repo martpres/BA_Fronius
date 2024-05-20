@@ -1,7 +1,6 @@
 package controller;
 
-import dto.ResponseAcPowerGridDto;
-import dto.ResponseDcPowerPvDto;
+import dto.*;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,4 +38,37 @@ public class PowerFlowRealtimeDataController {
                                                                     @RequestParam(value = "pagesize", required = false) Optional<Integer> pagesize) {
         return powerFlowRealtimeDataService.loadAcPowerGrid(startDate, endDate, PaginationUtil.getPagination(page, pagesize));
     }
+
+    @GetMapping(value = "/dc-power-akku", produces = "application/json")
+    public QueryDslResponse<ResponseDcPowerAkkuDto> loadDcPowerAkku(@RequestParam(value = "startDate", required = false) Optional<ZonedDateTime> startDate,
+                                                                    @RequestParam(value = "endDate", required = false) Optional<ZonedDateTime> endDate,
+                                                                    @RequestParam(value = "page", required = false) Optional<Integer> page,
+                                                                    @RequestParam(value = "pagesize", required = false) Optional<Integer> pagesize) {
+        return powerFlowRealtimeDataService.loadDcPowerAkku(startDate, endDate, PaginationUtil.getPagination(page, pagesize));
+    }
+
+    @GetMapping(value = "/ac-power-load", produces = "application/json")
+    public QueryDslResponse<ResponseAcPowerLoadDto> loadAcPowerLoad(@RequestParam(value = "startDate", required = false) Optional<ZonedDateTime> startDate,
+                                                                    @RequestParam(value = "endDate", required = false) Optional<ZonedDateTime> endDate,
+                                                                    @RequestParam(value = "page", required = false) Optional<Integer> page,
+                                                                    @RequestParam(value = "pagesize", required = false) Optional<Integer> pagesize) {
+        return powerFlowRealtimeDataService.loadAcPowerLoad(startDate, endDate, PaginationUtil.getPagination(page, pagesize));
+    }
+
+    @GetMapping(value = "/autonomy", produces = "application/json")
+    public QueryDslResponse<ResponseAutonomyDto> loadAutonomy(@RequestParam(value = "startDate", required = false) Optional<ZonedDateTime> startDate,
+                                                                 @RequestParam(value = "endDate", required = false) Optional<ZonedDateTime> endDate,
+                                                                 @RequestParam(value = "page", required = false) Optional<Integer> page,
+                                                                 @RequestParam(value = "pagesize", required = false) Optional<Integer> pagesize) {
+        return powerFlowRealtimeDataService.loadAutonomy(startDate, endDate, PaginationUtil.getPagination(page, pagesize));
+    }
+
+    @GetMapping(value = "/self-consumption", produces = "application/json")
+    public QueryDslResponse<ResponseSelfConsumptionDto> loadSelfConsumption(@RequestParam(value = "startDate", required = false) Optional<ZonedDateTime> startDate,
+                                                              @RequestParam(value = "endDate", required = false) Optional<ZonedDateTime> endDate,
+                                                              @RequestParam(value = "page", required = false) Optional<Integer> page,
+                                                              @RequestParam(value = "pagesize", required = false) Optional<Integer> pagesize) {
+        return powerFlowRealtimeDataService.loadSelfConsumption(startDate, endDate, PaginationUtil.getPagination(page, pagesize));
+    }
+
 }

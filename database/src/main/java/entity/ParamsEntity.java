@@ -29,10 +29,24 @@ public class ParamsEntity extends AbstractBaseEntity {
     @Column(name = "dc_voltage_pv", updatable = false)
     private Float dcVoltagePv;
 
+    @Column(name = "dc_power_akku", updatable = false)
+    private Float dcPowerAkku;
+
+    @Column(name = "ac_power_load", updatable = false)
+    private Float acPowerLoad;
+
+    @Column(name = "autonomy", updatable = false)
+    private Float autonomy;
+
+    @Column(name = "selfConsumption", updatable = false)
+    private Float selfConsumption;
+
     public ParamsEntity() {
     }
 
-    public ParamsEntity(Float acCurrentGridPhase1, Float acCurrentGridPhase2, Float acCurrentGridPhase3, Float dcPowerPv, Float acPowerGrid, Integer acPowerInverter, Float dcVoltagePv) {
+    public ParamsEntity(Float acCurrentGridPhase1, Float acCurrentGridPhase2, Float acCurrentGridPhase3,
+                        Float dcPowerPv, Float acPowerGrid, Integer acPowerInverter, Float dcVoltagePv,
+                        Float dcPowerAkku, Float acPowerLoad, Float autonomy, Float selfConsumption) {
         this.acCurrentGridPhase1 = acCurrentGridPhase1;
         this.acCurrentGridPhase2 = acCurrentGridPhase2;
         this.acCurrentGridPhase3 = acCurrentGridPhase3;
@@ -40,6 +54,10 @@ public class ParamsEntity extends AbstractBaseEntity {
         this.acPowerGrid = acPowerGrid;
         this.acPowerInverter = acPowerInverter;
         this.dcVoltagePv = dcVoltagePv;
+        this.dcPowerAkku = dcPowerAkku;
+        this.acPowerLoad = acPowerLoad;
+        this.autonomy = autonomy;
+        this.selfConsumption = selfConsumption;
     }
 
     public Float getAcCurrentGridPhase1() {
@@ -98,6 +116,38 @@ public class ParamsEntity extends AbstractBaseEntity {
         this.dcVoltagePv = dcVoltagePv;
     }
 
+    public Float getDcPowerAkku() {
+        return dcPowerAkku;
+    }
+
+    public void setDcPowerAkku(Float dcPowerAkku) {
+        this.dcPowerAkku = dcPowerAkku;
+    }
+
+    public Float getAcPowerLoad() {
+        return acPowerLoad;
+    }
+
+    public void setAcPowerLoad(Float acPowerLoad) {
+        this.acPowerLoad = acPowerLoad;
+    }
+
+    public Float getAutonomy() {
+        return autonomy;
+    }
+
+    public void setAutonomy(Float autonomy) {
+        this.autonomy = autonomy;
+    }
+
+    public Float getSelfConsumption() {
+        return selfConsumption;
+    }
+
+    public void setSelfConsumption(Float selfConsumption) {
+        this.selfConsumption = selfConsumption;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -110,13 +160,18 @@ public class ParamsEntity extends AbstractBaseEntity {
                 && Objects.equals(acPowerGrid, paramsEntity.acPowerGrid)
                 && Objects.equals(dcVoltagePv, paramsEntity.dcVoltagePv)
                 && Objects.equals(acPowerInverter, paramsEntity.acPowerInverter)
+                && Objects.equals(dcPowerAkku, paramsEntity.dcPowerAkku)
+                && Objects.equals(acPowerLoad, paramsEntity.acPowerLoad)
+                && Objects.equals(autonomy, paramsEntity.autonomy)
+                && Objects.equals(selfConsumption, paramsEntity.selfConsumption)
                 && Objects.equals(super.getTimestamp(), paramsEntity.getTimestamp());
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(acCurrentGridPhase1, acCurrentGridPhase2, acCurrentGridPhase3,
-                dcPowerPv, acPowerGrid, dcVoltagePv, acPowerInverter, super.getTimestamp());
+                dcPowerPv, acPowerGrid, dcVoltagePv, acPowerInverter, dcPowerAkku,
+                acPowerLoad, autonomy, selfConsumption, super.getTimestamp());
     }
 
     @Override
@@ -129,6 +184,10 @@ public class ParamsEntity extends AbstractBaseEntity {
                 ", acPowerGrid=" + acPowerGrid +
                 ", dcVoltagePv=" + dcVoltagePv +
                 ", acPowerInverter=" + acPowerInverter +
+                ", dcPowerAkku=" + dcPowerAkku +
+                ", acPowerLoad=" + acPowerLoad +
+                ", autonomy=" + autonomy +
+                ", selfConsumption=" + selfConsumption +
                 ", timestamp=" + super.getTimestamp() +
                 '}';
     }

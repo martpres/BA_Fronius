@@ -34,6 +34,18 @@
             <column name="ac_power_inverter" type="integer">
             </column>
 
+            <column name="dc_power_akku" type="real">
+            </column>
+
+            <column name="ac_power_load" type="real">
+            </column>
+
+            <column name="autonomy" type="real">
+            </column>
+
+            <column name="self_consumption" type="real">
+            </column>
+
         </createTable>
     </changeSet>
 </databaseChangeLog>

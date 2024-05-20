@@ -1,0 +1,27 @@
+<div class="d-flex">
+  <div>
+    <h3>
+      Power AC to Loads
+    </h3>
+  </div>
+  <div class="ml-auto">
+    <h3>
+      Date: {{initialDate | date: 'dd.MM.yyyy'}}
+    </h3>
+  </div>
+</div>
+
+<div *ngIf="lineChartData">
+  <ngx-charts-line-chart
+    [legend]="true"
+    [showXAxisLabel]="true"
+    [showYAxisLabel]="true"
+    [xAxis]="true"
+    [yAxis]="true"
+    [xAxisLabel]="'Time'"
+    [yAxisLabel]="'Power [W]'"
+    [xAxisTickFormatting]="convertTime"
+    [results]="lineChartData"
+  ></ngx-charts-line-chart>
+</div>
+

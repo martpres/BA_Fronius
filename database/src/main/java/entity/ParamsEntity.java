@@ -41,7 +41,7 @@ public class ParamsEntity extends AbstractBaseEntity {
     @Column(name = "selfConsumption", updatable = false)
     private Float selfConsumption;
 
-    @Column(name = "stateOfChargeStorage", updatable = false)
+    @Column(name = "stateOfChargeAkku", updatable = false)
     private Float stateOfChargeStorage;
 
     public ParamsEntity() {

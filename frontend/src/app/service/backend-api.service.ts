@@ -11,7 +11,6 @@ import {DcPowerAkku} from "../dto/dcPowerAkku.model";
 import {AcPowerLoad} from "../dto/acPowerLoad.model";
 import {Autonomy} from "../dto/autonomy.model";
 import {SelfConsumption} from "../dto/selfConsumption.model";
-import {StateOfChargeAkku} from "../dto/stateOfChargeAkku.model";
 
 @Injectable({
   providedIn: 'root'
@@ -57,10 +56,6 @@ export class BackendApiService {
 
   public loadSelfConsumption(filter?: any): Observable<QueryDslResponse<SelfConsumption>> {
     return this.httpClient.get<QueryDslResponse<SelfConsumption>>(`${this.baseUrl}power-flow-realtime-data/self-consumption`,{params: filter});
-  }
-
-  public loadStateOfChargeAkku(filter?: any): Observable<QueryDslResponse<StateOfChargeAkku>> {
-    return this.httpClient.get<QueryDslResponse<StateOfChargeAkku>>(`${this.baseUrl}storage-realtime-data/state-of-charge-storage`,{params: filter});
   }
 
 }

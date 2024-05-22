@@ -19,7 +19,6 @@ import { DcPowerAkkuComponent } from './dc-power-akku/dc-power-akku.component';
 import { AutonomyComponent } from './autonomy/autonomy.component';
 import { SelfConsumptionComponent } from './self-consumption/self-consumption.component';
 import { AcPowerLoadComponent } from './ac-power-load/ac-power-load.component';
-import { StateOfChargeAkkuComponent } from './state-of-charge-akku/state-of-charge-akku.component';
 
 @NgModule({
   declarations: [
@@ -33,8 +32,7 @@ import { StateOfChargeAkkuComponent } from './state-of-charge-akku/state-of-char
     DcPowerAkkuComponent,
     AutonomyComponent,
     SelfConsumptionComponent,
-    AcPowerLoadComponent,
-    StateOfChargeAkkuComponent
+    AcPowerLoadComponent
   ],
   imports: [
     BrowserModule,

@@ -3,7 +3,6 @@ package service;
 import dto.CommonInverterDataDto;
 import dto.MeterRealtimeDataDto;
 import dto.PowerFlowRealtimeDataDto;
-import dto.StorageRealtimeDataDto;
 
 public interface FroniusClient {
 
@@ -12,6 +11,4 @@ public interface FroniusClient {
     PowerFlowRealtimeDataDto powerFlowRealtimeDataEndpoint();
 
     CommonInverterDataDto commonInverterDataEndpoint();
-
-    StorageRealtimeDataDto storageRealtimeDataEndpoint();
 }

@@ -11,7 +11,6 @@ import jakarta.persistence.PersistenceContext;
 import mapper.CommonInverterDataMapper;
 import mapper.MeterRealtimeDataMapper;
 import mapper.PowerFlowRealtimeDataMapper;
-import mapper.StorageRealtimeDataMapper;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -35,13 +34,10 @@ public class ParamsQueryDslRepository {
 
     private final CommonInverterDataMapper commonInverterDataMapper;
 
-    private final StorageRealtimeDataMapper storageRealtimeDataMapper;
-
-    public ParamsQueryDslRepository(MeterRealtimeDataMapper meterRealtimeDataMapper, PowerFlowRealtimeDataMapper powerFlowRealtimeDataMapper, CommonInverterDataMapper commonInverterDataMapper, StorageRealtimeDataMapper storageRealtimeDataMapper) {
+    public ParamsQueryDslRepository(MeterRealtimeDataMapper meterRealtimeDataMapper, PowerFlowRealtimeDataMapper powerFlowRealtimeDataMapper, CommonInverterDataMapper commonInverterDataMapper) {
         this.meterRealtimeDataMapper = meterRealtimeDataMapper;
         this.powerFlowRealtimeDataMapper = powerFlowRealtimeDataMapper;
         this.commonInverterDataMapper = commonInverterDataMapper;
-        this.storageRealtimeDataMapper = storageRealtimeDataMapper;
     }
 
     public QueryDslResponse<ResponseAcCurrentGridDto> loadCurrentAc(Optional<ZonedDateTime> startDate, Optional<ZonedDateTime> endDate, Optional<PageRequest> pageRequest) {
@@ -109,12 +105,6 @@ public class ParamsQueryDslRepository {
         return new QueryDslResponse<>(commonInverterDataMapper.convertParamsToDcVoltagePv(query.fetch()), fetchCount());
     }
 
-    public QueryDslResponse<ResponseStateOfChargeStorageDto> loadStateOfChargeStorage(Optional<ZonedDateTime> startDate, Optional<ZonedDateTime> endDate, Optional<PageRequest> pageRequest) {
-        BooleanBuilder booleanBuilder = prepareBooleanBuilder(startDate, endDate);
-        booleanBuilder.and(qParamsEntity.stateOfChargeStorage.isNotNull());
-        JPAQuery<ParamsEntity> query = prepareQuery(booleanBuilder, pageRequest);
-        return new QueryDslResponse<>(storageRealtimeDataMapper.convertParamsToStateOfChargeStorage(query.fetch()), fetchCount());
-    }
 
     private JPAQuery<ParamsEntity> prepareQuery(BooleanBuilder booleanBuilder, Optional<PageRequest> pageRequest) {
         JPAQuery<ParamsEntity> query = getJpaQueryFactory().selectFrom(qParamsEntity).where(booleanBuilder);

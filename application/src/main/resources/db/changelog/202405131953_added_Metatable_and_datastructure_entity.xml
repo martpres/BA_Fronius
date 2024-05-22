@@ -46,30 +46,6 @@
             <column name="self_consumption" type="real">
             </column>
 
-            <column name="state_of_charge_akku" type="real">
-            </column>
-
         </createTable>
-
-        <createTable tableName="metadata">
-
-            <column name="primary_timestamp" type="timestamptz">
-                <constraints primaryKey="true" nullable="false"/>
-            </column>
-
-            <column name="capacity_storage" type="integer">
-            </column>
-
-            <column name="manufacturer_storage" type="varchar(255)">
-            </column>
-
-            <column name="model_storage" type="varchar(255)">
-            </column>
-
-            <column name="serial_storage" type="varchar(255)">
-            </column>
-
-        </createTable>
-
     </changeSet>
 </databaseChangeLog>

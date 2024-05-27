@@ -33,6 +33,6 @@ public abstract class CommonInverterDataMapper {
     public abstract List<ResponseAcPowerInverterDto> convertParamsToAcPowerInverter(List<ParamsEntity> entities);
 
     public abstract ResponseAcEnergyInverterDayDto convertParamsToAcEnergyInverterDay(ParamsEntity entity);
-    public abstract List<ResponseAcEnergyInverterDayDto> convertParamsToAcEnergyInverterDay(List<ParamsEntity> entities);
+
 
 }

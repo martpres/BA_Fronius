@@ -1,22 +1,23 @@
-import {Component, inject, OnDestroy, OnInit} from '@angular/core';
-import {BackendApiService} from "../service/backend-api.service";
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Subscription} from "rxjs";
 import {QueryDslResponse} from "../dto/queryDslResponse.model";
-import {AcCurrentGrid} from "../dto/acCurrentGrid.model";
+import {BackendApiService} from "../service/backend-api.service";
 import {DateTimeService} from "../service/date-time.service";
 import {formatDate} from "@angular/common";
 import {localId, timeFormat} from "../dto/const";
+import {StateOfChargeAkku} from "../dto/stateOfChargeAkku.model";
 
 @Component({
-  selector: 'app-ac-current-grid',
-  templateUrl: './ac-current-grid.component.html',
-  styleUrls: ['./ac-current-grid.component.scss']
+  selector: 'app-state-of-charge-akku',
+  templateUrl: './state-of-charge-akku.component.html',
+  styleUrls: ['./state-of-charge-akku.component.scss']
 })
-export class AcCurrentGridComponent implements OnInit, OnDestroy{
+export class StateOfChargeAkkuComponent implements OnInit, OnDestroy {
+
   public lineChartData?: any[];
   public initialDate = new Date();
   private sub?: Subscription;
-  private data?: QueryDslResponse<AcCurrentGrid>;
+  private data?: QueryDslResponse<StateOfChargeAkku>;
   private refreshMilliSeconds = 60000;
   private interval?: any;
 
@@ -43,7 +44,7 @@ export class AcCurrentGridComponent implements OnInit, OnDestroy{
     this.initialDate = new Date();
     const endDate = this.dateTimeService.convertToUtcDate(this.initialDate);
     const startDate = this.dateTimeService.convertToStartOfDayUtc(this.dateTimeService.convertToUtcDate(this.initialDate));
-    this.sub = this.backendService.loadCurrentAC(this.dateTimeService.createFilter(startDate, endDate)).subscribe((e)=> {
+    this.sub = this.backendService.loadStateOfChargeAkku(this.dateTimeService.createFilter(startDate, endDate)).subscribe((e)=> {
       this.data=e;
       this.mapRequestToLineChart();
     });
@@ -55,17 +56,14 @@ export class AcCurrentGridComponent implements OnInit, OnDestroy{
       return;
     }
     this.lineChartData = [];
-    const arrayAcCurrentGridPhase1: any[] = [];
-    const arrayAcCurrentGridPhase2: any[] = [];
-    const arrayAcCurrentGridPhase3: any[] = [];
+    const arrayStateOfChargeAkku: any[] = [];
     this.data?.content?.forEach((e)=>{
       let date = this.dateTimeService.convertUtcToLocalTimeZone(e.timestamp)
-      arrayAcCurrentGridPhase1.push({name: date, value: e.acCurrentGridPhase1});
-      arrayAcCurrentGridPhase2.push({name: date, value: e.acCurrentGridPhase2});
-      arrayAcCurrentGridPhase3.push({name: date, value: e.acCurrentGridPhase3});
+      arrayStateOfChargeAkku.push({name: date, value: e.stateOfChargeAkku});
     });
-    this.lineChartData?.push({name: 'Current Grid Phase 1', series: arrayAcCurrentGridPhase1});
-    this.lineChartData?.push({name: 'Current Grid Phase 2', series: arrayAcCurrentGridPhase2});
-    this.lineChartData?.push({name: 'Current Grid Phase 3', series: arrayAcCurrentGridPhase3});
+    this.lineChartData?.push({name: 'StateOfChargeAkku', series: arrayStateOfChargeAkku});
   }
+
+
+
 }

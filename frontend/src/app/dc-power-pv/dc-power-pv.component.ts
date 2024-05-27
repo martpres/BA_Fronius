@@ -62,7 +62,7 @@ export class DcPowerPvComponent implements OnInit, OnDestroy {
       let date = this.dateTimeService.convertUtcToLocalTimeZone(e.timestamp)
       arrayPower1.push({name: date, value: e.dcPowerPv});
     });
-    this.lineChartData?.push({name: 'Power Pv', series: arrayPower1});
+    this.lineChartData?.push({name: 'Power PV-Modules', series: arrayPower1});
   }
 
 }

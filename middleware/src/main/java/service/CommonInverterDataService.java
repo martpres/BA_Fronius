@@ -1,5 +1,6 @@
 package service;
 
+import dto.ResponseAcEnergyInverterDayDto;
 import dto.ResponseAcPowerInverterDto;
 import dto.ResponseDcVoltagePvDto;
 import org.springframework.data.domain.PageRequest;
@@ -26,6 +27,10 @@ public class CommonInverterDataService {
 
     public QueryDslResponse<ResponseAcPowerInverterDto> loadAcPowerInverter(Optional<ZonedDateTime> startDate, Optional<ZonedDateTime> endDate, Optional<PageRequest> pageRequest){
         return paramsQueryDslRepository.loadAcPowerInverter(startDate,endDate,pageRequest);
+    }
+
+    public QueryDslResponse<ResponseAcEnergyInverterDayDto> loadAcEnergyInverterDay(Optional<ZonedDateTime> startDate, Optional<ZonedDateTime> endDate, Optional<PageRequest> pageRequest){
+        return paramsQueryDslRepository.loadAcEnergyInverterDay(startDate,endDate,pageRequest);
     }
 
 }

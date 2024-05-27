@@ -27,10 +27,12 @@ public abstract class CommonInverterDataMapper {
     public abstract ParamsEntity dtoToEntity(CommonInverterDataDto dto);
 
     public abstract ResponseDcVoltagePvDto convertParamsToDcVoltagePv(ParamsEntity entity);
-
     public abstract List<ResponseDcVoltagePvDto> convertParamsToDcVoltagePv(List<ParamsEntity> entities);
 
-    public abstract ResponseAcPowerInverterDto convertParamsToAcPowerInverterParamsEntity(ParamsEntity entity);
-
+    public abstract ResponseAcPowerInverterDto convertParamsToAcPowerInverter(ParamsEntity entity);
     public abstract List<ResponseAcPowerInverterDto> convertParamsToAcPowerInverter(List<ParamsEntity> entities);
+
+    public abstract ResponseAcEnergyInverterDayDto convertParamsToAcEnergyInverterDay(ParamsEntity entity);
+    public abstract List<ResponseAcEnergyInverterDayDto> convertParamsToAcEnergyInverterDay(List<ParamsEntity> entities);
+
 }

@@ -61,7 +61,7 @@ export class AcPowerInverterComponent implements OnInit, OnDestroy {
       let date = this.dateTimeService.convertUtcToLocalTimeZone(e.timestamp)
       arrayPower1.push({name: date, value: e.acPowerInverter});
     });
-    this.lineChartData?.push({name: 'Power Inverter', series: arrayPower1});
+    this.lineChartData?.push({name: 'AC Power Inverter', series: arrayPower1});
   }
 
 

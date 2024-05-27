@@ -49,6 +49,9 @@
             <column name="state_of_charge_akku" type="real">
             </column>
 
+            <column name="ac_energy_inverter_day" type="real">
+            </column>
+
         </createTable>
     </changeSet>
 </databaseChangeLog>

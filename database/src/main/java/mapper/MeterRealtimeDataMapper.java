@@ -24,6 +24,7 @@ public abstract class MeterRealtimeDataMapper {
     @Mapping(target = "autonomy", ignore = true)
     @Mapping(target = "selfConsumption", ignore = true)
     @Mapping(target = "stateOfChargeAkku", ignore = true)
+    @Mapping(target = "acEnergyInverterDay", ignore = true)
     public abstract ParamsEntity dtoToEntity(MeterRealtimeDataDto dto);
 
     public abstract ResponseAcCurrentGridDto entityToDto(ParamsEntity entity);

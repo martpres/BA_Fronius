@@ -1,4 +1,4 @@
 export interface AcEnergyInverterDay {
-  acPowerInverter?: number;
+  acEnergyInverterDay?: number;
   timestamp?: Date;
 }

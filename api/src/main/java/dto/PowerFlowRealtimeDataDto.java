@@ -19,19 +19,6 @@ public class PowerFlowRealtimeDataDto implements Serializable {
     public PowerFlowRealtimeDataDto() {
     }
 
-    public PowerFlowRealtimeDataDto(Float autonomy, Float selfConsumption) {
-        this.autonomy = autonomy;
-        this.selfConsumption = selfConsumption;
-    }
-
-    public PowerFlowRealtimeDataDto(Float dcPowerPv, Float acPowerGrid, Float dcPowerAkku, Float acPowerLoad, Float autonomy) {
-        this.dcPowerPv = dcPowerPv;
-        this.acPowerGrid = acPowerGrid;
-        this.dcPowerAkku = dcPowerAkku;
-        this.acPowerLoad = acPowerLoad;
-        this.autonomy = autonomy;
-    }
-
     public PowerFlowRealtimeDataDto(Float dcPowerPv, Float acPowerGrid, Float dcPowerAkku, Float acPowerLoad,
                                     Float autonomy, Float selfConsumption, ZonedDateTime timestamp) {
         this.dcPowerPv = dcPowerPv;
@@ -118,19 +105,23 @@ public class PowerFlowRealtimeDataDto implements Serializable {
         Map<String, Object> site = (Map<String, Object>) data.get("Site");
 
         if (site.get("rel_Autonomy").getClass() == Integer.class) {
-            this.autonomy = convertObjectToFloat(site.get("rel_Autonomy"));
+            this.autonomy = ((Integer) site.get("rel_Autonomy")).floatValue();
         } else if (site.get("rel_Autonomy").getClass() == Double.class) {
             this.autonomy = ((Double) site.get("rel_Autonomy")).floatValue();
         } else if (site.get("rel_Autonomy").getClass() == BigDecimal.class) {
             this.autonomy = ((BigDecimal) site.get("rel_Autonomy")).floatValue();
+        } else {
+            throw new IllegalStateException("Unexpected cast for class PowerFlowRealtimeData: " + site.get("rel_Autonomy").getClass());
         }
 
         if (site.get("rel_SelfConsumption").getClass() == Integer.class) {
-            this.selfConsumption = convertObjectToFloat(site.get("rel_SelfConsumption"));
+            this.selfConsumption = ((Integer) site.get("rel_SelfConsumption")).floatValue();
         } else if (site.get("rel_SelfConsumption").getClass() == Double.class) {
             this.selfConsumption = ((Double) site.get("rel_SelfConsumption")).floatValue();
         } else if (site.get("rel_SelfConsumption").getClass() == BigDecimal.class) {
             this.selfConsumption = ((BigDecimal) site.get("rel_SelfConsumption")).floatValue();
+        }else {
+            throw new IllegalStateException("Unexpected cast for class PowerFlowRealtimeData: " + site.get("rel_SelfConsumption").getClass());
         }
 
         if (site.get("P_PV").getClass() == Double.class) {
@@ -144,23 +135,14 @@ public class PowerFlowRealtimeDataDto implements Serializable {
             this.dcPowerAkku = ((BigDecimal) site.get("P_Akku")).floatValue();
             this.acPowerLoad = ((BigDecimal) site.get("P_Load")).floatValue();
         } else {
-            throw new IllegalStateException("Unexpected cast for class PowerFlowRealtimeData");
+            throw new IllegalStateException("Unexpected cast for class PowerFlowRealtimeData: " + site.get("P_PV").getClass());
         }
+
     }
 
     @JsonProperty("Head")
     private void unpackHead(Map<String, Object> head) {
         this.timestamp = ZonedDateTime.parse((String) head.get("Timestamp"));
-    }
-
-    private float convertObjectToFloat(Object value) {
-        if (value instanceof Integer) {
-            return (float) (Integer) value;
-        } else if (value instanceof Double) {
-            return ((Double) value).floatValue();
-        } else {
-            throw new IllegalArgumentException("Unexpected cast for class PowerFlowRealtimeData: " + value.getClass());
-        }
     }
 
 }

@@ -28,7 +28,7 @@ public class SchedulerMeterRealtimeData {
     }
 
     @Async
-    @Scheduled(fixedDelayString = "PT15S", initialDelayString = "PT20S")
+    @Scheduled(fixedDelayString = "PT30S", initialDelayString = "PT30S")
     public void startWorkflowForMeterRealtimeData() {
         if (meterRealtimeData) {
             MeterRealtimeDataDto dto = froniusClientFactory.getFroniusClient().meterRealtimeDataEndpoint();

@@ -65,10 +65,18 @@ public class PowerFlowRealtimeDataController {
 
     @GetMapping(value = "/self-consumption", produces = "application/json")
     public QueryDslResponse<ResponseSelfConsumptionDto> loadSelfConsumption(@RequestParam(value = "startDate", required = false) Optional<ZonedDateTime> startDate,
-                                                              @RequestParam(value = "endDate", required = false) Optional<ZonedDateTime> endDate,
-                                                              @RequestParam(value = "page", required = false) Optional<Integer> page,
-                                                              @RequestParam(value = "pagesize", required = false) Optional<Integer> pagesize) {
+                                                                            @RequestParam(value = "endDate", required = false) Optional<ZonedDateTime> endDate,
+                                                                            @RequestParam(value = "page", required = false) Optional<Integer> page,
+                                                                            @RequestParam(value = "pagesize", required = false) Optional<Integer> pagesize) {
         return powerFlowRealtimeDataService.loadSelfConsumption(startDate, endDate, PaginationUtil.getPagination(page, pagesize));
+    }
+
+    @GetMapping(value = "/state-of-charge-akku", produces = "application/json")
+    public QueryDslResponse<ResponseStateOfChargeAkkuDto> loadStateOfChargeAkku(@RequestParam(value = "startDate", required = false) Optional<ZonedDateTime> startDate,
+                                                                            @RequestParam(value = "endDate", required = false) Optional<ZonedDateTime> endDate,
+                                                                            @RequestParam(value = "page", required = false) Optional<Integer> page,
+                                                                            @RequestParam(value = "pagesize", required = false) Optional<Integer> pagesize) {
+        return powerFlowRealtimeDataService.loadStateOfChargeAkku(startDate, endDate, PaginationUtil.getPagination(page, pagesize));
     }
 
 }

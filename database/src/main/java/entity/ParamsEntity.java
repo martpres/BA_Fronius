@@ -41,12 +41,16 @@ public class ParamsEntity extends AbstractBaseEntity {
     @Column(name = "selfConsumption", updatable = false)
     private Float selfConsumption;
 
+    @Column(name = "stateOfChargeAkku", updatable = false)
+    private Float stateOfChargeAkku;
+
     public ParamsEntity() {
     }
 
     public ParamsEntity(Float acCurrentGridPhase1, Float acCurrentGridPhase2, Float acCurrentGridPhase3,
                         Float dcPowerPv, Float acPowerGrid, Integer acPowerInverter, Float dcVoltagePv,
-                        Float dcPowerAkku, Float acPowerLoad, Float autonomy, Float selfConsumption) {
+                        Float dcPowerAkku, Float acPowerLoad, Float autonomy, Float selfConsumption,
+                        Float stateOfChargeAkku) {
         this.acCurrentGridPhase1 = acCurrentGridPhase1;
         this.acCurrentGridPhase2 = acCurrentGridPhase2;
         this.acCurrentGridPhase3 = acCurrentGridPhase3;
@@ -58,6 +62,7 @@ public class ParamsEntity extends AbstractBaseEntity {
         this.acPowerLoad = acPowerLoad;
         this.autonomy = autonomy;
         this.selfConsumption = selfConsumption;
+        this.stateOfChargeAkku = stateOfChargeAkku;
     }
 
     public Float getAcCurrentGridPhase1() {
@@ -148,6 +153,14 @@ public class ParamsEntity extends AbstractBaseEntity {
         this.selfConsumption = selfConsumption;
     }
 
+    public Float getStateOfChargeAkku() {
+        return stateOfChargeAkku;
+    }
+
+    public void setStateOfChargeAkku(Float stateOfChargeAkku) {
+        this.stateOfChargeAkku = stateOfChargeAkku;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -164,6 +177,7 @@ public class ParamsEntity extends AbstractBaseEntity {
                 && Objects.equals(acPowerLoad, paramsEntity.acPowerLoad)
                 && Objects.equals(autonomy, paramsEntity.autonomy)
                 && Objects.equals(selfConsumption, paramsEntity.selfConsumption)
+                && Objects.equals(stateOfChargeAkku, paramsEntity.stateOfChargeAkku)
                 && Objects.equals(super.getTimestamp(), paramsEntity.getTimestamp());
     }
 
@@ -171,7 +185,7 @@ public class ParamsEntity extends AbstractBaseEntity {
     public int hashCode() {
         return Objects.hash(acCurrentGridPhase1, acCurrentGridPhase2, acCurrentGridPhase3,
                 dcPowerPv, acPowerGrid, dcVoltagePv, acPowerInverter, dcPowerAkku,
-                acPowerLoad, autonomy, selfConsumption, super.getTimestamp());
+                acPowerLoad, autonomy, selfConsumption, stateOfChargeAkku, super.getTimestamp());
     }
 
     @Override
@@ -188,6 +202,7 @@ public class ParamsEntity extends AbstractBaseEntity {
                 ", acPowerLoad=" + acPowerLoad +
                 ", autonomy=" + autonomy +
                 ", selfConsumption=" + selfConsumption +
+                ", stateOfChargeAkku=" + stateOfChargeAkku +
                 ", timestamp=" + super.getTimestamp() +
                 '}';
     }

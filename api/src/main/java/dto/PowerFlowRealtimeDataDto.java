@@ -14,19 +14,21 @@ public class PowerFlowRealtimeDataDto implements Serializable {
     private Float acPowerLoad;
     private Float autonomy;
     private Float selfConsumption;
+    private Float stateOfChargeAkku;
     private ZonedDateTime timestamp;
 
     public PowerFlowRealtimeDataDto() {
     }
 
     public PowerFlowRealtimeDataDto(Float dcPowerPv, Float acPowerGrid, Float dcPowerAkku, Float acPowerLoad,
-                                    Float autonomy, Float selfConsumption, ZonedDateTime timestamp) {
+                                    Float autonomy, Float selfConsumption, Float stateOfChargeAkku, ZonedDateTime timestamp) {
         this.dcPowerPv = dcPowerPv;
         this.acPowerGrid = acPowerGrid;
         this.dcPowerAkku = dcPowerAkku;
         this.acPowerLoad = acPowerLoad;
         this.autonomy = autonomy;
         this.selfConsumption = selfConsumption;
+        this.stateOfChargeAkku = stateOfChargeAkku;
         this.timestamp = timestamp;
     }
 
@@ -86,6 +88,14 @@ public class PowerFlowRealtimeDataDto implements Serializable {
         this.selfConsumption = selfConsumption;
     }
 
+    public Float getStateOfChargeAkku() {
+        return stateOfChargeAkku;
+    }
+
+    public void setStateOfChargeAkku(Float stateOfChargeAkku) {
+        this.stateOfChargeAkku = stateOfChargeAkku;
+    }
+
     @Override
     public String toString() {
         return "PowerFlowRealtimeDataDto{" +
@@ -95,6 +105,7 @@ public class PowerFlowRealtimeDataDto implements Serializable {
                 ", acPowerLoad=" + acPowerLoad +
                 ", autonomy=" + autonomy +
                 ", selfConsumption=" + selfConsumption +
+                ", stateOfChargeAkku=" + stateOfChargeAkku +
                 ", timestamp=" + timestamp +
                 '}';
     }
@@ -103,6 +114,18 @@ public class PowerFlowRealtimeDataDto implements Serializable {
     private void unpackData(Map<String, Object> body) {
         Map<String, Object> data = (Map<String, Object>) body.get("Data");
         Map<String, Object> site = (Map<String, Object>) data.get("Site");
+        Map<String, Object> inverters = (Map<String, Object>) data.get("Inverters");
+        Map<String, Object> inverter1 = (Map<String, Object>) inverters.get("1");
+
+        if (inverter1.get("SOC").getClass() == Integer.class) {
+            this.stateOfChargeAkku = ((Integer) inverter1.get("SOC")).floatValue();
+        } else if (inverter1.get("SOC").getClass() == Double.class) {
+            this.stateOfChargeAkku = ((Double) inverter1.get("SOC")).floatValue();
+        } else if (inverter1.get("SOC").getClass() == BigDecimal.class) {
+            this.stateOfChargeAkku = ((BigDecimal) inverter1.get("SOC")).floatValue();
+        } else {
+            throw new IllegalStateException("Unexpected cast for class PowerFlowRealtimeData: " + inverter1.get("SOC").getClass());
+        }
 
         if (site.get("rel_Autonomy").getClass() == Integer.class) {
             this.autonomy = ((Integer) site.get("rel_Autonomy")).floatValue();

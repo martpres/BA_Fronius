@@ -46,6 +46,9 @@
             <column name="self_consumption" type="real">
             </column>
 
+            <column name="state_of_charge_akku" type="real">
+            </column>
+
         </createTable>
     </changeSet>
 </databaseChangeLog>

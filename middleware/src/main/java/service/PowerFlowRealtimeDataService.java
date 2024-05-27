@@ -42,4 +42,8 @@ public class PowerFlowRealtimeDataService {
         return paramsQueryDslRepository.loadSelfConsumption(startDate,endDate,pageRequest);
     }
 
+    public QueryDslResponse<ResponseStateOfChargeAkkuDto> loadStateOfChargeAkku(Optional<ZonedDateTime> startDate, Optional<ZonedDateTime> endDate, Optional<PageRequest> pageRequest){
+        return paramsQueryDslRepository.loadStateOfChargeAkku(startDate,endDate,pageRequest);
+    }
+
 }

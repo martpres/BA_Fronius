@@ -84,6 +84,13 @@ public class ParamsQueryDslRepository {
         return new QueryDslResponse<>(powerFlowRealtimeDataMapper.convertParamsToSelfConsumption(query.fetch()), fetchCount());
     }
 
+    public QueryDslResponse<ResponseStateOfChargeAkkuDto> loadStateOfChargeAkku(Optional<ZonedDateTime> startDate, Optional<ZonedDateTime> endDate, Optional<PageRequest> pageRequest) {
+        BooleanBuilder booleanBuilder = prepareBooleanBuilder(startDate, endDate);
+        booleanBuilder.and(qParamsEntity.stateOfChargeAkku.isNotNull());
+        JPAQuery<ParamsEntity> query = prepareQuery(booleanBuilder, pageRequest);
+        return new QueryDslResponse<>(powerFlowRealtimeDataMapper.convertParamsToStateOfChargeAkku(query.fetch()), fetchCount());
+    }
+
     public QueryDslResponse<ResponseAcPowerGridDto> loadAcPowerGrid(Optional<ZonedDateTime> startDate, Optional<ZonedDateTime> endDate, Optional<PageRequest> pageRequest) {
         BooleanBuilder booleanBuilder = prepareBooleanBuilder(startDate, endDate);
         booleanBuilder.and(qParamsEntity.acPowerGrid.isNotNull());

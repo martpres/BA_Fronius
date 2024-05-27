@@ -40,5 +40,9 @@ public abstract class PowerFlowRealtimeDataMapper {
     public abstract ResponseSelfConsumptionDto convertParamsToSelfConsumption(ParamsEntity entity);
     public abstract List<ResponseSelfConsumptionDto> convertParamsToSelfConsumption(List<ParamsEntity> entities);
 
+    public abstract ResponseStateOfChargeAkkuDto convertParamsToStateOfChargeAkku(ParamsEntity entity);
+    public abstract List<ResponseStateOfChargeAkkuDto> convertParamsToStateOfChargeAkku(List<ParamsEntity> entities);
+
+
 
 }

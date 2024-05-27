@@ -157,6 +157,11 @@ public class PowerFlowRealtimeDataDto implements Serializable {
             this.acPowerGrid = ((BigDecimal) site.get("P_Grid")).floatValue();
             this.dcPowerAkku = ((BigDecimal) site.get("P_Akku")).floatValue();
             this.acPowerLoad = ((BigDecimal) site.get("P_Load")).floatValue();
+        } else if (site.get("P_PV").getClass() == Integer.class) {
+            this.dcPowerPv = ((Integer) site.get("P_PV")).floatValue();
+            this.acPowerGrid = ((Integer) site.get("P_Grid")).floatValue();
+            this.dcPowerAkku = ((Integer) site.get("P_Akku")).floatValue();
+            this.acPowerLoad = ((Integer) site.get("P_Load")).floatValue();
         } else {
             throw new IllegalStateException("Unexpected cast for class PowerFlowRealtimeData: " + site.get("P_PV").getClass());
         }

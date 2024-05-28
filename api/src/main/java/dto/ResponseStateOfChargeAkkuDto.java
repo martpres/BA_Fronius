@@ -7,7 +7,7 @@ import java.time.ZonedDateTime;
 
 public record ResponseStateOfChargeAkkuDto(Float stateOfChargeAkku,
                                            @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
-                                     ZonedDateTime timestamp) implements Serializable {
+                                           ZonedDateTime timestamp) implements Serializable {
     @Override
     public String toString() {
         return "ResponseStateOfChargeAkkuDto{" +

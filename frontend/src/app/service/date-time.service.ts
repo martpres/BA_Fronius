@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {localId, timeFormat, timeZone} from "../dto/const";
 
 @Injectable({
@@ -14,7 +14,7 @@ export class DateTimeService {
   }
 
   public convertToStartOfDayUtc(date: Date = new Date()): Date {
-    date.setUTCHours(0,0,0,0);
+    date.setUTCHours(0, 0, 0, 0);
     return date;
   }
 

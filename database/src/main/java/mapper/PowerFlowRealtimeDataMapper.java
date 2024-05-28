@@ -28,7 +28,6 @@ public abstract class PowerFlowRealtimeDataMapper {
     public abstract ResponseAcPowerGridDto convertParamsToAcPowerGrid(ParamsEntity entity);
     public abstract List<ResponseAcPowerGridDto> convertParamsToAcPowerGrid(List<ParamsEntity> entities);
 
-
     public abstract ResponseDcPowerAkkuDto convertParamsToDcPowerAkku(ParamsEntity entity);
     public abstract List<ResponseDcPowerAkkuDto> convertParamsToDcPowerAkku(List<ParamsEntity> entities);
 
@@ -43,7 +42,5 @@ public abstract class PowerFlowRealtimeDataMapper {
 
     public abstract ResponseStateOfChargeAkkuDto convertParamsToStateOfChargeAkku(ParamsEntity entity);
     public abstract List<ResponseStateOfChargeAkkuDto> convertParamsToStateOfChargeAkku(List<ParamsEntity> entities);
-
-
 
 }

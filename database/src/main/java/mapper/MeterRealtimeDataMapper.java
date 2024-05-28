@@ -28,6 +28,5 @@ public abstract class MeterRealtimeDataMapper {
     public abstract ParamsEntity dtoToEntity(MeterRealtimeDataDto dto);
 
     public abstract ResponseAcCurrentGridDto entityToDto(ParamsEntity entity);
-
     public abstract List<ResponseAcCurrentGridDto> entityToDto(List<ParamsEntity> entities);
 }

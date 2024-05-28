@@ -19,7 +19,9 @@ public class MeterRealtimeDataService {
         this.paramsQueryDslRepository = paramsQueryDslRepository;
     }
 
-    public QueryDslResponse<ResponseAcCurrentGridDto> loadAcCurrentGrid(Optional<ZonedDateTime> startDate, Optional<ZonedDateTime> endDate, Optional<PageRequest> pageRequest) {
+    public QueryDslResponse<ResponseAcCurrentGridDto> loadAcCurrentGrid(Optional<ZonedDateTime> startDate,
+                                                                        Optional<ZonedDateTime> endDate,
+                                                                        Optional<PageRequest> pageRequest) {
         return paramsQueryDslRepository.loadCurrentAc(startDate, endDate, pageRequest);
     }
 

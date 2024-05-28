@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
 import {AcCurrentGridComponent} from "./ac-current-grid/ac-current-grid.component";
 import {DcPowerPvComponent} from "./dc-power-pv/dc-power-pv.component";
 import {AcPowerGridComponent} from "./ac-power-grid/ac-power-grid.component";
@@ -54,7 +54,7 @@ const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: 'dc-power-pv'
+    redirectTo: 'ac-power-inverter'
   }
 ];
 
@@ -62,4 +62,5 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}

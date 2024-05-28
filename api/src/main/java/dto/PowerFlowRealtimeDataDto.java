@@ -21,7 +21,8 @@ public class PowerFlowRealtimeDataDto implements Serializable {
     }
 
     public PowerFlowRealtimeDataDto(Float dcPowerPv, Float acPowerGrid, Float dcPowerAkku, Float acPowerLoad,
-                                    Float autonomy, Float selfConsumption, Float stateOfChargeAkku, ZonedDateTime timestamp) {
+                                    Float autonomy, Float selfConsumption, Float stateOfChargeAkku,
+                                    ZonedDateTime timestamp) {
         this.dcPowerPv = dcPowerPv;
         this.acPowerGrid = acPowerGrid;
         this.dcPowerAkku = dcPowerAkku;
@@ -117,14 +118,48 @@ public class PowerFlowRealtimeDataDto implements Serializable {
         Map<String, Object> inverters = (Map<String, Object>) data.get("Inverters");
         Map<String, Object> inverter1 = (Map<String, Object>) inverters.get("1");
 
-        if (inverter1.get("SOC").getClass() == Integer.class) {
-            this.stateOfChargeAkku = ((Integer) inverter1.get("SOC")).floatValue();
-        } else if (inverter1.get("SOC").getClass() == Double.class) {
-            this.stateOfChargeAkku = ((Double) inverter1.get("SOC")).floatValue();
-        } else if (inverter1.get("SOC").getClass() == BigDecimal.class) {
-            this.stateOfChargeAkku = ((BigDecimal) inverter1.get("SOC")).floatValue();
+        if (site.get("P_PV").getClass() == Double.class) {
+            this.dcPowerPv = ((Double) site.get("P_PV")).floatValue();
+        } else if (site.get("P_PV").getClass() == BigDecimal.class) {
+            this.dcPowerPv = ((BigDecimal) site.get("P_PV")).floatValue();
+        } else if (site.get("P_PV").getClass() == Integer.class) {
+            this.dcPowerPv = ((Integer) site.get("P_PV")).floatValue();
         } else {
-            throw new IllegalStateException("Unexpected cast for class PowerFlowRealtimeData: " + inverter1.get("SOC").getClass());
+            throw new IllegalStateException("Unexpected cast for class PowerFlowRealtimeData (dcPowerPv): "
+                    + site.get("P_PV").getClass());
+        }
+
+        if (site.get("P_Grid").getClass() == Double.class) {
+            this.acPowerGrid = ((Double) site.get("P_Grid")).floatValue();
+        } else if (site.get("P_Grid").getClass() == BigDecimal.class) {
+            this.acPowerGrid = ((BigDecimal) site.get("P_Grid")).floatValue();
+        } else if (site.get("P_Grid").getClass() == Integer.class) {
+            this.acPowerGrid = ((Integer) site.get("P_Grid")).floatValue();
+        } else {
+            throw new IllegalStateException("Unexpected cast for class PowerFlowRealtimeData (acPowerGrid): "
+                    + site.get("P_Grid").getClass());
+        }
+
+        if (site.get("P_Akku").getClass() == Double.class) {
+            this.dcPowerAkku = ((Double) site.get("P_Akku")).floatValue();
+        } else if (site.get("P_Akku").getClass() == BigDecimal.class) {
+            this.dcPowerAkku = ((BigDecimal) site.get("P_Akku")).floatValue();
+        } else if (site.get("P_Akku").getClass() == Integer.class) {
+            this.dcPowerAkku = ((Integer) site.get("P_Akku")).floatValue();
+        } else {
+            throw new IllegalStateException("Unexpected cast for class PowerFlowRealtimeData (dcPowerAkku): "
+                    + site.get("P_Akku").getClass());
+        }
+
+        if (site.get("P_Load").getClass() == Double.class) {
+            this.acPowerLoad = ((Double) site.get("P_Load")).floatValue();
+        } else if (site.get("P_Load").getClass() == BigDecimal.class) {
+            this.acPowerLoad = ((BigDecimal) site.get("P_Load")).floatValue();
+        } else if (site.get("P_Load").getClass() == Integer.class) {
+            this.acPowerLoad = ((Integer) site.get("P_Load")).floatValue();
+        } else {
+            throw new IllegalStateException("Unexpected cast for class PowerFlowRealtimeData (acPowerLoad): "
+                    + site.get("P_Load").getClass());
         }
 
         if (site.get("rel_Autonomy").getClass() == Integer.class) {
@@ -134,7 +169,8 @@ public class PowerFlowRealtimeDataDto implements Serializable {
         } else if (site.get("rel_Autonomy").getClass() == BigDecimal.class) {
             this.autonomy = ((BigDecimal) site.get("rel_Autonomy")).floatValue();
         } else {
-            throw new IllegalStateException("Unexpected cast for class PowerFlowRealtimeData: " + site.get("rel_Autonomy").getClass());
+            throw new IllegalStateException("Unexpected cast for class PowerFlowRealtimeData (autonomy): "
+                    + site.get("rel_Autonomy").getClass());
         }
 
         if (site.get("rel_SelfConsumption").getClass() == Integer.class) {
@@ -143,27 +179,20 @@ public class PowerFlowRealtimeDataDto implements Serializable {
             this.selfConsumption = ((Double) site.get("rel_SelfConsumption")).floatValue();
         } else if (site.get("rel_SelfConsumption").getClass() == BigDecimal.class) {
             this.selfConsumption = ((BigDecimal) site.get("rel_SelfConsumption")).floatValue();
-        }else {
-            throw new IllegalStateException("Unexpected cast for class PowerFlowRealtimeData: " + site.get("rel_SelfConsumption").getClass());
+        } else {
+            throw new IllegalStateException("Unexpected cast for class PowerFlowRealtimeData (selfConsumption): "
+                    + site.get("rel_SelfConsumption").getClass());
         }
 
-        if (site.get("P_PV").getClass() == Double.class) {
-            this.dcPowerPv = ((Double) site.get("P_PV")).floatValue();
-            this.acPowerGrid = ((Double) site.get("P_Grid")).floatValue();
-            this.dcPowerAkku = ((Double) site.get("P_Akku")).floatValue();
-            this.acPowerLoad = ((Double) site.get("P_Load")).floatValue();
-        } else if (site.get("P_PV").getClass() == BigDecimal.class) {
-            this.dcPowerPv = ((BigDecimal) site.get("P_PV")).floatValue();
-            this.acPowerGrid = ((BigDecimal) site.get("P_Grid")).floatValue();
-            this.dcPowerAkku = ((BigDecimal) site.get("P_Akku")).floatValue();
-            this.acPowerLoad = ((BigDecimal) site.get("P_Load")).floatValue();
-        } else if (site.get("P_PV").getClass() == Integer.class) {
-            this.dcPowerPv = ((Integer) site.get("P_PV")).floatValue();
-            this.acPowerGrid = ((Integer) site.get("P_Grid")).floatValue();
-            this.dcPowerAkku = ((Integer) site.get("P_Akku")).floatValue();
-            this.acPowerLoad = ((Integer) site.get("P_Load")).floatValue();
+        if (inverter1.get("SOC").getClass() == Integer.class) {
+            this.stateOfChargeAkku = ((Integer) inverter1.get("SOC")).floatValue();
+        } else if (inverter1.get("SOC").getClass() == Double.class) {
+            this.stateOfChargeAkku = ((Double) inverter1.get("SOC")).floatValue();
+        } else if (inverter1.get("SOC").getClass() == BigDecimal.class) {
+            this.stateOfChargeAkku = ((BigDecimal) inverter1.get("SOC")).floatValue();
         } else {
-            throw new IllegalStateException("Unexpected cast for class PowerFlowRealtimeData: " + site.get("P_PV").getClass());
+            throw new IllegalStateException("Unexpected cast for class PowerFlowRealtimeData (stateOfChargeAkku): "
+                    + inverter1.get("SOC").getClass());
         }
 
     }

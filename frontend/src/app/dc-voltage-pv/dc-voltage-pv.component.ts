@@ -13,7 +13,6 @@ import {DcVoltagePv} from "../dto/dcVoltagePv.model";
   styleUrls: ['./dc-voltage-pv.component.scss']
 })
 export class DcVoltagePvComponent implements OnInit, OnDestroy {
-
   public lineChartData?: any[];
   public initialDate = new Date();
   private sub?: Subscription;
@@ -63,8 +62,5 @@ export class DcVoltagePvComponent implements OnInit, OnDestroy {
     });
     this.lineChartData?.push({name: 'Voltage PV-Modules', series: arrayVoltage1});
   }
-
-
-
 
 }

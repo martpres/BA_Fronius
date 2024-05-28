@@ -13,7 +13,6 @@ import {StateOfChargeAkku} from "../dto/stateOfChargeAkku.model";
   styleUrls: ['./state-of-charge-akku.component.scss']
 })
 export class StateOfChargeAkkuComponent implements OnInit, OnDestroy {
-
   public lineChartData?: any[];
   public initialDate = new Date();
   private sub?: Subscription;
@@ -63,7 +62,5 @@ export class StateOfChargeAkkuComponent implements OnInit, OnDestroy {
     });
     this.lineChartData?.push({name: 'StateOfChargeAkku', series: arrayStateOfChargeAkku});
   }
-
-
 
 }

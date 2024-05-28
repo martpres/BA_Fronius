@@ -17,7 +17,7 @@ public class SchedulerCommonInverterData {
     private final CommonInverterDataMapper commonInverterDataMapper;
     private final FroniusClientFactory froniusClientFactory;
 
-    public SchedulerCommonInverterData(@Value("${app.run.scheduled.common-inverter-data:false}")boolean commonInverterData1,
+    public SchedulerCommonInverterData(@Value("${app.run.scheduled.common-inverter-data:false}") boolean commonInverterData1,
                                        ParamsRepository paramsRepository,
                                        CommonInverterDataMapper commonInverterDataMapper,
                                        FroniusClientFactory froniusClientFactory) {
@@ -28,7 +28,7 @@ public class SchedulerCommonInverterData {
     }
 
     @Async
-    @Scheduled(fixedDelayString = "PT30S", initialDelayString = "PT20S")
+    @Scheduled(fixedDelayString = "PT15S", initialDelayString = "PT20S")
     public void startWorkflowForCommonInverterData() {
         if (commonInverterData) {
             CommonInverterDataDto dto = froniusClientFactory.getFroniusClient().commonInverterDataEndpoint();

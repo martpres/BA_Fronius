@@ -14,7 +14,6 @@ import {AcEnergyInverterDay} from "../dto/acEnergyInverterDay.model";
   styleUrls: ['./ac-power-inverter.component.scss']
 })
 export class AcPowerInverterComponent implements OnInit, OnDestroy {
-
   public acEnergyInverterDayData?: AcEnergyInverterDay;
   public lineChartData?: any[];
   public initialDate = new Date();
@@ -66,6 +65,5 @@ export class AcPowerInverterComponent implements OnInit, OnDestroy {
     });
     this.lineChartData?.push({name: 'AC Power Inverter', series: arrayPower1});
   }
-
 
 }

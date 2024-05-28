@@ -13,7 +13,6 @@ import {AcPowerGrid} from "../dto/acPowerGrid.model";
   styleUrls: ['./ac-power-grid.component.scss']
 })
 export class AcPowerGridComponent implements OnInit, OnDestroy {
-
   public lineChartData?: any[];
   public initialDate = new Date();
   private sub?: Subscription;

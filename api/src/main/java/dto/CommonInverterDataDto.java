@@ -8,7 +8,7 @@ import java.time.ZonedDateTime;
 import java.util.Map;
 
 public class CommonInverterDataDto implements Serializable {
-    private Integer acPowerInverter;
+    private Float acPowerInverter;
     private Float dcVoltagePv;
     private Float acEnergyInverterDay;
     private ZonedDateTime timestamp;
@@ -16,19 +16,18 @@ public class CommonInverterDataDto implements Serializable {
     public CommonInverterDataDto() {
     }
 
-    public CommonInverterDataDto(Integer acPowerInverter, Float dcVoltagePv,
-                                 Float acEnergyInverterDay, ZonedDateTime timestamp) {
+    public CommonInverterDataDto(Float acPowerInverter, Float dcVoltagePv, Float acEnergyInverterDay, ZonedDateTime timestamp) {
         this.acPowerInverter = acPowerInverter;
         this.dcVoltagePv = dcVoltagePv;
         this.acEnergyInverterDay = acEnergyInverterDay;
         this.timestamp = timestamp;
     }
 
-    public Integer getAcPowerInverter() {
+    public Float getAcPowerInverter() {
         return acPowerInverter;
     }
 
-    public void setAcPowerInverter(Integer acPowerInverter) {
+    public void setAcPowerInverter(Float acPowerInverter) {
         this.acPowerInverter = acPowerInverter;
     }
 
@@ -73,6 +72,28 @@ public class CommonInverterDataDto implements Serializable {
         Map<String, Object> udc = (Map<String, Object>) data.get("UDC");
         Map<String, Object> dayEnergy = (Map<String, Object>) data.get("DAY_ENERGY");
 
+        if (pac.get("Value").getClass() == Integer.class) {
+            this.acPowerInverter = ((Integer) pac.get("Value")).floatValue();
+        } else if (pac.get("Value").getClass() == Double.class) {
+            this.acPowerInverter = ((Double) pac.get("Value")).floatValue();
+        } else if (pac.get("Value").getClass() == BigDecimal.class) {
+            this.acPowerInverter = ((BigDecimal) pac.get("Value")).floatValue();
+        } else {
+            throw new IllegalStateException("Unexpected cast for class CommonInverterData (acPowerInverter): "
+                    + pac.get("Value").getClass());
+        }
+
+        if (udc.get("Value").getClass() == Double.class) {
+            this.dcVoltagePv = ((Double) udc.get("Value")).floatValue();
+        } else if (udc.get("Value").getClass() == BigDecimal.class) {
+            this.dcVoltagePv = ((BigDecimal) udc.get("Value")).floatValue();
+        } else if (udc.get("Value").getClass() == Integer.class) {
+            this.dcVoltagePv = ((Integer) udc.get("Value")).floatValue();
+        } else {
+            throw new IllegalStateException("Unexpected cast for class CommonInverterData (dcVoltagePv): "
+                    + udc.get("Value").getClass());
+        }
+
         if (dayEnergy.get("Value").getClass() == Integer.class) {
             this.acEnergyInverterDay = ((Integer) dayEnergy.get("Value")).floatValue();
         } else if (dayEnergy.get("Value").getClass() == Double.class) {
@@ -80,22 +101,10 @@ public class CommonInverterDataDto implements Serializable {
         } else if (dayEnergy.get("Value").getClass() == BigDecimal.class) {
             this.acEnergyInverterDay = ((BigDecimal) dayEnergy.get("Value")).floatValue();
         } else {
-            throw new IllegalStateException("Unexpected cast for class PowerFlowRealtimeData: " + dayEnergy.get("Value").getClass());
+            throw new IllegalStateException("Unexpected cast for class PowerFlowRealtimeData (acEnergyInverterDay): "
+                    + dayEnergy.get("Value").getClass());
         }
 
-
-        if (pac.get("Value").getClass() == Integer.class) {
-            this.acPowerInverter = ((Integer) pac.get("Value")).intValue();
-        } else {
-            throw new IllegalStateException("Unexpected cast for class CommonInverterData: " + pac.get("Value").getClass());
-        }
-        if (udc.get("Value").getClass() == Double.class) {
-            this.dcVoltagePv = ((Double) udc.get("Value")).floatValue();
-        } else if (udc.get("Value").getClass() == BigDecimal.class) {
-            this.dcVoltagePv = ((BigDecimal) udc.get("Value")).floatValue();
-        } else {
-            throw new IllegalStateException("Unexpected cast for class CommonInverterData: " + udc.get("Value").getClass());
-        }
     }
 
     @JsonProperty("Head")

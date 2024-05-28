@@ -13,14 +13,12 @@ import {DcPowerPv} from "../dto/dcPowerPv.model";
   styleUrls: ['./dc-power-pv.component.scss']
 })
 export class DcPowerPvComponent implements OnInit, OnDestroy {
-
   public lineChartData?: any[];
   public initialDate = new Date();
   private sub?: Subscription;
   private data?: QueryDslResponse<DcPowerPv>;
   private refreshMilliSeconds = 60000;
   private interval?: any;
-
 
   constructor(private backendService: BackendApiService, private dateTimeService: DateTimeService) {
   }

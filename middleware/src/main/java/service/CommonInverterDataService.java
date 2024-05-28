@@ -21,15 +21,19 @@ public class CommonInverterDataService {
         this.paramsQueryDslRepository = paramsQueryDslRepository;
     }
 
-    public QueryDslResponse<ResponseDcVoltagePvDto> loadDcVoltagePv(Optional<ZonedDateTime> startDate, Optional<ZonedDateTime> endDate, Optional<PageRequest> pageRequest){
-        return paramsQueryDslRepository.loadDcVoltagePv(startDate,endDate,pageRequest);
+    public QueryDslResponse<ResponseDcVoltagePvDto> loadDcVoltagePv(Optional<ZonedDateTime> startDate,
+                                                                    Optional<ZonedDateTime> endDate,
+                                                                    Optional<PageRequest> pageRequest) {
+        return paramsQueryDslRepository.loadDcVoltagePv(startDate, endDate, pageRequest);
     }
 
-    public QueryDslResponse<ResponseAcPowerInverterDto> loadAcPowerInverter(Optional<ZonedDateTime> startDate, Optional<ZonedDateTime> endDate, Optional<PageRequest> pageRequest){
-        return paramsQueryDslRepository.loadAcPowerInverter(startDate,endDate,pageRequest);
+    public QueryDslResponse<ResponseAcPowerInverterDto> loadAcPowerInverter(Optional<ZonedDateTime> startDate,
+                                                                            Optional<ZonedDateTime> endDate,
+                                                                            Optional<PageRequest> pageRequest) {
+        return paramsQueryDslRepository.loadAcPowerInverter(startDate, endDate, pageRequest);
     }
 
-    public ResponseAcEnergyInverterDayDto loadAcEnergyInverterDay(){
+    public ResponseAcEnergyInverterDayDto loadAcEnergyInverterDay() {
         return paramsQueryDslRepository.loadAcEnergyInverterDay();
     }
 

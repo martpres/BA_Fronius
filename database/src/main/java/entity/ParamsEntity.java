@@ -23,12 +23,6 @@ public class ParamsEntity extends AbstractBaseEntity {
     @Column(name = "ac_power_grid", updatable = false)
     private Float acPowerGrid;
 
-    @Column(name = "ac_power_inverter", updatable = false)
-    private Integer acPowerInverter;
-
-    @Column(name = "dc_voltage_pv", updatable = false)
-    private Float dcVoltagePv;
-
     @Column(name = "dc_power_akku", updatable = false)
     private Float dcPowerAkku;
 
@@ -44,6 +38,12 @@ public class ParamsEntity extends AbstractBaseEntity {
     @Column(name = "stateOfChargeAkku", updatable = false)
     private Float stateOfChargeAkku;
 
+    @Column(name = "ac_power_inverter", updatable = false)
+    private Float acPowerInverter;
+
+    @Column(name = "dc_voltage_pv", updatable = false)
+    private Float dcVoltagePv;
+
     @Column(name = "acEnergyInverterDay", updatable = false)
     private Float acEnergyInverterDay;
 
@@ -51,7 +51,7 @@ public class ParamsEntity extends AbstractBaseEntity {
     }
 
     public ParamsEntity(Float acCurrentGridPhase1, Float acCurrentGridPhase2, Float acCurrentGridPhase3,
-                        Float dcPowerPv, Float acPowerGrid, Integer acPowerInverter, Float dcVoltagePv,
+                        Float dcPowerPv, Float acPowerGrid, Float acPowerInverter, Float dcVoltagePv,
                         Float dcPowerAkku, Float acPowerLoad, Float autonomy, Float selfConsumption,
                         Float stateOfChargeAkku, Float acEnergyInverterDay) {
         this.acCurrentGridPhase1 = acCurrentGridPhase1;
@@ -109,11 +109,11 @@ public class ParamsEntity extends AbstractBaseEntity {
         this.acPowerGrid = acPowerGrid;
     }
 
-    public Integer getAcPowerInverter() {
+    public Float getAcPowerInverter() {
         return acPowerInverter;
     }
 
-    public void setAcPowerInverter(Integer acPowerInverter) {
+    public void setAcPowerInverter(Float acPowerInverter) {
         this.acPowerInverter = acPowerInverter;
     }
 

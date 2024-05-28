@@ -16,7 +16,8 @@ public class MeterRealtimeDataDto implements Serializable {
     public MeterRealtimeDataDto() {
     }
 
-    public MeterRealtimeDataDto(Float acCurrentGridPhase1, Float acCurrentGridPhase2, Float acCurrentGridPhase3, ZonedDateTime timestamp) {
+    public MeterRealtimeDataDto(Float acCurrentGridPhase1, Float acCurrentGridPhase2, Float acCurrentGridPhase3,
+                                ZonedDateTime timestamp) {
         this.acCurrentGridPhase1 = acCurrentGridPhase1;
         this.acCurrentGridPhase2 = acCurrentGridPhase2;
         this.acCurrentGridPhase3 = acCurrentGridPhase3;
@@ -68,17 +69,40 @@ public class MeterRealtimeDataDto implements Serializable {
     @JsonProperty("Body")
     private void unpackData(Map<String, Object> body) {
         Map<String, Object> data = (Map<String, Object>) body.get("Data");
+
         if (data.get("Current_AC_Phase_1").getClass() == Double.class) {
             this.acCurrentGridPhase1 = ((Double) data.get("Current_AC_Phase_1")).floatValue();
-            this.acCurrentGridPhase2 = ((Double) data.get("Current_AC_Phase_2")).floatValue();
-            this.acCurrentGridPhase3 = ((Double) data.get("Current_AC_Phase_3")).floatValue();
         } else if (data.get("Current_AC_Phase_1").getClass() == BigDecimal.class) {
             this.acCurrentGridPhase1 = ((BigDecimal) data.get("Current_AC_Phase_1")).floatValue();
-            this.acCurrentGridPhase2 = ((BigDecimal) data.get("Current_AC_Phase_2")).floatValue();
-            this.acCurrentGridPhase3 = ((BigDecimal) data.get("Current_AC_Phase_3")).floatValue();
+        } else if (data.get("Current_AC_Phase_1").getClass() == Integer.class) {
+            this.acCurrentGridPhase1 = ((Integer) data.get("Current_AC_Phase_1")).floatValue();
         } else {
-            throw new IllegalStateException("Unexpected cast for class MeterRealtimeData :" + data.get("Current_AC_Phase_1").getClass());
+            throw new IllegalStateException("Unexpected cast for class MeterRealtimeData (Current_AC_Phase_1):"
+                    + data.get("Current_AC_Phase_1").getClass());
         }
+
+        if (data.get("Current_AC_Phase_2").getClass() == Double.class) {
+            this.acCurrentGridPhase2 = ((Double) data.get("Current_AC_Phase_2")).floatValue();
+        } else if (data.get("Current_AC_Phase_2").getClass() == BigDecimal.class) {
+            this.acCurrentGridPhase2 = ((BigDecimal) data.get("Current_AC_Phase_2")).floatValue();
+        } else if (data.get("Current_AC_Phase_2").getClass() == Integer.class) {
+            this.acCurrentGridPhase2 = ((Integer) data.get("Current_AC_Phase_2")).floatValue();
+        } else {
+            throw new IllegalStateException("Unexpected cast for class MeterRealtimeData (Current_AC_Phase_2):"
+                    + data.get("Current_AC_Phase_2").getClass());
+        }
+
+        if (data.get("Current_AC_Phase_3").getClass() == Double.class) {
+            this.acCurrentGridPhase3 = ((Double) data.get("Current_AC_Phase_3")).floatValue();
+        } else if (data.get("Current_AC_Phase_3").getClass() == BigDecimal.class) {
+            this.acCurrentGridPhase3 = ((BigDecimal) data.get("Current_AC_Phase_3")).floatValue();
+        } else if (data.get("Current_AC_Phase_3").getClass() == Integer.class) {
+            this.acCurrentGridPhase3 = ((Integer) data.get("Current_AC_Phase_3")).floatValue();
+        } else {
+            throw new IllegalStateException("Unexpected cast for class MeterRealtimeData (Current_AC_Phase_3):"
+                    + data.get("Current_AC_Phase_3").getClass());
+        }
+
     }
 
     @JsonProperty("Head")

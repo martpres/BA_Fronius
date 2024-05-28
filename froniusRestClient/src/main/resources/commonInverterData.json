@@ -3,7 +3,7 @@
         "Data": {
             "DAY_ENERGY": {
                 "Unit": "Wh",
-                "Value": 6890
+                "Value": 222222
             },
             "DeviceStatus": {
                 "ErrorCode": 0,

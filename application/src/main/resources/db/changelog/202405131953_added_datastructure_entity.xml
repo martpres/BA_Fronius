@@ -13,6 +13,36 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
 
+            <column name="dc_voltage_pv" type="real">
+            </column>
+
+            <column name="ac_power_inverter" type="real">
+            </column>
+
+            <column name="ac_energy_inverter_day" type="real">
+            </column>
+
+            <column name="ac_power_grid" type="real">
+            </column>
+
+            <column name="ac_power_load" type="real">
+            </column>
+
+            <column name="dc_power_pv" type="real">
+            </column>
+
+            <column name="dc_power_akku" type="real">
+            </column>
+
+            <column name="autonomy" type="real">
+            </column>
+
+            <column name="self_consumption" type="real">
+            </column>
+
+            <column name="state_of_charge_akku" type="real">
+            </column>
+
             <column name="ac_current_grid_phase1" type="real">
             </column>
 
@@ -20,30 +50,6 @@
             </column>
 
             <column name="ac_current_grid_phase3" type="real">
-            </column>
-
-            <column name="dc_power_pv" type="real">
-            </column>
-
-            <column name="ac_power_grid" type="real">
-            </column>
-
-            <column name="dc_voltage_pv" type="real">
-            </column>
-
-            <column name="ac_power_inverter" type="integer">
-            </column>
-
-            <column name="dc_power_akku" type="real">
-            </column>
-
-            <column name="ac_power_load" type="real">
-            </column>
-
-            <column name="autonomy" type="real">
-            </column>
-
-            <column name="self_consumption" type="real">
             </column>
 
         </createTable>

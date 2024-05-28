@@ -13,7 +13,6 @@ import {DcVoltagePv} from "../dto/dcVoltagePv.model";
   styleUrls: ['./dc-voltage-pv.component.scss']
 })
 export class DcVoltagePvComponent implements OnInit, OnDestroy {
-
   public lineChartData?: any[];
   public initialDate = new Date();
   private sub?: Subscription;
@@ -61,10 +60,7 @@ export class DcVoltagePvComponent implements OnInit, OnDestroy {
       let date = this.dateTimeService.convertUtcToLocalTimeZone(e.timestamp)
       arrayVoltage1.push({name: date, value: e.dcVoltagePv});
     });
-    this.lineChartData?.push({name: 'Power Grid', series: arrayVoltage1});
+    this.lineChartData?.push({name: 'Voltage PV-Modules', series: arrayVoltage1});
   }
-
-
-
 
 }

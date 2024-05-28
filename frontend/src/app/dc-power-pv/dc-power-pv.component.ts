@@ -13,14 +13,12 @@ import {DcPowerPv} from "../dto/dcPowerPv.model";
   styleUrls: ['./dc-power-pv.component.scss']
 })
 export class DcPowerPvComponent implements OnInit, OnDestroy {
-
   public lineChartData?: any[];
   public initialDate = new Date();
   private sub?: Subscription;
   private data?: QueryDslResponse<DcPowerPv>;
   private refreshMilliSeconds = 60000;
   private interval?: any;
-
 
   constructor(private backendService: BackendApiService, private dateTimeService: DateTimeService) {
   }
@@ -62,7 +60,7 @@ export class DcPowerPvComponent implements OnInit, OnDestroy {
       let date = this.dateTimeService.convertUtcToLocalTimeZone(e.timestamp)
       arrayPower1.push({name: date, value: e.dcPowerPv});
     });
-    this.lineChartData?.push({name: 'Power Pv', series: arrayPower1});
+    this.lineChartData?.push({name: 'Power PV-Modules', series: arrayPower1});
   }
 
 }

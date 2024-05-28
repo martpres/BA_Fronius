@@ -19,6 +19,7 @@ public abstract class PowerFlowRealtimeDataMapper {
     @Mapping(target = "acCurrentGridPhase3", ignore = true)
     @Mapping(target = "dcVoltagePv", ignore = true)
     @Mapping(target = "acPowerInverter", ignore = true)
+    @Mapping(target = "acEnergyInverterDay", ignore = true)
     public abstract ParamsEntity dtoToEntity(PowerFlowRealtimeDataDto dto);
 
     public abstract ResponseDcPowerPvDto convertParamsToDcPowerPv(ParamsEntity entity);
@@ -26,7 +27,6 @@ public abstract class PowerFlowRealtimeDataMapper {
 
     public abstract ResponseAcPowerGridDto convertParamsToAcPowerGrid(ParamsEntity entity);
     public abstract List<ResponseAcPowerGridDto> convertParamsToAcPowerGrid(List<ParamsEntity> entities);
-
 
     public abstract ResponseDcPowerAkkuDto convertParamsToDcPowerAkku(ParamsEntity entity);
     public abstract List<ResponseDcPowerAkkuDto> convertParamsToDcPowerAkku(List<ParamsEntity> entities);
@@ -40,5 +40,7 @@ public abstract class PowerFlowRealtimeDataMapper {
     public abstract ResponseSelfConsumptionDto convertParamsToSelfConsumption(ParamsEntity entity);
     public abstract List<ResponseSelfConsumptionDto> convertParamsToSelfConsumption(List<ParamsEntity> entities);
 
+    public abstract ResponseStateOfChargeAkkuDto convertParamsToStateOfChargeAkku(ParamsEntity entity);
+    public abstract List<ResponseStateOfChargeAkkuDto> convertParamsToStateOfChargeAkku(List<ParamsEntity> entities);
 
 }

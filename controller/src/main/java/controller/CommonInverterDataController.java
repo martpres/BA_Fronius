@@ -1,5 +1,6 @@
 package controller;
 
+import dto.ResponseAcEnergyInverterDayDto;
 import dto.ResponseAcPowerInverterDto;
 import dto.ResponseDcVoltagePvDto;
 import org.springframework.transaction.annotation.Transactional;
@@ -38,5 +39,10 @@ public class CommonInverterDataController {
                                                                     @RequestParam(value = "page", required = false) Optional<Integer> page,
                                                                     @RequestParam(value = "pagesize", required = false) Optional<Integer> pagesize) {
         return commonInverterDataService.loadDcVoltagePv(startDate, endDate, PaginationUtil.getPagination(page, pagesize));
+    }
+
+    @GetMapping(value = "/ac-energy-inverter-day/latest", produces = "application/json")
+    public ResponseAcEnergyInverterDayDto loadAcEnergyInverterDay() {
+        return commonInverterDataService.loadAcEnergyInverterDay();
     }
 }

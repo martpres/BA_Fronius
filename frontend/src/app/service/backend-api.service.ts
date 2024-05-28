@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {QueryDslResponse} from "../dto/queryDslResponse.model";
@@ -11,6 +11,9 @@ import {DcPowerAkku} from "../dto/dcPowerAkku.model";
 import {AcPowerLoad} from "../dto/acPowerLoad.model";
 import {Autonomy} from "../dto/autonomy.model";
 import {SelfConsumption} from "../dto/selfConsumption.model";
+import {StateOfChargeAkkuComponent} from "../state-of-charge-akku/state-of-charge-akku.component";
+import {StateOfChargeAkku} from "../dto/stateOfChargeAkku.model";
+import {AcEnergyInverterDay} from "../dto/acEnergyInverterDay.model";
 
 @Injectable({
   providedIn: 'root'
@@ -23,39 +26,47 @@ export class BackendApiService {
   }
 
   public loadCurrentAC(filter?: any): Observable<QueryDslResponse<AcCurrentGrid>> {
-    return this.httpClient.get<QueryDslResponse<AcCurrentGrid>>(`${this.baseUrl}meter-realtime-data/ac-current-grid`,{params: filter});
+    return this.httpClient.get<QueryDslResponse<AcCurrentGrid>>(`${this.baseUrl}meter-realtime-data/ac-current-grid`, {params: filter});
   }
 
   public loadDcPowerPv(filter?: any): Observable<QueryDslResponse<DcPowerPv>> {
-    return this.httpClient.get<QueryDslResponse<DcPowerPv>>(`${this.baseUrl}power-flow-realtime-data/dc-power-pv`,{params: filter});
+    return this.httpClient.get<QueryDslResponse<DcPowerPv>>(`${this.baseUrl}power-flow-realtime-data/dc-power-pv`, {params: filter});
   }
 
   public loadDcVoltagePv(filter?: any): Observable<QueryDslResponse<DcVoltagePv>> {
-    return this.httpClient.get<QueryDslResponse<DcVoltagePv>>(`${this.baseUrl}common-inverter-data/dc-voltage-pv`,{params: filter});
+    return this.httpClient.get<QueryDslResponse<DcVoltagePv>>(`${this.baseUrl}common-inverter-data/dc-voltage-pv`, {params: filter});
   }
 
   public loadAcPowerGrid(filter?: any): Observable<QueryDslResponse<AcPowerGrid>> {
-    return this.httpClient.get<QueryDslResponse<AcPowerGrid>>(`${this.baseUrl}power-flow-realtime-data/ac-power-grid`,{params: filter});
+    return this.httpClient.get<QueryDslResponse<AcPowerGrid>>(`${this.baseUrl}power-flow-realtime-data/ac-power-grid`, {params: filter});
   }
 
   public loadAcPowerInverter(filter?: any): Observable<QueryDslResponse<AcPowerInverter>> {
-    return this.httpClient.get<QueryDslResponse<AcPowerInverter>>(`${this.baseUrl}common-inverter-data/ac-power-inverter`,{params: filter});
+    return this.httpClient.get<QueryDslResponse<AcPowerInverter>>(`${this.baseUrl}common-inverter-data/ac-power-inverter`, {params: filter});
   }
 
   public loadDcPowerAkku(filter?: any): Observable<QueryDslResponse<DcPowerAkku>> {
-    return this.httpClient.get<QueryDslResponse<AcPowerInverter>>(`${this.baseUrl}power-flow-realtime-data/dc-power-akku`,{params: filter});
+    return this.httpClient.get<QueryDslResponse<AcPowerInverter>>(`${this.baseUrl}power-flow-realtime-data/dc-power-akku`, {params: filter});
   }
 
   public loadAcPowerLoad(filter?: any): Observable<QueryDslResponse<AcPowerLoad>> {
-    return this.httpClient.get<QueryDslResponse<AcPowerLoad>>(`${this.baseUrl}power-flow-realtime-data/ac-power-load`,{params: filter});
+    return this.httpClient.get<QueryDslResponse<AcPowerLoad>>(`${this.baseUrl}power-flow-realtime-data/ac-power-load`, {params: filter});
   }
 
   public loadAutonomy(filter?: any): Observable<QueryDslResponse<Autonomy>> {
-    return this.httpClient.get<QueryDslResponse<Autonomy>>(`${this.baseUrl}power-flow-realtime-data/autonomy`,{params: filter});
+    return this.httpClient.get<QueryDslResponse<Autonomy>>(`${this.baseUrl}power-flow-realtime-data/autonomy`, {params: filter});
   }
 
   public loadSelfConsumption(filter?: any): Observable<QueryDslResponse<SelfConsumption>> {
-    return this.httpClient.get<QueryDslResponse<SelfConsumption>>(`${this.baseUrl}power-flow-realtime-data/self-consumption`,{params: filter});
+    return this.httpClient.get<QueryDslResponse<SelfConsumption>>(`${this.baseUrl}power-flow-realtime-data/self-consumption`, {params: filter});
+  }
+
+  public loadStateOfChargeAkku(filter?: any): Observable<QueryDslResponse<StateOfChargeAkku>> {
+    return this.httpClient.get<QueryDslResponse<StateOfChargeAkku>>(`${this.baseUrl}power-flow-realtime-data/state-of-charge-akku`, {params: filter});
+  }
+
+  public loadAcEnergyInverterDay(): Observable<AcEnergyInverterDay> {
+    return this.httpClient.get<AcEnergyInverterDay>(`${this.baseUrl}common-inverter-data/ac-energy-inverter-day/latest`);
   }
 
 }

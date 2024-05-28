@@ -14,7 +14,6 @@ import {SelfConsumption} from "../dto/selfConsumption.model";
 })
 
 export class SelfConsumptionComponent implements OnInit, OnDestroy {
-
   public lineChartData?: any[];
   public initialDate = new Date();
   private sub?: Subscription;
@@ -27,7 +26,7 @@ export class SelfConsumptionComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.sendRequest();
-    this.interval = setInterval(()=> {
+    this.interval = setInterval(() => {
       this.sendRequest();
     }, this.refreshMilliSeconds);
   }
@@ -45,20 +44,20 @@ export class SelfConsumptionComponent implements OnInit, OnDestroy {
     this.initialDate = new Date();
     const endDate = this.dateTimeService.convertToUtcDate(this.initialDate);
     const startDate = this.dateTimeService.convertToStartOfDayUtc(this.dateTimeService.convertToUtcDate(this.initialDate));
-    this.sub = this.backendService.loadSelfConsumption(this.dateTimeService.createFilter(startDate, endDate)).subscribe((e)=> {
-      this.data=e;
+    this.sub = this.backendService.loadSelfConsumption(this.dateTimeService.createFilter(startDate, endDate)).subscribe((e) => {
+      this.data = e;
       this.mapRequestToLineChart();
     });
   }
 
   private mapRequestToLineChart(): void {
-    if (this.data?.content?.length===0) {
-      this.lineChartData=undefined;
+    if (this.data?.content?.length === 0) {
+      this.lineChartData = undefined;
       return;
     }
     this.lineChartData = [];
     const arraySelfConsumption: any[] = [];
-    this.data?.content?.forEach((e)=>{
+    this.data?.content?.forEach((e) => {
       let date = this.dateTimeService.convertUtcToLocalTimeZone(e.timestamp)
       arraySelfConsumption.push({name: date, value: e.selfConsumption});
     });

@@ -12,7 +12,7 @@ import {localId, timeFormat} from "../dto/const";
   templateUrl: './ac-current-grid.component.html',
   styleUrls: ['./ac-current-grid.component.scss']
 })
-export class AcCurrentGridComponent implements OnInit, OnDestroy{
+export class AcCurrentGridComponent implements OnInit, OnDestroy {
   public lineChartData?: any[];
   public initialDate = new Date();
   private sub?: Subscription;
@@ -25,7 +25,7 @@ export class AcCurrentGridComponent implements OnInit, OnDestroy{
 
   ngOnInit(): void {
     this.sendRequest();
-    this.interval = setInterval(()=> {
+    this.interval = setInterval(() => {
       this.sendRequest();
     }, this.refreshMilliSeconds);
   }
@@ -43,29 +43,29 @@ export class AcCurrentGridComponent implements OnInit, OnDestroy{
     this.initialDate = new Date();
     const endDate = this.dateTimeService.convertToUtcDate(this.initialDate);
     const startDate = this.dateTimeService.convertToStartOfDayUtc(this.dateTimeService.convertToUtcDate(this.initialDate));
-    this.sub = this.backendService.loadCurrentAC(this.dateTimeService.createFilter(startDate, endDate)).subscribe((e)=> {
-      this.data=e;
+    this.sub = this.backendService.loadCurrentAC(this.dateTimeService.createFilter(startDate, endDate)).subscribe((e) => {
+      this.data = e;
       this.mapRequestToLineChart();
     });
   }
 
   private mapRequestToLineChart(): void {
-    if (this.data?.content?.length===0) {
-      this.lineChartData=undefined;
+    if (this.data?.content?.length === 0) {
+      this.lineChartData = undefined;
       return;
     }
     this.lineChartData = [];
     const arrayAcCurrentGridPhase1: any[] = [];
     const arrayAcCurrentGridPhase2: any[] = [];
     const arrayAcCurrentGridPhase3: any[] = [];
-    this.data?.content?.forEach((e)=>{
+    this.data?.content?.forEach((e) => {
       let date = this.dateTimeService.convertUtcToLocalTimeZone(e.timestamp)
       arrayAcCurrentGridPhase1.push({name: date, value: e.acCurrentGridPhase1});
       arrayAcCurrentGridPhase2.push({name: date, value: e.acCurrentGridPhase2});
       arrayAcCurrentGridPhase3.push({name: date, value: e.acCurrentGridPhase3});
     });
-    this.lineChartData?.push({name: 'Phase 1', series: arrayAcCurrentGridPhase1});
-    this.lineChartData?.push({name: 'Phase 2', series: arrayAcCurrentGridPhase2});
-    this.lineChartData?.push({name: 'Phase 3', series: arrayAcCurrentGridPhase3});
+    this.lineChartData?.push({name: 'AC Current Grid - Phase 1', series: arrayAcCurrentGridPhase1});
+    this.lineChartData?.push({name: 'AC Current Grid - Phase 2', series: arrayAcCurrentGridPhase2});
+    this.lineChartData?.push({name: 'AC Current Grid - Phase 3', series: arrayAcCurrentGridPhase3});
   }
 }

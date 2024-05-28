@@ -7,14 +7,12 @@ import {formatDate} from "@angular/common";
 import {localId, timeFormat} from "../dto/const";
 import {DcPowerAkku} from "../dto/dcPowerAkku.model";
 
-
 @Component({
   selector: 'app-dc-power-akku',
   templateUrl: './dc-power-akku.component.html',
   styleUrls: ['./dc-power-akku.component.scss']
 })
 export class DcPowerAkkuComponent implements OnInit, OnDestroy {
-
   public lineChartData?: any[];
   public initialDate = new Date();
   private sub?: Subscription;
@@ -22,13 +20,12 @@ export class DcPowerAkkuComponent implements OnInit, OnDestroy {
   private refreshMilliSeconds = 60000;
   private interval?: any;
 
-
   constructor(private backendService: BackendApiService, private dateTimeService: DateTimeService) {
   }
 
   ngOnInit(): void {
     this.sendRequest();
-    this.interval = setInterval(()=> {
+    this.interval = setInterval(() => {
       this.sendRequest();
     }, this.refreshMilliSeconds);
   }
@@ -46,20 +43,20 @@ export class DcPowerAkkuComponent implements OnInit, OnDestroy {
     this.initialDate = new Date();
     const endDate = this.dateTimeService.convertToUtcDate(this.initialDate);
     const startDate = this.dateTimeService.convertToStartOfDayUtc(this.dateTimeService.convertToUtcDate(this.initialDate));
-    this.sub = this.backendService.loadDcPowerAkku(this.dateTimeService.createFilter(startDate, endDate)).subscribe((e)=> {
-      this.data=e;
+    this.sub = this.backendService.loadDcPowerAkku(this.dateTimeService.createFilter(startDate, endDate)).subscribe((e) => {
+      this.data = e;
       this.mapRequestToLineChart();
     });
   }
 
   private mapRequestToLineChart(): void {
-    if (this.data?.content?.length===0) {
-      this.lineChartData=undefined;
+    if (this.data?.content?.length === 0) {
+      this.lineChartData = undefined;
       return;
     }
     this.lineChartData = [];
     const arrayPower1: any[] = [];
-    this.data?.content?.forEach((e)=>{
+    this.data?.content?.forEach((e) => {
       let date = this.dateTimeService.convertUtcToLocalTimeZone(e.timestamp)
       arrayPower1.push({name: date, value: e.dcPowerAkku});
     });

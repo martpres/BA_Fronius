@@ -5,21 +5,20 @@ import {BackendApiService} from "../service/backend-api.service";
 import {DateTimeService} from "../service/date-time.service";
 import {formatDate} from "@angular/common";
 import {localId, timeFormat} from "../dto/const";
-import {AcPowerGrid} from "../dto/acPowerGrid.model";
+import {StateOfChargeAkku} from "../dto/stateOfChargeAkku.model";
 
 @Component({
-  selector: 'app-ac-power-grid',
-  templateUrl: './ac-power-grid.component.html',
-  styleUrls: ['./ac-power-grid.component.scss']
+  selector: 'app-state-of-charge-akku',
+  templateUrl: './state-of-charge-akku.component.html',
+  styleUrls: ['./state-of-charge-akku.component.scss']
 })
-export class AcPowerGridComponent implements OnInit, OnDestroy {
+export class StateOfChargeAkkuComponent implements OnInit, OnDestroy {
   public lineChartData?: any[];
   public initialDate = new Date();
   private sub?: Subscription;
-  private data?: QueryDslResponse<AcPowerGrid>;
+  private data?: QueryDslResponse<StateOfChargeAkku>;
   private refreshMilliSeconds = 60000;
   private interval?: any;
-
 
   constructor(private backendService: BackendApiService, private dateTimeService: DateTimeService) {
   }
@@ -44,7 +43,7 @@ export class AcPowerGridComponent implements OnInit, OnDestroy {
     this.initialDate = new Date();
     const endDate = this.dateTimeService.convertToUtcDate(this.initialDate);
     const startDate = this.dateTimeService.convertToStartOfDayUtc(this.dateTimeService.convertToUtcDate(this.initialDate));
-    this.sub = this.backendService.loadAcPowerGrid(this.dateTimeService.createFilter(startDate, endDate)).subscribe((e)=> {
+    this.sub = this.backendService.loadStateOfChargeAkku(this.dateTimeService.createFilter(startDate, endDate)).subscribe((e)=> {
       this.data=e;
       this.mapRequestToLineChart();
     });
@@ -56,14 +55,12 @@ export class AcPowerGridComponent implements OnInit, OnDestroy {
       return;
     }
     this.lineChartData = [];
-    const arrayPower1: any[] = [];
+    const arrayStateOfChargeAkku: any[] = [];
     this.data?.content?.forEach((e)=>{
       let date = this.dateTimeService.convertUtcToLocalTimeZone(e.timestamp)
-      arrayPower1.push({name: date, value: e.acPowerGrid});
+      arrayStateOfChargeAkku.push({name: date, value: e.stateOfChargeAkku});
     });
-    this.lineChartData?.push({name: 'Power Grid', series: arrayPower1});
+    this.lineChartData?.push({name: 'StateOfChargeAkku', series: arrayStateOfChargeAkku});
   }
-
-
 
 }

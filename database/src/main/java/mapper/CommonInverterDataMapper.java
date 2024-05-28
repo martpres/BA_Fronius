@@ -23,13 +23,16 @@ public abstract class CommonInverterDataMapper {
     @Mapping(target = "acPowerLoad", ignore = true)
     @Mapping(target = "autonomy", ignore = true)
     @Mapping(target = "selfConsumption", ignore = true)
+    @Mapping(target = "stateOfChargeAkku", ignore = true)
     public abstract ParamsEntity dtoToEntity(CommonInverterDataDto dto);
 
     public abstract ResponseDcVoltagePvDto convertParamsToDcVoltagePv(ParamsEntity entity);
-
     public abstract List<ResponseDcVoltagePvDto> convertParamsToDcVoltagePv(List<ParamsEntity> entities);
 
-    public abstract ResponseAcPowerInverterDto convertParamsToAcPowerInverterParamsEntity(ParamsEntity entity);
-
+    public abstract ResponseAcPowerInverterDto convertParamsToAcPowerInverter(ParamsEntity entity);
     public abstract List<ResponseAcPowerInverterDto> convertParamsToAcPowerInverter(List<ParamsEntity> entities);
+
+    public abstract ResponseAcEnergyInverterDayDto convertParamsToAcEnergyInverterDay(ParamsEntity entity);
+
+
 }

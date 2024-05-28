@@ -23,12 +23,6 @@ public class ParamsEntity extends AbstractBaseEntity {
     @Column(name = "ac_power_grid", updatable = false)
     private Float acPowerGrid;
 
-    @Column(name = "ac_power_inverter", updatable = false)
-    private Integer acPowerInverter;
-
-    @Column(name = "dc_voltage_pv", updatable = false)
-    private Float dcVoltagePv;
-
     @Column(name = "dc_power_akku", updatable = false)
     private Float dcPowerAkku;
 
@@ -41,12 +35,25 @@ public class ParamsEntity extends AbstractBaseEntity {
     @Column(name = "selfConsumption", updatable = false)
     private Float selfConsumption;
 
+    @Column(name = "stateOfChargeAkku", updatable = false)
+    private Float stateOfChargeAkku;
+
+    @Column(name = "ac_power_inverter", updatable = false)
+    private Float acPowerInverter;
+
+    @Column(name = "dc_voltage_pv", updatable = false)
+    private Float dcVoltagePv;
+
+    @Column(name = "acEnergyInverterDay", updatable = false)
+    private Float acEnergyInverterDay;
+
     public ParamsEntity() {
     }
 
     public ParamsEntity(Float acCurrentGridPhase1, Float acCurrentGridPhase2, Float acCurrentGridPhase3,
-                        Float dcPowerPv, Float acPowerGrid, Integer acPowerInverter, Float dcVoltagePv,
-                        Float dcPowerAkku, Float acPowerLoad, Float autonomy, Float selfConsumption) {
+                        Float dcPowerPv, Float acPowerGrid, Float acPowerInverter, Float dcVoltagePv,
+                        Float dcPowerAkku, Float acPowerLoad, Float autonomy, Float selfConsumption,
+                        Float stateOfChargeAkku, Float acEnergyInverterDay) {
         this.acCurrentGridPhase1 = acCurrentGridPhase1;
         this.acCurrentGridPhase2 = acCurrentGridPhase2;
         this.acCurrentGridPhase3 = acCurrentGridPhase3;
@@ -58,6 +65,8 @@ public class ParamsEntity extends AbstractBaseEntity {
         this.acPowerLoad = acPowerLoad;
         this.autonomy = autonomy;
         this.selfConsumption = selfConsumption;
+        this.stateOfChargeAkku = stateOfChargeAkku;
+        this.acEnergyInverterDay = acEnergyInverterDay;
     }
 
     public Float getAcCurrentGridPhase1() {
@@ -100,11 +109,11 @@ public class ParamsEntity extends AbstractBaseEntity {
         this.acPowerGrid = acPowerGrid;
     }
 
-    public Integer getAcPowerInverter() {
+    public Float getAcPowerInverter() {
         return acPowerInverter;
     }
 
-    public void setAcPowerInverter(Integer acPowerInverter) {
+    public void setAcPowerInverter(Float acPowerInverter) {
         this.acPowerInverter = acPowerInverter;
     }
 
@@ -148,6 +157,22 @@ public class ParamsEntity extends AbstractBaseEntity {
         this.selfConsumption = selfConsumption;
     }
 
+    public Float getStateOfChargeAkku() {
+        return stateOfChargeAkku;
+    }
+
+    public void setStateOfChargeAkku(Float stateOfChargeAkku) {
+        this.stateOfChargeAkku = stateOfChargeAkku;
+    }
+
+    public Float getAcEnergyInverterDay() {
+        return acEnergyInverterDay;
+    }
+
+    public void setAcEnergyInverterDay(Float acEnergyInverterDay) {
+        this.acEnergyInverterDay = acEnergyInverterDay;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -164,6 +189,8 @@ public class ParamsEntity extends AbstractBaseEntity {
                 && Objects.equals(acPowerLoad, paramsEntity.acPowerLoad)
                 && Objects.equals(autonomy, paramsEntity.autonomy)
                 && Objects.equals(selfConsumption, paramsEntity.selfConsumption)
+                && Objects.equals(stateOfChargeAkku, paramsEntity.stateOfChargeAkku)
+                && Objects.equals(acEnergyInverterDay, paramsEntity.acEnergyInverterDay)
                 && Objects.equals(super.getTimestamp(), paramsEntity.getTimestamp());
     }
 
@@ -171,7 +198,7 @@ public class ParamsEntity extends AbstractBaseEntity {
     public int hashCode() {
         return Objects.hash(acCurrentGridPhase1, acCurrentGridPhase2, acCurrentGridPhase3,
                 dcPowerPv, acPowerGrid, dcVoltagePv, acPowerInverter, dcPowerAkku,
-                acPowerLoad, autonomy, selfConsumption, super.getTimestamp());
+                acPowerLoad, autonomy, selfConsumption, stateOfChargeAkku, acEnergyInverterDay, super.getTimestamp());
     }
 
     @Override
@@ -188,6 +215,8 @@ public class ParamsEntity extends AbstractBaseEntity {
                 ", acPowerLoad=" + acPowerLoad +
                 ", autonomy=" + autonomy +
                 ", selfConsumption=" + selfConsumption +
+                ", stateOfChargeAkku=" + stateOfChargeAkku +
+                ", acEnergyInverterDay=" + acEnergyInverterDay +
                 ", timestamp=" + super.getTimestamp() +
                 '}';
     }

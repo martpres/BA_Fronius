@@ -3,7 +3,7 @@
     <h3>
       Power AC Inverter
     </h3>
-    <h4>
+    <h4 *ngIf="acEnergyInverterDayData?.acEnergyInverterDay">
       Day Energy: {{acEnergyInverterDayData?.acEnergyInverterDay}} Wh
     </h4>
   </div>

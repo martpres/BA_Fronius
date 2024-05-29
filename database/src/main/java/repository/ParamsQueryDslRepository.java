@@ -133,7 +133,6 @@ public class ParamsQueryDslRepository {
         BooleanBuilder booleanBuilder = new BooleanBuilder();
         booleanBuilder.and(qParamsEntity.acEnergyInverterDay.isNotNull());
         JPAQuery<ParamsEntity> query = getJpaQueryFactory().selectFrom(qParamsEntity).where(booleanBuilder);
-        query.limit(1);
         query.orderBy(qParamsEntity.acEnergyInverterDay.desc());
         return commonInverterDataMapper.convertParamsToAcEnergyInverterDay(query.fetchFirst());
     }

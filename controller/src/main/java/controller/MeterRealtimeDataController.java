@@ -24,10 +24,11 @@ public class MeterRealtimeDataController {
     }
 
     @GetMapping(value = "/ac-current-grid", produces = "application/json")
-    public QueryDslResponse<ResponseAcCurrentGridDto> loadAcCurrentGrid(@RequestParam(value = "startDate", required = false) Optional<ZonedDateTime> startDate,
-                                                                        @RequestParam(value = "endDate", required = false) Optional<ZonedDateTime> endDate,
-                                                                        @RequestParam(value = "page", required = false) Optional<Integer> page,
-                                                                        @RequestParam(value = "pagesize", required = false) Optional<Integer> pagesize) {
+    public QueryDslResponse<ResponseAcCurrentGridDto> loadAcCurrentGrid(
+            @RequestParam(value = "startDate", required = false) Optional<ZonedDateTime> startDate,
+            @RequestParam(value = "endDate", required = false) Optional<ZonedDateTime> endDate,
+            @RequestParam(value = "page", required = false) Optional<Integer> page,
+            @RequestParam(value = "pagesize", required = false) Optional<Integer> pagesize) {
         return meterRealtimeDataService.loadAcCurrentGrid(startDate, endDate, PaginationUtil.getPagination(page, pagesize));
     }
 }

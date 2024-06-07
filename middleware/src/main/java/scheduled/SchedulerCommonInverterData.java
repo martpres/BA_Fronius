@@ -28,7 +28,7 @@ public class SchedulerCommonInverterData {
     }
 
     @Async
-    @Scheduled(fixedDelayString = "PT15S", initialDelayString = "PT20S")
+    @Scheduled(fixedDelayString = "PT15S", initialDelayString = "PT30S")
     public void startWorkflowForCommonInverterData() {
         if (commonInverterData) {
             CommonInverterDataDto dto = froniusClientFactory.getFroniusClient().commonInverterDataEndpoint();

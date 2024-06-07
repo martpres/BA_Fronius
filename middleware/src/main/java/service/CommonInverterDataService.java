@@ -33,8 +33,9 @@ public class CommonInverterDataService {
         return paramsQueryDslRepository.loadAcPowerInverter(startDate, endDate, pageRequest);
     }
 
-    public ResponseAcEnergyInverterDayDto loadAcEnergyInverterDay() {
-        return paramsQueryDslRepository.loadAcEnergyInverterDay();
+    public ResponseAcEnergyInverterDayDto loadAcEnergyInverterDay(Optional<ZonedDateTime> startDate,
+                                                                  Optional<ZonedDateTime> endDate) {
+        return paramsQueryDslRepository.loadAcEnergyInverterDay(startDate, endDate);
     }
 
 }

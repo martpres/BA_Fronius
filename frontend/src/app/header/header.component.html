@@ -1,12 +1,12 @@
 <div class="header-container">
-  <button mat-button class="btn" [routerLink]="['/ac-power-inverter']">Power AC (Inverter)</button>
-  <button mat-button class="btn" [routerLink]="['/ac-power-load']">Power AC (Load)</button>
-  <button mat-button class="btn" [routerLink]="['/ac-power-grid']">Power AC (Grid)</button>
-  <button mat-button class="btn" [routerLink]="['/ac-current-grid']">Current AC (Grid)</button>
-  <button mat-button class="btn" [routerLink]="['/dc-voltage-pv']">Voltage DC (PV)</button>
-  <button mat-button class="btn" [routerLink]="['/dc-power-pv']">Power DC (PV)</button>
-  <button mat-button class="btn" [routerLink]="['/dc-power-akku']">Power DC (Storage)</button>
-  <button mat-button class="btn" [routerLink]="['/state-of-charge-akku']">State of Charge (Storage)</button>
-  <button mat-button class="btn" [routerLink]="['/autonomy']">Autonomy</button>
-  <button mat-button class="btn" [routerLink]="['/self-consumption']">Self Consumption</button>
+  <button mat-button class="btn" [routerLink]="['/ac-power-inverter']" [ngClass]="{'active': isActive('/ac-power-inverter')}">Power AC (Inverter)</button>
+  <button mat-button class="btn" [routerLink]="['/ac-power-load']" [ngClass]="{'active': isActive('/ac-power-load')}">Power AC (Load)</button>
+  <button mat-button class="btn" [routerLink]="['/ac-power-grid']" [ngClass]="{'active': isActive('/ac-power-grid')}">Power AC (Grid)</button>
+  <button mat-button class="btn" [routerLink]="['/ac-current-grid']" [ngClass]="{'active': isActive('/ac-current-grid')}">Current AC (Grid)</button>
+  <button mat-button class="btn" [routerLink]="['/dc-voltage-pv']" [ngClass]="{'active': isActive('/dc-voltage-pv')}">Voltage DC (PV)</button>
+  <button mat-button class="btn" [routerLink]="['/dc-power-pv']" [ngClass]="{'active': isActive('/dc-power-pv')}">Power DC (PV)</button>
+  <button mat-button class="btn" [routerLink]="['/dc-power-akku']" [ngClass]="{'active': isActive('/dc-power-akku')}">Power DC (Storage)</button>
+  <button mat-button class="btn" [routerLink]="['/state-of-charge-akku']" [ngClass]="{'active': isActive('/state-of-charge-akku')}">State of Charge (Storage)</button>
+  <button mat-button class="btn" [routerLink]="['/autonomy']" [ngClass]="{'active': isActive('/autonomy')}">Autonomy</button>
+  <button mat-button class="btn" [routerLink]="['/self-consumption']" [ngClass]="{'active': isActive('/self-consumption')}">Self Consumption</button>
 </div>

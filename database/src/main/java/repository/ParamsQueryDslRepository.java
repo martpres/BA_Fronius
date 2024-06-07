@@ -129,7 +129,8 @@ public class ParamsQueryDslRepository {
         return new QueryDslResponse<>(commonInverterDataMapper.convertParamsToDcVoltagePv(query.fetch()), fetchCount());
     }
 
-    public ResponseAcEnergyInverterDayDto loadAcEnergyInverterDay() {
+    public ResponseAcEnergyInverterDayDto loadAcEnergyInverterDay(Optional<ZonedDateTime> startDate,
+                                                                  Optional<ZonedDateTime> endDate) {
         BooleanBuilder booleanBuilder = new BooleanBuilder();
         booleanBuilder.and(qParamsEntity.acEnergyInverterDay.isNotNull());
         JPAQuery<ParamsEntity> query = getJpaQueryFactory().selectFrom(qParamsEntity).where(booleanBuilder);

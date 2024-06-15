@@ -17,6 +17,7 @@ export class AcPowerInverterComponent implements OnInit, OnDestroy {
   public acEnergyInverterDayData?: QueryDslResponse<AcEnergyInverterDay>;
   public lineChartData?: any[];
   public initialDate = new Date();
+  public maxDate = new Date();
   private sub?: Subscription;
   private data?: QueryDslResponse<AcPowerInverter>;
   private refreshMilliSeconds = 60000;
@@ -41,8 +42,14 @@ export class AcPowerInverterComponent implements OnInit, OnDestroy {
     return formatDate(value, timeFormat, localId);
   }
 
+  public dateChange(): void {
+    this.initialDate.setHours(23,59,59);
+    // TODO:
+    this.sendRequest();
+  }
+
   private sendRequest(): void {
-    this.initialDate = new Date();
+    debugger
     const endDate = this.dateTimeService.convertToUtcDate(this.initialDate);
     const startDate = this.dateTimeService.convertToStartOfDayUtc(this.dateTimeService.convertToUtcDate(this.initialDate));
     this.sub = this.backendService.loadAcPowerInverter(this.dateTimeService.createFilter(startDate, endDate)).subscribe((e) => {

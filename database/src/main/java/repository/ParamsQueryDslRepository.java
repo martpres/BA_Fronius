@@ -131,7 +131,7 @@ public class ParamsQueryDslRepository {
 
     public ResponseAcEnergyInverterDayDto loadAcEnergyInverterDay(Optional<ZonedDateTime> startDate,
                                                                   Optional<ZonedDateTime> endDate) {
-        BooleanBuilder booleanBuilder = new BooleanBuilder();
+        BooleanBuilder booleanBuilder = prepareBooleanBuilder(startDate, endDate);
         booleanBuilder.and(qParamsEntity.acEnergyInverterDay.isNotNull());
         JPAQuery<ParamsEntity> query = getJpaQueryFactory().selectFrom(qParamsEntity).where(booleanBuilder);
         query.orderBy(qParamsEntity.acEnergyInverterDay.desc());

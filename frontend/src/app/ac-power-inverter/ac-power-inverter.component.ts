@@ -52,7 +52,6 @@ export class AcPowerInverterComponent implements OnInit, OnDestroy {
     this.sub.add(this.backendService.loadAcEnergyInverterDay(this.dateTimeService.createFilter(startDate, endDate)).subscribe((e) => {
       this.acEnergyInverterDayData = e;
     }))
-    // this.sub.add(this.backendService.loadAcEnergyInverterDay().subscribe((e) => this.acEnergyInverterDayData = e))
   }
 
   private mapRequestToLineChart(): void {

@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
+import {filter, Observable} from "rxjs";
 import {QueryDslResponse} from "../dto/queryDslResponse.model";
 import {AcCurrentGrid} from "../dto/acCurrentGrid.model";
 import {DcPowerPv} from "../dto/dcPowerPv.model";
@@ -65,8 +65,8 @@ export class BackendApiService {
     return this.httpClient.get<QueryDslResponse<StateOfChargeAkku>>(`${this.baseUrl}power-flow-realtime-data/state-of-charge-akku`, {params: filter});
   }
 
-  public loadAcEnergyInverterDay(): Observable<AcEnergyInverterDay> {
-    return this.httpClient.get<AcEnergyInverterDay>(`${this.baseUrl}common-inverter-data/ac-energy-inverter-day/latest`);
+  public loadAcEnergyInverterDay(filter?: any): Observable<QueryDslResponse<AcEnergyInverterDay>> {
+    return this.httpClient.get<QueryDslResponse<AcEnergyInverterDay>>(`${this.baseUrl}common-inverter-data/ac-energy-inverter-day/latest`, {params: filter});
   }
 
 }

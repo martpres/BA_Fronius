@@ -14,7 +14,7 @@ import {AcEnergyInverterDay} from "../dto/acEnergyInverterDay.model";
   styleUrls: ['./ac-power-inverter.component.scss']
 })
 export class AcPowerInverterComponent implements OnInit, OnDestroy {
-  public acEnergyInverterDayData?: AcEnergyInverterDay;
+  public acEnergyInverterDayData?: QueryDslResponse<AcEnergyInverterDay>;
   public lineChartData?: any[];
   public initialDate = new Date();
   private sub?: Subscription;
@@ -49,7 +49,10 @@ export class AcPowerInverterComponent implements OnInit, OnDestroy {
       this.data = e;
       this.mapRequestToLineChart();
     });
-    this.sub.add(this.backendService.loadAcEnergyInverterDay().subscribe((e) => this.acEnergyInverterDayData = e))
+    this.sub.add(this.backendService.loadAcEnergyInverterDay(this.dateTimeService.createFilter(startDate, endDate)).subscribe((e) => {
+      this.acEnergyInverterDayData = e;
+    }))
+    // this.sub.add(this.backendService.loadAcEnergyInverterDay().subscribe((e) => this.acEnergyInverterDayData = e))
   }
 
   private mapRequestToLineChart(): void {

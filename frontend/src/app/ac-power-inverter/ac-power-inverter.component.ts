@@ -7,6 +7,7 @@ import {formatDate} from "@angular/common";
 import {localId, timeFormat} from "../dto/const";
 import {AcPowerInverter} from "../dto/acPowerInverter.model";
 import {AcEnergyInverterDay} from "../dto/acEnergyInverterDay.model";
+import * as moment from "moment";
 
 @Component({
   selector: 'app-ac-power-inverter',
@@ -42,21 +43,14 @@ export class AcPowerInverterComponent implements OnInit, OnDestroy {
     return formatDate(value, timeFormat, localId);
   }
 
-  public dateChange(): void {
-    this.initialDate.setHours(23,59,59);
-    // TODO:
-    this.sendRequest();
-  }
-
-  private sendRequest(): void {
-    debugger
-    const endDate = this.dateTimeService.convertToUtcDate(this.initialDate);
-    const startDate = this.dateTimeService.convertToStartOfDayUtc(this.dateTimeService.convertToUtcDate(this.initialDate));
-    this.sub = this.backendService.loadAcPowerInverter(this.dateTimeService.createFilter(startDate, endDate)).subscribe((e) => {
+  public sendRequest(): void {
+    const endDate = moment(this.initialDate).endOf('day').utc();
+    const startDate = moment(this.initialDate).startOf('day').utc();
+    this.sub = this.backendService.loadAcPowerInverter(this.dateTimeService.createFilterForMoment(startDate.format(), endDate.format())).subscribe((e) => {
       this.data = e;
       this.mapRequestToLineChart();
     });
-    this.sub.add(this.backendService.loadAcEnergyInverterDay(this.dateTimeService.createFilter(startDate, endDate)).subscribe((e) => {
+    this.sub.add(this.backendService.loadAcEnergyInverterDay(this.dateTimeService.createFilterForMoment(startDate.format(), endDate.format())).subscribe((e) => {
       this.acEnergyInverterDayData = e;
     }))
   }

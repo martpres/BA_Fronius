@@ -11,7 +11,7 @@
 
     <mat-form-field>
       <mat-label>Select Day</mat-label>
-      <input matInput [matDatepicker]="picker" [(ngModel)]="initialDate" (dateChange)="dateChange()" [max]="maxDate">
+      <input matInput [matDatepicker]="picker" [(ngModel)]="initialDate" (dateChange)="sendRequest()" [max]="maxDate">
       <mat-hint>DD.MM.YYYY</mat-hint>
       <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>

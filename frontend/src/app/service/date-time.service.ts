@@ -18,6 +18,10 @@ export class DateTimeService {
     return date;
   }
 
+  public createFilterForMoment(startDate: string, endDate: string): any {
+    return {startDate: startDate, endDate: endDate};
+  }
+
   public createFilter(startDate: Date = new Date(), endDate: Date = new Date()): any {
     return {startDate: startDate.toISOString(), endDate: endDate.toISOString()};
   }

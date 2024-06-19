@@ -17,11 +17,10 @@
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
 
-
   </div>
 </div>
 
-<div *ngIf="lineChartData">
+<div *ngIf="chartData">
   <ngx-charts-area-chart
     [legend]="true"
     [showXAxisLabel]="true"
@@ -31,6 +30,8 @@
     [xAxisLabel]="'Time'"
     [yAxisLabel]="'Power [W]'"
     [xAxisTickFormatting]="convertTime"
-    [results]="lineChartData"
+    [results]="chartData"
+    [scheme]="'forest'"
+    [gradient]="true"
   ></ngx-charts-area-chart>
 </div>

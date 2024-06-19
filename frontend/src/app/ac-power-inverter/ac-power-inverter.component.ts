@@ -16,12 +16,13 @@ import * as moment from "moment";
 })
 export class AcPowerInverterComponent implements OnInit, OnDestroy {
   public acEnergyInverterDayData?: QueryDslResponse<AcEnergyInverterDay>;
-  public lineChartData?: any[];
+  public chartData?: any[];
   public initialDate = new Date();
   public maxDate = new Date();
-  private sub?: Subscription;
+  private sub1?: Subscription;
+  private sub2?: Subscription;
   private data?: QueryDslResponse<AcPowerInverter>;
-  private refreshMilliSeconds = 60000;
+  private refreshMilliSeconds = 6000;
   private interval?: any;
 
   constructor(private backendService: BackendApiService, private dateTimeService: DateTimeService) {
@@ -35,7 +36,8 @@ export class AcPowerInverterComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.sub?.unsubscribe();
+    this.sub1?.unsubscribe();
+    this.sub2?.unsubscribe();
     clearInterval(this.interval);
   }
 
@@ -43,30 +45,34 @@ export class AcPowerInverterComponent implements OnInit, OnDestroy {
     return formatDate(value, timeFormat, localId);
   }
 
-  public sendRequest(): void {
+  sendRequest(): void {
     const endDate = moment(this.initialDate).endOf('day').utc();
     const startDate = moment(this.initialDate).startOf('day').utc();
-    this.sub = this.backendService.loadAcPowerInverter(this.dateTimeService.createFilterForMoment(startDate.format(), endDate.format())).subscribe((e) => {
+
+    this.sub1 = this.backendService.loadAcPowerInverter(this.dateTimeService.createFilterForMoment(startDate.format(),
+      endDate.format())).subscribe((e) => {
       this.data = e;
       this.mapRequestToLineChart();
     });
-    this.sub.add(this.backendService.loadAcEnergyInverterDay(this.dateTimeService.createFilterForMoment(startDate.format(), endDate.format())).subscribe((e) => {
+
+    this.sub2 = this.backendService.loadAcEnergyInverterDay(this.dateTimeService.createFilterForMoment(startDate.format(),
+      endDate.format())).subscribe((e) => {
       this.acEnergyInverterDayData = e;
-    }))
+    });
   }
 
   private mapRequestToLineChart(): void {
     if (this.data?.content?.length === 0) {
-      this.lineChartData = undefined;
+      this.chartData = undefined;
       return;
     }
-    this.lineChartData = [];
-    const arrayPower1: any[] = [];
+    this.chartData = [];
+    const array: any[] = [];
     this.data?.content?.forEach((e) => {
       let date = this.dateTimeService.convertUtcToLocalTimeZone(e.timestamp)
-      arrayPower1.push({name: date, value: e.acPowerInverter});
+      array.push({name: date, value: e.acPowerInverter});
     });
-    this.lineChartData?.push({name: 'AC Power Inverter', series: arrayPower1});
+    this.chartData?.push({name: 'AC Power Inverter', series: array});
   }
 
 }

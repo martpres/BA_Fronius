@@ -20,6 +20,7 @@ import {AutonomyComponent} from './autonomy/autonomy.component';
 import {SelfConsumptionComponent} from './self-consumption/self-consumption.component';
 import {AcPowerLoadComponent} from './ac-power-load/ac-power-load.component';
 import {StateOfChargeAkkuComponent} from './state-of-charge-akku/state-of-charge-akku.component';
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import {StateOfChargeAkkuComponent} from './state-of-charge-akku/state-of-charge
     BrowserAnimationsModule,
     MaterialModule,
     HttpClientModule,
-    NgxChartsModule
+    NgxChartsModule,
+    FormsModule
   ],
   providers: [
     {provide: LOCALE_ID, useValue: 'de-DE'},

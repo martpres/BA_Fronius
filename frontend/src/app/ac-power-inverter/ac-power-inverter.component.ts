@@ -7,6 +7,7 @@ import {formatDate} from "@angular/common";
 import {localId, timeFormat} from "../dto/const";
 import {AcPowerInverter} from "../dto/acPowerInverter.model";
 import {AcEnergyInverterDay} from "../dto/acEnergyInverterDay.model";
+import * as moment from "moment";
 
 @Component({
   selector: 'app-ac-power-inverter',
@@ -14,9 +15,10 @@ import {AcEnergyInverterDay} from "../dto/acEnergyInverterDay.model";
   styleUrls: ['./ac-power-inverter.component.scss']
 })
 export class AcPowerInverterComponent implements OnInit, OnDestroy {
-  public acEnergyInverterDayData?: AcEnergyInverterDay;
+  public acEnergyInverterDayData?: QueryDslResponse<AcEnergyInverterDay>;
   public lineChartData?: any[];
   public initialDate = new Date();
+  public maxDate = new Date();
   private sub?: Subscription;
   private data?: QueryDslResponse<AcPowerInverter>;
   private refreshMilliSeconds = 60000;
@@ -41,15 +43,16 @@ export class AcPowerInverterComponent implements OnInit, OnDestroy {
     return formatDate(value, timeFormat, localId);
   }
 
-  private sendRequest(): void {
-    this.initialDate = new Date();
-    const endDate = this.dateTimeService.convertToUtcDate(this.initialDate);
-    const startDate = this.dateTimeService.convertToStartOfDayUtc(this.dateTimeService.convertToUtcDate(this.initialDate));
-    this.sub = this.backendService.loadAcPowerInverter(this.dateTimeService.createFilter(startDate, endDate)).subscribe((e) => {
+  public sendRequest(): void {
+    const endDate = moment(this.initialDate).endOf('day').utc();
+    const startDate = moment(this.initialDate).startOf('day').utc();
+    this.sub = this.backendService.loadAcPowerInverter(this.dateTimeService.createFilterForMoment(startDate.format(), endDate.format())).subscribe((e) => {
       this.data = e;
       this.mapRequestToLineChart();
     });
-    this.sub.add(this.backendService.loadAcEnergyInverterDay().subscribe((e) => this.acEnergyInverterDayData = e))
+    this.sub.add(this.backendService.loadAcEnergyInverterDay(this.dateTimeService.createFilterForMoment(startDate.format(), endDate.format())).subscribe((e) => {
+      this.acEnergyInverterDayData = e;
+    }))
   }
 
   private mapRequestToLineChart(): void {

@@ -22,7 +22,7 @@ export class AcPowerInverterComponent implements OnInit, OnDestroy {
   private sub1?: Subscription;
   private sub2?: Subscription;
   private data?: QueryDslResponse<AcPowerInverter>;
-  private refreshMilliSeconds = 6000;
+  private refreshMilliSeconds = 60000;
   private interval?: any;
 
   constructor(private backendService: BackendApiService, private dateTimeService: DateTimeService) {
@@ -45,14 +45,14 @@ export class AcPowerInverterComponent implements OnInit, OnDestroy {
     return formatDate(value, timeFormat, localId);
   }
 
-  sendRequest(): void {
+  public sendRequest(): void {
     const endDate = moment(this.initialDate).endOf('day').utc();
     const startDate = moment(this.initialDate).startOf('day').utc();
 
     this.sub1 = this.backendService.loadAcPowerInverter(this.dateTimeService.createFilterForMoment(startDate.format(),
       endDate.format())).subscribe((e) => {
       this.data = e;
-      this.mapRequestToLineChart();
+      this.mapRequestToChart();
     });
 
     this.sub2 = this.backendService.loadAcEnergyInverterDay(this.dateTimeService.createFilterForMoment(startDate.format(),
@@ -61,7 +61,7 @@ export class AcPowerInverterComponent implements OnInit, OnDestroy {
     });
   }
 
-  private mapRequestToLineChart(): void {
+  private mapRequestToChart(): void {
     if (this.data?.content?.length === 0) {
       this.chartData = undefined;
       return;

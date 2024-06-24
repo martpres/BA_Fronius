@@ -6,6 +6,8 @@ import {DateTimeService} from "../service/date-time.service";
 import {formatDate} from "@angular/common";
 import {localId, timeFormat} from "../dto/const";
 import {AcPowerLoad} from "../dto/acPowerLoad.model";
+import * as moment from "moment";
+import {AcEnergyInverterDay} from "../dto/acEnergyInverterDay.model";
 
 @Component({
   selector: 'app-ac-power-load',
@@ -13,13 +15,14 @@ import {AcPowerLoad} from "../dto/acPowerLoad.model";
   styleUrls: ['./ac-power-load.component.scss']
 })
 export class AcPowerLoadComponent implements OnInit, OnDestroy {
-  public lineChartData?: any[];
+  public acEnergyLoadDayData? = "xxx";
+  public chartData?: any[];
   public initialDate = new Date();
+  public maxDate = new Date();
   private sub?: Subscription;
   private data?: QueryDslResponse<AcPowerLoad>;
   private refreshMilliSeconds = 60000;
   private interval?: any;
-
 
   constructor(private backendService: BackendApiService, private dateTimeService: DateTimeService) {
   }
@@ -40,28 +43,31 @@ export class AcPowerLoadComponent implements OnInit, OnDestroy {
     return formatDate(value, timeFormat, localId);
   }
 
-  private sendRequest(): void {
-    this.initialDate = new Date();
-    const endDate = this.dateTimeService.convertToUtcDate(this.initialDate);
-    const startDate = this.dateTimeService.convertToStartOfDayUtc(this.dateTimeService.convertToUtcDate(this.initialDate));
-    this.sub = this.backendService.loadAcPowerLoad(this.dateTimeService.createFilter(startDate, endDate)).subscribe((e) => {
+  public sendRequest(): void {
+    const endDate = moment(this.initialDate).endOf('day').utc();
+    const startDate = moment(this.initialDate).startOf('day').utc();
+
+    this.sub = this.backendService.loadAcPowerLoad(this.dateTimeService.createFilterForMoment(startDate.format(),
+      endDate.format())).subscribe((e) => {
       this.data = e;
-      this.mapRequestToLineChart();
+      this.mapRequestToChart();
     });
   }
 
-  private mapRequestToLineChart(): void {
+  private mapRequestToChart(): void {
     if (this.data?.content?.length === 0) {
-      this.lineChartData = undefined;
+      this.chartData = undefined;
       return;
     }
-    this.lineChartData = [];
-    const arrayPower1: any[] = [];
+    this.chartData = [];
+    const array: any[] = [];
     this.data?.content?.forEach((e) => {
       let date = this.dateTimeService.convertUtcToLocalTimeZone(e.timestamp)
-      arrayPower1.push({name: date, value: e.acPowerLoad});
+      if (typeof e.acPowerLoad === 'number') {
+        array.push({name: date, value: -e.acPowerLoad});
+      }
     });
-    this.lineChartData?.push({name: 'Power Load', series: arrayPower1});
+    this.chartData?.push({name: 'Power Load', series: array});
   }
 
 }

@@ -7,7 +7,6 @@ import {formatDate} from "@angular/common";
 import {localId, timeFormat} from "../dto/const";
 import {AcPowerLoad} from "../dto/acPowerLoad.model";
 import * as moment from "moment";
-import {AcEnergyInverterDay} from "../dto/acEnergyInverterDay.model";
 
 @Component({
   selector: 'app-ac-power-load',

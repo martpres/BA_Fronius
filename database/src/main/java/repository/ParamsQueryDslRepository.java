@@ -129,8 +129,8 @@ public class ParamsQueryDslRepository {
         return new QueryDslResponse<>(commonInverterDataMapper.convertParamsToDcVoltagePv(query.fetch()), fetchCount());
     }
 
-    public ResponseAcEnergyInverterDayDto loadAcEnergyInverterDay(Optional<ZonedDateTime> startDate,
-                                                                  Optional<ZonedDateTime> endDate) {
+    public ResponseAcEnergyInverterDayDto loadAcEnergyInverterDay(ZonedDateTime startDate,
+                                                                  ZonedDateTime endDate) {
         BooleanBuilder booleanBuilder = prepareBooleanBuilder(startDate, endDate);
         booleanBuilder.and(qParamsEntity.acEnergyInverterDay.isNotNull());
         JPAQuery<ParamsEntity> query = getJpaQueryFactory().selectFrom(qParamsEntity).where(booleanBuilder);
@@ -149,6 +149,13 @@ public class ParamsQueryDslRepository {
         BooleanBuilder booleanBuilder = new BooleanBuilder();
         startDate.ifPresent(value -> booleanBuilder.and(qParamsEntity.timestamp.after(startDate.get())));
         endDate.ifPresent(value -> booleanBuilder.and(qParamsEntity.timestamp.before(endDate.get())));
+        return booleanBuilder;
+    }
+
+    private BooleanBuilder prepareBooleanBuilder(ZonedDateTime startDate, ZonedDateTime endDate) {
+        BooleanBuilder booleanBuilder = new BooleanBuilder();
+        booleanBuilder.and(qParamsEntity.timestamp.after(startDate));
+        booleanBuilder.and(qParamsEntity.timestamp.before(endDate));
         return booleanBuilder;
     }
 

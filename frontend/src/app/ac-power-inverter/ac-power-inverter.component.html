@@ -6,10 +6,17 @@
     </h3>
     <h4 *ngIf="acEnergyInverterDayData?.acEnergyInverterDay">
       Day Energy (Wert von API): {{acEnergyInverterDayData?.acEnergyInverterDay}} Ws
-      <br>
-      Day Energy (berechneter Wert):   xxx Ws
     </h4>
+
+    <h4 *ngIf="acCalculated?.energyDay">
+      Day Energy (berechneter Wert):   {{acCalculated?.energyDay}} Ws
+    </h4>
+
+
+
   </div>
+
+
 
   <div class="ml-auto">
     <mat-form-field>

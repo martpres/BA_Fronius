@@ -8,6 +8,7 @@ import {localId, timeFormat} from "../dto/const";
 import {AcPowerInverter} from "../dto/acPowerInverter.model";
 import {AcEnergyInverterDay} from "../dto/acEnergyInverterDay.model";
 import * as moment from "moment";
+import {EnergyDay} from "../dto/energyDay.model";
 
 @Component({
   selector: 'app-ac-power-inverter',
@@ -15,12 +16,14 @@ import * as moment from "moment";
   styleUrls: ['./ac-power-inverter.component.scss']
 })
 export class AcPowerInverterComponent implements OnInit, OnDestroy {
+  public acCalculated?: EnergyDay;
   public acEnergyInverterDayData?: QueryDslResponse<AcEnergyInverterDay>;
   public chartData?: any[];
   public initialDate = new Date();
   public maxDate = new Date();
   private sub1?: Subscription;
   private sub2?: Subscription;
+  private sub3?: Subscription;
   private data?: QueryDslResponse<AcPowerInverter>;
   private refreshMilliSeconds = 60000;
   private interval?: any;
@@ -38,6 +41,7 @@ export class AcPowerInverterComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.sub1?.unsubscribe();
     this.sub2?.unsubscribe();
+    this.sub3?.unsubscribe();
     clearInterval(this.interval);
   }
 
@@ -58,6 +62,11 @@ export class AcPowerInverterComponent implements OnInit, OnDestroy {
     this.sub2 = this.backendService.loadAcEnergyInverterDay(this.dateTimeService.createFilterForMoment(startDate.format(),
       endDate.format())).subscribe((e) => {
       this.acEnergyInverterDayData = e;
+    });
+
+    this.sub3 = this.backendService.loadAcEnergyDay(this.dateTimeService.createFilterForMoment(startDate.format(),
+      endDate.format())).subscribe((e) => {
+      this.acCalculated = e;
     });
   }
 

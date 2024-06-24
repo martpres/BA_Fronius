@@ -14,6 +14,7 @@ import {SelfConsumption} from "../dto/selfConsumption.model";
 import {StateOfChargeAkkuComponent} from "../state-of-charge-akku/state-of-charge-akku.component";
 import {StateOfChargeAkku} from "../dto/stateOfChargeAkku.model";
 import {AcEnergyInverterDay} from "../dto/acEnergyInverterDay.model";
+import {EnergyDay} from "../dto/energyDay.model";
 
 @Injectable({
   providedIn: 'root'
@@ -67,6 +68,10 @@ export class BackendApiService {
 
   public loadAcEnergyInverterDay(filter?: any): Observable<QueryDslResponse<AcEnergyInverterDay>> {
     return this.httpClient.get<QueryDslResponse<AcEnergyInverterDay>>(`${this.baseUrl}common-inverter-data/ac-energy-inverter-day/latest`, {params: filter});
+  }
+
+  public loadAcEnergyDay(filter?: any): Observable<EnergyDay> {
+    return this.httpClient.get<EnergyDay>(`${this.baseUrl}common-inverter-data/ac-energy-inverter-day/calculated/latest`, {params: filter});
   }
 
 }

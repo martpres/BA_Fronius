@@ -1,18 +1,25 @@
-<div class="d-flex">
+<div class="d-flex filter-container">
+
   <div>
     <h3 class="bold-text">
       DC Voltage PV-Modules
     </h3>
   </div>
+
   <div class="ml-auto">
-    <h3>
-      Date: {{initialDate | date: 'dd.MM.yyyy'}}
-    </h3>
+    <mat-form-field>
+      <mat-label>Select Day</mat-label>
+      <input matInput [matDatepicker]="picker" [(ngModel)]="initialDate" (dateChange)="sendRequest()" [max]="maxDate">
+      <mat-hint>DD.MM.YYYY</mat-hint>
+      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
   </div>
+
 </div>
 
-<div *ngIf="lineChartData">
-  <ngx-charts-line-chart
+<div *ngIf="chartData">
+  <ngx-charts-area-chart
     [legend]="true"
     [showXAxisLabel]="true"
     [showYAxisLabel]="true"
@@ -21,6 +28,8 @@
     [xAxisLabel]="'Time'"
     [yAxisLabel]="'Voltage [V]'"
     [xAxisTickFormatting]="convertTime"
-    [results]="lineChartData"
-  ></ngx-charts-line-chart>
+    [results]="chartData"
+    [scheme]="'forest'"
+    [gradient]="true"
+  ></ngx-charts-area-chart>
 </div>

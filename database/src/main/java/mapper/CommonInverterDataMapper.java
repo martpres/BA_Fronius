@@ -24,6 +24,9 @@ public abstract class CommonInverterDataMapper {
     @Mapping(target = "autonomy", ignore = true)
     @Mapping(target = "selfConsumption", ignore = true)
     @Mapping(target = "stateOfChargeAkku", ignore = true)
+    @Mapping(target = "acPowerGridPhase1", ignore = true)
+    @Mapping(target = "acPowerGridPhase2", ignore = true)
+    @Mapping(target = "acPowerGridPhase3", ignore = true)
     public abstract ParamsEntity dtoToEntity(CommonInverterDataDto dto);
 
     public abstract ResponseDcVoltagePvDto convertParamsToDcVoltagePv(ParamsEntity entity);

@@ -22,7 +22,7 @@
 </div>
 
 <div *ngIf="chartData">
-  <ngx-charts-line-chart
+  <ngx-charts-area-chart
     [legend]="true"
     [showXAxisLabel]="true"
     [showYAxisLabel]="true"
@@ -32,5 +32,7 @@
     [yAxisLabel]="'Power [W]'"
     [xAxisTickFormatting]="convertTime"
     [results]="chartData"
-  ></ngx-charts-line-chart>
+    [customColors]="mapColors()"
+
+  ></ngx-charts-area-chart>
 </div>

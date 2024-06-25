@@ -7,6 +7,14 @@ import {formatDate} from "@angular/common";
 import {localId, timeFormat} from "../dto/const";
 import {AcPowerGrid} from "../dto/acPowerGrid.model";
 import * as moment from "moment";
+import {isNumber} from "@swimlane/ngx-charts/lib/utils/types";
+import {DEBUG} from "@angular/compiler-cli/src/ngtsc/logging/src/console_logger";
+
+// Define an interface for chart data point
+interface ChartDataPoint {
+  name: string;
+  value: number;
+}
 
 @Component({
   selector: 'app-ac-power-grid',
@@ -16,6 +24,7 @@ import * as moment from "moment";
 export class AcPowerGridComponent implements OnInit, OnDestroy {
   public acEnergyGridDayData? = "xxx";
   public chartData?: any[];
+  public chartColors?: any[];
   public initialDate = new Date();
   public maxDate = new Date();
   private sub?: Subscription;
@@ -49,6 +58,9 @@ export class AcPowerGridComponent implements OnInit, OnDestroy {
       endDate.format())).subscribe((e)=> {
       this.data = e;
       this.mapRequestToLineChart();
+      this.mapColors();
+      console.log(this.chartData)
+      console.log(this.chartColors)
     });
   }
 
@@ -63,7 +75,29 @@ export class AcPowerGridComponent implements OnInit, OnDestroy {
       let date = this.dateTimeService.convertUtcToLocalTimeZone(e.timestamp)
       array.push({name: date, value: e.acPowerGrid});
     });
-    this.chartData?.push({name: 'Power Grid', series: array});
+    this.chartData?.push({name: 'Power Grid', series: array });
+  }
+
+  public mapColors(): void {
+    if (this.data?.content?.length === 0) {
+      this.chartColors = undefined;
+      return;
+    }
+    this.chartColors = [];
+    this.data?.content?.forEach((e)=>{
+      if(e.acPowerGrid === undefined){
+        return;
+      }
+      let date = this.dateTimeService.convertUtcToLocalTimeZone(e.timestamp)
+      if ( e.acPowerGrid >  0 || isNaN(e.acPowerGrid)){
+        // @ts-ignore
+        this.chartColors.push({name: date, value: "#0000ff"});
+      } else
+        { // @ts-ignore
+          this.chartColors.push({name: date, value: "#ff0000"});
+        }
+      // return this.chartColors;
+    });
   }
 
 }

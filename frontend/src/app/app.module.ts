@@ -5,7 +5,7 @@ import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {HeaderComponent} from './header/header.component';
 import {MaterialModule} from "./material/material.module";
-import {AcCurrentGridComponent} from './ac-current-grid/ac-current-grid.component';
+import {AcCurrentGridPhasesComponent} from './ac-current-grid-phases/ac-current-grid-phases.component';
 import {HttpClientModule} from "@angular/common/http";
 import {CommonModule, DatePipe, registerLocaleData} from "@angular/common";
 import {NgxChartsModule} from "@swimlane/ngx-charts";
@@ -21,12 +21,13 @@ import {SelfConsumptionComponent} from './self-consumption/self-consumption.comp
 import {AcPowerLoadComponent} from './ac-power-load/ac-power-load.component';
 import {StateOfChargeAkkuComponent} from './state-of-charge-akku/state-of-charge-akku.component';
 import {FormsModule} from "@angular/forms";
+import { AcPowerGridPhasesComponent } from './ac-power-grid-phases/ac-power-grid-phases.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    AcCurrentGridComponent,
+    AcCurrentGridPhasesComponent,
     DcPowerPvComponent,
     AcPowerGridComponent,
     AcPowerInverterComponent,
@@ -35,7 +36,8 @@ import {FormsModule} from "@angular/forms";
     AutonomyComponent,
     SelfConsumptionComponent,
     AcPowerLoadComponent,
-    StateOfChargeAkkuComponent
+    StateOfChargeAkkuComponent,
+    AcPowerGridPhasesComponent
   ],
   imports: [
     BrowserModule,

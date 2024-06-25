@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {AcCurrentGridComponent} from "./ac-current-grid/ac-current-grid.component";
+import {AcCurrentGridPhasesComponent} from "./ac-current-grid-phases/ac-current-grid-phases.component";
 import {DcPowerPvComponent} from "./dc-power-pv/dc-power-pv.component";
 import {AcPowerGridComponent} from "./ac-power-grid/ac-power-grid.component";
 import {AcPowerInverterComponent} from "./ac-power-inverter/ac-power-inverter.component";
@@ -10,11 +10,16 @@ import {AcPowerLoadComponent} from "./ac-power-load/ac-power-load.component";
 import {AutonomyComponent} from "./autonomy/autonomy.component";
 import {SelfConsumptionComponent} from "./self-consumption/self-consumption.component";
 import {StateOfChargeAkkuComponent} from "./state-of-charge-akku/state-of-charge-akku.component";
+import {AcPowerGridPhasesComponent} from "./ac-power-grid-phases/ac-power-grid-phases.component";
 
 const routes: Routes = [
   {
-    path: 'ac-current-grid',
-    component: AcCurrentGridComponent
+    path: 'ac-current-grid-phases',
+    component: AcCurrentGridPhasesComponent
+  },
+  {
+    path: 'ac-power-grid-phases',
+    component: AcPowerGridPhasesComponent
   },
   {
     path: 'dc-power-pv',

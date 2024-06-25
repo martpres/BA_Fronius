@@ -1,22 +1,22 @@
-import {Component, inject, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {BackendApiService} from "../service/backend-api.service";
 import {Subscription} from "rxjs";
 import {QueryDslResponse} from "../dto/queryDslResponse.model";
-import {AcCurrentGrid} from "../dto/acCurrentGrid.model";
+import {AcCurrentGridPhases} from "../dto/acCurrentGridPhases.model";
 import {DateTimeService} from "../service/date-time.service";
 import {formatDate} from "@angular/common";
 import {localId, timeFormat} from "../dto/const";
 
 @Component({
-  selector: 'app-ac-current-grid',
-  templateUrl: './ac-current-grid.component.html',
-  styleUrls: ['./ac-current-grid.component.scss']
+  selector: 'app-ac-current-grid-phases',
+  templateUrl: './ac-current-grid-phases.component.html',
+  styleUrls: ['./ac-current-grid-phases.component.scss']
 })
-export class AcCurrentGridComponent implements OnInit, OnDestroy {
+export class AcCurrentGridPhasesComponent implements OnInit, OnDestroy {
   public lineChartData?: any[];
   public initialDate = new Date();
   private sub?: Subscription;
-  private data?: QueryDslResponse<AcCurrentGrid>;
+  private data?: QueryDslResponse<AcCurrentGridPhases>;
   private refreshMilliSeconds = 60000;
   private interval?: any;
 
@@ -43,7 +43,8 @@ export class AcCurrentGridComponent implements OnInit, OnDestroy {
     this.initialDate = new Date();
     const endDate = this.dateTimeService.convertToUtcDate(this.initialDate);
     const startDate = this.dateTimeService.convertToStartOfDayUtc(this.dateTimeService.convertToUtcDate(this.initialDate));
-    this.sub = this.backendService.loadCurrentAC(this.dateTimeService.createFilter(startDate, endDate)).subscribe((e) => {
+    this.sub = this.backendService.loadAcCurrentGridPhases(
+      this.dateTimeService.createFilter(startDate, endDate)).subscribe((e) => {
       this.data = e;
       this.mapRequestToLineChart();
     });

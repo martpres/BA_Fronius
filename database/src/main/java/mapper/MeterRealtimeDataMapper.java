@@ -2,6 +2,7 @@ package mapper;
 
 import dto.MeterRealtimeDataDto;
 import dto.ResponseAcCurrentGridDto;
+import dto.ResponseAcPowerGridPhasesDto;
 import entity.ParamsEntity;
 import org.mapstruct.InjectionStrategy;
 import org.mapstruct.Mapper;
@@ -10,8 +11,7 @@ import org.mapstruct.ReportingPolicy;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring",
-        injectionStrategy = InjectionStrategy.CONSTRUCTOR,
+@Mapper(componentModel = "spring", injectionStrategy = InjectionStrategy.CONSTRUCTOR,
         unmappedTargetPolicy = ReportingPolicy.ERROR)
 public abstract class MeterRealtimeDataMapper {
 
@@ -27,6 +27,9 @@ public abstract class MeterRealtimeDataMapper {
     @Mapping(target = "acEnergyInverterDay", ignore = true)
     public abstract ParamsEntity dtoToEntity(MeterRealtimeDataDto dto);
 
-    public abstract ResponseAcCurrentGridDto entityToDto(ParamsEntity entity);
-    public abstract List<ResponseAcCurrentGridDto> entityToDto(List<ParamsEntity> entities);
+    public abstract ResponseAcCurrentGridDto convertParamsToAcCurrentGridPhases(ParamsEntity entity);
+    public abstract List<ResponseAcCurrentGridDto> convertParamsToAcCurrentGridPhases(List<ParamsEntity> entities);
+
+    public abstract ResponseAcPowerGridPhasesDto convertParamsToAcPowerGridPhases(ParamsEntity entity);
+    public abstract List<ResponseAcPowerGridPhasesDto> convertParamsToAcPowerGridPhases(List<ParamsEntity> entities);
 }

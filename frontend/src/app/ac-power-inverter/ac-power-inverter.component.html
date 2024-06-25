@@ -1,9 +1,11 @@
 <div class="d-flex filter-container">
 
   <div>
+
     <h3 class="bold-text">
       Power AC Inverter
     </h3>
+
     <h4 *ngIf="acEnergyInverterDayData?.acEnergyInverterDay">
       Day Energy (Wert von API): {{acEnergyInverterDayData?.acEnergyInverterDay}} Ws
     </h4>
@@ -12,11 +14,7 @@
       Day Energy (berechneter Wert):   {{acCalculated?.energyDay}} Ws
     </h4>
 
-
-
   </div>
-
-
 
   <div class="ml-auto">
     <mat-form-field>

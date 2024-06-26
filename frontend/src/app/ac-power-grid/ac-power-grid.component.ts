@@ -7,14 +7,7 @@ import {formatDate} from "@angular/common";
 import {localId, timeFormat} from "../dto/const";
 import {AcPowerGrid} from "../dto/acPowerGrid.model";
 import * as moment from "moment";
-import {isNumber} from "@swimlane/ngx-charts/lib/utils/types";
-import {DEBUG} from "@angular/compiler-cli/src/ngtsc/logging/src/console_logger";
-
-// Define an interface for chart data point
-interface ChartDataPoint {
-  name: string;
-  value: number;
-}
+import * as d3 from 'd3';
 
 @Component({
   selector: 'app-ac-power-grid',
@@ -83,21 +76,25 @@ export class AcPowerGridComponent implements OnInit, OnDestroy {
       this.chartColors = undefined;
       return;
     }
+    const positiveFillColor = '#0000ff'; // Blue for positive
+    const negativeFillColor = '#ff0000'; // Red for negative
+    const zeroColor = 'transparent'; // Transparent for zero
+
     this.chartColors = [];
-    this.data?.content?.forEach((e)=>{
-      if(e.acPowerGrid === undefined){
+    const colorScale = d3.scaleLinear() // Create a linear color scale
+      .domain([-1, 0, 1]) // Define the domain for positive, zero, negative values
+      // @ts-ignore
+      .range([negativeFillColor, zeroColor, positiveFillColor]); // Set color mapping
+    this.data?.content?.forEach((e) => {
+      if (e.acPowerGrid === undefined) {
         return;
       }
-      let date = this.dateTimeService.convertUtcToLocalTimeZone(e.timestamp)
-      if ( e.acPowerGrid >  0 || isNaN(e.acPowerGrid)){
-        // @ts-ignore
-        this.chartColors.push({name: date, value: "#0000ff"});
-      } else
-        { // @ts-ignore
-          this.chartColors.push({name: date, value: "#ff0000"});
-        }
-      // return this.chartColors;
+      let date = this.dateTimeService.convertUtcToLocalTimeZone(e.timestamp);
+      // @ts-ignore
+      this.chartColors.push({
+        name: date,
+        value: colorScale(e.acPowerGrid), // Use color scale to determine color based on value
+      });
     });
   }
-
 }

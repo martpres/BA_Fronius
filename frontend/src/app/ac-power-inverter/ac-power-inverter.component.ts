@@ -83,12 +83,9 @@ export class AcPowerInverterComponent implements OnInit, OnDestroy {
     this.chartData?.push({name: 'AC Power Inverter', series: array});
   }
 
-  public ConvertAndRoundEnergy(energyDay: any): EnergyDay {
-    if (!energyDay?.energyDay) {
-      return { energyDay: 0 };
-    }
-    const kiloWatts = energyDay.energyDay / (1000 * 3600);
-    return { energyDay: Math.round(kiloWatts) };
+  public convertAndRoundEnergy(energyDay: EnergyDay): number {
+    const kiloWatts = (energyDay?.energyDay ?? 0) / (1000 * 3600);
+    return Math.round(kiloWatts*100)/100;
   }
 
 }

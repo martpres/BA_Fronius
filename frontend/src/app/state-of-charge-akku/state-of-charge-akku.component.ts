@@ -6,6 +6,7 @@ import {DateTimeService} from "../service/date-time.service";
 import {formatDate} from "@angular/common";
 import {localId, timeFormat} from "../dto/const";
 import {StateOfChargeAkku} from "../dto/stateOfChargeAkku.model";
+import * as moment from "moment";
 
 @Component({
   selector: 'app-state-of-charge-akku',
@@ -13,8 +14,9 @@ import {StateOfChargeAkku} from "../dto/stateOfChargeAkku.model";
   styleUrls: ['./state-of-charge-akku.component.scss']
 })
 export class StateOfChargeAkkuComponent implements OnInit, OnDestroy {
-  public lineChartData?: any[];
+  public chartData?: any[];
   public initialDate = new Date();
+  public maxDate = new Date();
   private sub?: Subscription;
   private data?: QueryDslResponse<StateOfChargeAkku>;
   private refreshMilliSeconds = 60000;
@@ -39,28 +41,28 @@ export class StateOfChargeAkkuComponent implements OnInit, OnDestroy {
     return formatDate(value, timeFormat, localId);
   }
 
-  private sendRequest(): void {
-    this.initialDate = new Date();
-    const endDate = this.dateTimeService.convertToUtcDate(this.initialDate);
-    const startDate = this.dateTimeService.convertToStartOfDayUtc(this.dateTimeService.convertToUtcDate(this.initialDate));
-    this.sub = this.backendService.loadStateOfChargeAkku(this.dateTimeService.createFilter(startDate, endDate)).subscribe((e)=> {
-      this.data=e;
-      this.mapRequestToLineChart();
+  public sendRequest(): void {
+    const endDate = moment(this.initialDate).endOf('day').utc();
+    const startDate = moment(this.initialDate).startOf('day').utc();
+    this.sub = this.backendService.loadStateOfChargeAkku(this.dateTimeService.createFilterForMoment(startDate.format(),
+      endDate.format())).subscribe((e) => {
+      this.data = e;
+      this.mapRequestToChart();
     });
   }
 
-  private mapRequestToLineChart(): void {
+  private mapRequestToChart(): void {
     if (this.data?.content?.length===0) {
-      this.lineChartData=undefined;
+      this.chartData=undefined;
       return;
     }
-    this.lineChartData = [];
-    const arrayStateOfChargeAkku: any[] = [];
+    this.chartData = [];
+    const array: any[] = [];
     this.data?.content?.forEach((e)=>{
       let date = this.dateTimeService.convertUtcToLocalTimeZone(e.timestamp)
-      arrayStateOfChargeAkku.push({name: date, value: e.stateOfChargeAkku});
+      array.push({name: date, value: e.stateOfChargeAkku});
     });
-    this.lineChartData?.push({name: 'StateOfChargeAkku', series: arrayStateOfChargeAkku});
+    this.chartData?.push({name: 'StateOfChargeAkku', series: array});
   }
 
 }

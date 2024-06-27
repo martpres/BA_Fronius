@@ -6,6 +6,7 @@ import {DateTimeService} from "../service/date-time.service";
 import {formatDate} from "@angular/common";
 import {localId, timeFormat} from "../dto/const";
 import {DcPowerPv} from "../dto/dcPowerPv.model";
+import * as moment from "moment";
 
 @Component({
   selector: 'app-power-dc',
@@ -13,8 +14,10 @@ import {DcPowerPv} from "../dto/dcPowerPv.model";
   styleUrls: ['./dc-power-pv.component.scss']
 })
 export class DcPowerPvComponent implements OnInit, OnDestroy {
-  public lineChartData?: any[];
+  public dcEnergyPvDayData? = "xxx";
+  public chartData?: any[];
   public initialDate = new Date();
+  public maxDate = new Date();
   private sub?: Subscription;
   private data?: QueryDslResponse<DcPowerPv>;
   private refreshMilliSeconds = 60000;
@@ -39,28 +42,28 @@ export class DcPowerPvComponent implements OnInit, OnDestroy {
     return formatDate(value, timeFormat, localId);
   }
 
-  private sendRequest(): void {
-    this.initialDate = new Date();
-    const endDate = this.dateTimeService.convertToUtcDate(this.initialDate);
-    const startDate = this.dateTimeService.convertToStartOfDayUtc(this.dateTimeService.convertToUtcDate(this.initialDate));
-    this.sub = this.backendService.loadDcPowerPv(this.dateTimeService.createFilter(startDate, endDate)).subscribe((e)=> {
-      this.data=e;
-      this.mapRequestToLineChart();
+  public sendRequest(): void {
+    const endDate = moment(this.initialDate).endOf('day').utc();
+    const startDate = moment(this.initialDate).startOf('day').utc();
+    this.sub = this.backendService.loadDcPowerPv(this.dateTimeService.createFilterForMoment(startDate.format(),
+      endDate.format())).subscribe((e) => {
+      this.data = e;
+      this.mapRequestToChart();
     });
   }
 
-  private mapRequestToLineChart(): void {
+  private mapRequestToChart(): void {
     if (this.data?.content?.length===0) {
-      this.lineChartData=undefined;
+      this.chartData=undefined;
       return;
     }
-    this.lineChartData = [];
-    const arrayPower1: any[] = [];
+    this.chartData = [];
+    const array: any[] = [];
     this.data?.content?.forEach((e)=>{
       let date = this.dateTimeService.convertUtcToLocalTimeZone(e.timestamp)
-      arrayPower1.push({name: date, value: e.dcPowerPv});
+      array.push({name: date, value: e.dcPowerPv});
     });
-    this.lineChartData?.push({name: 'Power PV-Modules', series: arrayPower1});
+    this.chartData?.push({name: 'Power PV-Modules', series: array});
   }
 
 }

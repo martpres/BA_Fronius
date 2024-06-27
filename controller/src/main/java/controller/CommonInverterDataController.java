@@ -3,12 +3,14 @@ package controller;
 import dto.ResponseAcEnergyInverterDayDto;
 import dto.ResponseAcPowerInverterDto;
 import dto.ResponseDcVoltagePvDto;
+import dto.ResponseEnergyDayDto;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import pagination.PaginationUtil;
+import repository.EnergyRepository;
 import response.QueryDslResponse;
 import service.CommonInverterDataService;
 
@@ -19,9 +21,11 @@ import java.util.Optional;
 @RequestMapping("/api/common-inverter-data")
 @Transactional(readOnly = true)
 public class CommonInverterDataController {
+    private final EnergyRepository energyRepository;
     private final CommonInverterDataService commonInverterDataService;
 
-    public CommonInverterDataController(CommonInverterDataService commonInverterDataService) {
+    public CommonInverterDataController(EnergyRepository energyRepository, CommonInverterDataService commonInverterDataService) {
+        this.energyRepository = energyRepository;
         this.commonInverterDataService = commonInverterDataService;
     }
 
@@ -45,8 +49,16 @@ public class CommonInverterDataController {
 
     @GetMapping(value = "/ac-energy-inverter-day/latest", produces = "application/json")
     public ResponseAcEnergyInverterDayDto loadAcEnergyInverterDay(
-        @RequestParam(value = "startDate", required = false) Optional<ZonedDateTime> startDate,
-        @RequestParam(value = "endDate", required = false) Optional<ZonedDateTime> endDate) {
+        @RequestParam(value = "startDate") ZonedDateTime startDate,
+        @RequestParam(value = "endDate") ZonedDateTime endDate) {
         return commonInverterDataService.loadAcEnergyInverterDay(startDate, endDate);
     }
+
+    @GetMapping(value = "/ac-energy-inverter-day/calculated/latest", produces = "application/json")
+    public ResponseEnergyDayDto loadEnergyDay(
+            @RequestParam(value = "startDate") ZonedDateTime startDate,
+            @RequestParam(value = "endDate") ZonedDateTime endDate) {
+        return commonInverterDataService.loadEnergyDay(startDate, endDate);
+    }
+
 }

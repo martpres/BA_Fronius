@@ -1,25 +1,24 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, inject, OnDestroy, OnInit} from '@angular/core';
+import {BackendApiService} from "../service/backend-api.service";
 import {Subscription} from "rxjs";
 import {QueryDslResponse} from "../dto/queryDslResponse.model";
-import {BackendApiService} from "../service/backend-api.service";
 import {DateTimeService} from "../service/date-time.service";
 import {formatDate} from "@angular/common";
 import {localId, timeFormat} from "../dto/const";
-import {SelfConsumption} from "../dto/selfConsumption.model";
+import {AcPowerGridPhases} from "../dto/acPowerGridPhases.model";
 import * as moment from "moment";
 
 @Component({
-  selector: 'app-self-consumption',
-  templateUrl: './self-consumption.component.html',
-  styleUrls: ['./self-consumption.component.scss']
+  selector: 'app-ac-power-grid-phases',
+  templateUrl: './ac-power-grid-phases.component.html',
+  styleUrls: ['./ac-power-grid-phases.component.scss']
 })
-
-export class SelfConsumptionComponent implements OnInit, OnDestroy {
+export class AcPowerGridPhasesComponent  implements OnInit, OnDestroy {
   public chartData?: any[];
   public initialDate = new Date();
   public maxDate = new Date();
   private sub?: Subscription;
-  private data?: QueryDslResponse<SelfConsumption>;
+  private data?: QueryDslResponse<AcPowerGridPhases>;
   private refreshMilliSeconds = 60000;
   private interval?: any;
 
@@ -45,7 +44,7 @@ export class SelfConsumptionComponent implements OnInit, OnDestroy {
   public sendRequest(): void {
     const endDate = moment(this.initialDate).endOf('day').utc();
     const startDate = moment(this.initialDate).startOf('day').utc();
-    this.sub = this.backendService.loadSelfConsumption(this.dateTimeService.createFilterForMoment(startDate.format(),
+    this.sub = this.backendService.loadAcPowerGridPhases(this.dateTimeService.createFilterForMoment(startDate.format(),
       endDate.format())).subscribe((e) => {
       this.data = e;
       this.mapRequestToChart();
@@ -58,12 +57,17 @@ export class SelfConsumptionComponent implements OnInit, OnDestroy {
       return;
     }
     this.chartData = [];
-    const array: any[] = [];
+    const array1: any[] = [];
+    const array2: any[] = [];
+    const array3: any[] = [];
     this.data?.content?.forEach((e) => {
       let date = this.dateTimeService.convertUtcToLocalTimeZone(e.timestamp)
-      array.push({name: date, value: e.selfConsumption});
+      array1.push({name: date, value: e.acPowerGridPhase1});
+      array2.push({name: date, value: e.acPowerGridPhase2});
+      array3.push({name: date, value: e.acPowerGridPhase3});
     });
-    this.chartData?.push({name: 'Self Consumption', series: array});
+    this.chartData?.push({name: 'AC Power Grid - Phase 1', series: array1});
+    this.chartData?.push({name: 'AC Power Grid - Phase 2', series: array2});
+    this.chartData?.push({name: 'AC Power Grid - Phase 3', series: array3});
   }
-
 }

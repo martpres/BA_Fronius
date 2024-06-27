@@ -1,6 +1,7 @@
 package controller;
 
 import dto.ResponseAcCurrentGridDto;
+import dto.ResponseAcPowerGridPhasesDto;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,12 +24,22 @@ public class MeterRealtimeDataController {
         this.meterRealtimeDataService = meterRealtimeDataService;
     }
 
-    @GetMapping(value = "/ac-current-grid", produces = "application/json")
+    @GetMapping(value = "/ac-current-grid-phases", produces = "application/json")
     public QueryDslResponse<ResponseAcCurrentGridDto> loadAcCurrentGrid(
             @RequestParam(value = "startDate", required = false) Optional<ZonedDateTime> startDate,
             @RequestParam(value = "endDate", required = false) Optional<ZonedDateTime> endDate,
             @RequestParam(value = "page", required = false) Optional<Integer> page,
             @RequestParam(value = "pagesize", required = false) Optional<Integer> pagesize) {
-        return meterRealtimeDataService.loadAcCurrentGrid(startDate, endDate, PaginationUtil.getPagination(page, pagesize));
+        return meterRealtimeDataService.loadAcCurrentGridPhases(startDate, endDate, PaginationUtil.getPagination(page, pagesize));
     }
+
+    @GetMapping(value = "/ac-power-grid-phases", produces = "application/json")
+    public QueryDslResponse<ResponseAcPowerGridPhasesDto> loadAcPowerGridPhases(
+            @RequestParam(value = "startDate", required = false) Optional<ZonedDateTime> startDate,
+            @RequestParam(value = "endDate", required = false) Optional<ZonedDateTime> endDate,
+            @RequestParam(value = "page", required = false) Optional<Integer> page,
+            @RequestParam(value = "pagesize", required = false) Optional<Integer> pagesize) {
+        return meterRealtimeDataService.loadAcPowerGridPhases(startDate, endDate, PaginationUtil.getPagination(page, pagesize));
+    }
+
 }

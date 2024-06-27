@@ -20,6 +20,9 @@ public abstract class PowerFlowRealtimeDataMapper {
     @Mapping(target = "dcVoltagePv", ignore = true)
     @Mapping(target = "acPowerInverter", ignore = true)
     @Mapping(target = "acEnergyInverterDay", ignore = true)
+    @Mapping(target = "acPowerGridPhase1", ignore = true)
+    @Mapping(target = "acPowerGridPhase2", ignore = true)
+    @Mapping(target = "acPowerGridPhase3", ignore = true)
     public abstract ParamsEntity dtoToEntity(PowerFlowRealtimeDataDto dto);
 
     public abstract ResponseDcPowerPvDto convertParamsToDcPowerPv(ParamsEntity entity);

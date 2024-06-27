@@ -9,21 +9,8 @@ export class DateTimeService {
   constructor() {
   }
 
-  public convertToUtcDate(date: Date = new Date()): Date {
-    return new Date(date.toUTCString());
-  }
-
-  public convertToStartOfDayUtc(date: Date = new Date()): Date {
-    date.setUTCHours(0, 0, 0, 0);
-    return date;
-  }
-
   public createFilterForMoment(startDate: string, endDate: string): any {
     return {startDate: startDate, endDate: endDate};
-  }
-
-  public createFilter(startDate: Date = new Date(), endDate: Date = new Date()): any {
-    return {startDate: startDate.toISOString(), endDate: endDate.toISOString()};
   }
 
   public convertUtcToLocalTimeZone(date: Date = new Date()): Date {

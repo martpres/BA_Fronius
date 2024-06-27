@@ -24,28 +24,38 @@ import java.util.Optional;
 public class ParamsQueryDslRepository {
     @PersistenceContext
     private EntityManager entityManager;
-
     private final QParamsEntity qParamsEntity = QParamsEntity.paramsEntity;
-
     private final MeterRealtimeDataMapper meterRealtimeDataMapper;
-
     private final PowerFlowRealtimeDataMapper powerFlowRealtimeDataMapper;
-
     private final CommonInverterDataMapper commonInverterDataMapper;
 
-    public ParamsQueryDslRepository(MeterRealtimeDataMapper meterRealtimeDataMapper, PowerFlowRealtimeDataMapper powerFlowRealtimeDataMapper, CommonInverterDataMapper commonInverterDataMapper) {
+    public ParamsQueryDslRepository(MeterRealtimeDataMapper meterRealtimeDataMapper, PowerFlowRealtimeDataMapper
+            powerFlowRealtimeDataMapper, CommonInverterDataMapper commonInverterDataMapper) {
         this.meterRealtimeDataMapper = meterRealtimeDataMapper;
         this.powerFlowRealtimeDataMapper = powerFlowRealtimeDataMapper;
         this.commonInverterDataMapper = commonInverterDataMapper;
     }
 
-    public QueryDslResponse<ResponseAcCurrentGridDto> loadCurrentAc(Optional<ZonedDateTime> startDate, Optional<ZonedDateTime> endDate, Optional<PageRequest> pageRequest) {
+    public QueryDslResponse<ResponseAcCurrentGridDto> loadAcCurrentGridPhases(Optional<ZonedDateTime> startDate,
+                                                                    Optional<ZonedDateTime> endDate,
+                                                                    Optional<PageRequest> pageRequest) {
         BooleanBuilder booleanBuilder = prepareBooleanBuilder(startDate, endDate);
         booleanBuilder.and(qParamsEntity.acCurrentGridPhase1.isNotNull());
         booleanBuilder.and(qParamsEntity.acCurrentGridPhase2.isNotNull());
         booleanBuilder.and(qParamsEntity.acCurrentGridPhase3.isNotNull());
         JPAQuery<ParamsEntity> query = prepareQuery(booleanBuilder, pageRequest);
-        return new QueryDslResponse<>(meterRealtimeDataMapper.entityToDto(query.fetch()), fetchCount());
+        return new QueryDslResponse<>(meterRealtimeDataMapper.convertParamsToAcCurrentGridPhases(query.fetch()), fetchCount());
+    }
+
+    public QueryDslResponse<ResponseAcPowerGridPhasesDto> loadAcPowerGridPhases(Optional<ZonedDateTime> startDate,
+                                                                                Optional<ZonedDateTime> endDate,
+                                                                                Optional<PageRequest> pageRequest) {
+        BooleanBuilder booleanBuilder = prepareBooleanBuilder(startDate, endDate);
+        booleanBuilder.and(qParamsEntity.acPowerGridPhase1.isNotNull());
+        booleanBuilder.and(qParamsEntity.acPowerGridPhase2.isNotNull());
+        booleanBuilder.and(qParamsEntity.acPowerGridPhase3.isNotNull());
+        JPAQuery<ParamsEntity> query = prepareQuery(booleanBuilder, pageRequest);
+        return new QueryDslResponse<>(meterRealtimeDataMapper.convertParamsToAcPowerGridPhases(query.fetch()), fetchCount());
     }
 
     public QueryDslResponse<ResponseDcPowerPvDto> loadDcPowerPv(Optional<ZonedDateTime> startDate,
@@ -129,8 +139,8 @@ public class ParamsQueryDslRepository {
         return new QueryDslResponse<>(commonInverterDataMapper.convertParamsToDcVoltagePv(query.fetch()), fetchCount());
     }
 
-    public ResponseAcEnergyInverterDayDto loadAcEnergyInverterDay(Optional<ZonedDateTime> startDate,
-                                                                  Optional<ZonedDateTime> endDate) {
+    public ResponseAcEnergyInverterDayDto loadAcEnergyInverterDay(ZonedDateTime startDate,
+                                                                  ZonedDateTime endDate) {
         BooleanBuilder booleanBuilder = prepareBooleanBuilder(startDate, endDate);
         booleanBuilder.and(qParamsEntity.acEnergyInverterDay.isNotNull());
         JPAQuery<ParamsEntity> query = getJpaQueryFactory().selectFrom(qParamsEntity).where(booleanBuilder);
@@ -149,6 +159,13 @@ public class ParamsQueryDslRepository {
         BooleanBuilder booleanBuilder = new BooleanBuilder();
         startDate.ifPresent(value -> booleanBuilder.and(qParamsEntity.timestamp.after(startDate.get())));
         endDate.ifPresent(value -> booleanBuilder.and(qParamsEntity.timestamp.before(endDate.get())));
+        return booleanBuilder;
+    }
+
+    private BooleanBuilder prepareBooleanBuilder(ZonedDateTime startDate, ZonedDateTime endDate) {
+        BooleanBuilder booleanBuilder = new BooleanBuilder();
+        booleanBuilder.and(qParamsEntity.timestamp.after(startDate));
+        booleanBuilder.and(qParamsEntity.timestamp.before(endDate));
         return booleanBuilder;
     }
 

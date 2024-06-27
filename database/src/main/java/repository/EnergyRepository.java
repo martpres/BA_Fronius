@@ -34,32 +34,46 @@ public class EnergyRepository {
             " FROM ordered_points" +
             " WHERE next_timestamp IS NOT NULL" +
             " )" +
-            " SELECT SUM(trapezoid_area) AS total_area" +
+            " SELECT SUM(trapezoid_area)$Pn AS total_area" +
             " FROM trapezoids;";
 
 
     public Double calculateEnergy( String columnName,
                                     ZonedDateTime startDate,
                                     ZonedDateTime endDate){
-        return calculateEnergy(columnName, startDate, endDate, null);
+        return calculateEnergy(columnName, startDate, endDate, null, false);
     }
 
     public Double calculatePositiveEnergy( String columnName,
                                    ZonedDateTime startDate,
                                    ZonedDateTime endDate){
         final String additionalWhere = " AND $Cm > 0 ";
-        return calculateEnergy(columnName, startDate, endDate, additionalWhere);
+        return calculateEnergy(columnName, startDate, endDate, additionalWhere, false);
+    }
+
+    public Double calculateNegativeEnergy( String columnName,
+                                           ZonedDateTime startDate,
+                                           ZonedDateTime endDate){
+        final String additionalWhere = " AND $Cm < 0 ";
+        return calculateEnergy(columnName, startDate, endDate, additionalWhere, true);
     }
 
     private Double calculateEnergy( String columnName,
                                    ZonedDateTime startDate,
                                    ZonedDateTime endDate,
-                                   String additionalWhere ){
+                                   String additionalWhere,
+                                   Boolean pn
+                                    ){
         String cquery = queryEnergy;
         if (additionalWhere == null) {
             cquery = cquery.replace("$Aw", "");
         } else {
             cquery = cquery.replace("$Aw", additionalWhere);
+        }
+        if (pn) {
+            cquery = cquery.replace("$Pn", " *-1");
+        } else {
+            cquery = cquery.replace("$Pn", "");
         }
         cquery = cquery.replaceAll("\\$Cm", columnName);
         Query query = entityManager.createNativeQuery(cquery);

@@ -14,6 +14,10 @@
       Day Energy (berechneter Wert):   {{acCalculated?.energyDay}} Ws
     </h4>
 
+    <h4 *ngIf="acCalculated?.energyDay">
+      Day Energy (berechneter Wert gerundet und umgerechnet):  {{ConvertAndRoundEnergy(acCalculated?.energyDay)}} kWh
+    </h4>
+
   </div>
 
   <div class="ml-auto">

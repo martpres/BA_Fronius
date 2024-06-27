@@ -52,10 +52,13 @@ export class AcPowerGridComponent implements OnInit, OnDestroy {
       this.data = e;
       this.mapRequestToLineChart();
       this.mapColors();
+      console.log(this.data)
       console.log(this.chartData)
       console.log(this.chartColors)
     });
   }
+
+
 
   private mapRequestToLineChart(): void {
     if (this.data?.content?.length === 0) {
@@ -72,28 +75,45 @@ export class AcPowerGridComponent implements OnInit, OnDestroy {
   }
 
   public mapColors(): void {
+    // debugger
+    this.chartColors = [];
     if (this.data?.content?.length === 0) {
       this.chartColors = undefined;
       return;
     }
-    const positiveFillColor = '#0000ff'; // Blue for positive
-    const negativeFillColor = '#ff0000'; // Red for negative
-    const zeroColor = 'transparent'; // Transparent for zero
 
-    this.chartColors = [];
-    const colorScale = d3.scaleLinear() // Create a linear color scale
-      .domain([-1, 0, 1]) // Define the domain for positive, zero, negative values
-      // @ts-ignore
-      .range([negativeFillColor, zeroColor, positiveFillColor]); // Set color mapping
+    const colorScale = d3.scaleOrdinal()
+      .domain(["negative", "zero", "positive"])
+      .range(["#0000ff", "#8b0000", "#ffff00"]);
+  // .range(["#0000ff", "transparent", "#ffff00"]);
+
+    const numberToCategory = (value: number) => {
+      if (value < 0) {
+        return "negative";
+      } else if (value > 0) {
+        return "positive";
+      } else {
+        return "zero";
+      }
+    };
+
+    this.chartColors.forEach((e) => {
+      const category = numberToCategory(e.value);
+      e.value = colorScale(category);
+    });
+
+
     this.data?.content?.forEach((e) => {
-      if (e.acPowerGrid === undefined) {
+      if (e.acPowerGrid === undefined || isNaN(e.acPowerGrid)) {
         return;
       }
-      let date = this.dateTimeService.convertUtcToLocalTimeZone(e.timestamp);
+      const date = this.dateTimeService.convertUtcToLocalTimeZone(e.timestamp);
+      const category = numberToCategory(e.acPowerGrid);
       // @ts-ignore
       this.chartColors.push({
         name: date,
-        value: colorScale(e.acPowerGrid), // Use color scale to determine color based on value
+        // @ts-ignore
+        value: colorScale
       });
     });
   }

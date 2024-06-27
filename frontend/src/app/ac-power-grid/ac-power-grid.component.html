@@ -1,12 +1,15 @@
 <div class="d-flex filter-container">
 
   <div>
+
     <h3 class="bold-text">
       Power AC from or to Grid
     </h3>
+
     <h4 *ngIf="acEnergyGridDayData">
       Day Energy: {{acEnergyGridDayData}} Ws
     </h4>
+
   </div>
 
   <div class="ml-auto">
@@ -32,6 +35,6 @@
     [yAxisLabel]="'Power [W]'"
     [xAxisTickFormatting]="convertTime"
     [results]="chartData"
-    [customColors]="mapColors()"
+    [customColors]="chartColors"
   ></ngx-charts-area-chart>
 </div>

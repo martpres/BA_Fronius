@@ -45,7 +45,7 @@ public class CommonInverterDataService {
     public ResponseEnergyDayDto loadEnergyDay(ZonedDateTime startDate,
                                               ZonedDateTime endDate) {
         return new ResponseEnergyDayDto(
-                energyRepository.calculateEnergy("ac_power_inverter" ,startDate, endDate, null)
+                energyRepository.calculateEnergy("ac_power_inverter" ,startDate, endDate)
         );
     }
 

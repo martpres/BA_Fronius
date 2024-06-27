@@ -7,7 +7,6 @@ import {formatDate} from "@angular/common";
 import {localId, timeFormat} from "../dto/const";
 import {AcPowerGrid} from "../dto/acPowerGrid.model";
 import * as moment from "moment";
-import * as d3 from 'd3';
 
 @Component({
   selector: 'app-ac-power-grid',
@@ -18,7 +17,6 @@ export class AcPowerGridComponent implements OnInit, OnDestroy {
   public acEnergyIntoGridData?: any = "xxx";
   public acEnergyFromGridData?: any = "xxx";
   public chartData?: any[];
-  public chartColors?: any[];
   public initialDate = new Date();
   public maxDate = new Date();
   private sub?: Subscription;
@@ -52,14 +50,8 @@ export class AcPowerGridComponent implements OnInit, OnDestroy {
       endDate.format())).subscribe((e)=> {
       this.data = e;
       this.mapRequestToLineChart();
-      // this.mapColors();
-      console.log(this.data)
-      console.log(this.chartData)
-      console.log(this.chartColors)
     });
   }
-
-
 
   private mapRequestToLineChart(): void {
     if (this.data?.content?.length === 0) {
@@ -73,49 +65,5 @@ export class AcPowerGridComponent implements OnInit, OnDestroy {
       array.push({name: date, value: e.acPowerGrid});
     });
     this.chartData?.push({name: 'Power Grid', series: array });
-  }
-
-  public mapColors(): void {
-    // debugger
-    this.chartColors = [];
-    if (this.data?.content?.length === 0) {
-      this.chartColors = undefined;
-      return;
-    }
-
-    const colorScale = d3.scaleOrdinal()
-      .domain(["negative", "zero", "positive"])
-      .range(["#0000ff", "#8b0000", "#ffff00"]);
-  // .range(["#0000ff", "transparent", "#ffff00"]);
-
-    const numberToCategory = (value: number) => {
-      if (value < 0) {
-        return "negative";
-      } else if (value > 0) {
-        return "positive";
-      } else {
-        return "zero";
-      }
-    };
-
-    this.chartColors.forEach((e) => {
-      const category = numberToCategory(e.value);
-      e.value = colorScale(category);
-    });
-
-
-    this.data?.content?.forEach((e) => {
-      if (e.acPowerGrid === undefined || isNaN(e.acPowerGrid)) {
-        return;
-      }
-      const date = this.dateTimeService.convertUtcToLocalTimeZone(e.timestamp);
-      const category = numberToCategory(e.acPowerGrid);
-      // @ts-ignore
-      this.chartColors.push({
-        name: date,
-        // @ts-ignore
-        value: colorScale
-      });
-    });
   }
 }

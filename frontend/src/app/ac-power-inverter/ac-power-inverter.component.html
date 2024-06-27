@@ -17,7 +17,7 @@
       Day Energy (berechneter Wert gerundet und umgerechnet):  {{convertAndRoundEnergy(acCalculated)}} kWh
     </h4>
 
-    <h4 *ngIf="!acCalculated?.energyDay">
+    <h4 *ngIf="!acEnergyInverterDayData?.acEnergyInverterDay">
       Keine Daten für den ausgewählten Tag vorhanden
     </h4>
   </div>

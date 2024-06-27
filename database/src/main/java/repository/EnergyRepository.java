@@ -39,6 +39,19 @@ public class EnergyRepository {
 
 
     public Double calculateEnergy( String columnName,
+                                    ZonedDateTime startDate,
+                                    ZonedDateTime endDate){
+        return calculateEnergy(columnName, startDate, endDate, null);
+    }
+
+    public Double calculatePositiveEnergy( String columnName,
+                                   ZonedDateTime startDate,
+                                   ZonedDateTime endDate){
+        final String additionalWhere = " AND $Cm > 0 ";
+        return calculateEnergy(columnName, startDate, endDate, additionalWhere);
+    }
+
+    private Double calculateEnergy( String columnName,
                                    ZonedDateTime startDate,
                                    ZonedDateTime endDate,
                                    String additionalWhere ){
@@ -55,7 +68,6 @@ public class EnergyRepository {
 
         return (Double) query.getSingleResult();
     }
-
 
 }
 

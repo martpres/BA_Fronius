@@ -6,6 +6,7 @@ import {DateTimeService} from "../service/date-time.service";
 import {formatDate} from "@angular/common";
 import {localId, timeFormat} from "../dto/const";
 import {AcPowerGridPhases} from "../dto/acPowerGridPhases.model";
+import * as moment from "moment";
 
 @Component({
   selector: 'app-ac-power-grid-phases',
@@ -15,6 +16,7 @@ import {AcPowerGridPhases} from "../dto/acPowerGridPhases.model";
 export class AcPowerGridPhasesComponent  implements OnInit, OnDestroy {
   public chartData?: any[];
   public initialDate = new Date();
+  public maxDate = new Date();
   private sub?: Subscription;
   private data?: QueryDslResponse<AcPowerGridPhases>;
   private refreshMilliSeconds = 60000;
@@ -39,11 +41,11 @@ export class AcPowerGridPhasesComponent  implements OnInit, OnDestroy {
     return formatDate(value, timeFormat, localId);
   }
 
-  private sendRequest(): void {
-    this.initialDate = new Date();
-    const endDate = this.dateTimeService.convertToUtcDate(this.initialDate);
-    const startDate = this.dateTimeService.convertToStartOfDayUtc(this.dateTimeService.convertToUtcDate(this.initialDate));
-    this.sub = this.backendService.loadAcPowerGridPhases(this.dateTimeService.createFilter(startDate, endDate)).subscribe((e) => {
+  public sendRequest(): void {
+    const endDate = moment(this.initialDate).endOf('day').utc();
+    const startDate = moment(this.initialDate).startOf('day').utc();
+    this.sub = this.backendService.loadAcPowerGridPhases(this.dateTimeService.createFilterForMoment(startDate.format(),
+      endDate.format())).subscribe((e) => {
       this.data = e;
       this.mapRequestToChart();
     });
@@ -55,17 +57,17 @@ export class AcPowerGridPhasesComponent  implements OnInit, OnDestroy {
       return;
     }
     this.chartData = [];
-    const arrayAcPowerGridPhase1: any[] = [];
-    const arrayAcPowerGridPhase2: any[] = [];
-    const arrayAcPowerGridPhase3: any[] = [];
+    const array1: any[] = [];
+    const array2: any[] = [];
+    const array3: any[] = [];
     this.data?.content?.forEach((e) => {
       let date = this.dateTimeService.convertUtcToLocalTimeZone(e.timestamp)
-      arrayAcPowerGridPhase1.push({name: date, value: e.acPowerGridPhase1});
-      arrayAcPowerGridPhase2.push({name: date, value: e.acPowerGridPhase2});
-      arrayAcPowerGridPhase3.push({name: date, value: e.acPowerGridPhase3});
+      array1.push({name: date, value: e.acPowerGridPhase1});
+      array2.push({name: date, value: e.acPowerGridPhase2});
+      array3.push({name: date, value: e.acPowerGridPhase3});
     });
-    this.chartData?.push({name: 'AC Power Grid - Phase 1', series: arrayAcPowerGridPhase1});
-    this.chartData?.push({name: 'AC Power Grid - Phase 2', series: arrayAcPowerGridPhase2});
-    this.chartData?.push({name: 'AC Power Grid - Phase 3', series: arrayAcPowerGridPhase3});
+    this.chartData?.push({name: 'AC Power Grid - Phase 1', series: array1});
+    this.chartData?.push({name: 'AC Power Grid - Phase 2', series: array2});
+    this.chartData?.push({name: 'AC Power Grid - Phase 3', series: array3});
   }
 }

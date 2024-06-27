@@ -19,7 +19,7 @@
 </div>
 
 <div *ngIf="chartData">
-  <ngx-charts-area-chart
+  <ngx-charts-line-chart
     [legend]="true"
     [showXAxisLabel]="true"
     [showYAxisLabel]="true"
@@ -29,7 +29,5 @@
     [yAxisLabel]="'SoC [%]'"
     [xAxisTickFormatting]="convertTime"
     [results]="chartData"
-    [scheme]="'forest'"
-    [gradient]="true"
-  ></ngx-charts-area-chart>
+  ></ngx-charts-line-chart>
 </div>

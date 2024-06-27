@@ -51,7 +51,7 @@ export class AcPowerGridComponent implements OnInit, OnDestroy {
       endDate.format())).subscribe((e)=> {
       this.data = e;
       this.mapRequestToLineChart();
-      this.mapColors();
+      // this.mapColors();
       console.log(this.data)
       console.log(this.chartData)
       console.log(this.chartColors)

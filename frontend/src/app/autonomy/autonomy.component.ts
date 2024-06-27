@@ -6,6 +6,7 @@ import {DateTimeService} from "../service/date-time.service";
 import {formatDate} from "@angular/common";
 import {localId, timeFormat} from "../dto/const";
 import {Autonomy} from "../dto/autonomy.model";
+import * as moment from "moment";
 
 @Component({
   selector: 'app-autonomy',
@@ -13,8 +14,9 @@ import {Autonomy} from "../dto/autonomy.model";
   styleUrls: ['./autonomy.component.scss']
 })
 export class AutonomyComponent implements OnInit, OnDestroy {
-  public lineChartData?: any[];
+  public chartData?: any[];
   public initialDate = new Date();
+  public maxDate = new Date();
   private sub?: Subscription;
   private data?: QueryDslResponse<Autonomy>;
   private refreshMilliSeconds = 60000;
@@ -39,28 +41,28 @@ export class AutonomyComponent implements OnInit, OnDestroy {
     return formatDate(value, timeFormat, localId);
   }
 
-  private sendRequest(): void {
-    this.initialDate = new Date();
-    const endDate = this.dateTimeService.convertToUtcDate(this.initialDate);
-    const startDate = this.dateTimeService.convertToStartOfDayUtc(this.dateTimeService.convertToUtcDate(this.initialDate));
-    this.sub = this.backendService.loadAutonomy(this.dateTimeService.createFilter(startDate, endDate)).subscribe((e)=> {
-      this.data=e;
-      this.mapRequestToLineChart();
+  public sendRequest(): void {
+    const endDate = moment(this.initialDate).endOf('day').utc();
+    const startDate = moment(this.initialDate).startOf('day').utc();
+    this.sub = this.backendService.loadAutonomy(this.dateTimeService.createFilterForMoment(startDate.format(),
+      endDate.format())).subscribe((e) => {
+      this.data = e;
+      this.mapRequestToChart();
     });
   }
 
-  private mapRequestToLineChart(): void {
+  private mapRequestToChart(): void {
     if (this.data?.content?.length===0) {
-      this.lineChartData=undefined;
+      this.chartData=undefined;
       return;
     }
-    this.lineChartData = [];
-    const arrayAutonomy: any[] = [];
+    this.chartData = [];
+    const array: any[] = [];
     this.data?.content?.forEach((e)=>{
       let date = this.dateTimeService.convertUtcToLocalTimeZone(e.timestamp)
-      arrayAutonomy.push({name: date, value: e.autonomy});
+      array.push({name: date, value: e.autonomy});
     });
-    this.lineChartData?.push({name: 'Autonomy', series: arrayAutonomy});
+    this.chartData?.push({name: 'Autonomy', series: array});
   }
 
 }

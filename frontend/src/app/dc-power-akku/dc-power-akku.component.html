@@ -4,6 +4,12 @@
     <h3 class="bold-text">
       Power DC from or to Storage
     </h3>
+    <h4 *ngIf="dcEnergyAkkuDayIntoGridData">
+      Day Energy into Grid: {{dcEnergyAkkuDayIntoGridData}} kWh
+    </h4>
+    <h4 *ngIf="dcEnergyAkkuDayFromGridData">
+      Day Energy from Grid: {{dcEnergyAkkuDayFromGridData}} kWh
+    </h4>
   </div>
 
   <div class="ml-auto">

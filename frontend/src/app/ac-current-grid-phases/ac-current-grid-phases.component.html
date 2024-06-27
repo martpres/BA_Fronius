@@ -1,17 +1,24 @@
-<div class="d-flex">
+<div class="d-flex filter-container">
+
   <div>
     <h3 class="bold-text">
       3-Phase Current AC from or to Grid
     </h3>
   </div>
+
   <div class="ml-auto">
-    <h3>
-      Date: {{initialDate | date: 'dd.MM.yyyy'}}
-    </h3>
+    <mat-form-field>
+      <mat-label>Select Day</mat-label>
+      <input matInput [matDatepicker]="picker" [(ngModel)]="initialDate" (dateChange)="sendRequest()" [max]="maxDate">
+      <mat-hint>DD.MM.YYYY</mat-hint>
+      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
   </div>
+
 </div>
 
-<div *ngIf="lineChartData">
+<div *ngIf="chartData">
   <ngx-charts-line-chart
     [legend]="true"
     [showXAxisLabel]="true"
@@ -21,6 +28,6 @@
     [xAxisLabel]="'Time'"
     [yAxisLabel]="'Current [A]'"
     [xAxisTickFormatting]="convertTime"
-    [results]="lineChartData"
+    [results]="chartData"
   ></ngx-charts-line-chart>
 </div>

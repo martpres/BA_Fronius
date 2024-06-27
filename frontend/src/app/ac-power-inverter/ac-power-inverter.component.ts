@@ -52,7 +52,6 @@ export class AcPowerInverterComponent implements OnInit, OnDestroy {
   public sendRequest(): void {
     const endDate = moment(this.initialDate).endOf('day').utc();
     const startDate = moment(this.initialDate).startOf('day').utc();
-
     this.sub1 = this.backendService.loadAcPowerInverter(this.dateTimeService.createFilterForMoment(startDate.format(),
       endDate.format())).subscribe((e) => {
       this.data = e;

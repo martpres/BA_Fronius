@@ -6,6 +6,7 @@ import {DateTimeService} from "../service/date-time.service";
 import {formatDate} from "@angular/common";
 import {localId, timeFormat} from "../dto/const";
 import {SelfConsumption} from "../dto/selfConsumption.model";
+import * as moment from "moment";
 
 @Component({
   selector: 'app-self-consumption',
@@ -14,8 +15,9 @@ import {SelfConsumption} from "../dto/selfConsumption.model";
 })
 
 export class SelfConsumptionComponent implements OnInit, OnDestroy {
-  public lineChartData?: any[];
+  public chartData?: any[];
   public initialDate = new Date();
+  public maxDate = new Date();
   private sub?: Subscription;
   private data?: QueryDslResponse<SelfConsumption>;
   private refreshMilliSeconds = 60000;
@@ -40,28 +42,28 @@ export class SelfConsumptionComponent implements OnInit, OnDestroy {
     return formatDate(value, timeFormat, localId);
   }
 
-  private sendRequest(): void {
-    this.initialDate = new Date();
-    const endDate = this.dateTimeService.convertToUtcDate(this.initialDate);
-    const startDate = this.dateTimeService.convertToStartOfDayUtc(this.dateTimeService.convertToUtcDate(this.initialDate));
-    this.sub = this.backendService.loadSelfConsumption(this.dateTimeService.createFilter(startDate, endDate)).subscribe((e) => {
+  public sendRequest(): void {
+    const endDate = moment(this.initialDate).endOf('day').utc();
+    const startDate = moment(this.initialDate).startOf('day').utc();
+    this.sub = this.backendService.loadSelfConsumption(this.dateTimeService.createFilterForMoment(startDate.format(),
+      endDate.format())).subscribe((e) => {
       this.data = e;
-      this.mapRequestToLineChart();
+      this.mapRequestToChart();
     });
   }
 
-  private mapRequestToLineChart(): void {
+  private mapRequestToChart(): void {
     if (this.data?.content?.length === 0) {
-      this.lineChartData = undefined;
+      this.chartData = undefined;
       return;
     }
-    this.lineChartData = [];
-    const arraySelfConsumption: any[] = [];
+    this.chartData = [];
+    const array: any[] = [];
     this.data?.content?.forEach((e) => {
       let date = this.dateTimeService.convertUtcToLocalTimeZone(e.timestamp)
-      arraySelfConsumption.push({name: date, value: e.selfConsumption});
+      array.push({name: date, value: e.selfConsumption});
     });
-    this.lineChartData?.push({name: 'Self Consumption', series: arraySelfConsumption});
+    this.chartData?.push({name: 'Self Consumption', series: array});
   }
 
 }

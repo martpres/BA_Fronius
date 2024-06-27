@@ -25,7 +25,7 @@
 </div>
 
 <div *ngIf="chartData">
-  <ngx-charts-area-chart
+  <ngx-charts-line-chart
     [legend]="true"
     [showXAxisLabel]="true"
     [showYAxisLabel]="true"
@@ -36,5 +36,5 @@
     [xAxisTickFormatting]="convertTime"
     [results]="chartData"
     [customColors]="chartColors"
-  ></ngx-charts-area-chart>
+  ></ngx-charts-line-chart>
 </div>

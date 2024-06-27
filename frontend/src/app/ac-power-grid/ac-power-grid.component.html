@@ -6,8 +6,11 @@
       Power AC from or to Grid
     </h3>
 
-    <h4 *ngIf="acEnergyGridDayData">
-      Day Energy: {{acEnergyGridDayData}} Ws
+    <h4 *ngIf="acEnergyIntoGridData">
+      Day Energy into Grid: {{acEnergyIntoGridData}} kWh
+    </h4>
+    <h4 *ngIf="acEnergyFromGridData">
+      Day Energy from Grid: {{acEnergyFromGridData}} kWh
     </h4>
 
   </div>

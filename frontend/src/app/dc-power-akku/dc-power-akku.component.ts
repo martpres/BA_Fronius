@@ -14,8 +14,8 @@ import * as moment from "moment";
   styleUrls: ['./dc-power-akku.component.scss']
 })
 export class DcPowerAkkuComponent implements OnInit, OnDestroy {
-  public dcEnergyAkkuDayIntoGridData?: any = "xxx";
-  public dcEnergyAkkuDayFromGridData?: any = "xxx";
+  public dcEnergyDayIntoStorageData?: any = "xxx";
+  public dcEnergyDayFromStorageData?: any = "xxx";
   public chartData?: any[];
   public initialDate = new Date();
   public maxDate = new Date();

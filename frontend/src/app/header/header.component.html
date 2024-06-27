@@ -1,6 +1,16 @@
 <div class="header-container">
 
   <button mat-button class="btn"
+          [routerLink]="['/dc-power-pv']"
+          [ngClass]="{'active': isActive('/dc-power-pv')}">Power DC (PV)
+  </button>
+
+  <button mat-button class="btn"
+          [routerLink]="['/ac-power-grid']"
+          [ngClass]="{'active': isActive('/ac-power-grid')}">Power AC (Grid)
+  </button>
+
+  <button mat-button class="btn"
           [routerLink]="['/ac-power-inverter']"
           [ngClass]="{'active': isActive('/ac-power-inverter')}">Power AC (Inverter)
   </button>
@@ -11,8 +21,8 @@
   </button>
 
   <button mat-button class="btn"
-          [routerLink]="['/ac-power-grid']"
-          [ngClass]="{'active': isActive('/ac-power-grid')}">Power AC (Grid)
+          [routerLink]="['/dc-power-akku']"
+          [ngClass]="{'active': isActive('/dc-power-akku')}">Power DC (Storage)
   </button>
 
   <button mat-button class="btn"
@@ -28,16 +38,6 @@
   <button mat-button class="btn"
           [routerLink]="['/dc-voltage-pv']"
           [ngClass]="{'active': isActive('/dc-voltage-pv')}">Voltage DC (PV)
-  </button>
-
-  <button mat-button class="btn"
-          [routerLink]="['/dc-power-pv']"
-          [ngClass]="{'active': isActive('/dc-power-pv')}">Power DC (PV)
-  </button>
-
-  <button mat-button class="btn"
-          [routerLink]="['/dc-power-akku']"
-          [ngClass]="{'active': isActive('/dc-power-akku')}">Power DC (Storage)
   </button>
 
   <button mat-button class="btn"

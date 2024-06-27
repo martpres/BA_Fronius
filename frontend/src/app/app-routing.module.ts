@@ -59,7 +59,7 @@ const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: 'ac-power-inverter'
+    redirectTo: 'dc-power-pv'
   }
 ];
 

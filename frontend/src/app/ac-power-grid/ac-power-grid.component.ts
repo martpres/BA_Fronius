@@ -15,7 +15,8 @@ import * as d3 from 'd3';
   styleUrls: ['./ac-power-grid.component.scss']
 })
 export class AcPowerGridComponent implements OnInit, OnDestroy {
-  public acEnergyGridDayData? = "xxx";
+  public acEnergyIntoGridData?: any = "xxx";
+  public acEnergyFromGridData?: any = "xxx";
   public chartData?: any[];
   public chartColors?: any[];
   public initialDate = new Date();

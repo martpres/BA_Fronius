@@ -114,5 +114,19 @@ public class PowerFlowRealtimeDataController {
         return powerFlowRealtimeDataService.loadCalculatedAcEnergyLoadDay(startDate, endDate);
     }
 
+    @GetMapping(value = "/dc-energy-into-akku-day/calculated/latest", produces = "application/json")
+    public ResponseEnergyDayDto loadCalculatedDcEnergyIntoAkkuDay(
+            @RequestParam(value = "startDate") ZonedDateTime startDate,
+            @RequestParam(value = "endDate") ZonedDateTime endDate) {
+        return powerFlowRealtimeDataService.loadCalculatedDcEnergyIntoAkkuDay(startDate, endDate);
+    }
+
+    @GetMapping(value = "/dc-energy-from-akku-day/calculated/latest", produces = "application/json")
+    public ResponseEnergyDayDto loadCalculatedDcEnergyFromAkkuDay(
+            @RequestParam(value = "startDate") ZonedDateTime startDate,
+            @RequestParam(value = "endDate") ZonedDateTime endDate) {
+        return powerFlowRealtimeDataService.loadCalculatedDcEnergyFromAkkuDay(startDate, endDate);
+    }
+
 
 }

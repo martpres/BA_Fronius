@@ -4,11 +4,17 @@
     <h3 class="bold-text">
       Power DC from or to Storage
     </h3>
-    <h4 *ngIf="dcEnergyDayIntoStorageData">
-      Day Energy into Grid: {{dcEnergyDayIntoStorageData}} kWh
+
+    <h4 *ngIf="calculatedDcEnergyIntoAkkuDay && calculatedDcEnergyIntoAkkuDay?.energyDay">
+      Day Energy (calculated) into Storage: {{convertAndRoundEnergy(calculatedDcEnergyIntoAkkuDay)}} kWh
     </h4>
-    <h4 *ngIf="dcEnergyDayFromStorageData">
-      Day Energy from Grid: {{dcEnergyDayFromStorageData}} kWh
+
+    <h4 *ngIf="calculatedDcEnergyFromAkkuDay && calculatedDcEnergyFromAkkuDay?.energyDay">
+      Day Energy (calculated) from Storage: {{convertAndRoundEnergy(calculatedDcEnergyFromAkkuDay)}} kWh
+    </h4>
+
+    <h4 *ngIf="!calculatedDcEnergyIntoAkkuDay?.energyDay && !calculatedDcEnergyFromAkkuDay?.energyDay">
+      No data available for selected day
     </h4>
   </div>
 

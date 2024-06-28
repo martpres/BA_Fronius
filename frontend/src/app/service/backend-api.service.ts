@@ -96,4 +96,14 @@ export class BackendApiService {
       `${this.baseUrl}power-flow-realtime-data/dc-energy-pv-day/calculated/latest`, {params: filter});
   }
 
+  public loadCalculatedAcEnergyIntoGridDay(filter?: any): Observable<EnergyDay> {
+    return this.httpClient.get<EnergyDay>(
+      `${this.baseUrl}power-flow-realtime-data/ac-energy-into-grid-day/calculated/latest`, {params: filter});
+  }
+
+  public loadCalculatedAcEnergyFromGridDay(filter?: any): Observable<EnergyDay> {
+    return this.httpClient.get<EnergyDay>(
+      `${this.baseUrl}power-flow-realtime-data/ac-energy-from-grid-day/calculated/latest`, {params: filter});
+  }
+
 }

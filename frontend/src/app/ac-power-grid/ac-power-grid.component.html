@@ -1,18 +1,20 @@
 <div class="d-flex filter-container">
 
   <div>
-
     <h3 class="bold-text">
       Power AC from or to Grid
     </h3>
 
-    <h4 *ngIf="acEnergyIntoGridData">
-      Day Energy into Grid: {{acEnergyIntoGridData}} kWh
+    <h4 *ngIf="calculatedAcEnergyIntoGridDay && calculatedAcEnergyIntoGridDay?.energyDay">
+      Day Energy (calculated) into Grid: {{convertAndRoundEnergy(calculatedAcEnergyIntoGridDay)}} kWh
     </h4>
-    <h4 *ngIf="acEnergyFromGridData">
-      Day Energy from Grid: {{acEnergyFromGridData}} kWh
+    <h4 *ngIf="calculatedAcEnergyFromGridDay && calculatedAcEnergyFromGridDay?.energyDay">
+      Day Energy (calculated) from Grid: {{convertAndRoundEnergy(calculatedAcEnergyFromGridDay)}} kWh
     </h4>
 
+    <h4 *ngIf="!calculatedAcEnergyIntoGridDay?.energyDay">
+      No data available for selected day
+    </h4>
   </div>
 
   <div class="ml-auto">

@@ -64,11 +64,26 @@ public class PowerFlowRealtimeDataService {
         return paramsQueryDslRepository.loadStateOfChargeAkku(startDate, endDate, pageRequest);
     }
 
-    public ResponseEnergyDayDto loadEnergyDay(ZonedDateTime startDate,
-                                              ZonedDateTime endDate) {
+    public ResponseEnergyDayDto loadCalculatedDcEnergyPvDay(ZonedDateTime startDate,
+                                                            ZonedDateTime endDate) {
         return new ResponseEnergyDayDto(
-                energyRepository.calculateEnergy("dc_power_pv" ,startDate, endDate)
+                energyRepository.calculateEnergy("dc_power_pv", startDate, endDate)
         );
     }
+
+    public ResponseEnergyDayDto loadCalculatedAcEnergyIntoGridDay(ZonedDateTime startDate,
+                                                                  ZonedDateTime endDate) {
+        return new ResponseEnergyDayDto(
+                energyRepository.calculatePositiveEnergy("ac_power_grid", startDate, endDate)
+        );
+    }
+
+    public ResponseEnergyDayDto loadCalculatedAcEnergyFromGridDay(ZonedDateTime startDate,
+                                                                  ZonedDateTime endDate) {
+        return new ResponseEnergyDayDto(
+                energyRepository.calculateNegativeEnergy("ac_power_grid", startDate, endDate)
+        );
+    }
+
 
 }

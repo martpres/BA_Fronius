@@ -87,10 +87,25 @@ public class PowerFlowRealtimeDataController {
     }
 
     @GetMapping(value = "/dc-energy-pv-day/calculated/latest", produces = "application/json")
-    public ResponseEnergyDayDto loadEnergyDay(
+    public ResponseEnergyDayDto loadCalculatedDcEnergyPvDay(
             @RequestParam(value = "startDate") ZonedDateTime startDate,
             @RequestParam(value = "endDate") ZonedDateTime endDate) {
-        return powerFlowRealtimeDataService.loadEnergyDay(startDate, endDate);
+        return powerFlowRealtimeDataService.loadCalculatedDcEnergyPvDay(startDate, endDate);
     }
+
+    @GetMapping(value = "/ac-energy-into-grid-day/calculated/latest", produces = "application/json")
+    public ResponseEnergyDayDto loadCalculatedAcEnergyIntoGridDay(
+            @RequestParam(value = "startDate") ZonedDateTime startDate,
+            @RequestParam(value = "endDate") ZonedDateTime endDate) {
+        return powerFlowRealtimeDataService.loadCalculatedAcEnergyIntoGridDay(startDate, endDate);
+    }
+
+    @GetMapping(value = "/ac-energy-from-grid-day/calculated/latest", produces = "application/json")
+    public ResponseEnergyDayDto loadCalculatedAcEnergyFromGridDay(
+            @RequestParam(value = "startDate") ZonedDateTime startDate,
+            @RequestParam(value = "endDate") ZonedDateTime endDate) {
+        return powerFlowRealtimeDataService.loadCalculatedAcEnergyFromGridDay(startDate, endDate);
+    }
+
 
 }

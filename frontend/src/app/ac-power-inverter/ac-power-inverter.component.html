@@ -6,19 +6,15 @@
     </h3>
 
     <h4 *ngIf="acEnergyInverterDayData?.acEnergyInverterDay">
-      Day Energy (Wert von API): {{acEnergyInverterDayData?.acEnergyInverterDay}} Ws
+      Day Energy (cumulated value from API): {{acEnergyInverterDayData?.acEnergyInverterDay/1000}} kWh
     </h4>
 
-    <h4 *ngIf="acCalculated?.energyDay">
-      Day Energy (berechneter Wert):   {{acCalculated?.energyDay}} Ws
-    </h4>
-
-    <h4 *ngIf="acCalculated && acCalculated?.energyDay">
-      Day Energy (berechneter Wert gerundet und umgerechnet):  {{convertAndRoundEnergy(acCalculated)}} kWh
+    <h4 *ngIf="calculatedAcEnergyInverterDay && calculatedAcEnergyInverterDay?.energyDay">
+      Day Energy (calculated):  {{convertAndRoundEnergy(calculatedAcEnergyInverterDay)}} kWh
     </h4>
 
     <h4 *ngIf="!acEnergyInverterDayData?.acEnergyInverterDay">
-      Keine Daten für den ausgewählten Tag vorhanden
+      No data available for selected day
     </h4>
   </div>
 

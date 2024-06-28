@@ -16,7 +16,7 @@ import {EnergyDay} from "../dto/energyDay.model";
   styleUrls: ['./ac-power-inverter.component.scss']
 })
 export class AcPowerInverterComponent implements OnInit, OnDestroy {
-  public acCalculated?: EnergyDay;
+  public calculatedAcEnergyInverterDay?: EnergyDay;
   public acEnergyInverterDayData?: QueryDslResponse<AcEnergyInverterDay>;
   public chartData?: any[];
   public initialDate = new Date();
@@ -52,6 +52,7 @@ export class AcPowerInverterComponent implements OnInit, OnDestroy {
   public sendRequest(): void {
     const endDate = moment(this.initialDate).endOf('day').utc();
     const startDate = moment(this.initialDate).startOf('day').utc();
+
     this.sub1 = this.backendService.loadAcPowerInverter(this.dateTimeService.createFilterForMoment(startDate.format(),
       endDate.format())).subscribe((e) => {
       this.data = e;
@@ -63,9 +64,9 @@ export class AcPowerInverterComponent implements OnInit, OnDestroy {
       this.acEnergyInverterDayData = e;
     });
 
-    this.sub3 = this.backendService.loadAcEnergyDay(this.dateTimeService.createFilterForMoment(startDate.format(),
+    this.sub3 = this.backendService.loadCalculatedAcEnergyInverterDay(this.dateTimeService.createFilterForMoment(startDate.format(),
       endDate.format())).subscribe((e) => {
-      this.acCalculated = e;
+      this.calculatedAcEnergyInverterDay = e;
     });
   }
 
@@ -85,7 +86,7 @@ export class AcPowerInverterComponent implements OnInit, OnDestroy {
 
   public convertAndRoundEnergy(energyDay: EnergyDay): number {
     const kiloWatts = (energyDay?.energyDay ?? 0) / (1000 * 3600);
-    return Math.round(kiloWatts*100)/100;
+    return Math.round(kiloWatts*1000)/1000;
   }
 
 }

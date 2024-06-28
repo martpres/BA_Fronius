@@ -38,32 +38,32 @@ public class EnergyRepository {
             " FROM trapezoids;";
 
 
-    public Double calculateEnergy( String columnName,
-                                    ZonedDateTime startDate,
-                                    ZonedDateTime endDate){
+    public Double calculateEnergy(String columnName,
+                                  ZonedDateTime startDate,
+                                  ZonedDateTime endDate) {
         return calculateEnergy(columnName, startDate, endDate, null, false);
     }
 
-    public Double calculatePositiveEnergy( String columnName,
-                                   ZonedDateTime startDate,
-                                   ZonedDateTime endDate){
+    public Double calculatePositiveEnergy(String columnName,
+                                          ZonedDateTime startDate,
+                                          ZonedDateTime endDate) {
         final String additionalWhere = " AND $Cm > 0 ";
         return calculateEnergy(columnName, startDate, endDate, additionalWhere, false);
     }
 
-    public Double calculateNegativeEnergy( String columnName,
-                                           ZonedDateTime startDate,
-                                           ZonedDateTime endDate){
+    public Double calculateNegativeEnergy(String columnName,
+                                          ZonedDateTime startDate,
+                                          ZonedDateTime endDate) {
         final String additionalWhere = " AND $Cm < 0 ";
         return calculateEnergy(columnName, startDate, endDate, additionalWhere, true);
     }
 
-    private Double calculateEnergy( String columnName,
+    private Double calculateEnergy(String columnName,
                                    ZonedDateTime startDate,
                                    ZonedDateTime endDate,
                                    String additionalWhere,
                                    Boolean pn
-                                    ){
+    ) {
         String cquery = queryEnergy;
         if (additionalWhere == null) {
             cquery = cquery.replace("$Aw", "");

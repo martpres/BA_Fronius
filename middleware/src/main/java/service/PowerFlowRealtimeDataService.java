@@ -4,6 +4,7 @@ import dto.*;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import repository.EnergyRepository;
 import repository.ParamsQueryDslRepository;
 import response.QueryDslResponse;
 
@@ -14,9 +15,11 @@ import java.util.Optional;
 @Transactional(readOnly = true)
 public class PowerFlowRealtimeDataService {
     private final ParamsQueryDslRepository paramsQueryDslRepository;
+    private final EnergyRepository energyRepository;
 
-    public PowerFlowRealtimeDataService(ParamsQueryDslRepository paramsQueryDslRepository) {
+    public PowerFlowRealtimeDataService(ParamsQueryDslRepository paramsQueryDslRepository, EnergyRepository energyRepository) {
         this.paramsQueryDslRepository = paramsQueryDslRepository;
+        this.energyRepository = energyRepository;
     }
 
     public QueryDslResponse<ResponseDcPowerPvDto> loadDcPowerPv(Optional<ZonedDateTime> startDate,
@@ -59,6 +62,13 @@ public class PowerFlowRealtimeDataService {
                                                                                 Optional<ZonedDateTime> endDate,
                                                                                 Optional<PageRequest> pageRequest) {
         return paramsQueryDslRepository.loadStateOfChargeAkku(startDate, endDate, pageRequest);
+    }
+
+    public ResponseEnergyDayDto loadEnergyDay(ZonedDateTime startDate,
+                                              ZonedDateTime endDate) {
+        return new ResponseEnergyDayDto(
+                energyRepository.calculateEnergy("dc_power_pv" ,startDate, endDate)
+        );
     }
 
 }

@@ -86,9 +86,14 @@ export class BackendApiService {
       `${this.baseUrl}common-inverter-data/ac-energy-inverter-day/latest`, {params: filter});
   }
 
-  public loadAcEnergyDay(filter?: any): Observable<EnergyDay> {
+  public loadCalculatedAcEnergyInverterDay(filter?: any): Observable<EnergyDay> {
     return this.httpClient.get<EnergyDay>(
       `${this.baseUrl}common-inverter-data/ac-energy-inverter-day/calculated/latest`, {params: filter});
+  }
+
+  public loadCalculatedDcEnergyPvDay(filter?: any): Observable<EnergyDay> {
+    return this.httpClient.get<EnergyDay>(
+      `${this.baseUrl}power-flow-realtime-data/dc-energy-pv-day/calculated/latest`, {params: filter});
   }
 
 }

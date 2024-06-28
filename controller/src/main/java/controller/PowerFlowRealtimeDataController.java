@@ -86,4 +86,11 @@ public class PowerFlowRealtimeDataController {
         return powerFlowRealtimeDataService.loadStateOfChargeAkku(startDate, endDate, PaginationUtil.getPagination(page, pagesize));
     }
 
+    @GetMapping(value = "/dc-energy-pv-day/calculated/latest", produces = "application/json")
+    public ResponseEnergyDayDto loadEnergyDay(
+            @RequestParam(value = "startDate") ZonedDateTime startDate,
+            @RequestParam(value = "endDate") ZonedDateTime endDate) {
+        return powerFlowRealtimeDataService.loadEnergyDay(startDate, endDate);
+    }
+
 }

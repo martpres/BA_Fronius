@@ -85,5 +85,12 @@ public class PowerFlowRealtimeDataService {
         );
     }
 
+    public ResponseEnergyDayDto loadCalculatedAcEnergyLoadDay(ZonedDateTime startDate,
+                                                              ZonedDateTime endDate) {
+        return new ResponseEnergyDayDto(
+                energyRepository.calculateNegativeEnergy("ac_power_load", startDate, endDate)
+        );
+    }
+
 
 }

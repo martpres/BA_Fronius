@@ -4,8 +4,13 @@
     <h3 class="bold-text">
       Power AC to Loads
     </h3>
-    <h4 *ngIf="acEnergyLoadDayData">
-      Day Energy: {{acEnergyLoadDayData}} kWh
+
+    <h4 *ngIf="calculatedAcEnergyLoadDay && calculatedAcEnergyLoadDay?.energyDay">
+      Day Energy (calculated): {{convertAndRoundEnergy(calculatedAcEnergyLoadDay)}} kWh
+    </h4>
+
+    <h4 *ngIf="!calculatedAcEnergyLoadDay?.energyDay">
+      No data available for selected day
     </h4>
   </div>
 

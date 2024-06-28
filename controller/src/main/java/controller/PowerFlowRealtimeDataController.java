@@ -107,5 +107,12 @@ public class PowerFlowRealtimeDataController {
         return powerFlowRealtimeDataService.loadCalculatedAcEnergyFromGridDay(startDate, endDate);
     }
 
+    @GetMapping(value = "/ac-energy-load-day/calculated/latest", produces = "application/json")
+    public ResponseEnergyDayDto loadCalculatedAcEnergyLoadDay(
+            @RequestParam(value = "startDate") ZonedDateTime startDate,
+            @RequestParam(value = "endDate") ZonedDateTime endDate) {
+        return powerFlowRealtimeDataService.loadCalculatedAcEnergyLoadDay(startDate, endDate);
+    }
+
 
 }

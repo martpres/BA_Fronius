@@ -21,7 +21,7 @@ public class EnergyRepository {
             " LEAD(primary_timestamp) OVER (ORDER BY primary_timestamp) AS next_timestamp," +
             " LEAD($Cm) OVER (ORDER BY primary_timestamp) AS next_ac_power_inverter" +
             " FROM params" +
-            " WHERE primary_timestamp BETWEEN :startDate AND :endDate AND $Cm IS NOT NULL$Aw" +
+            " WHERE primary_timestamp BETWEEN :startDate AND :endDate AND $Cm IS NOT NULL" +
             ")," +
             " trapezoids AS (" +
             " SELECT" +
@@ -30,7 +30,9 @@ public class EnergyRepository {
             " next_timestamp," +
             " next_ac_power_inverter," +
             " EXTRACT(EPOCH FROM (next_timestamp - primary_timestamp)) AS time_difference," +
-            " (($Cm + next_ac_power_inverter) / 2.0) * EXTRACT(EPOCH FROM (next_timestamp - primary_timestamp)) AS trapezoid_area" +
+            " CASE WHEN $Cm $AwOR next_ac_power_inverter $AwTHEN" +
+            " (($Cm + next_ac_power_inverter) / 2.0) * EXTRACT(EPOCH FROM (next_timestamp - primary_timestamp))" +
+            " ELSE 0 END AS trapezoid_area" +
             " FROM ordered_points" +
             " WHERE next_timestamp IS NOT NULL" +
             " )" +
@@ -40,14 +42,14 @@ public class EnergyRepository {
     public Double calculatePositiveEnergy(String columnName,
                                           ZonedDateTime startDate,
                                           ZonedDateTime endDate) {
-        final String additionalWhere = " AND $Cm > 0 ";
+        final String additionalWhere = "> 0 ";
         return calculateEnergy(columnName, startDate, endDate, additionalWhere, false);
     }
 
     public Double calculateNegativeEnergy(String columnName,
                                           ZonedDateTime startDate,
                                           ZonedDateTime endDate) {
-        final String additionalWhere = " AND $Cm < 0 ";
+        final String additionalWhere = "< 0 ";
         return calculateEnergy(columnName, startDate, endDate, additionalWhere, true);
     }
 
@@ -58,11 +60,7 @@ public class EnergyRepository {
                                    Boolean pn
     ) {
         String cquery = queryEnergy;
-        if (additionalWhere == null) {
-            cquery = cquery.replace("$Aw", "");
-        } else {
-            cquery = cquery.replace("$Aw", additionalWhere);
-        }
+        cquery = cquery.replaceAll("\\$Aw", additionalWhere);
         if (pn) {
             cquery = cquery.replace("$Pn", " *-1");
         } else {

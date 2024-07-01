@@ -67,21 +67,21 @@ public class PowerFlowRealtimeDataService {
     public ResponseEnergyDayDto loadCalculatedDcEnergyPvDay(ZonedDateTime startDate,
                                                             ZonedDateTime endDate) {
         return new ResponseEnergyDayDto(
-                energyRepository.calculateEnergy("dc_power_pv", startDate, endDate)
+                energyRepository.calculatePositiveEnergy("dc_power_pv", startDate, endDate)
         );
     }
 
     public ResponseEnergyDayDto loadCalculatedAcEnergyIntoGridDay(ZonedDateTime startDate,
                                                                   ZonedDateTime endDate) {
         return new ResponseEnergyDayDto(
-                energyRepository.calculatePositiveEnergy("ac_power_grid", startDate, endDate)
+                energyRepository.calculateNegativeEnergy("ac_power_grid", startDate, endDate)
         );
     }
 
     public ResponseEnergyDayDto loadCalculatedAcEnergyFromGridDay(ZonedDateTime startDate,
                                                                   ZonedDateTime endDate) {
         return new ResponseEnergyDayDto(
-                energyRepository.calculateNegativeEnergy("ac_power_grid", startDate, endDate)
+                energyRepository.calculatePositiveEnergy("ac_power_grid", startDate, endDate)
         );
     }
 

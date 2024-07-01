@@ -37,13 +37,6 @@ public class EnergyRepository {
             " SELECT SUM(trapezoid_area)$Pn AS total_area" +
             " FROM trapezoids;";
 
-
-    public Double calculateEnergy(String columnName,
-                                  ZonedDateTime startDate,
-                                  ZonedDateTime endDate) {
-        return calculateEnergy(columnName, startDate, endDate, null, false);
-    }
-
     public Double calculatePositiveEnergy(String columnName,
                                           ZonedDateTime startDate,
                                           ZonedDateTime endDate) {

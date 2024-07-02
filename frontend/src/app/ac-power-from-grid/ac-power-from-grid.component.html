@@ -1,0 +1,43 @@
+<div class="d-flex filter-container">
+
+  <div>
+    <h3 class="bold-text">
+      Power AC from Grid
+    </h3>
+
+    <h4 *ngIf="calculatedAcEnergyFromGridDay && calculatedAcEnergyFromGridDay?.energyDay">
+      Day Energy (calculated) from Grid: {{convertAndRoundEnergy(calculatedAcEnergyFromGridDay)}} kWh
+    </h4>
+
+    <h4 *ngIf="!calculatedAcEnergyFromGridDay?.energyDay">
+      No data available for selected day
+    </h4>
+  </div>
+
+  <div class="ml-auto">
+    <mat-form-field>
+      <mat-label>Select Day</mat-label>
+      <input matInput [matDatepicker]="picker" [(ngModel)]="initialDate" (dateChange)="sendRequest()" [max]="maxDate">
+      <mat-hint>DD.MM.YYYY</mat-hint>
+      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+  </div>
+
+</div>
+
+<div *ngIf="chartData">
+  <ngx-charts-area-chart
+    [legend]="true"
+    [showXAxisLabel]="true"
+    [showYAxisLabel]="true"
+    [xAxis]="true"
+    [yAxis]="true"
+    [xAxisLabel]="'Time'"
+    [yAxisLabel]="'Power [W]'"
+    [xAxisTickFormatting]="convertTime"
+    [results]="chartData"
+    [scheme]="'forest'"
+
+  ></ngx-charts-area-chart>
+</div>

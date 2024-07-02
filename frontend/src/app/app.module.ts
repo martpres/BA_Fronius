@@ -12,7 +12,6 @@ import {NgxChartsModule} from "@swimlane/ngx-charts";
 import localeDe from '@angular/common/locales/de';
 import localeDeExtra from '@angular/common/locales/extra/de';
 import {DcPowerPvComponent} from './dc-power-pv/dc-power-pv.component';
-import {AcPowerGridComponent} from './ac-power-grid/ac-power-grid.component';
 import {AcPowerInverterComponent} from './ac-power-inverter/ac-power-inverter.component';
 import {DcVoltagePvComponent} from './dc-voltage-pv/dc-voltage-pv.component';
 import {DcPowerAkkuComponent} from './dc-power-akku/dc-power-akku.component';
@@ -22,6 +21,8 @@ import {AcPowerLoadComponent} from './ac-power-load/ac-power-load.component';
 import {StateOfChargeAkkuComponent} from './state-of-charge-akku/state-of-charge-akku.component';
 import {FormsModule} from "@angular/forms";
 import { AcPowerGridPhasesComponent } from './ac-power-grid-phases/ac-power-grid-phases.component';
+import { AcPowerIntoGridComponent } from './ac-power-into-grid/ac-power-into-grid.component';
+import { AcPowerFromGridComponent } from './ac-power-from-grid/ac-power-from-grid.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,6 @@ import { AcPowerGridPhasesComponent } from './ac-power-grid-phases/ac-power-grid
     HeaderComponent,
     AcCurrentGridPhasesComponent,
     DcPowerPvComponent,
-    AcPowerGridComponent,
     AcPowerInverterComponent,
     DcVoltagePvComponent,
     DcPowerAkkuComponent,
@@ -37,7 +37,9 @@ import { AcPowerGridPhasesComponent } from './ac-power-grid-phases/ac-power-grid
     SelfConsumptionComponent,
     AcPowerLoadComponent,
     StateOfChargeAkkuComponent,
-    AcPowerGridPhasesComponent
+    AcPowerGridPhasesComponent,
+    AcPowerIntoGridComponent,
+    AcPowerFromGridComponent
   ],
   imports: [
     BrowserModule,

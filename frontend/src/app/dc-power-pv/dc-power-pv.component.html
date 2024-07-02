@@ -1,11 +1,16 @@
 <div class="d-flex filter-container">
 
   <div>
-      <h3 class="bold-text">
-        Power DC from PV-Modules
-      </h3>
-    <h4 *ngIf="dcEnergyPvDayData">
-      Day Energy: {{dcEnergyPvDayData}} Ws
+    <h3 class="bold-text">
+      Power DC from PV-Modules
+    </h3>
+
+    <h4 *ngIf="calculatedDcEnergyPvDay && calculatedDcEnergyPvDay?.energyDay">
+      Day Energy (calculated):  {{convertAndRoundEnergy(calculatedDcEnergyPvDay)}} kWh
+    </h4>
+
+    <h4 *ngIf="!calculatedDcEnergyPvDay?.energyDay">
+      No data available for selected day
     </h4>
   </div>
 

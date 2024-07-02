@@ -86,4 +86,47 @@ public class PowerFlowRealtimeDataController {
         return powerFlowRealtimeDataService.loadStateOfChargeAkku(startDate, endDate, PaginationUtil.getPagination(page, pagesize));
     }
 
+    @GetMapping(value = "/dc-energy-pv-day/calculated/latest", produces = "application/json")
+    public ResponseEnergyDayDto loadCalculatedDcEnergyPvDay(
+            @RequestParam(value = "startDate") ZonedDateTime startDate,
+            @RequestParam(value = "endDate") ZonedDateTime endDate) {
+        return powerFlowRealtimeDataService.loadCalculatedDcEnergyPvDay(startDate, endDate);
+    }
+
+    @GetMapping(value = "/ac-energy-into-grid-day/calculated/latest", produces = "application/json")
+    public ResponseEnergyDayDto loadCalculatedAcEnergyIntoGridDay(
+            @RequestParam(value = "startDate") ZonedDateTime startDate,
+            @RequestParam(value = "endDate") ZonedDateTime endDate) {
+        return powerFlowRealtimeDataService.loadCalculatedAcEnergyIntoGridDay(startDate, endDate);
+    }
+
+    @GetMapping(value = "/ac-energy-from-grid-day/calculated/latest", produces = "application/json")
+    public ResponseEnergyDayDto loadCalculatedAcEnergyFromGridDay(
+            @RequestParam(value = "startDate") ZonedDateTime startDate,
+            @RequestParam(value = "endDate") ZonedDateTime endDate) {
+        return powerFlowRealtimeDataService.loadCalculatedAcEnergyFromGridDay(startDate, endDate);
+    }
+
+    @GetMapping(value = "/ac-energy-load-day/calculated/latest", produces = "application/json")
+    public ResponseEnergyDayDto loadCalculatedAcEnergyLoadDay(
+            @RequestParam(value = "startDate") ZonedDateTime startDate,
+            @RequestParam(value = "endDate") ZonedDateTime endDate) {
+        return powerFlowRealtimeDataService.loadCalculatedAcEnergyLoadDay(startDate, endDate);
+    }
+
+    @GetMapping(value = "/dc-energy-into-akku-day/calculated/latest", produces = "application/json")
+    public ResponseEnergyDayDto loadCalculatedDcEnergyIntoAkkuDay(
+            @RequestParam(value = "startDate") ZonedDateTime startDate,
+            @RequestParam(value = "endDate") ZonedDateTime endDate) {
+        return powerFlowRealtimeDataService.loadCalculatedDcEnergyIntoAkkuDay(startDate, endDate);
+    }
+
+    @GetMapping(value = "/dc-energy-from-akku-day/calculated/latest", produces = "application/json")
+    public ResponseEnergyDayDto loadCalculatedDcEnergyFromAkkuDay(
+            @RequestParam(value = "startDate") ZonedDateTime startDate,
+            @RequestParam(value = "endDate") ZonedDateTime endDate) {
+        return powerFlowRealtimeDataService.loadCalculatedDcEnergyFromAkkuDay(startDate, endDate);
+    }
+
+
 }

@@ -4,6 +4,7 @@ import dto.*;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import repository.EnergyRepository;
 import repository.ParamsQueryDslRepository;
 import response.QueryDslResponse;
 
@@ -14,9 +15,11 @@ import java.util.Optional;
 @Transactional(readOnly = true)
 public class PowerFlowRealtimeDataService {
     private final ParamsQueryDslRepository paramsQueryDslRepository;
+    private final EnergyRepository energyRepository;
 
-    public PowerFlowRealtimeDataService(ParamsQueryDslRepository paramsQueryDslRepository) {
+    public PowerFlowRealtimeDataService(ParamsQueryDslRepository paramsQueryDslRepository, EnergyRepository energyRepository) {
         this.paramsQueryDslRepository = paramsQueryDslRepository;
+        this.energyRepository = energyRepository;
     }
 
     public QueryDslResponse<ResponseDcPowerPvDto> loadDcPowerPv(Optional<ZonedDateTime> startDate,
@@ -60,5 +63,48 @@ public class PowerFlowRealtimeDataService {
                                                                                 Optional<PageRequest> pageRequest) {
         return paramsQueryDslRepository.loadStateOfChargeAkku(startDate, endDate, pageRequest);
     }
+
+    public ResponseEnergyDayDto loadCalculatedDcEnergyPvDay(ZonedDateTime startDate,
+                                                            ZonedDateTime endDate) {
+        return new ResponseEnergyDayDto(
+                energyRepository.calculatePositiveEnergy("dc_power_pv", startDate, endDate)
+        );
+    }
+
+    public ResponseEnergyDayDto loadCalculatedAcEnergyIntoGridDay(ZonedDateTime startDate,
+                                                                  ZonedDateTime endDate) {
+        return new ResponseEnergyDayDto(
+                energyRepository.calculateNegativeEnergy("ac_power_grid", startDate, endDate)
+        );
+    }
+
+    public ResponseEnergyDayDto loadCalculatedAcEnergyFromGridDay(ZonedDateTime startDate,
+                                                                  ZonedDateTime endDate) {
+        return new ResponseEnergyDayDto(
+                energyRepository.calculatePositiveEnergy("ac_power_grid", startDate, endDate)
+        );
+    }
+
+    public ResponseEnergyDayDto loadCalculatedAcEnergyLoadDay(ZonedDateTime startDate,
+                                                              ZonedDateTime endDate) {
+        return new ResponseEnergyDayDto(
+                energyRepository.calculateNegativeEnergy("ac_power_load", startDate, endDate)
+        );
+    }
+
+    public ResponseEnergyDayDto loadCalculatedDcEnergyIntoAkkuDay(ZonedDateTime startDate,
+                                                              ZonedDateTime endDate) {
+        return new ResponseEnergyDayDto(
+                energyRepository.calculatePositiveEnergy("dc_power_akku", startDate, endDate)
+        );
+    }
+
+    public ResponseEnergyDayDto loadCalculatedDcEnergyFromAkkuDay(ZonedDateTime startDate,
+                                                                  ZonedDateTime endDate) {
+        return new ResponseEnergyDayDto(
+                energyRepository.calculateNegativeEnergy("dc_power_akku", startDate, endDate)
+        );
+    }
+
 
 }

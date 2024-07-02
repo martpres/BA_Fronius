@@ -7,6 +7,7 @@ import {formatDate} from "@angular/common";
 import {localId, timeFormat} from "../dto/const";
 import {AcPowerLoad} from "../dto/acPowerLoad.model";
 import * as moment from "moment";
+import {EnergyDay} from "../dto/energyDay.model";
 
 @Component({
   selector: 'app-ac-power-load',
@@ -14,11 +15,12 @@ import * as moment from "moment";
   styleUrls: ['./ac-power-load.component.scss']
 })
 export class AcPowerLoadComponent implements OnInit, OnDestroy {
-  public acEnergyLoadDayData? = "xxx";
+  public calculatedAcEnergyLoadDay?: EnergyDay;
   public chartData?: any[];
   public initialDate = new Date();
   public maxDate = new Date();
-  private sub?: Subscription;
+  private sub1?: Subscription;
+  private sub2?: Subscription;
   private data?: QueryDslResponse<AcPowerLoad>;
   private refreshMilliSeconds = 60000;
   private interval?: any;
@@ -34,7 +36,8 @@ export class AcPowerLoadComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.sub?.unsubscribe();
+    this.sub1?.unsubscribe();
+    this.sub2?.unsubscribe();
     clearInterval(this.interval);
   }
 
@@ -45,10 +48,16 @@ export class AcPowerLoadComponent implements OnInit, OnDestroy {
   public sendRequest(): void {
     const endDate = moment(this.initialDate).endOf('day').utc();
     const startDate = moment(this.initialDate).startOf('day').utc();
-    this.sub = this.backendService.loadAcPowerLoad(this.dateTimeService.createFilterForMoment(startDate.format(),
+
+    this.sub1 = this.backendService.loadAcPowerLoad(this.dateTimeService.createFilterForMoment(startDate.format(),
       endDate.format())).subscribe((e) => {
       this.data = e;
       this.mapRequestToChart();
+    });
+
+    this.sub2 = this.backendService.loadCalculatedAcEnergyLoadDay(this.dateTimeService.createFilterForMoment(startDate.format(),
+      endDate.format())).subscribe((e) => {
+      this.calculatedAcEnergyLoadDay = e;
     });
   }
 
@@ -66,6 +75,11 @@ export class AcPowerLoadComponent implements OnInit, OnDestroy {
       }
     });
     this.chartData?.push({name: 'Power Load', series: array});
+  }
+
+  public convertAndRoundEnergy(energyDay: EnergyDay): number {
+    const kiloWatts = (energyDay?.energyDay ?? 0) / (1000 * 3600);
+    return Math.round(kiloWatts*1000)/1000;
   }
 
 }

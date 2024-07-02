@@ -55,7 +55,7 @@ public class CommonInverterDataController {
     }
 
     @GetMapping(value = "/ac-energy-inverter-day/calculated/latest", produces = "application/json")
-    public ResponseEnergyDayDto loadEnergyDay(
+    public ResponseEnergyDayDto loadCalculatedAcEnergyInverterDay(
             @RequestParam(value = "startDate") ZonedDateTime startDate,
             @RequestParam(value = "endDate") ZonedDateTime endDate) {
         return commonInverterDataService.loadEnergyDay(startDate, endDate);

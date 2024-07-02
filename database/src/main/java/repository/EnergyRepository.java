@@ -21,7 +21,7 @@ public class EnergyRepository {
             " LEAD(primary_timestamp) OVER (ORDER BY primary_timestamp) AS next_timestamp," +
             " LEAD($Cm) OVER (ORDER BY primary_timestamp) AS next_ac_power_inverter" +
             " FROM params" +
-            " WHERE primary_timestamp BETWEEN :startDate AND :endDate AND $Cm IS NOT NULL$Aw" +
+            " WHERE primary_timestamp BETWEEN :startDate AND :endDate AND $Cm IS NOT NULL" +
             ")," +
             " trapezoids AS (" +
             " SELECT" +
@@ -30,23 +30,41 @@ public class EnergyRepository {
             " next_timestamp," +
             " next_ac_power_inverter," +
             " EXTRACT(EPOCH FROM (next_timestamp - primary_timestamp)) AS time_difference," +
-            " (($Cm + next_ac_power_inverter) / 2.0) * EXTRACT(EPOCH FROM (next_timestamp - primary_timestamp)) AS trapezoid_area" +
+            " CASE WHEN $Cm $AwOR next_ac_power_inverter $AwTHEN" +
+            " (($Cm + next_ac_power_inverter) / 2.0) * EXTRACT(EPOCH FROM (next_timestamp - primary_timestamp))" +
+            " ELSE 0 END AS trapezoid_area" +
             " FROM ordered_points" +
             " WHERE next_timestamp IS NOT NULL" +
             " )" +
-            " SELECT SUM(trapezoid_area) AS total_area" +
+            " SELECT SUM(trapezoid_area)$Pn AS total_area" +
             " FROM trapezoids;";
 
+    public Double calculatePositiveEnergy(String columnName,
+                                          ZonedDateTime startDate,
+                                          ZonedDateTime endDate) {
+        final String additionalWhere = "> 0 ";
+        return calculateEnergy(columnName, startDate, endDate, additionalWhere, false);
+    }
 
-    public Double calculateEnergy( String columnName,
+    public Double calculateNegativeEnergy(String columnName,
+                                          ZonedDateTime startDate,
+                                          ZonedDateTime endDate) {
+        final String additionalWhere = "< 0 ";
+        return calculateEnergy(columnName, startDate, endDate, additionalWhere, true);
+    }
+
+    private Double calculateEnergy(String columnName,
                                    ZonedDateTime startDate,
                                    ZonedDateTime endDate,
-                                   String additionalWhere ){
+                                   String additionalWhere,
+                                   Boolean pn
+    ) {
         String cquery = queryEnergy;
-        if (additionalWhere == null) {
-            cquery = cquery.replace("$Aw", "");
+        cquery = cquery.replaceAll("\\$Aw", additionalWhere);
+        if (pn) {
+            cquery = cquery.replace("$Pn", " *-1");
         } else {
-            cquery = cquery.replace("$Aw", additionalWhere);
+            cquery = cquery.replace("$Pn", "");
         }
         cquery = cquery.replaceAll("\\$Cm", columnName);
         Query query = entityManager.createNativeQuery(cquery);
@@ -55,7 +73,6 @@ public class EnergyRepository {
 
         return (Double) query.getSingleResult();
     }
-
 
 }
 

@@ -11,7 +11,6 @@ import repository.ParamsRepository;
 
 @Component
 public class SchedulerMeterRealtimeData {
-
     private final boolean meterRealtimeData;
     private final ParamsRepository paramsRepository;
     private final MeterRealtimeDataMapper meterRealtimeDataMapper;
@@ -32,7 +31,7 @@ public class SchedulerMeterRealtimeData {
     public void startWorkflowForMeterRealtimeData() {
         if (meterRealtimeData) {
             MeterRealtimeDataDto dto = froniusClientFactory.getFroniusClient().meterRealtimeDataEndpoint();
-            System.out.println("DEBUG: " + dto.toString());
+//            System.out.println("DEBUG: " + dto.toString());
             paramsRepository.save(meterRealtimeDataMapper.dtoToEntity(dto));
         }
     }

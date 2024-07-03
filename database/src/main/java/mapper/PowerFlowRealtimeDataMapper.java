@@ -14,9 +14,6 @@ import java.util.List;
         unmappedTargetPolicy = ReportingPolicy.ERROR)
 public abstract class PowerFlowRealtimeDataMapper {
 
-    @Mapping(target = "acCurrentGridPhase1", ignore = true)
-    @Mapping(target = "acCurrentGridPhase2", ignore = true)
-    @Mapping(target = "acCurrentGridPhase3", ignore = true)
     @Mapping(target = "dcVoltagePv", ignore = true)
     @Mapping(target = "acPowerInverter", ignore = true)
     @Mapping(target = "acEnergyInverterDay", ignore = true)

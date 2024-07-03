@@ -1,7 +1,6 @@
 package mapper;
 
 import dto.MeterRealtimeDataDto;
-import dto.ResponseAcCurrentGridDto;
 import dto.ResponseAcPowerGridPhasesDto;
 import entity.ParamsEntity;
 import org.mapstruct.InjectionStrategy;
@@ -26,9 +25,6 @@ public abstract class MeterRealtimeDataMapper {
     @Mapping(target = "stateOfChargeAkku", ignore = true)
     @Mapping(target = "acEnergyInverterDay", ignore = true)
     public abstract ParamsEntity dtoToEntity(MeterRealtimeDataDto dto);
-
-    public abstract ResponseAcCurrentGridDto convertParamsToAcCurrentGridPhases(ParamsEntity entity);
-    public abstract List<ResponseAcCurrentGridDto> convertParamsToAcCurrentGridPhases(List<ParamsEntity> entities);
 
     public abstract ResponseAcPowerGridPhasesDto convertParamsToAcPowerGridPhases(ParamsEntity entity);
     public abstract List<ResponseAcPowerGridPhasesDto> convertParamsToAcPowerGridPhases(List<ParamsEntity> entities);

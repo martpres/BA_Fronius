@@ -1,6 +1,5 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {AcCurrentGridPhasesComponent} from "./ac-current-grid-phases/ac-current-grid-phases.component";
 import {DcPowerPvComponent} from "./dc-power-pv/dc-power-pv.component";
 import {AcPowerInverterComponent} from "./ac-power-inverter/ac-power-inverter.component";
 import {DcVoltagePvComponent} from "./dc-voltage-pv/dc-voltage-pv.component";
@@ -15,20 +14,8 @@ import {AcPowerFromGridComponent} from "./ac-power-from-grid/ac-power-from-grid.
 
 const routes: Routes = [
   {
-    path: 'ac-current-grid-phases',
-    component: AcCurrentGridPhasesComponent
-  },
-  {
-    path: 'ac-power-grid-phases',
-    component: AcPowerGridPhasesComponent
-  },
-  {
     path: 'dc-power-pv',
     component: DcPowerPvComponent
-  },
-  {
-    path: 'dc-voltage-pv',
-    component: DcVoltagePvComponent
   },
   {
     path: 'ac-power-from-grid',
@@ -43,12 +30,20 @@ const routes: Routes = [
     component: AcPowerInverterComponent
   },
   {
+    path: 'ac-power-load',
+    component: AcPowerLoadComponent
+  },
+  {
     path: 'dc-power-akku',
     component: DcPowerAkkuComponent
   },
   {
-    path: 'ac-power-load',
-    component: AcPowerLoadComponent
+    path: 'dc-voltage-pv',
+    component: DcVoltagePvComponent
+  },
+  {
+    path: 'state-of-charge-akku',
+    component: StateOfChargeAkkuComponent
   },
   {
     path: 'autonomy',
@@ -59,8 +54,8 @@ const routes: Routes = [
     component: SelfConsumptionComponent
   },
   {
-    path: 'state-of-charge-akku',
-    component: StateOfChargeAkkuComponent
+    path: 'ac-power-grid-phases',
+    component: AcPowerGridPhasesComponent
   },
   {
     path: '**',

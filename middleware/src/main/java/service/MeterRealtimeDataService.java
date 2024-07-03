@@ -1,6 +1,5 @@
 package service;
 
-import dto.ResponseAcCurrentGridDto;
 import dto.ResponseAcPowerGridPhasesDto;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -18,12 +17,6 @@ public class MeterRealtimeDataService {
 
     public MeterRealtimeDataService(ParamsQueryDslRepository paramsQueryDslRepository) {
         this.paramsQueryDslRepository = paramsQueryDslRepository;
-    }
-
-    public QueryDslResponse<ResponseAcCurrentGridDto> loadAcCurrentGridPhases(Optional<ZonedDateTime> startDate,
-                                                                              Optional<ZonedDateTime> endDate,
-                                                                              Optional<PageRequest> pageRequest) {
-        return paramsQueryDslRepository.loadAcCurrentGridPhases(startDate, endDate, pageRequest);
     }
 
     public QueryDslResponse<ResponseAcPowerGridPhasesDto> loadAcPowerGridPhases(Optional<ZonedDateTime> startDate,

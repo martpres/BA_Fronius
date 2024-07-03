@@ -5,7 +5,6 @@ import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {HeaderComponent} from './header/header.component';
 import {MaterialModule} from "./material/material.module";
-import {AcCurrentGridPhasesComponent} from './ac-current-grid-phases/ac-current-grid-phases.component';
 import {HttpClientModule} from "@angular/common/http";
 import {CommonModule, DatePipe, registerLocaleData} from "@angular/common";
 import {NgxChartsModule} from "@swimlane/ngx-charts";
@@ -28,7 +27,6 @@ import { AcPowerFromGridComponent } from './ac-power-from-grid/ac-power-from-gri
   declarations: [
     AppComponent,
     HeaderComponent,
-    AcCurrentGridPhasesComponent,
     DcPowerPvComponent,
     AcPowerInverterComponent,
     DcVoltagePvComponent,

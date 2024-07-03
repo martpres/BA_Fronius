@@ -14,9 +14,6 @@ import java.util.List;
         unmappedTargetPolicy = ReportingPolicy.ERROR)
 public abstract class CommonInverterDataMapper {
 
-    @Mapping(target = "acCurrentGridPhase1", ignore = true)
-    @Mapping(target = "acCurrentGridPhase2", ignore = true)
-    @Mapping(target = "acCurrentGridPhase3", ignore = true)
     @Mapping(target = "dcPowerPv", ignore = true)
     @Mapping(target = "acPowerGrid", ignore = true)
     @Mapping(target = "dcPowerAkku", ignore = true)

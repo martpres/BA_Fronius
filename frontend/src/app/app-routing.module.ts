@@ -11,6 +11,7 @@ import {StateOfChargeAkkuComponent} from "./state-of-charge-akku/state-of-charge
 import {AcPowerGridPhasesComponent} from "./ac-power-grid-phases/ac-power-grid-phases.component";
 import {AcPowerIntoGridComponent} from "./ac-power-into-grid/ac-power-into-grid.component";
 import {AcPowerFromGridComponent} from "./ac-power-from-grid/ac-power-from-grid.component";
+import {SettingsComponent} from "./settings/settings.component";
 
 const routes: Routes = [
   {
@@ -56,6 +57,10 @@ const routes: Routes = [
   {
     path: 'ac-power-grid-phases',
     component: AcPowerGridPhasesComponent
+  },
+  {
+    path: 'settings',
+    component: SettingsComponent
   },
   {
     path: '**',

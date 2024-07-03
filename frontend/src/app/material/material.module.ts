@@ -4,6 +4,8 @@ import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatButtonModule} from "@angular/material/button";
 import {MatNativeDateModule} from "@angular/material/core";
 import {MatInputModule} from "@angular/material/input";
+import {MatIconModule} from "@angular/material/icon";
+import {MatCardModule} from "@angular/material/card";
 
 @NgModule({
   imports: [
@@ -11,14 +13,18 @@ import {MatInputModule} from "@angular/material/input";
     MatDatepickerModule,
     MatButtonModule,
     MatNativeDateModule,
-    MatInputModule
+    MatInputModule,
+    MatIconModule,
+    MatCardModule
   ],
   exports: [
     MatFormFieldModule,
     MatDatepickerModule,
     MatButtonModule,
     MatNativeDateModule,
-    MatInputModule
+    MatInputModule,
+    MatIconModule,
+    MatCardModule
   ],
   providers: [
     MatDatepickerModule

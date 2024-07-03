@@ -22,6 +22,7 @@ import {FormsModule} from "@angular/forms";
 import { AcPowerGridPhasesComponent } from './ac-power-grid-phases/ac-power-grid-phases.component';
 import { AcPowerIntoGridComponent } from './ac-power-into-grid/ac-power-into-grid.component';
 import { AcPowerFromGridComponent } from './ac-power-from-grid/ac-power-from-grid.component';
+import { SettingsComponent } from './settings/settings.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { AcPowerFromGridComponent } from './ac-power-from-grid/ac-power-from-gri
     StateOfChargeAkkuComponent,
     AcPowerGridPhasesComponent,
     AcPowerIntoGridComponent,
-    AcPowerFromGridComponent
+    AcPowerFromGridComponent,
+    SettingsComponent
   ],
   imports: [
     BrowserModule,

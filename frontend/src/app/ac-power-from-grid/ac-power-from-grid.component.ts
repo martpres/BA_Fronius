@@ -86,5 +86,3 @@ export class AcPowerFromGridComponent implements OnInit, OnDestroy  {
   }
 
 }
-
-

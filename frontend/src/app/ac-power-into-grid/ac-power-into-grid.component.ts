@@ -15,7 +15,6 @@ import {EnergyDay} from "../dto/energyDay.model";
   styleUrls: ['./ac-power-into-grid.component.scss']
 })
 export class AcPowerIntoGridComponent  implements OnInit, OnDestroy {
-
   public calculatedAcEnergyIntoGridDay?: EnergyDay;
   public chartData?: any[];
   public initialDate = new Date();

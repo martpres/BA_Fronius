@@ -8,6 +8,7 @@ import {localId, timeFormat} from "../dto/const";
 import {AcPowerGrid} from "../dto/acPowerGrid.model";
 import * as moment from "moment";
 import {EnergyDay} from "../dto/energyDay.model";
+import {SettingsService} from "../settings/settings.service";
 
 @Component({
   selector: 'app-ac-power-from-grid',
@@ -25,7 +26,9 @@ export class AcPowerFromGridComponent implements OnInit, OnDestroy  {
   private refreshMilliSeconds = 60000;
   private interval?: any;
 
-  constructor(private backendService: BackendApiService, private dateTimeService: DateTimeService) {
+  constructor(private backendService: BackendApiService,
+              private dateTimeService: DateTimeService,
+              private settingsService: SettingsService) {
   }
 
   ngOnInit(): void {
@@ -82,6 +85,11 @@ export class AcPowerFromGridComponent implements OnInit, OnDestroy  {
   public convertAndRoundEnergy(energyDay: EnergyDay): number {
     const kiloWatts = (energyDay?.energyDay ?? 0) / (1000 * 3600);
     return Math.round(kiloWatts*1000)/1000;
+  }
+
+  public calculateAmount(energyDay: EnergyDay): number {
+    const kiloWatts = (energyDay?.energyDay ?? 0) / (1000 * 3600);
+    return Math.round(kiloWatts * 100 * this.settingsService.priceFromGrid)/100;
   }
 
 }

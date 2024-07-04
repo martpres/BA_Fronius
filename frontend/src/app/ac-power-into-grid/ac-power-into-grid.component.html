@@ -9,6 +9,10 @@
       Day Energy (calculated) into Grid: {{convertAndRoundEnergy(calculatedAcEnergyIntoGridDay)}} kWh
     </h4>
 
+    <h4 *ngIf="calculatedAcEnergyIntoGridDay && calculatedAcEnergyIntoGridDay?.energyDay">
+      Amount: {{calculateAmount(calculatedAcEnergyIntoGridDay)}} €
+    </h4>
+
     <h4 *ngIf="!chartData">
       No data available for selected day
     </h4>

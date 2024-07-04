@@ -26,18 +26,23 @@
   </button>
 
   <button mat-button class="btn"
-          [routerLink]="['/dc-power-akku']"
-          [ngClass]="{'active': isActive('/dc-power-akku')}">Power DC (Storage)
+          [routerLink]="['/dc-power-from-akku']"
+          [ngClass]="{'active': isActive('/dc-power-from-akku')}">Power DC from Storage
   </button>
 
   <button mat-button class="btn"
-          [routerLink]="['/dc-voltage-pv']"
-          [ngClass]="{'active': isActive('/dc-voltage-pv')}">Voltage DC (PV)
+          [routerLink]="['/dc-power-into-akku']"
+          [ngClass]="{'active': isActive('/dc-power-into-akku')}">Power DC into Storage
   </button>
 
   <button mat-button class="btn"
           [routerLink]="['/state-of-charge-akku']"
           [ngClass]="{'active': isActive('/state-of-charge-akku')}">State of Charge (Storage)
+  </button>
+
+  <button mat-button class="btn"
+          [routerLink]="['/dc-voltage-pv']"
+          [ngClass]="{'active': isActive('/dc-voltage-pv')}">Voltage DC (PV)
   </button>
 
   <button mat-button class="btn"

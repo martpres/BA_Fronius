@@ -3,7 +3,6 @@ import {RouterModule, Routes} from '@angular/router';
 import {DcPowerPvComponent} from "./dc-power-pv/dc-power-pv.component";
 import {AcPowerInverterComponent} from "./ac-power-inverter/ac-power-inverter.component";
 import {DcVoltagePvComponent} from "./dc-voltage-pv/dc-voltage-pv.component";
-import {DcPowerAkkuComponent} from "./dc-power-akku/dc-power-akku.component";
 import {AcPowerLoadComponent} from "./ac-power-load/ac-power-load.component";
 import {AutonomyComponent} from "./autonomy/autonomy.component";
 import {SelfConsumptionComponent} from "./self-consumption/self-consumption.component";
@@ -12,6 +11,8 @@ import {AcPowerGridPhasesComponent} from "./ac-power-grid-phases/ac-power-grid-p
 import {AcPowerIntoGridComponent} from "./ac-power-into-grid/ac-power-into-grid.component";
 import {AcPowerFromGridComponent} from "./ac-power-from-grid/ac-power-from-grid.component";
 import {SettingsComponent} from "./settings/settings.component";
+import {DcPowerIntoAkkuComponent} from "./dc-power-into-akku/dc-power-into-akku.component";
+import {DcPowerFromAkkuComponent} from "./dc-power-from-akku/dc-power-from-akku.component";
 
 const routes: Routes = [
   {
@@ -35,8 +36,12 @@ const routes: Routes = [
     component: AcPowerLoadComponent
   },
   {
-    path: 'dc-power-akku',
-    component: DcPowerAkkuComponent
+    path: 'dc-power-from-akku',
+    component: DcPowerFromAkkuComponent
+  },
+  {
+    path: 'dc-power-into-akku',
+    component: DcPowerIntoAkkuComponent
   },
   {
     path: 'dc-voltage-pv',

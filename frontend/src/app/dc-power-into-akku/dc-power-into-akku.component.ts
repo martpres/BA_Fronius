@@ -10,19 +10,17 @@ import * as moment from "moment";
 import {EnergyDay} from "../dto/energyDay.model";
 
 @Component({
-  selector: 'app-dc-power-akku',
-  templateUrl: './dc-power-akku.component.html',
-  styleUrls: ['./dc-power-akku.component.scss']
+  selector: 'app-dc-power-into-akku',
+  templateUrl: './dc-power-into-akku.component.html',
+  styleUrls: ['./dc-power-into-akku.component.scss']
 })
-export class DcPowerAkkuComponent implements OnInit, OnDestroy {
+export class DcPowerIntoAkkuComponent  implements OnInit, OnDestroy {
   public calculatedDcEnergyIntoAkkuDay?: EnergyDay;
-  public calculatedDcEnergyFromAkkuDay?: EnergyDay;
   public chartData?: any[];
   public initialDate = new Date();
   public maxDate = new Date();
   private sub1?: Subscription;
   private sub2?: Subscription;
-  private sub3?: Subscription;
   private data?: QueryDslResponse<DcPowerAkku>;
   private refreshMilliSeconds = 60000;
   private interval?: any;
@@ -40,7 +38,6 @@ export class DcPowerAkkuComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.sub1?.unsubscribe();
     this.sub2?.unsubscribe();
-    this.sub3?.unsubscribe();
     clearInterval(this.interval);
   }
 
@@ -49,8 +46,8 @@ export class DcPowerAkkuComponent implements OnInit, OnDestroy {
   }
 
   public sendRequest(): void {
-    const endDate = moment(this.initialDate).endOf('day').utc();
     const startDate = moment(this.initialDate).startOf('day').utc();
+    const endDate = moment(this.initialDate).endOf('day').utc();
 
     this.sub1 = this.backendService.loadDcPowerAkku(this.dateTimeService.createFilterForMoment(startDate.format(),
       endDate.format())).subscribe((e) => {
@@ -61,11 +58,6 @@ export class DcPowerAkkuComponent implements OnInit, OnDestroy {
     this.sub2 = this.backendService.loadCalculatedDcEnergyIntoAkkuDay(this.dateTimeService.createFilterForMoment(startDate.format(),
       endDate.format())).subscribe((e) => {
       this.calculatedDcEnergyIntoAkkuDay = e;
-    });
-
-    this.sub3 = this.backendService.loadCalculatedDcEnergyFromAkkuDay(this.dateTimeService.createFilterForMoment(startDate.format(),
-      endDate.format())).subscribe((e) => {
-      this.calculatedDcEnergyFromAkkuDay = e;
     });
 
   }
@@ -79,9 +71,12 @@ export class DcPowerAkkuComponent implements OnInit, OnDestroy {
     const array: any[] = [];
     this.data?.content?.forEach((e) => {
       let date = this.dateTimeService.convertUtcToLocalTimeZone(e.timestamp)
-      array.push({name: date, value: e.dcPowerAkku});
+      if (typeof e.dcPowerAkku === 'number') {
+        const value = e.dcPowerAkku > 0 ? 0 : e.dcPowerAkku;
+        array.push({ name: date, value: -value });
+      }
     });
-    this.chartData?.push({name: 'Power Akku', series: array});
+    this.chartData?.push({name: 'Power into Akku', series: array});
   }
 
   public convertAndRoundEnergy(energyDay: EnergyDay): number {

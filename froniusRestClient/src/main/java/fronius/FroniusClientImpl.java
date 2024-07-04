@@ -20,7 +20,7 @@ public class FroniusClientImpl implements FroniusClient {
 
     @Override
     public MeterRealtimeDataDto meterRealtimeDataEndpoint() {
-        System.out.println("DEBUG: MeterRealtimeData | sending rest request");
+//        System.out.println("DEBUG: MeterRealtimeData | sending rest request");
         return restClient.get()
                 .uri(froniusUrl + "GetMeterRealtimeData.cgi?Scope=Device&DeviceId=0")
                 .retrieve()
@@ -29,7 +29,7 @@ public class FroniusClientImpl implements FroniusClient {
 
     @Override
     public PowerFlowRealtimeDataDto powerFlowRealtimeDataEndpoint() {
-        System.out.println("DEBUG: PowerFlowRealtimeData | sending rest request");
+//        System.out.println("DEBUG: PowerFlowRealtimeData | sending rest request");
         return restClient.get()
                 .uri(froniusUrl + "GetPowerFlowRealtimeData.fcgi")
                 .retrieve()
@@ -38,7 +38,7 @@ public class FroniusClientImpl implements FroniusClient {
 
     @Override
     public CommonInverterDataDto commonInverterDataEndpoint() {
-        System.out.println("DEBUG: CommonInverterData | sending rest request");
+//        System.out.println("DEBUG: CommonInverterData | sending rest request");
         return restClient.get()
                 .uri(froniusUrl + "GetInverterRealtimeData.cgi?Scope=Device&DeviceId=1&DataCollection=CommonInverterData")
                 .retrieve()

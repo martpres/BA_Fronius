@@ -1,6 +1,5 @@
 package controller;
 
-import dto.ResponseAcCurrentGridDto;
 import dto.ResponseAcPowerGridPhasesDto;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,15 +21,6 @@ public class MeterRealtimeDataController {
 
     public MeterRealtimeDataController(MeterRealtimeDataService meterRealtimeDataService) {
         this.meterRealtimeDataService = meterRealtimeDataService;
-    }
-
-    @GetMapping(value = "/ac-current-grid-phases", produces = "application/json")
-    public QueryDslResponse<ResponseAcCurrentGridDto> loadAcCurrentGrid(
-            @RequestParam(value = "startDate", required = false) Optional<ZonedDateTime> startDate,
-            @RequestParam(value = "endDate", required = false) Optional<ZonedDateTime> endDate,
-            @RequestParam(value = "page", required = false) Optional<Integer> page,
-            @RequestParam(value = "pagesize", required = false) Optional<Integer> pagesize) {
-        return meterRealtimeDataService.loadAcCurrentGridPhases(startDate, endDate, PaginationUtil.getPagination(page, pagesize));
     }
 
     @GetMapping(value = "/ac-power-grid-phases", produces = "application/json")

@@ -11,7 +11,6 @@ import repository.ParamsRepository;
 
 @Component
 public class SchedulerPowerFlowRealtimeData {
-
     private final boolean powerFlowRealtimeData;
     private final ParamsRepository paramsRepository;
     private final PowerFlowRealtimeDataMapper powerFlowRealtimeDataMapper;
@@ -32,7 +31,7 @@ public class SchedulerPowerFlowRealtimeData {
     public void startWorkflowForPowerFlowRealtimeData() {
         if (powerFlowRealtimeData) {
             PowerFlowRealtimeDataDto dto = froniusClientFactory.getFroniusClient().powerFlowRealtimeDataEndpoint();
-            System.out.println("DEBUG: " + dto.toString());
+//            System.out.println("DEBUG: " + dto.toString());
             paramsRepository.save(powerFlowRealtimeDataMapper.dtoToEntity(dto));
         }
     }

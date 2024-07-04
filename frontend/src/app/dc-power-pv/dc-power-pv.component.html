@@ -9,7 +9,7 @@
       Day Energy (calculated):  {{convertAndRoundEnergy(calculatedDcEnergyPvDay)}} kWh
     </h4>
 
-    <h4 *ngIf="!calculatedDcEnergyPvDay?.energyDay">
+    <h4 *ngIf="!chartData">
       No data available for selected day
     </h4>
   </div>

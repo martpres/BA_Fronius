@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {QueryDslResponse} from "../dto/queryDslResponse.model";
-import {AcCurrentGridPhases} from "../dto/acCurrentGridPhases.model";
 import {DcPowerPv} from "../dto/dcPowerPv.model";
 import {AcPowerGrid} from "../dto/acPowerGrid.model";
 import {AcPowerInverter} from "../dto/acPowerInverter.model";
@@ -24,11 +23,6 @@ export class BackendApiService {
   private baseUrl = 'http://localhost:8080/api/'
 
   constructor(private httpClient: HttpClient) {
-  }
-
-  public loadAcCurrentGridPhases(filter?: any): Observable<QueryDslResponse<AcCurrentGridPhases>> {
-    return this.httpClient.get<QueryDslResponse<AcCurrentGridPhases>>(
-      `${this.baseUrl}meter-realtime-data/ac-current-grid-phases`, {params: filter});
   }
 
   public loadAcPowerGridPhases(filter?: any): Observable<QueryDslResponse<AcPowerGridPhases>> {

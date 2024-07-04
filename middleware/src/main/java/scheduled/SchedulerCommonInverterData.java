@@ -11,7 +11,6 @@ import repository.ParamsRepository;
 
 @Component
 public class SchedulerCommonInverterData {
-
     private final boolean commonInverterData;
     private final ParamsRepository paramsRepository;
     private final CommonInverterDataMapper commonInverterDataMapper;
@@ -32,7 +31,7 @@ public class SchedulerCommonInverterData {
     public void startWorkflowForCommonInverterData() {
         if (commonInverterData) {
             CommonInverterDataDto dto = froniusClientFactory.getFroniusClient().commonInverterDataEndpoint();
-            System.out.println("DEBUG: " + dto.toString());
+//            System.out.println("DEBUG: " + dto.toString());
             paramsRepository.save(commonInverterDataMapper.dtoToEntity(dto));
         }
     }

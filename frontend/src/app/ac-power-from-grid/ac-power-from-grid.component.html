@@ -2,17 +2,14 @@
 
   <div>
     <h3 class="bold-text">
-      Power AC from or to Grid
+      Power AC from Grid
     </h3>
 
-    <h4 *ngIf="calculatedAcEnergyIntoGridDay && calculatedAcEnergyIntoGridDay?.energyDay">
-      Day Energy (calculated) into Grid: {{convertAndRoundEnergy(calculatedAcEnergyIntoGridDay)}} kWh
-    </h4>
     <h4 *ngIf="calculatedAcEnergyFromGridDay && calculatedAcEnergyFromGridDay?.energyDay">
       Day Energy (calculated) from Grid: {{convertAndRoundEnergy(calculatedAcEnergyFromGridDay)}} kWh
     </h4>
 
-    <h4 *ngIf="!calculatedAcEnergyIntoGridDay?.energyDay">
+    <h4 *ngIf="!chartData">
       No data available for selected day
     </h4>
   </div>
@@ -30,7 +27,7 @@
 </div>
 
 <div *ngIf="chartData">
-  <ngx-charts-line-chart
+  <ngx-charts-area-chart
     [legend]="true"
     [showXAxisLabel]="true"
     [showYAxisLabel]="true"
@@ -40,5 +37,7 @@
     [yAxisLabel]="'Power [W]'"
     [xAxisTickFormatting]="convertTime"
     [results]="chartData"
-  ></ngx-charts-line-chart>
+    [scheme]="'forest'"
+    [gradient]="true"
+  ></ngx-charts-area-chart>
 </div>

@@ -36,17 +36,6 @@ public class ParamsQueryDslRepository {
         this.commonInverterDataMapper = commonInverterDataMapper;
     }
 
-    public QueryDslResponse<ResponseAcCurrentGridDto> loadAcCurrentGridPhases(Optional<ZonedDateTime> startDate,
-                                                                    Optional<ZonedDateTime> endDate,
-                                                                    Optional<PageRequest> pageRequest) {
-        BooleanBuilder booleanBuilder = prepareBooleanBuilder(startDate, endDate);
-        booleanBuilder.and(qParamsEntity.acCurrentGridPhase1.isNotNull());
-        booleanBuilder.and(qParamsEntity.acCurrentGridPhase2.isNotNull());
-        booleanBuilder.and(qParamsEntity.acCurrentGridPhase3.isNotNull());
-        JPAQuery<ParamsEntity> query = prepareQuery(booleanBuilder, pageRequest);
-        return new QueryDslResponse<>(meterRealtimeDataMapper.convertParamsToAcCurrentGridPhases(query.fetch()), fetchCount());
-    }
-
     public QueryDslResponse<ResponseAcPowerGridPhasesDto> loadAcPowerGridPhases(Optional<ZonedDateTime> startDate,
                                                                                 Optional<ZonedDateTime> endDate,
                                                                                 Optional<PageRequest> pageRequest) {

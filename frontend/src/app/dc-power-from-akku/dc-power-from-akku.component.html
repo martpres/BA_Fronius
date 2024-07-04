@@ -2,11 +2,11 @@
 
   <div>
     <h3 class="bold-text">
-      Power AC to Loads
+      Power DC from Storage
     </h3>
 
-    <h4 *ngIf="calculatedAcEnergyLoadDay && calculatedAcEnergyLoadDay?.energyDay">
-      Day Energy (calculated): {{convertAndRoundEnergy(calculatedAcEnergyLoadDay)}} kWh
+    <h4 *ngIf="calculatedDcEnergyFromAkkuDay && calculatedDcEnergyFromAkkuDay?.energyDay">
+      Day Energy (calculated) from Storage: {{convertAndRoundEnergy(calculatedDcEnergyFromAkkuDay)}} kWh
     </h4>
 
     <h4 *ngIf="!chartData">
@@ -41,3 +41,4 @@
     [gradient]="true"
   ></ngx-charts-area-chart>
 </div>
+

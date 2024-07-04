@@ -27,7 +27,7 @@
 </div>
 
 <div *ngIf="chartData">
-  <ngx-charts-line-chart
+  <ngx-charts-area-chart
     [legend]="true"
     [showXAxisLabel]="true"
     [showYAxisLabel]="true"
@@ -39,6 +39,6 @@
     [results]="chartData"
     [scheme]="'forest'"
     [gradient]="true"
-  ></ngx-charts-line-chart>
+  ></ngx-charts-area-chart>
 </div>
 

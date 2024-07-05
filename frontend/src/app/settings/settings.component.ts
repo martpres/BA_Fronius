@@ -10,23 +10,23 @@ import { Component, Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class SettingsComponent {
-  private _priceFromGrid: number = 0.25;
-  private _priceIntoGrid: number = 0.12;
+  private _kwhPriceFromGrid: number = 0.25;
+  private _kwhPriceIntoGrid: number = 0.12;
 
-
-  get priceFromGrid(): number {
-    return this._priceFromGrid;
+  get kwhPriceFromGrid(): number {
+    return this._kwhPriceFromGrid;
   }
 
-  set priceFromGrid(value: number) {
-    this._priceFromGrid = value;
+  set kwhPriceFromGrid(value: number) {
+    this._kwhPriceFromGrid = value;
   }
 
-  get priceIntoGrid(): number {
-    return this._priceIntoGrid;
+  get kwhPriceIntoGrid(): number {
+    return this._kwhPriceIntoGrid;
   }
 
-  set priceIntoGrid(value: number) {
-    this._priceIntoGrid = value;
+  set kwhPriceIntoGrid(value: number) {
+    this._kwhPriceIntoGrid = value;
   }
+
 }

@@ -89,7 +89,7 @@ export class AcPowerFromGridComponent implements OnInit, OnDestroy  {
 
   public calculateAmount(energyDay: EnergyDay): number {
     const kiloWatts = (energyDay?.energyDay ?? 0) / (1000 * 3600);
-    return Math.round(kiloWatts * 100 * this.settingsService.priceFromGrid)/100;
+    return Math.round(kiloWatts * 100 * this.settingsService.kwhPriceFromGrid)/100;
   }
 
 }

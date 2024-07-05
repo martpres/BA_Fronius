@@ -53,5 +53,26 @@
             </column>
 
         </createTable>
+
+        <createTable tableName="prices">
+
+            <column name="id" type="integer">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="begin_day" type="timestamptz">
+            </column>
+
+            <column name="end_day" type="timestamptz">
+            </column>
+
+            <column name="kwh_price_from_grid" type="real">
+            </column>
+
+            <column name="kwh_price_into_grid" type="real">
+            </column>
+
+        </createTable>
+
     </changeSet>
 </databaseChangeLog>

@@ -4,6 +4,6 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class SettingsService {
-  public priceFromGrid: number = 0.25;
-  public priceIntoGrid: number = 0.12;
+  public kwhPriceFromGrid: number = 0.25;
+  public kwhPriceIntoGrid: number = 0.12;
 }

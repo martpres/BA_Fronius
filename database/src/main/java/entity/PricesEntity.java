@@ -1,9 +1,6 @@
 package entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.time.ZonedDateTime;
 import java.util.Objects;
@@ -13,19 +10,20 @@ import java.util.Objects;
 public class PricesEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", updatable = false, nullable = false)
     private Integer id;
 
-    @Column(name = "kwh_price_from_grid", updatable = true)
+    @Column(name = "kwh_price_from_grid")
     private Float kwhPriceFromGrid;
 
-    @Column(name = "kwh_price_into_grid", updatable = true)
+    @Column(name = "kwh_price_into_grid")
     private Float kwhPriceIntoGrid;
 
-    @Column(name = "begin_day", updatable = true, nullable = true)
+    @Column(name = "begin_day")
     private ZonedDateTime beginDay;
 
-    @Column(name = "end_day", updatable = true, nullable = true)
+    @Column(name = "end_day")
     private ZonedDateTime endDay;
 
     public PricesEntity() {

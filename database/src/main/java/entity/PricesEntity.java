@@ -2,6 +2,7 @@ package entity;
 
 import jakarta.persistence.*;
 
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.Objects;
 
@@ -62,19 +63,19 @@ public class PricesEntity {
     }
 
     public ZonedDateTime getBeginDay() {
-        return beginDay;
+        return beginDay.withZoneSameInstant(ZoneId.of("UTC"));
     }
 
     public void setBeginDay(ZonedDateTime beginDay) {
-        this.beginDay = beginDay;
+        this.beginDay = beginDay.withZoneSameInstant(ZoneId.of("UTC"));
     }
 
     public ZonedDateTime getEndDay() {
-        return endDay;
+        return endDay.withZoneSameInstant(ZoneId.of("UTC"));
     }
 
     public void setEndDay(ZonedDateTime endDay) {
-        this.endDay = endDay;
+        this.endDay = endDay.withZoneSameInstant(ZoneId.of("UTC"));
     }
 
     @Override

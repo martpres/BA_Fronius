@@ -16,6 +16,10 @@
     <h4 *ngIf="!chartData">
       No data available for selected day
     </h4>
+
+    <h4 *ngIf="allValuesAreZero(chartData)">
+      No energy was delivered to grid on this day
+    </h4>
   </div>
 
   <div class="ml-auto">
@@ -30,7 +34,7 @@
 
 </div>
 
-<div *ngIf="chartData">
+<div *ngIf="chartData && !allValuesAreZero(chartData)">
   <ngx-charts-area-chart
     [legend]="true"
     [showXAxisLabel]="true"

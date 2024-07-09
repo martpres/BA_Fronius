@@ -95,14 +95,14 @@ public class PowerFlowRealtimeDataService {
     public ResponseEnergyDayDto loadCalculatedDcEnergyIntoAkkuDay(ZonedDateTime startDate,
                                                               ZonedDateTime endDate) {
         return new ResponseEnergyDayDto(
-                energyRepository.calculatePositiveEnergy("dc_power_akku", startDate, endDate)
+                energyRepository.calculateNegativeEnergy("dc_power_akku", startDate, endDate)
         );
     }
 
     public ResponseEnergyDayDto loadCalculatedDcEnergyFromAkkuDay(ZonedDateTime startDate,
                                                                   ZonedDateTime endDate) {
         return new ResponseEnergyDayDto(
-                energyRepository.calculateNegativeEnergy("dc_power_akku", startDate, endDate)
+                energyRepository.calculatePositiveEnergy("dc_power_akku", startDate, endDate)
         );
     }
 

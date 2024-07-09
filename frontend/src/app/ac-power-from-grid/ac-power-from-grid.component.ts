@@ -92,4 +92,14 @@ export class AcPowerFromGridComponent implements OnInit, OnDestroy  {
     return Math.round(kiloWatts * 100 * this.settingsService.kwhPriceFromGrid)/100;
   }
 
+  public allValuesAreZero(chartData?: any[]): boolean {
+    console.log(chartData)
+    if (chartData === undefined || !Array.isArray(chartData)) {
+      return false;
+    }
+    return chartData.every(data => data.series.every((obj: any) => obj.value === 0));
+  }
+
+
+
 }

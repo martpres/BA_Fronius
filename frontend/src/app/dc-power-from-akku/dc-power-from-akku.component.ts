@@ -84,5 +84,13 @@ export class DcPowerFromAkkuComponent implements OnInit, OnDestroy {
     return Math.round(kiloWatts*1000)/1000;
   }
 
+  public allValuesAreZero(chartData?: any[]): boolean {
+    console.log(chartData)
+    if (chartData === undefined || !Array.isArray(chartData)) {
+      return false;
+    }
+    return chartData.every(data => data.series.every((obj: any) => obj.value === 0));
+  }
+
 }
 

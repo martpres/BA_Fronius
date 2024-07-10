@@ -84,12 +84,13 @@ export class AcPowerIntoGridComponent  implements OnInit, OnDestroy {
 
   public convertAndRoundEnergy(energyDay: EnergyDay): number {
     const kiloWatts = (energyDay?.energyDay ?? 0) / (1000 * 3600);
-    return Math.round(kiloWatts*1000)/1000;
+    return Math.round(kiloWatts*100)/100;
   }
 
   public calculateAmount(energyDay: EnergyDay): number {
     const kiloWatts = (energyDay?.energyDay ?? 0) / (1000 * 3600);
-    return Math.round(kiloWatts * 100 * this.settingsService.kwhPriceIntoGrid)/100;
+    const roundedPrice = (kiloWatts * 100 * this.settingsService.kwhPriceFromGrid / 100).toFixed(2);
+    return Number(roundedPrice);
   }
 
   public allValuesAreZero(chartData?: any[]): boolean {

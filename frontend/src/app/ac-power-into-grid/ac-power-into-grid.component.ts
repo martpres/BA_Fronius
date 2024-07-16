@@ -8,7 +8,7 @@ import {localId, timeFormat} from "../dto/const";
 import {AcPowerGrid} from "../dto/acPowerGrid.model";
 import * as moment from "moment";
 import {EnergyDay} from "../dto/energyDay.model";
-import {SettingsService} from "../settings/settings.service";
+import {PricesService} from "../service/prices.service";
 
 @Component({
   selector: 'app-ac-power-into-grid',
@@ -28,7 +28,7 @@ export class AcPowerIntoGridComponent  implements OnInit, OnDestroy {
 
   constructor(private backendService: BackendApiService,
               private dateTimeService: DateTimeService,
-              private settingsService: SettingsService) {
+              private pricesService: PricesService) {
   }
 
   ngOnInit(): void {
@@ -46,6 +46,11 @@ export class AcPowerIntoGridComponent  implements OnInit, OnDestroy {
 
   public convertTime(value: Date): string {
     return formatDate(value, timeFormat, localId);
+  }
+
+  public loadPriceForDate(): void {
+    const startDate = moment(this.initialDate).utc();
+    this.pricesService.loadPriceForDate(startDate.format());
   }
 
   public sendRequest(): void {
@@ -85,12 +90,6 @@ export class AcPowerIntoGridComponent  implements OnInit, OnDestroy {
   public convertAndRoundEnergy(energyDay: EnergyDay): number {
     const kiloWatts = (energyDay?.energyDay ?? 0) / (1000 * 3600);
     return Math.round(kiloWatts*100)/100;
-  }
-
-  public calculateAmount(energyDay: EnergyDay): number {
-    const kiloWatts = (energyDay?.energyDay ?? 0) / (1000 * 3600);
-    const roundedPrice = (kiloWatts * 100 * this.settingsService.kwhPriceFromGrid / 100).toFixed(2);
-    return Number(roundedPrice);
   }
 
   public allValuesAreZero(chartData?: any[]): boolean {

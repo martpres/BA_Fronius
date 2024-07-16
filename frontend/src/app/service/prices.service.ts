@@ -21,7 +21,7 @@ export class PricesService {
     firstValueFrom(this.apiService.loadLastPrice()).then((res: PricesModel)=> this.pricesSubject.next(res));
   }
 
-  public loadPriceForDate(date: Date): void {
+  public loadPriceForDate(date: string): void {
     firstValueFrom(this.apiService.loadPriceForDate(date)).then((res: PricesModel)=> this.pricesSubject.next(res));
   }
 

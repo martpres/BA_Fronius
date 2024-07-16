@@ -121,7 +121,7 @@ export class BackendApiService {
       `${this.baseUrl}prices/`);
   }
 
-  public loadPriceForDate(date: Date): Observable<PricesModel> {
+  public loadPriceForDate(date: string): Observable<PricesModel> {
     const filter = {date: date} as any;
     return this.httpClient.get<PricesModel>(
       `${this.baseUrl}prices/archiv`, {params: filter});

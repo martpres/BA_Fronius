@@ -3,10 +3,7 @@ package controller;
 import dto.ResponseAcPowerGridPhasesDto;
 import dto.ResponsePricesDto;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pagination.PaginationUtil;
 import response.QueryDslResponse;
 import service.MeterRealtimeDataService;
@@ -34,6 +31,11 @@ public class PricesController {
     @GetMapping(value = "/", produces = "application/json")
     public ResponsePricesDto loadLastPrice() {
         return pricesService.loadLastPrice();
+    }
+
+    @PostMapping(value = "/", produces = "application/json", consumes = "application/json")
+    public void updatePrice(@RequestBody ResponsePricesDto responsePricesDto) {
+        pricesService.updatePrice(responsePricesDto);
     }
 
 }

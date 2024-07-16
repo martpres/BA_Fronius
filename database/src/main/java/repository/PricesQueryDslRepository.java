@@ -25,6 +25,12 @@ public class PricesQueryDslRepository {
         this.pricesMapper = pricesMapper;
     }
 
+    public PricesEntity getLastPriceEntity(){
+        BooleanBuilder booleanBuilder = new BooleanBuilder();
+        booleanBuilder.and(qPricesEntity.endDay.isNotNull());
+        return getJpaQueryFactory().selectFrom(qPricesEntity).where(booleanBuilder).fetchFirst();
+    }
+
     public ResponsePricesDto getLastPrice(){
         BooleanBuilder booleanBuilder = new BooleanBuilder();
         booleanBuilder.and(qPricesEntity.endDay.isNotNull());

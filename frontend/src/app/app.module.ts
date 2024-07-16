@@ -17,7 +17,7 @@ import {AutonomyComponent} from './autonomy/autonomy.component';
 import {SelfConsumptionComponent} from './self-consumption/self-consumption.component';
 import {AcPowerLoadComponent} from './ac-power-load/ac-power-load.component';
 import {StateOfChargeAkkuComponent} from './state-of-charge-akku/state-of-charge-akku.component';
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { AcPowerGridPhasesComponent } from './ac-power-grid-phases/ac-power-grid-phases.component';
 import { AcPowerIntoGridComponent } from './ac-power-into-grid/ac-power-into-grid.component';
 import { AcPowerFromGridComponent } from './ac-power-from-grid/ac-power-from-grid.component';
@@ -51,7 +51,8 @@ import { DcPowerIntoAkkuComponent } from './dc-power-into-akku/dc-power-into-akk
     MaterialModule,
     HttpClientModule,
     NgxChartsModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     {provide: LOCALE_ID, useValue: 'de-DE'},

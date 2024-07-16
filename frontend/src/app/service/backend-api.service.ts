@@ -127,4 +127,9 @@ export class BackendApiService {
       `${this.baseUrl}prices/archiv`, {params: filter});
   }
 
+  public updatePrice(request: PricesModel): Observable<void> {
+    return this.httpClient.post<void>(
+      `${this.baseUrl}prices/`, request);
+  }
+
 }

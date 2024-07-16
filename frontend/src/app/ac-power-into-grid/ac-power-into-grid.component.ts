@@ -28,7 +28,7 @@ export class AcPowerIntoGridComponent  implements OnInit, OnDestroy {
 
   constructor(private backendService: BackendApiService,
               private dateTimeService: DateTimeService,
-              private pricesService: PricesService) {
+              public pricesService: PricesService) {
   }
 
   ngOnInit(): void {

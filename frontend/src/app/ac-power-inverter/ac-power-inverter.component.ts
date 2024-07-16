@@ -89,10 +89,4 @@ export class AcPowerInverterComponent implements OnInit, OnDestroy {
     return Math.round(kiloWatts*100)/100;
   }
 
-  public convertAndRoundApiEnergy(x: AcEnergyInverterDay): number {
-    const kiloWatts = (x?.acEnergyInverterDay ?? 0) / 1000;
-    console.log(kiloWatts)
-    return Math.round(kiloWatts*100)/100;
-  }
-
 }

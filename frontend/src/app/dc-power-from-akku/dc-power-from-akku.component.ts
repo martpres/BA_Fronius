@@ -81,11 +81,10 @@ export class DcPowerFromAkkuComponent implements OnInit, OnDestroy {
 
   public convertAndRoundEnergy(energyDay: EnergyDay): number {
     const kiloWatts = (energyDay?.energyDay ?? 0) / (1000 * 3600);
-    return Math.round(kiloWatts*1000)/1000;
+    return Math.round(kiloWatts*100)/100;
   }
 
   public allValuesAreZero(chartData?: any[]): boolean {
-    console.log(chartData)
     if (chartData === undefined || !Array.isArray(chartData)) {
       return false;
     }

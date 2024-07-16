@@ -94,7 +94,6 @@ export class AcPowerIntoGridComponent  implements OnInit, OnDestroy {
   }
 
   public allValuesAreZero(chartData?: any[]): boolean {
-    console.log(chartData)
     if (chartData === undefined || !Array.isArray(chartData)) {
       return false;
     }

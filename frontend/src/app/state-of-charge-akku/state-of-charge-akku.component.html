@@ -5,6 +5,10 @@
       State of Charge - Storage
     </h3>
 
+    <h4 *ngIf="chartData">
+      Average day value: {{calculateAverage(chartData).toFixed(0)}} %
+    </h4>
+
     <h4 *ngIf="!chartData">
       No data available for selected day
     </h4>

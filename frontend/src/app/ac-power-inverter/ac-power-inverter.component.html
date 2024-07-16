@@ -9,7 +9,6 @@
       Day Energy (cumulated value from API): {{ (acEnergyInverterDayData?.acEnergyInverterDay / 1000).toFixed(2) }} kWh
     </h4>
 
-
     <h4 *ngIf="calculatedAcEnergyInverterDay && calculatedAcEnergyInverterDay?.energyDay">
       Day Energy (calculated):  {{convertAndRoundEnergy(calculatedAcEnergyInverterDay)}} kWh
     </h4>

@@ -1,4 +1,5 @@
 import { Component, Injectable } from '@angular/core';
+import {PricesService} from "../service/prices.service";
 
 @Component({
   selector: 'app-settings',
@@ -10,23 +11,7 @@ import { Component, Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class SettingsComponent {
-  private _kwhPriceFromGrid: number = 0.25;
-  private _kwhPriceIntoGrid: number = 0.12;
 
-  get kwhPriceFromGrid(): number {
-    return this._kwhPriceFromGrid;
+  constructor(public pricesService: PricesService) {
   }
-
-  set kwhPriceFromGrid(value: number) {
-    this._kwhPriceFromGrid = value;
-  }
-
-  get kwhPriceIntoGrid(): number {
-    return this._kwhPriceIntoGrid;
-  }
-
-  set kwhPriceIntoGrid(value: number) {
-    this._kwhPriceIntoGrid = value;
-  }
-
 }

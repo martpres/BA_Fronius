@@ -1,6 +1,6 @@
 import { Component, Injectable } from '@angular/core';
 import {PricesService} from "../service/prices.service";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {PricesModel} from "../dto/prices.model";
 import {firstValueFrom} from "rxjs";
 import {BackendApiService} from "../service/backend-api.service";
@@ -12,17 +12,18 @@ import {BackendApiService} from "../service/backend-api.service";
 })
 export class SettingsComponent {
 
- private fg?: FormGroup;
+ public fg?: FormGroup;
 
   constructor(public pricesService: PricesService, private formBuilder: FormBuilder, private backendApi: BackendApiService) {
+    pricesService.price.subscribe(model => this.buildFormGroup(model))
   }
 
   public buildFormGroup(prices: PricesModel) {
-    this.fg = this.formBuilder.group({
-      kwhPriceFromGrid: [prices?.kwhPriceFromGrid ?? 0, [Validators.required]],
-      kwhPriceIntoGrid: [prices?.kwhPriceIntoGrid ?? 0, [Validators.required]],
-    });
-    return this.fg;
+    this.fg = new FormGroup({
+      kwhPriceFromGrid: new FormControl(prices.kwhPriceFromGrid, Validators.required),
+      kwhPriceIntoGrid: new FormControl(prices.kwhPriceIntoGrid, Validators.required)
+    })
+    return this.fg
   }
 
   public update() {

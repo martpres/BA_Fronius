@@ -1,20 +1,15 @@
 package controller;
 
-import dto.ResponseAcPowerGridPhasesDto;
 import dto.ResponsePricesDto;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-import pagination.PaginationUtil;
-import response.QueryDslResponse;
-import service.MeterRealtimeDataService;
 import service.PricesService;
 
 import java.time.ZonedDateTime;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/prices")
-@Transactional(readOnly = true)
+@Transactional(readOnly = false)
 public class PricesController {
     private final PricesService pricesService;
 

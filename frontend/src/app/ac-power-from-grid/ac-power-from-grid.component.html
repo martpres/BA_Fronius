@@ -11,7 +11,7 @@
 
     <h4
       *ngIf="calculatedAcEnergyFromGridDay && calculatedAcEnergyFromGridDay?.energyDay && (pricesService.price | async) as price">
-      Amount: {{(calculatedAcEnergyFromGridDay?.energyDay ?? 0) * (price?.kwhPriceFromGrid ?? 0)}} €
+      Amount: {{((calculatedAcEnergyFromGridDay?.energyDay ?? 0) * (price?.kwhPriceFromGrid ?? 0) / 3600000).toFixed(2)}} €
     </h4>
 
     <h4 *ngIf="!chartData">

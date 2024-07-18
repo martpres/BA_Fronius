@@ -81,6 +81,7 @@ export class AcPowerFromGridComponent implements OnInit, OnDestroy  {
       let date = this.dateTimeService.convertUtcToLocalTimeZone(e.timestamp);
       if (typeof e.acPowerGrid === 'number') {
         const value = e.acPowerGrid < 0 ? 0 : e.acPowerGrid;
+        console.log(value)
         array.push({ name: date, value: value });
       }
     });
@@ -88,7 +89,7 @@ export class AcPowerFromGridComponent implements OnInit, OnDestroy  {
   }
 
   public convertAndRoundEnergy(energyDay: EnergyDay): number {
-    const kiloWatts = (energyDay?.energyDay ?? 0) / (1000 * 3600);
+    const kiloWatts = (energyDay?.energyDay ?? 0) / (3600000);
     return Math.round(kiloWatts*100)/100;
   }
 

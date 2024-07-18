@@ -88,7 +88,7 @@ export class AcPowerIntoGridComponent  implements OnInit, OnDestroy {
   }
 
   public convertAndRoundEnergy(energyDay: EnergyDay): number {
-    const kiloWatts = (energyDay?.energyDay ?? 0) / (1000 * 3600);
+    const kiloWatts = (energyDay?.energyDay ?? 0) / (3600000);
     return Math.round(kiloWatts*100)/100;
   }
 

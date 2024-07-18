@@ -65,6 +65,7 @@ export class AcPowerFromGridComponent implements OnInit, OnDestroy  {
 
     this.sub2 = this.backendService.loadCalculatedAcEnergyFromGridDay(this.dateTimeService.createFilterForMoment(startDate.format(),
       endDate.format())).subscribe((e) => {
+        console.log(e)
       this.calculatedAcEnergyFromGridDay = e;
     });
 
@@ -81,7 +82,7 @@ export class AcPowerFromGridComponent implements OnInit, OnDestroy  {
       let date = this.dateTimeService.convertUtcToLocalTimeZone(e.timestamp);
       if (typeof e.acPowerGrid === 'number') {
         const value = e.acPowerGrid < 0 ? 0 : e.acPowerGrid;
-        console.log(value)
+        // console.log(array)
         array.push({ name: date, value: value });
       }
     });
@@ -90,6 +91,7 @@ export class AcPowerFromGridComponent implements OnInit, OnDestroy  {
 
   public convertAndRoundEnergy(energyDay: EnergyDay): number {
     const kiloWatts = (energyDay?.energyDay ?? 0) / (3600000);
+    // console.log(kiloWatts)
     return Math.round(kiloWatts*100)/100;
   }
 

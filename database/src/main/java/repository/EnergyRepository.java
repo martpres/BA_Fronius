@@ -19,7 +19,7 @@ public class EnergyRepository {
             " primary_timestamp," +
             " $Cm," +
             " LEAD(primary_timestamp) OVER (ORDER BY primary_timestamp) AS next_timestamp," +
-            " LEAD($Cm) OVER (ORDER BY primary_timestamp) AS next_ac_power_inverter" +
+            " LEAD($Cm) OVER (ORDER BY primary_timestamp) AS delta_power" +
             " FROM params" +
             " WHERE primary_timestamp BETWEEN :startDate AND :endDate AND $Cm IS NOT NULL" +
             ")," +
@@ -28,10 +28,10 @@ public class EnergyRepository {
             " primary_timestamp," +
             " $Cm," +
             " next_timestamp," +
-            " next_ac_power_inverter," +
+            " delta_power," +
             " EXTRACT(EPOCH FROM (next_timestamp - primary_timestamp)) AS time_difference," +
-            " CASE WHEN $Cm $AwOR next_ac_power_inverter $AwTHEN" +
-            " (($Cm + next_ac_power_inverter) / 2.0) * EXTRACT(EPOCH FROM (next_timestamp - primary_timestamp))" +
+            " CASE WHEN $Cm $AwOR delta_power $AwTHEN" +
+            " (($Cm + delta_power) / 2.0) * EXTRACT(EPOCH FROM (next_timestamp - primary_timestamp))" +
             " ELSE 0 END AS trapezoid_area" +
             " FROM ordered_points" +
             " WHERE next_timestamp IS NOT NULL" +

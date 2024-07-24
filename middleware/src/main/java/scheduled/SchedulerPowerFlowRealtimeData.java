@@ -35,4 +35,5 @@ public class SchedulerPowerFlowRealtimeData {
             paramsRepository.save(powerFlowRealtimeDataMapper.dtoToEntity(dto));
         }
     }
+
 }

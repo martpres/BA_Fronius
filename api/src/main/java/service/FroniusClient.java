@@ -6,6 +6,8 @@ import dto.PowerFlowRealtimeDataDto;
 
 public interface FroniusClient {
     MeterRealtimeDataDto meterRealtimeDataEndpoint();
+
     PowerFlowRealtimeDataDto powerFlowRealtimeDataEndpoint();
+
     CommonInverterDataDto commonInverterDataEndpoint();
 }

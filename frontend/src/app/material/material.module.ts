@@ -30,4 +30,5 @@ import {MatCardModule} from "@angular/material/card";
     MatDatepickerModule
   ]
 })
-export class MaterialModule { }
+export class MaterialModule {
+}

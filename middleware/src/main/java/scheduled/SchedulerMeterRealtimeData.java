@@ -35,4 +35,5 @@ public class SchedulerMeterRealtimeData {
             paramsRepository.save(meterRealtimeDataMapper.dtoToEntity(dto));
         }
     }
+
 }

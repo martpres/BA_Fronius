@@ -25,19 +25,19 @@ public class PricesQueryDslRepository {
         this.pricesMapper = pricesMapper;
     }
 
-    public PricesEntity getLastPriceEntity(){
+    public PricesEntity getLastPriceEntity() {
         BooleanBuilder booleanBuilder = new BooleanBuilder();
         booleanBuilder.and(qPricesEntity.endDay.isNull());
         return getJpaQueryFactory().selectFrom(qPricesEntity).where(booleanBuilder).fetchFirst();
     }
 
-    public ResponsePricesDto getLastPrice(){
+    public ResponsePricesDto getLastPrice() {
         BooleanBuilder booleanBuilder = new BooleanBuilder();
         booleanBuilder.and(qPricesEntity.endDay.isNull());
         return pricesMapper.entityToDto(getJpaQueryFactory().selectFrom(qPricesEntity).where(booleanBuilder).fetchFirst());
     }
 
-    public ResponsePricesDto getPriceForDate(ZonedDateTime zonedDateTime){
+    public ResponsePricesDto getPriceForDate(ZonedDateTime zonedDateTime) {
         BooleanBuilder booleanBuilder = new BooleanBuilder();
         booleanBuilder.and(qPricesEntity.beginDay.before(zonedDateTime));
         booleanBuilder.and(qPricesEntity.endDay.after(zonedDateTime)).or(qPricesEntity.endDay.isNull());

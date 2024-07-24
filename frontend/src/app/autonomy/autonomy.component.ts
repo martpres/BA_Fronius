@@ -27,7 +27,7 @@ export class AutonomyComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.sendRequest();
-    this.interval = setInterval(()=> {
+    this.interval = setInterval(() => {
       this.sendRequest();
     }, this.refreshMilliSeconds);
   }
@@ -52,13 +52,13 @@ export class AutonomyComponent implements OnInit, OnDestroy {
   }
 
   private mapRequestToChart(): void {
-    if (this.data?.content?.length===0) {
-      this.chartData=undefined;
+    if (this.data?.content?.length === 0) {
+      this.chartData = undefined;
       return;
     }
     this.chartData = [];
     const array: any[] = [];
-    this.data?.content?.forEach((e)=>{
+    this.data?.content?.forEach((e) => {
       let date = this.dateTimeService.convertUtcToLocalTimeZone(e.timestamp)
       array.push({name: date, value: e.autonomy});
     });

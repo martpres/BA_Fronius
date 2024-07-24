@@ -1,5 +1,4 @@
 <div class="d-flex filter-container">
-
   <div>
     <h3 class="bold-text">
       Power DC from Storage
@@ -27,7 +26,6 @@
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
   </div>
-
 </div>
 
 <div *ngIf="chartData && !allValuesAreZero(chartData)">
@@ -45,4 +43,3 @@
     [gradient]="true"
   ></ngx-charts-area-chart>
 </div>
-

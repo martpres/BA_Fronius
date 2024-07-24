@@ -18,12 +18,12 @@ import {SelfConsumptionComponent} from './self-consumption/self-consumption.comp
 import {AcPowerLoadComponent} from './ac-power-load/ac-power-load.component';
 import {StateOfChargeAkkuComponent} from './state-of-charge-akku/state-of-charge-akku.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import { AcPowerGridPhasesComponent } from './ac-power-grid-phases/ac-power-grid-phases.component';
-import { AcPowerIntoGridComponent } from './ac-power-into-grid/ac-power-into-grid.component';
-import { AcPowerFromGridComponent } from './ac-power-from-grid/ac-power-from-grid.component';
-import { SettingsComponent } from './settings/settings.component';
-import { DcPowerFromAkkuComponent } from './dc-power-from-akku/dc-power-from-akku.component';
-import { DcPowerIntoAkkuComponent } from './dc-power-into-akku/dc-power-into-akku.component';
+import {AcPowerGridPhasesComponent} from './ac-power-grid-phases/ac-power-grid-phases.component';
+import {AcPowerIntoGridComponent} from './ac-power-into-grid/ac-power-into-grid.component';
+import {AcPowerFromGridComponent} from './ac-power-from-grid/ac-power-from-grid.component';
+import {SettingsComponent} from './settings/settings.component';
+import {DcPowerFromAkkuComponent} from './dc-power-from-akku/dc-power-from-akku.component';
+import {DcPowerIntoAkkuComponent} from './dc-power-into-akku/dc-power-into-akku.component';
 import {ToastrModule} from "ngx-toastr";
 
 @NgModule({

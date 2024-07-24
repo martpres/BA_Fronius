@@ -1,4 +1,4 @@
-import { Component, Injectable } from '@angular/core';
+import {Component} from '@angular/core';
 import {PricesService} from "../service/prices.service";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {PricesModel} from "../dto/prices.model";
@@ -12,14 +12,13 @@ import {ToastrService} from "ngx-toastr";
   styleUrls: ['./settings.component.scss']
 })
 export class SettingsComponent {
-
- public fg?: FormGroup;
+  public fg?: FormGroup;
 
   constructor(public pricesService: PricesService,
               private formBuilder: FormBuilder,
               private backendApi: BackendApiService,
               private toaster: ToastrService
-              ) {
+  ) {
     pricesService.price.subscribe(model => this.buildFormGroup(model))
   }
 
@@ -33,7 +32,7 @@ export class SettingsComponent {
 
   public update() {
     const request = this.fg?.value as PricesModel;
-    firstValueFrom(this.backendApi.updatePrice(request)).then(()=>{
+    firstValueFrom(this.backendApi.updatePrice(request)).then(() => {
       this.toaster.success("Successfully updated price")
     });
   }

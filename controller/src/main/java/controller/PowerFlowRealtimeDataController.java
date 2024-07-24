@@ -128,5 +128,4 @@ public class PowerFlowRealtimeDataController {
         return powerFlowRealtimeDataService.loadCalculatedDcEnergyFromAkkuDay(startDate, endDate);
     }
 
-
 }

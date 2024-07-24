@@ -1,16 +1,16 @@
 <div class="d-flex filter-container">
-
   <div>
     <h3 class="bold-text">
       Power AC Inverter
     </h3>
 
     <h4 *ngIf="acEnergyInverterDayData?.acEnergyInverterDay">
-      Day Energy (cumulated value from API): {{ (acEnergyInverterDayData?.acEnergyInverterDay / 1000).toFixed(2) }} kWh
+      Day Energy (cumulated value from API):
+      {{ (acEnergyInverterDayData?.acEnergyInverterDay / 1000).toFixed(2) }} kWh
     </h4>
 
     <h4 *ngIf="calculatedAcEnergyInverterDay && calculatedAcEnergyInverterDay?.energyDay">
-      Day Energy (calculated):  {{convertAndRoundEnergy(calculatedAcEnergyInverterDay)}} kWh
+      Day Energy (calculated): {{convertAndRoundEnergy(calculatedAcEnergyInverterDay)}} kWh
     </h4>
 
     <h4 *ngIf="!chartData">
@@ -27,7 +27,6 @@
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
   </div>
-
 </div>
 
 <div *ngIf="chartData">

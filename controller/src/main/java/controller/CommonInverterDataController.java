@@ -24,7 +24,8 @@ public class CommonInverterDataController {
     private final EnergyRepository energyRepository;
     private final CommonInverterDataService commonInverterDataService;
 
-    public CommonInverterDataController(EnergyRepository energyRepository, CommonInverterDataService commonInverterDataService) {
+    public CommonInverterDataController(EnergyRepository energyRepository,
+                                        CommonInverterDataService commonInverterDataService) {
         this.energyRepository = energyRepository;
         this.commonInverterDataService = commonInverterDataService;
     }
@@ -49,8 +50,8 @@ public class CommonInverterDataController {
 
     @GetMapping(value = "/ac-energy-inverter-day/latest", produces = "application/json")
     public ResponseAcEnergyInverterDayDto loadAcEnergyInverterDay(
-        @RequestParam(value = "startDate") ZonedDateTime startDate,
-        @RequestParam(value = "endDate") ZonedDateTime endDate) {
+            @RequestParam(value = "startDate") ZonedDateTime startDate,
+            @RequestParam(value = "endDate") ZonedDateTime endDate) {
         return commonInverterDataService.loadAcEnergyInverterDay(startDate, endDate);
     }
 

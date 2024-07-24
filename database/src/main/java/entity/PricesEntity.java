@@ -30,7 +30,8 @@ public class PricesEntity {
     public PricesEntity() {
     }
 
-    public PricesEntity(Integer id, Float kwhPriceFromGrid, Float kwhPriceIntoGrid, ZonedDateTime beginDay, ZonedDateTime endDay) {
+    public PricesEntity(Integer id, Float kwhPriceFromGrid, Float kwhPriceIntoGrid,
+                        ZonedDateTime beginDay, ZonedDateTime endDay) {
         this.id = id;
         this.kwhPriceFromGrid = kwhPriceFromGrid;
         this.kwhPriceIntoGrid = kwhPriceIntoGrid;

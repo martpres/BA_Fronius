@@ -1,4 +1,4 @@
-import {Component, inject, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {BackendApiService} from "../service/backend-api.service";
 import {Subscription} from "rxjs";
 import {QueryDslResponse} from "../dto/queryDslResponse.model";
@@ -13,7 +13,7 @@ import * as moment from "moment";
   templateUrl: './ac-power-grid-phases.component.html',
   styleUrls: ['./ac-power-grid-phases.component.scss']
 })
-export class AcPowerGridPhasesComponent  implements OnInit, OnDestroy {
+export class AcPowerGridPhasesComponent implements OnInit, OnDestroy {
   public chartData?: any[];
   public initialDate = new Date();
   public maxDate = new Date();
@@ -71,4 +71,5 @@ export class AcPowerGridPhasesComponent  implements OnInit, OnDestroy {
     this.chartData?.push({name: 'AC Power Grid - Phase 2', series: array2});
     this.chartData?.push({name: 'AC Power Grid - Phase 3', series: array3});
   }
+
 }

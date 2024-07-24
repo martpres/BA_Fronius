@@ -18,7 +18,7 @@ export class PricesService {
   }
 
   public loadLastPrice(): void {
-    firstValueFrom(this.apiService.loadLastPrice()).then((res: PricesModel)=> {
+    firstValueFrom(this.apiService.loadLastPrice()).then((res: PricesModel) => {
       if (!res) {
         res = {kwhPriceIntoGrid: 0, kwhPriceFromGrid: 0};
       }
@@ -27,7 +27,7 @@ export class PricesService {
   }
 
   public loadPriceForDate(date: string): void {
-    firstValueFrom(this.apiService.loadPriceForDate(date)).then((res: PricesModel)=> {
+    firstValueFrom(this.apiService.loadPriceForDate(date)).then((res: PricesModel) => {
       if (!res) {
         res = {kwhPriceIntoGrid: 0, kwhPriceFromGrid: 0};
       }

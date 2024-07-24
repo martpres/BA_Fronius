@@ -91,15 +91,8 @@ export class AcPowerFromGridComponent implements OnInit, OnDestroy  {
 
   public convertAndRoundEnergy(energyDay: EnergyDay): number {
     const kiloWatts = (energyDay?.energyDay ?? 0) / (3600000);
-    // console.log(kiloWatts)
     return Math.round(kiloWatts*100)/100;
   }
-
-  // public calculateAmount(energyDay: EnergyDay): number {
-  //   const kiloWatts = (energyDay?.energyDay ?? 0) / (1000 * 3600);
-  //   const roundedPrice = (kiloWatts * 100 * this.settingsService.kwhPriceFromGrid / 100).toFixed(2);
-  //   return Number(roundedPrice);
-  // }
 
   public allValuesAreZero(chartData?: any[]): boolean {
     if (chartData === undefined || !Array.isArray(chartData)) {
@@ -107,7 +100,5 @@ export class AcPowerFromGridComponent implements OnInit, OnDestroy  {
     }
     return chartData.every(data => data.series.every((obj: any) => obj.value === 0));
   }
-
-
 
 }

@@ -15,7 +15,7 @@ import {PricesService} from "../service/prices.service";
   templateUrl: './ac-power-into-grid.component.html',
   styleUrls: ['./ac-power-into-grid.component.scss']
 })
-export class AcPowerIntoGridComponent  implements OnInit, OnDestroy {
+export class AcPowerIntoGridComponent implements OnInit, OnDestroy {
   public calculatedAcEnergyIntoGridDay?: EnergyDay;
   public chartData?: any[];
   public initialDate = new Date();
@@ -33,7 +33,7 @@ export class AcPowerIntoGridComponent  implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.sendRequest();
-    this.interval = setInterval(()=> {
+    this.interval = setInterval(() => {
       this.sendRequest();
     }, this.refreshMilliSeconds);
   }
@@ -58,7 +58,7 @@ export class AcPowerIntoGridComponent  implements OnInit, OnDestroy {
     const endDate = moment(this.initialDate).endOf('day').utc();
 
     this.sub1 = this.backendService.loadAcPowerGrid(this.dateTimeService.createFilterForMoment(startDate.format(),
-      endDate.format())).subscribe((e)=> {
+      endDate.format())).subscribe((e) => {
       this.data = e;
       this.mapRequestToChart();
     });
@@ -67,7 +67,6 @@ export class AcPowerIntoGridComponent  implements OnInit, OnDestroy {
       endDate.format())).subscribe((e) => {
       this.calculatedAcEnergyIntoGridDay = e;
     });
-
   }
 
   private mapRequestToChart(): void {
@@ -77,19 +76,19 @@ export class AcPowerIntoGridComponent  implements OnInit, OnDestroy {
     }
     this.chartData = [];
     const array: any[] = [];
-    this.data?.content?.forEach((e)=>{
+    this.data?.content?.forEach((e) => {
       let date = this.dateTimeService.convertUtcToLocalTimeZone(e.timestamp);
       if (typeof e.acPowerGrid === 'number') {
         const value = e.acPowerGrid > 0 ? 0 : e.acPowerGrid;
-        array.push({ name: date, value: -value });
+        array.push({name: date, value: -value});
       }
     });
-    this.chartData?.push({name: 'Power into Grid', series: array });
+    this.chartData?.push({name: 'Power into Grid', series: array});
   }
 
   public convertAndRoundEnergy(energyDay: EnergyDay): number {
     const kiloWatts = (energyDay?.energyDay ?? 0) / (3600000);
-    return Math.round(kiloWatts*100)/100;
+    return Math.round(kiloWatts * 100) / 100;
   }
 
   public allValuesAreZero(chartData?: any[]): boolean {
@@ -100,4 +99,3 @@ export class AcPowerIntoGridComponent  implements OnInit, OnDestroy {
   }
 
 }
-

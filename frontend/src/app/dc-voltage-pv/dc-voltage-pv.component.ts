@@ -22,43 +22,43 @@ export class DcVoltagePvComponent implements OnInit, OnDestroy {
   private refreshMilliSeconds = 60000;
   private interval?: any;
 
-    constructor(private backendService: BackendApiService, private dateTimeService: DateTimeService) {
-    }
+  constructor(private backendService: BackendApiService, private dateTimeService: DateTimeService) {
+  }
 
-    ngOnInit(): void {
+  ngOnInit(): void {
+    this.sendRequest();
+    this.interval = setInterval(() => {
       this.sendRequest();
-      this.interval = setInterval(()=> {
-        this.sendRequest();
-      }, this.refreshMilliSeconds);
-    }
+    }, this.refreshMilliSeconds);
+  }
 
-    ngOnDestroy(): void {
-      this.sub?.unsubscribe();
-      clearInterval(this.interval);
+  ngOnDestroy(): void {
+    this.sub?.unsubscribe();
+    clearInterval(this.interval);
   }
 
   public convertTime(value: Date): string {
-      return formatDate(value, timeFormat, localId);
-    }
+    return formatDate(value, timeFormat, localId);
+  }
 
   public sendRequest(): void {
     const endDate = moment(this.initialDate).endOf('day').utc();
     const startDate = moment(this.initialDate).startOf('day').utc();
-      this.sub = this.backendService.loadDcVoltagePv(this.dateTimeService.createFilterForMoment(startDate.format(),
-        endDate.format())).subscribe((e)=> {
-        this.data = e;
-        this.mapRequestToLineChart();
-      });
-    }
+    this.sub = this.backendService.loadDcVoltagePv(this.dateTimeService.createFilterForMoment(startDate.format(),
+      endDate.format())).subscribe((e) => {
+      this.data = e;
+      this.mapRequestToLineChart();
+    });
+  }
 
   private mapRequestToLineChart(): void {
-      if (this.data?.content?.length===0) {
-      this.chartData=undefined;
+    if (this.data?.content?.length === 0) {
+      this.chartData = undefined;
       return;
     }
     this.chartData = [];
     const array: any[] = [];
-    this.data?.content?.forEach((e)=>{
+    this.data?.content?.forEach((e) => {
       let date = this.dateTimeService.convertUtcToLocalTimeZone(e.timestamp)
       array.push({name: date, value: e.dcVoltagePv});
     });

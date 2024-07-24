@@ -11,7 +11,6 @@ public class MeterRealtimeDataDto implements Serializable {
     private Float acPowerGridPhase1;
     private Float acPowerGridPhase2;
     private Float acPowerGridPhase3;
-
     private ZonedDateTime timestamp;
 
     public MeterRealtimeDataDto() {

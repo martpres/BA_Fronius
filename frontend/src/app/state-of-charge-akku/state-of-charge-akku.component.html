@@ -1,9 +1,12 @@
 <div class="d-flex filter-container">
-
   <div>
     <h3 class="bold-text">
       State of Charge - Storage
     </h3>
+
+    <h4 *ngIf="chartData">
+      Average day value: {{calculateAverage(chartData).toFixed(0)}} %
+    </h4>
 
     <h4 *ngIf="!chartData">
       No data available for selected day
@@ -19,7 +22,6 @@
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
   </div>
-
 </div>
 
 <div *ngIf="chartData">

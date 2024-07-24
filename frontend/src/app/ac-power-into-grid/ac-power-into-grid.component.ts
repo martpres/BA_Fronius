@@ -8,13 +8,14 @@ import {localId, timeFormat} from "../dto/const";
 import {AcPowerGrid} from "../dto/acPowerGrid.model";
 import * as moment from "moment";
 import {EnergyDay} from "../dto/energyDay.model";
+import {PricesService} from "../service/prices.service";
 
 @Component({
   selector: 'app-ac-power-into-grid',
   templateUrl: './ac-power-into-grid.component.html',
   styleUrls: ['./ac-power-into-grid.component.scss']
 })
-export class AcPowerIntoGridComponent  implements OnInit, OnDestroy {
+export class AcPowerIntoGridComponent implements OnInit, OnDestroy {
   public calculatedAcEnergyIntoGridDay?: EnergyDay;
   public chartData?: any[];
   public initialDate = new Date();
@@ -25,12 +26,14 @@ export class AcPowerIntoGridComponent  implements OnInit, OnDestroy {
   private refreshMilliSeconds = 60000;
   private interval?: any;
 
-  constructor(private backendService: BackendApiService, private dateTimeService: DateTimeService) {
+  constructor(private backendService: BackendApiService,
+              private dateTimeService: DateTimeService,
+              public pricesService: PricesService) {
   }
 
   ngOnInit(): void {
     this.sendRequest();
-    this.interval = setInterval(()=> {
+    this.interval = setInterval(() => {
       this.sendRequest();
     }, this.refreshMilliSeconds);
   }
@@ -45,12 +48,17 @@ export class AcPowerIntoGridComponent  implements OnInit, OnDestroy {
     return formatDate(value, timeFormat, localId);
   }
 
+  public loadPriceForDate(): void {
+    const startDate = moment(this.initialDate).utc();
+    this.pricesService.loadPriceForDate(startDate.format());
+  }
+
   public sendRequest(): void {
     const startDate = moment(this.initialDate).startOf('day').utc();
     const endDate = moment(this.initialDate).endOf('day').utc();
 
     this.sub1 = this.backendService.loadAcPowerGrid(this.dateTimeService.createFilterForMoment(startDate.format(),
-      endDate.format())).subscribe((e)=> {
+      endDate.format())).subscribe((e) => {
       this.data = e;
       this.mapRequestToChart();
     });
@@ -59,7 +67,6 @@ export class AcPowerIntoGridComponent  implements OnInit, OnDestroy {
       endDate.format())).subscribe((e) => {
       this.calculatedAcEnergyIntoGridDay = e;
     });
-
   }
 
   private mapRequestToChart(): void {
@@ -69,20 +76,26 @@ export class AcPowerIntoGridComponent  implements OnInit, OnDestroy {
     }
     this.chartData = [];
     const array: any[] = [];
-    this.data?.content?.forEach((e)=>{
+    this.data?.content?.forEach((e) => {
       let date = this.dateTimeService.convertUtcToLocalTimeZone(e.timestamp);
       if (typeof e.acPowerGrid === 'number') {
         const value = e.acPowerGrid > 0 ? 0 : e.acPowerGrid;
-        array.push({ name: date, value: -value });
+        array.push({name: date, value: -value});
       }
     });
-    this.chartData?.push({name: 'Power into Grid', series: array });
+    this.chartData?.push({name: 'Power into Grid', series: array});
   }
 
   public convertAndRoundEnergy(energyDay: EnergyDay): number {
-    const kiloWatts = (energyDay?.energyDay ?? 0) / (1000 * 3600);
-    return Math.round(kiloWatts*1000)/1000;
+    const kiloWatts = (energyDay?.energyDay ?? 0) / (3600000);
+    return Math.round(kiloWatts * 100) / 100;
+  }
+
+  public allValuesAreZero(chartData?: any[]): boolean {
+    if (chartData === undefined || !Array.isArray(chartData)) {
+      return false;
+    }
+    return chartData.every(data => data.series.every((obj: any) => obj.value === 0));
   }
 
 }
-

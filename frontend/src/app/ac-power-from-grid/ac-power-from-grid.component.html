@@ -1,5 +1,4 @@
 <div class="d-flex filter-container">
-
   <div>
     <h3 class="bold-text">
       Power AC from Grid
@@ -9,24 +8,38 @@
       Day Energy (calculated) from Grid: {{convertAndRoundEnergy(calculatedAcEnergyFromGridDay)}} kWh
     </h4>
 
+    <h4 *ngIf="calculatedAcEnergyFromGridDay
+      && calculatedAcEnergyFromGridDay?.energyDay
+      && (pricesService.price | async) as price">
+      Amount:
+      {{((calculatedAcEnergyFromGridDay?.energyDay ?? 0) * (price?.kwhPriceFromGrid ?? 0)
+      / (3600000)).toFixed(2)}} €
+    </h4>
+
     <h4 *ngIf="!chartData">
       No data available for selected day
+    </h4>
+
+    <h4 *ngIf="allValuesAreZero(chartData)">
+      No energy was consumed from grid on this day
     </h4>
   </div>
 
   <div class="ml-auto">
     <mat-form-field>
       <mat-label>Select Day</mat-label>
-      <input matInput [matDatepicker]="picker" [(ngModel)]="initialDate" (dateChange)="sendRequest()" [max]="maxDate">
+      <input matInput [matDatepicker]="picker"
+             [(ngModel)]="initialDate"
+             (dateChange)="sendRequest(); loadPriceForDate()"
+             [max]="maxDate">
       <mat-hint>DD.MM.YYYY</mat-hint>
       <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
   </div>
-
 </div>
 
-<div *ngIf="chartData">
+<div *ngIf="chartData && !allValuesAreZero(chartData)">
   <ngx-charts-area-chart
     [legend]="true"
     [showXAxisLabel]="true"

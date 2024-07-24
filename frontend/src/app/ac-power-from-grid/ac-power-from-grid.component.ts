@@ -8,6 +8,7 @@ import {localId, timeFormat} from "../dto/const";
 import {AcPowerGrid} from "../dto/acPowerGrid.model";
 import * as moment from "moment";
 import {EnergyDay} from "../dto/energyDay.model";
+import {PricesService} from "../service/prices.service";
 
 @Component({
   selector: 'app-ac-power-from-grid',
@@ -25,7 +26,9 @@ export class AcPowerFromGridComponent implements OnInit, OnDestroy  {
   private refreshMilliSeconds = 60000;
   private interval?: any;
 
-  constructor(private backendService: BackendApiService, private dateTimeService: DateTimeService) {
+  constructor(private backendService: BackendApiService,
+              private dateTimeService: DateTimeService,
+              public pricesService: PricesService) {
   }
 
   ngOnInit(): void {
@@ -45,6 +48,11 @@ export class AcPowerFromGridComponent implements OnInit, OnDestroy  {
     return formatDate(value, timeFormat, localId);
   }
 
+  public loadPriceForDate(): void {
+    const startDate = moment(this.initialDate).utc();
+    this.pricesService.loadPriceForDate(startDate.format());
+  }
+
   public sendRequest(): void {
     const startDate = moment(this.initialDate).startOf('day').utc();
     const endDate = moment(this.initialDate).endOf('day').utc();
@@ -57,6 +65,7 @@ export class AcPowerFromGridComponent implements OnInit, OnDestroy  {
 
     this.sub2 = this.backendService.loadCalculatedAcEnergyFromGridDay(this.dateTimeService.createFilterForMoment(startDate.format(),
       endDate.format())).subscribe((e) => {
+        console.log(e)
       this.calculatedAcEnergyFromGridDay = e;
     });
 
@@ -73,6 +82,7 @@ export class AcPowerFromGridComponent implements OnInit, OnDestroy  {
       let date = this.dateTimeService.convertUtcToLocalTimeZone(e.timestamp);
       if (typeof e.acPowerGrid === 'number') {
         const value = e.acPowerGrid < 0 ? 0 : e.acPowerGrid;
+        // console.log(array)
         array.push({ name: date, value: value });
       }
     });
@@ -80,8 +90,15 @@ export class AcPowerFromGridComponent implements OnInit, OnDestroy  {
   }
 
   public convertAndRoundEnergy(energyDay: EnergyDay): number {
-    const kiloWatts = (energyDay?.energyDay ?? 0) / (1000 * 3600);
-    return Math.round(kiloWatts*1000)/1000;
+    const kiloWatts = (energyDay?.energyDay ?? 0) / (3600000);
+    return Math.round(kiloWatts*100)/100;
+  }
+
+  public allValuesAreZero(chartData?: any[]): boolean {
+    if (chartData === undefined || !Array.isArray(chartData)) {
+      return false;
+    }
+    return chartData.every(data => data.series.every((obj: any) => obj.value === 0));
   }
 
 }

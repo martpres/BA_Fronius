@@ -17,7 +17,8 @@ public class PowerFlowRealtimeDataService {
     private final ParamsQueryDslRepository paramsQueryDslRepository;
     private final EnergyRepository energyRepository;
 
-    public PowerFlowRealtimeDataService(ParamsQueryDslRepository paramsQueryDslRepository, EnergyRepository energyRepository) {
+    public PowerFlowRealtimeDataService(ParamsQueryDslRepository paramsQueryDslRepository,
+                                        EnergyRepository energyRepository) {
         this.paramsQueryDslRepository = paramsQueryDslRepository;
         this.energyRepository = energyRepository;
     }
@@ -93,18 +94,17 @@ public class PowerFlowRealtimeDataService {
     }
 
     public ResponseEnergyDayDto loadCalculatedDcEnergyIntoAkkuDay(ZonedDateTime startDate,
-                                                              ZonedDateTime endDate) {
-        return new ResponseEnergyDayDto(
-                energyRepository.calculatePositiveEnergy("dc_power_akku", startDate, endDate)
-        );
-    }
-
-    public ResponseEnergyDayDto loadCalculatedDcEnergyFromAkkuDay(ZonedDateTime startDate,
                                                                   ZonedDateTime endDate) {
         return new ResponseEnergyDayDto(
                 energyRepository.calculateNegativeEnergy("dc_power_akku", startDate, endDate)
         );
     }
 
+    public ResponseEnergyDayDto loadCalculatedDcEnergyFromAkkuDay(ZonedDateTime startDate,
+                                                                  ZonedDateTime endDate) {
+        return new ResponseEnergyDayDto(
+                energyRepository.calculatePositiveEnergy("dc_power_akku", startDate, endDate)
+        );
+    }
 
 }

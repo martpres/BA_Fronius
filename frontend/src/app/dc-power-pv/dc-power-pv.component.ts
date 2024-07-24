@@ -30,7 +30,7 @@ export class DcPowerPvComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.sendRequest();
-    this.interval = setInterval(()=> {
+    this.interval = setInterval(() => {
       this.sendRequest();
     }, this.refreshMilliSeconds);
   }
@@ -62,13 +62,13 @@ export class DcPowerPvComponent implements OnInit, OnDestroy {
   }
 
   private mapRequestToChart(): void {
-    if (this.data?.content?.length===0) {
-      this.chartData=undefined;
+    if (this.data?.content?.length === 0) {
+      this.chartData = undefined;
       return;
     }
     this.chartData = [];
     const array: any[] = [];
-    this.data?.content?.forEach((e)=>{
+    this.data?.content?.forEach((e) => {
       let date = this.dateTimeService.convertUtcToLocalTimeZone(e.timestamp)
       array.push({name: date, value: e.dcPowerPv});
     });
@@ -77,7 +77,7 @@ export class DcPowerPvComponent implements OnInit, OnDestroy {
 
   public convertAndRoundEnergy(energyDay: EnergyDay): number {
     const kiloWatts = (energyDay?.energyDay ?? 0) / (1000 * 3600);
-    return Math.round(kiloWatts*1000)/1000;
+    return Math.round(kiloWatts * 100) / 100;
   }
 
 }

@@ -7,8 +7,8 @@
                    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
     <changeSet id="202405131953-1" author="martpres">
-        <createTable tableName="params">
 
+        <createTable tableName="params">
             <column name="primary_timestamp" type="timestamptz">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -51,7 +51,25 @@
 
             <column name="ac_power_grid_phase3" type="real">
             </column>
-
         </createTable>
+
+        <createTable tableName="prices">
+            <column name="id" type="integer">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="begin_day" type="timestamptz">
+            </column>
+
+            <column name="end_day" type="timestamptz">
+            </column>
+
+            <column name="kwh_price_from_grid" type="real">
+            </column>
+
+            <column name="kwh_price_into_grid" type="real">
+            </column>
+        </createTable>
+
     </changeSet>
 </databaseChangeLog>

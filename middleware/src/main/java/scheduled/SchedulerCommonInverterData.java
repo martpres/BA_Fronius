@@ -35,4 +35,5 @@ public class SchedulerCommonInverterData {
             paramsRepository.save(commonInverterDataMapper.dtoToEntity(dto));
         }
     }
+
 }

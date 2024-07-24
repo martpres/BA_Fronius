@@ -26,15 +26,19 @@ public class CommonInverterDataDto implements Serializable {
     public Float getAcPowerInverter() {
         return acPowerInverter;
     }
+
     public Float getDcVoltagePv() {
         return dcVoltagePv;
     }
+
     public ZonedDateTime getTimestamp() {
         return timestamp;
     }
+
     public void setTimestamp(ZonedDateTime timestamp) {
         this.timestamp = timestamp;
     }
+
     public Float getAcEnergyInverterDay() {
         return acEnergyInverterDay;
     }

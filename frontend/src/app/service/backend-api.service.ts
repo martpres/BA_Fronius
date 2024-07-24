@@ -14,6 +14,7 @@ import {StateOfChargeAkku} from "../dto/stateOfChargeAkku.model";
 import {AcEnergyInverterDay} from "../dto/acEnergyInverterDay.model";
 import {EnergyDay} from "../dto/energyDay.model";
 import {AcPowerGridPhases} from "../dto/acPowerGridPhases.model";
+import {PricesModel} from "../dto/prices.model";
 
 @Injectable({
   providedIn: 'root'
@@ -113,6 +114,22 @@ export class BackendApiService {
   public loadCalculatedDcEnergyFromAkkuDay(filter?: any): Observable<EnergyDay> {
     return this.httpClient.get<EnergyDay>(
       `${this.baseUrl}power-flow-realtime-data/dc-energy-from-akku-day/calculated/latest`, {params: filter});
+  }
+
+  public loadLastPrice(): Observable<PricesModel> {
+    return this.httpClient.get<PricesModel>(
+      `${this.baseUrl}prices/`);
+  }
+
+  public loadPriceForDate(date: string): Observable<PricesModel> {
+    const filter = {date: date} as any;
+    return this.httpClient.get<PricesModel>(
+      `${this.baseUrl}prices/archiv`, {params: filter});
+  }
+
+  public updatePrice(request: PricesModel): Observable<void> {
+    return this.httpClient.post<void>(
+      `${this.baseUrl}prices/`, request);
   }
 
 }

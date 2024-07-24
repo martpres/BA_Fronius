@@ -59,7 +59,6 @@ export class DcPowerFromAkkuComponent implements OnInit, OnDestroy {
       endDate.format())).subscribe((e) => {
       this.calculatedDcEnergyFromAkkuDay = e;
     });
-
   }
 
   private mapRequestToChart(): void {
@@ -73,7 +72,7 @@ export class DcPowerFromAkkuComponent implements OnInit, OnDestroy {
       let date = this.dateTimeService.convertUtcToLocalTimeZone(e.timestamp)
       if (typeof e.dcPowerAkku === 'number') {
         const value = e.dcPowerAkku < 0 ? 0 : e.dcPowerAkku;
-        array.push({ name: date, value: value });
+        array.push({name: date, value: value});
       }
     });
     this.chartData?.push({name: 'Power from Akku', series: array});
@@ -81,8 +80,14 @@ export class DcPowerFromAkkuComponent implements OnInit, OnDestroy {
 
   public convertAndRoundEnergy(energyDay: EnergyDay): number {
     const kiloWatts = (energyDay?.energyDay ?? 0) / (1000 * 3600);
-    return Math.round(kiloWatts*1000)/1000;
+    return Math.round(kiloWatts * 100) / 100;
+  }
+
+  public allValuesAreZero(chartData?: any[]): boolean {
+    if (chartData === undefined || !Array.isArray(chartData)) {
+      return false;
+    }
+    return chartData.every(data => data.series.every((obj: any) => obj.value === 0));
   }
 
 }
-

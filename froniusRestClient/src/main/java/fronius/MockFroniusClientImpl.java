@@ -28,7 +28,8 @@ public class MockFroniusClientImpl implements FroniusClient {
     @Override
     public MeterRealtimeDataDto meterRealtimeDataEndpoint() {
         System.out.println("DEBUG: MeterRealtimeData | reading Json file");
-        MeterRealtimeDataDto dto1 = readJsonFromFile(METER_REALTIME_DATA_PATH, "$", MeterRealtimeDataDto.class);
+        MeterRealtimeDataDto dto1 = readJsonFromFile(METER_REALTIME_DATA_PATH, "$",
+                MeterRealtimeDataDto.class);
         dto1.setTimestamp(ZonedDateTime.now());
         return dto1;
     }
@@ -36,7 +37,8 @@ public class MockFroniusClientImpl implements FroniusClient {
     @Override
     public PowerFlowRealtimeDataDto powerFlowRealtimeDataEndpoint() {
         System.out.println("DEBUG: PowerFlowRealtimeData | reading Json file");
-        PowerFlowRealtimeDataDto dto2 = readJsonFromFile(POWER_FLOW_REALTIME_DATA_PATH, "$", PowerFlowRealtimeDataDto.class);
+        PowerFlowRealtimeDataDto dto2 = readJsonFromFile(POWER_FLOW_REALTIME_DATA_PATH, "$",
+                PowerFlowRealtimeDataDto.class);
         dto2.setTimestamp(ZonedDateTime.now());
         return dto2;
     }
@@ -44,7 +46,8 @@ public class MockFroniusClientImpl implements FroniusClient {
     @Override
     public CommonInverterDataDto commonInverterDataEndpoint() {
         System.out.println("DEBUG: CommonInverterData | reading Json file");
-        CommonInverterDataDto dto3 = readJsonFromFile(COMMON_INVERTER_DATA_PATH, "$", CommonInverterDataDto.class);
+        CommonInverterDataDto dto3 = readJsonFromFile(COMMON_INVERTER_DATA_PATH, "$",
+                CommonInverterDataDto.class);
         dto3.setTimestamp(ZonedDateTime.now());
         return dto3;
     }

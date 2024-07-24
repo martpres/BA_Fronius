@@ -50,9 +50,10 @@ public class ParamsEntity extends AbstractBaseEntity {
     public ParamsEntity() {
     }
 
-    public ParamsEntity(Float dcPowerPv, Float acPowerGrid, Float acPowerInverter, Float dcVoltagePv, Float dcPowerAkku,
-                        Float acPowerLoad, Float autonomy, Float selfConsumption, Float stateOfChargeAkku,
-                        Float acEnergyInverterDay, Float acPowerGridPhase1, Float acPowerGridPhase2, Float acPowerGridPhase3) {
+    public ParamsEntity(Float dcPowerPv, Float acPowerGrid, Float acPowerInverter, Float dcVoltagePv,
+                        Float dcPowerAkku, Float acPowerLoad, Float autonomy, Float selfConsumption,
+                        Float stateOfChargeAkku, Float acEnergyInverterDay, Float acPowerGridPhase1,
+                        Float acPowerGridPhase2, Float acPowerGridPhase3) {
         this.dcPowerPv = dcPowerPv;
         this.acPowerGrid = acPowerGrid;
         this.acPowerInverter = acPowerInverter;
@@ -71,78 +72,103 @@ public class ParamsEntity extends AbstractBaseEntity {
     public Float getDcPowerPv() {
         return dcPowerPv;
     }
+
     public void setDcPowerPv(Float dcPowerPv) {
         this.dcPowerPv = dcPowerPv;
     }
+
     public Float getAcPowerGrid() {
         return acPowerGrid;
     }
+
     public void setAcPowerGrid(Float acPowerGrid) {
         this.acPowerGrid = acPowerGrid;
     }
+
     public Float getAcPowerInverter() {
         return acPowerInverter;
     }
+
     public void setAcPowerInverter(Float acPowerInverter) {
         this.acPowerInverter = acPowerInverter;
     }
+
     public Float getDcVoltagePv() {
         return dcVoltagePv;
     }
+
     public void setDcVoltagePv(Float dcVoltagePv) {
         this.dcVoltagePv = dcVoltagePv;
     }
+
     public Float getDcPowerAkku() {
         return dcPowerAkku;
     }
+
     public void setDcPowerAkku(Float dcPowerAkku) {
         this.dcPowerAkku = dcPowerAkku;
     }
+
     public Float getAcPowerLoad() {
         return acPowerLoad;
     }
+
     public void setAcPowerLoad(Float acPowerLoad) {
         this.acPowerLoad = acPowerLoad;
     }
+
     public Float getAutonomy() {
         return autonomy;
     }
+
     public void setAutonomy(Float autonomy) {
         this.autonomy = autonomy;
     }
+
     public Float getSelfConsumption() {
         return selfConsumption;
     }
+
     public void setSelfConsumption(Float selfConsumption) {
         this.selfConsumption = selfConsumption;
     }
+
     public Float getStateOfChargeAkku() {
         return stateOfChargeAkku;
     }
+
     public void setStateOfChargeAkku(Float stateOfChargeAkku) {
         this.stateOfChargeAkku = stateOfChargeAkku;
     }
+
     public Float getAcEnergyInverterDay() {
         return acEnergyInverterDay;
     }
+
     public void setAcEnergyInverterDay(Float acEnergyInverterDay) {
         this.acEnergyInverterDay = acEnergyInverterDay;
     }
+
     public Float getAcPowerGridPhase1() {
         return acPowerGridPhase1;
     }
+
     public void setAcPowerGridPhase1(Float acPowerGridPhase1) {
         this.acPowerGridPhase1 = acPowerGridPhase1;
     }
+
     public Float getAcPowerGridPhase2() {
         return acPowerGridPhase2;
     }
+
     public void setAcPowerGridPhase2(Float acPowerGridPhase2) {
         this.acPowerGridPhase2 = acPowerGridPhase2;
     }
+
     public Float getAcPowerGridPhase3() {
         return acPowerGridPhase3;
     }
+
     public void setAcPowerGridPhase3(Float acPowerGridPhase3) {
         this.acPowerGridPhase3 = acPowerGridPhase3;
     }

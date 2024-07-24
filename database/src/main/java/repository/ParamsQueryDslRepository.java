@@ -29,8 +29,9 @@ public class ParamsQueryDslRepository {
     private final PowerFlowRealtimeDataMapper powerFlowRealtimeDataMapper;
     private final CommonInverterDataMapper commonInverterDataMapper;
 
-    public ParamsQueryDslRepository(MeterRealtimeDataMapper meterRealtimeDataMapper, PowerFlowRealtimeDataMapper
-            powerFlowRealtimeDataMapper, CommonInverterDataMapper commonInverterDataMapper) {
+    public ParamsQueryDslRepository(MeterRealtimeDataMapper meterRealtimeDataMapper,
+                                    PowerFlowRealtimeDataMapper powerFlowRealtimeDataMapper,
+                                    CommonInverterDataMapper commonInverterDataMapper) {
         this.meterRealtimeDataMapper = meterRealtimeDataMapper;
         this.powerFlowRealtimeDataMapper = powerFlowRealtimeDataMapper;
         this.commonInverterDataMapper = commonInverterDataMapper;

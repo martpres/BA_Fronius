@@ -1,3 +1,18 @@
 .bold-text {
   font-weight: bold;
 }
+
+.btn {
+  background-color: lightgreen;
+  color: black !important;
+}
+
+mat-card {
+  background-color: #FFFFCC;
+}
+
+.mat-card-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}

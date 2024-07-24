@@ -27,7 +27,7 @@ export class AutonomyComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.sendRequest();
-    this.interval = setInterval(()=> {
+    this.interval = setInterval(() => {
       this.sendRequest();
     }, this.refreshMilliSeconds);
   }
@@ -52,17 +52,29 @@ export class AutonomyComponent implements OnInit, OnDestroy {
   }
 
   private mapRequestToChart(): void {
-    if (this.data?.content?.length===0) {
-      this.chartData=undefined;
+    if (this.data?.content?.length === 0) {
+      this.chartData = undefined;
       return;
     }
     this.chartData = [];
     const array: any[] = [];
-    this.data?.content?.forEach((e)=>{
+    this.data?.content?.forEach((e) => {
       let date = this.dateTimeService.convertUtcToLocalTimeZone(e.timestamp)
       array.push({name: date, value: e.autonomy});
     });
     this.chartData?.push({name: 'Autonomy', series: array});
+  }
+
+  public calculateAverage(chartData?: any[]): number {
+    if (chartData === undefined || !Array.isArray(chartData) || chartData.length === 0) {
+      return 0;
+    }
+    const totalSum = chartData.reduce((sum, data) => {
+      const seriesSum = data.series.reduce((seriesSum: any, obj: { value: any; }) => seriesSum + obj.value, 0);
+      return sum + seriesSum;
+    }, 0);
+    const totalCount = chartData.reduce((count, data) => count + data.series.length, 0);
+    return totalSum / totalCount;
   }
 
 }

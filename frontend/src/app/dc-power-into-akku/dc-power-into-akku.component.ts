@@ -14,7 +14,7 @@ import {EnergyDay} from "../dto/energyDay.model";
   templateUrl: './dc-power-into-akku.component.html',
   styleUrls: ['./dc-power-into-akku.component.scss']
 })
-export class DcPowerIntoAkkuComponent  implements OnInit, OnDestroy {
+export class DcPowerIntoAkkuComponent implements OnInit, OnDestroy {
   public calculatedDcEnergyIntoAkkuDay?: EnergyDay;
   public chartData?: any[];
   public initialDate = new Date();
@@ -59,7 +59,6 @@ export class DcPowerIntoAkkuComponent  implements OnInit, OnDestroy {
       endDate.format())).subscribe((e) => {
       this.calculatedDcEnergyIntoAkkuDay = e;
     });
-
   }
 
   private mapRequestToChart(): void {
@@ -73,7 +72,7 @@ export class DcPowerIntoAkkuComponent  implements OnInit, OnDestroy {
       let date = this.dateTimeService.convertUtcToLocalTimeZone(e.timestamp)
       if (typeof e.dcPowerAkku === 'number') {
         const value = e.dcPowerAkku > 0 ? 0 : e.dcPowerAkku;
-        array.push({ name: date, value: -value });
+        array.push({name: date, value: -value});
       }
     });
     this.chartData?.push({name: 'Power into Akku', series: array});
@@ -81,7 +80,14 @@ export class DcPowerIntoAkkuComponent  implements OnInit, OnDestroy {
 
   public convertAndRoundEnergy(energyDay: EnergyDay): number {
     const kiloWatts = (energyDay?.energyDay ?? 0) / (1000 * 3600);
-    return Math.round(kiloWatts*1000)/1000;
+    return Math.round(kiloWatts * 100) / 100;
+  }
+
+  public allValuesAreZero(chartData?: any[]): boolean {
+    if (chartData === undefined || !Array.isArray(chartData)) {
+      return false;
+    }
+    return chartData.every(data => data.series.every((obj: any) => obj.value === 0));
   }
 
 }

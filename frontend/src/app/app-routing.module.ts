@@ -13,63 +13,78 @@ import {AcPowerFromGridComponent} from "./ac-power-from-grid/ac-power-from-grid.
 import {SettingsComponent} from "./settings/settings.component";
 import {DcPowerIntoAkkuComponent} from "./dc-power-into-akku/dc-power-into-akku.component";
 import {DcPowerFromAkkuComponent} from "./dc-power-from-akku/dc-power-from-akku.component";
+import {PriceResolver} from "./resolver/price.resolver";
 
 const routes: Routes = [
   {
     path: 'dc-power-pv',
-    component: DcPowerPvComponent
+    component: DcPowerPvComponent,
+    resolve: [PriceResolver]
   },
   {
     path: 'ac-power-from-grid',
-    component: AcPowerFromGridComponent
+    component: AcPowerFromGridComponent,
+    resolve: [PriceResolver]
   },
   {
     path: 'ac-power-into-grid',
-    component: AcPowerIntoGridComponent
+    component: AcPowerIntoGridComponent,
+    resolve: [PriceResolver]
   },
   {
     path: 'ac-power-inverter',
-    component: AcPowerInverterComponent
+    component: AcPowerInverterComponent,
+    resolve: [PriceResolver]
   },
   {
     path: 'ac-power-load',
-    component: AcPowerLoadComponent
+    component: AcPowerLoadComponent,
+    resolve: [PriceResolver]
   },
   {
     path: 'dc-power-from-akku',
-    component: DcPowerFromAkkuComponent
+    component: DcPowerFromAkkuComponent,
+    resolve: [PriceResolver]
   },
   {
     path: 'dc-power-into-akku',
-    component: DcPowerIntoAkkuComponent
+    component: DcPowerIntoAkkuComponent,
+    resolve: [PriceResolver]
   },
   {
     path: 'dc-voltage-pv',
-    component: DcVoltagePvComponent
+    component: DcVoltagePvComponent,
+    resolve: [PriceResolver]
   },
   {
     path: 'state-of-charge-akku',
-    component: StateOfChargeAkkuComponent
+    component: StateOfChargeAkkuComponent,
+    resolve: [PriceResolver]
   },
   {
     path: 'autonomy',
-    component: AutonomyComponent
+    component: AutonomyComponent,
+    resolve: [PriceResolver]
   },
   {
     path: 'self-consumption',
-    component: SelfConsumptionComponent
+    component: SelfConsumptionComponent,
+    resolve: [PriceResolver]
   },
   {
     path: 'ac-power-grid-phases',
-    component: AcPowerGridPhasesComponent
+    component: AcPowerGridPhasesComponent,
+    resolve: [PriceResolver]
   },
   {
     path: 'settings',
-    component: SettingsComponent
+    component: SettingsComponent,
+    resolve: [PriceResolver]
   },
   {
     path: '**',
-    redirectTo: 'dc-power-pv'
+    redirectTo: 'dc-power-pv',
+    resolve: [PriceResolver]
   }
 ];
 

@@ -9,7 +9,7 @@ import java.time.ZonedDateTime;
 
 @RestController
 @RequestMapping("/api/prices")
-@Transactional(readOnly = false)
+@Transactional(readOnly = true)
 public class PricesController {
     private final PricesService pricesService;
 
@@ -28,6 +28,7 @@ public class PricesController {
         return pricesService.loadLastPrice();
     }
 
+    @Transactional()
     @PostMapping(value = "/", produces = "application/json", consumes = "application/json")
     public void updatePrice(@RequestBody ResponsePricesDto responsePricesDto) {
         pricesService.updatePrice(responsePricesDto);

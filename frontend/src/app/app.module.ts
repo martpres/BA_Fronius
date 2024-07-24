@@ -24,6 +24,7 @@ import { AcPowerFromGridComponent } from './ac-power-from-grid/ac-power-from-gri
 import { SettingsComponent } from './settings/settings.component';
 import { DcPowerFromAkkuComponent } from './dc-power-from-akku/dc-power-from-akku.component';
 import { DcPowerIntoAkkuComponent } from './dc-power-into-akku/dc-power-into-akku.component';
+import {ToastrModule} from "ngx-toastr";
 
 @NgModule({
   declarations: [
@@ -52,7 +53,12 @@ import { DcPowerIntoAkkuComponent } from './dc-power-into-akku/dc-power-into-akk
     HttpClientModule,
     NgxChartsModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ToastrModule.forRoot({
+      timeOut: 10000,
+      positionClass: 'toast-bottom-center',
+      preventDuplicates: true,
+    }),
   ],
   providers: [
     {provide: LOCALE_ID, useValue: 'de-DE'},

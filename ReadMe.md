@@ -19,7 +19,7 @@ Database:
     - Docker file: root/docker-compose.yml
 
     Crate new database "fronius_db"
-    You dont need test-data and tables autmatically created
+    No test data is required, the tables are created automatically
 
 Starting the Backend:
 
@@ -32,6 +32,7 @@ Starting the Backend:
     Set the API query interval:
         - Changes for each data collection in src/main/java/scheduled.
         - Default setting: 15 seconds, with a 5-second offset for each datacollection.
+![img_2.png](img_2.png)
 
     Before Starting:
         - Run: mvn clean install

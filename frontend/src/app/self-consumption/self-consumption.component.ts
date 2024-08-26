@@ -66,16 +66,4 @@ export class SelfConsumptionComponent implements OnInit, OnDestroy {
     this.chartData?.push({name: 'Self Consumption', series: array});
   }
 
-  public calculateAverage(chartData?: any[]): number {
-    if (chartData === undefined || !Array.isArray(chartData) || chartData.length === 0) {
-      return 0;
-    }
-    const totalSum = chartData.reduce((sum, data) => {
-      const seriesSum = data.series.reduce((seriesSum: any, obj: { value: any; }) => seriesSum + obj.value, 0);
-      return sum + seriesSum;
-    }, 0);
-    const totalCount = chartData.reduce((count, data) => count + data.series.length, 0);
-    return totalSum / totalCount;
-  }
-
 }
